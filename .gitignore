@@ -12,3 +12,7 @@ OpenParking Code/.idea/vcs.xml
 .idea/workspace.xml
 OpenParking Code/.idea/libraries/Gradle__android_arch_core_runtime_1_1_1_aar.xml
 OpenParking Code/app/src/release/res/values/google_maps_api\.xml
+
+OpenParking Code/\.idea/caches/gradle_models\.ser
+
+OpenParking Code/locals\.properties
