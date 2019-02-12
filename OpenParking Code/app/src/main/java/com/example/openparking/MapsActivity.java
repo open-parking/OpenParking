@@ -77,14 +77,14 @@ public class MapsActivity extends FragmentActivity implements
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        /*Commenting out default marker -> replacing it with users location
+        // Replacing this section with users location
         // Add a marker in Long Beach and move the camera
         LatLng longbeach = new LatLng(33.782896, -118.110230);
 
         mMap.addMarker(new MarkerOptions().position(longbeach).title("Marker in Long Beach"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(longbeach));
         mMap.moveCamera(CameraUpdateFactory.zoomTo(12));
-        */
+
 
         // Permission Check
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)== PackageManager.PERMISSION_GRANTED)
