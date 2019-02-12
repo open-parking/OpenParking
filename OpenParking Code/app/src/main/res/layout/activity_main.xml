@@ -1,25 +1,156 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg_login"
     tools:context=".MainActivity">
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="201dp"
+        android:layout_height="207dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="45dp"
+        android:layout_marginEnd="80dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo" />
+
     <Button
-        android:layout_width="wrap_content"
+        android:id="@+id/button_login"
+        android:layout_width="322dp"
         android:layout_height="wrap_content"
-        android:text = "Map"
-        android:id="@+id/btnMap"/>
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/btn_bg"
+        android:text="Login"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/tvInfo"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etPassword"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/etUsername"
+        android:layout_width="322dp"
+        android:layout_height="49dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="4dp"
+        android:background="@drawable/et_bg"
+        android:ems="10"
+        android:hint="Username"
+        android:inputType="textEmailAddress"
+        android:padding="16dp"
+        android:textColorHint="@color/login_form_details"
+        app:layout_constraintBottom_toTopOf="@+id/etPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <EditText
+        android:id="@+id/etPassword"
+        android:layout_width="322dp"
+        android:layout_height="49dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/et_bg"
+        android:drawableRight="@drawable/ic_eye"
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="textEmailAddress"
+        android:padding="16dp"
+        android:textColorHint="@color/login_form_details"
+        app:layout_constraintBottom_toTopOf="@+id/button_login"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etUsername" />
 
     <TextView
+        android:id="@+id/tvInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello Open Parking!"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="15dp"
+        android:text="Number of attempts left: "
+        app:layout_constraintBottom_toTopOf="@+id/forgot_password"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_login" />
+
+    <TextView
+        android:id="@+id/forgot_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="Forgot Password"
+        android:textColor="@color/login_form_details"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/facebook_login"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvInfo"
+        app:layout_constraintVertical_bias="0.059" />
+
+    <TextView
+        android:id="@+id/facebook_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:drawableStart="@drawable/ic_fb"
+        android:drawableLeft="@drawable/ic_fb"
+        android:drawablePadding="8dp"
+        android:text="Sign in with Facebook"
+        android:textColor="@color/login_form_details"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/or" />
+
+    <TextView
+        android:id="@+id/or"
+        android:layout_width="17dp"
+        android:layout_height="23dp"
+        android:layout_marginStart="197dp"
+        android:layout_marginLeft="197dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="197dp"
+        android:layout_marginRight="197dp"
+        android:layout_marginBottom="11dp"
+        android:text="or"
+        android:textColor="@color/login_form_details"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/forgot_password"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvInfo"
+        tools:ignore="MissingConstraints" />
 
 </android.support.constraint.ConstraintLayout>
