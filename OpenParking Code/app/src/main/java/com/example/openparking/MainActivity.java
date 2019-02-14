@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.firebase.FirebaseApp;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,13 +24,23 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
+
+
+
 
         if(isServicesOK())
         {
             init();
         }
+    }
+
+    public void signUp(View view) {
+        Intent registration = new Intent(this, SignupActivity.class);
+        startActivity(registration);
     }
 
     private void init()
@@ -38,8 +49,25 @@ public class MainActivity extends AppCompatActivity {
         btnMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, MapsActivity.class);
-                startActivity(intent);
+                startActivity(new Intent(MainActivity.this, MapsActivity.class));
+            }
+        });
+
+
+        Button btnSignup = (Button) findViewById(R.id.btnSignup);
+        btnSignup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, SignupActivity.class));
+            }
+        });
+
+
+        Button btnSignin = (Button) findViewById(R.id.btnSignin);
+        btnSignin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, LoginActivity.class));
             }
         });
     }
