@@ -124,21 +124,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="493">
-              <caret line="32" column="38" selection-start-line="32" selection-start-column="29" selection-end-line="32" selection-end-column="38" />
+            <state relative-caret-position="204">
+              <caret line="45" column="57" lean-forward="true" selection-start-line="45" selection-start-column="57" selection-end-line="45" selection-end-column="57" />
             </state>
           </provider>
           <provider editor-type-id="android-designer2" />
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/openparking/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1377">
-              <caret line="87" column="26" lean-forward="true" selection-start-line="87" selection-start-column="26" selection-end-line="87" selection-end-column="26" />
+              <caret line="87" column="26" selection-start-line="87" selection-start-column="26" selection-end-line="87" selection-end-column="26" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#1738#1937#0" expanded="true" />
@@ -466,8 +466,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="32" column="38" selection-start-line="32" selection-start-column="29" selection-end-line="32" selection-end-column="38" />
+        <state relative-caret-position="204">
+          <caret line="45" column="57" lean-forward="true" selection-start-line="45" selection-start-column="57" selection-end-line="45" selection-end-column="57" />
         </state>
       </provider>
       <provider editor-type-id="android-designer2" />
@@ -475,7 +475,7 @@
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/openparking/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1377">
-          <caret line="87" column="26" lean-forward="true" selection-start-line="87" selection-start-column="26" selection-end-line="87" selection-end-column="26" />
+          <caret line="87" column="26" selection-start-line="87" selection-start-column="26" selection-end-line="87" selection-end-column="26" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1738#1937#0" expanded="true" />
