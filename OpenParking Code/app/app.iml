@@ -177,6 +177,9 @@
     <orderEntry type="library" name="Gradle: com.android.support:swiperefreshlayout:28.0.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-maps:16.0.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-tasks:16.0.1@aar" level="project" />
+<<<<<<< HEAD
     <orderEntry type="library" name="Gradle: android-android-28" level="project" />
+=======
+>>>>>>> refs/remotes/origin/dev
   </component>
 </module>
