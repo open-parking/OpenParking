@@ -22,6 +22,7 @@ import android.widget.TextView;
 // Google API  
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.firebase.FirebaseApp;
 
 
 
@@ -54,8 +55,13 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
+
+
+
 
         if(isServicesOK())
         {
@@ -65,22 +71,14 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void signUp(View view) {
+        Intent registration = new Intent(this, SignupActivity.class);
+        startActivity(registration);
+    }
+
     private void init()
     {
 
-        // Map Button
-        btnMap  =  findViewById(R.id.btnMap);
-        btnMap.setOnClickListener(new View.OnClickListener() {
-              @Override
-              public void onClick(View v) {
-                  Log.v(TAG, "Clicked Map Button");
-
-                  Intent intent = new Intent(MainActivity.this, MapsActivity.class);
-                  startActivity(intent);
-
-              }
-
-        });
 
         // Login Interface
         username = (EditText)findViewById(R.id.etUsername);
@@ -88,11 +86,28 @@ public class MainActivity extends AppCompatActivity {
         Info = (TextView)findViewById(R.id.tvInfo);
         Login = (Button)findViewById(R.id.button_login);
         Info.setText("Number of attempts remaining: 5");
+
+        /*
         Login.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
                 validate(username.getText().toString(), password.getText().toString());
             }
+        });
+*/
+
+        // Map Button
+        btnMap  =  findViewById(R.id.btnMap);
+        btnMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.v(TAG, "Clicked Map Button");
+
+                Intent intent = new Intent(MainActivity.this, MapsActivity.class);
+                startActivity(intent);
+
+            }
+
         });
 
         // Write to File Button
@@ -104,6 +119,24 @@ public class MainActivity extends AppCompatActivity {
 
                 //Testing Writing to file
                 generateNoteOnSD( "Hello", "World");
+            }
+        });
+
+
+        Button btnSignup = (Button) findViewById(R.id.btnSignup);
+        btnSignup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, SignupActivity.class));
+            }
+        });
+
+
+        Button btnSignin = (Button) findViewById(R.id.btnSignin);
+        btnSignin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, LoginActivity.class));
             }
         });
     }
@@ -124,7 +157,7 @@ public class MainActivity extends AppCompatActivity {
             Dialog dialog = GoogleApiAvailability.getInstance().getErrorDialog(MainActivity.this, available, ERROR_DIALOG_REQUEST);
             dialog.show();
         }else{
-            Toast.makeText(this, "You cant make map requests", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "You can't make map requests", Toast.LENGTH_SHORT).show();
         }
         return false;
     }
