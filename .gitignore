@@ -1,6 +1,8 @@
 OpenParking Code/local.properties
 OpenParking Code/.idea/libraries/*
 OpenParking Code/.idea/libraries/
+OpenParking Code/.idea/caches/*
+OpenParking Code/.idea/caches/
 OpenParking Code/.gradle/*
 OpenParking Code/.gradle/
 Gradle__com_android_support_viewpager_28_0_0_aar.xml
@@ -79,3 +81,9 @@ OpenParking Code/local.properties
 *.properties
 OpenParking Code/local.properties
 OpenParking Code/.idea/workspace.xml
+OpenParking Code/.idea/caches/gradle_models.ser
+*.bin
+OpenParking Code/.idea/workspace.xml
+OpenParking Code/.gradle/4.10.1/fileHashes/fileHashes.bin
+OpenParking Code/.gradle/4.10.1/fileHashes/fileHashes.bin
+*.lock
