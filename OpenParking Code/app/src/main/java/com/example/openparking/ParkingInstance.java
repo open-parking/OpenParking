@@ -8,9 +8,9 @@ import java.util.Date;
 
 public class ParkingInstance {
 
-    //private Contributor contributor;
-    //private User user;
-    //private Vehicle vehicle;
+    private Contributor contributor;
+    private User user;
+    private Vehicle vehicle;
     private Address address;
     private LatLng latlng; //Possibly redundant, could be derived from address variable
 
@@ -22,7 +22,7 @@ public class ParkingInstance {
     private final double longitude = -118.110230;
 
 
-
+/*
     public ParkingInstance( Address address )
     {
         //this.contributor = contributor;
@@ -35,8 +35,9 @@ public class ParkingInstance {
         this.starttime = new  Date();
         endtime = new  Date();
     }
+    */
 
-    /*
+
     public ParkingInstance(Contributor contributor, User user, Vehicle vehicle, Address address )
     {
         this.contributor = contributor;
@@ -49,6 +50,5 @@ public class ParkingInstance {
         this.starttime = new  Date();
         endtime = new  Date();
     }
-    */
 
 }
