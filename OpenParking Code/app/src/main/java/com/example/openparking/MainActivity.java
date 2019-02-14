@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
             Dialog dialog = GoogleApiAvailability.getInstance().getErrorDialog(MainActivity.this, available, ERROR_DIALOG_REQUEST);
             dialog.show();
         }else{
-            Toast.makeText(this, "You cant make map requests", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "You can't make map requests", Toast.LENGTH_SHORT).show();
         }
         return false;
     }
