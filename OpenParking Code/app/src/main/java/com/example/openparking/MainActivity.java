@@ -71,12 +71,16 @@ public class MainActivity extends AppCompatActivity {
         // Map Button
         btnMap  =  findViewById(R.id.btnMap);
         btnMap.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.v(TAG, "Clicked Map Button");
+              @Override
+              public void onClick(View v) {
+                  Log.v(TAG, "Clicked Map Button");
 
-                Intent intent = new Intent(MainActivity.this, MapsActivity.class);
-                startActivity(intent);
+                  Intent intent = new Intent(MainActivity.this, MapsActivity.class);
+                  startActivity(intent);
+
+              }
+
+        });
 
         // Login Interface
         username = (EditText)findViewById(R.id.etUsername);

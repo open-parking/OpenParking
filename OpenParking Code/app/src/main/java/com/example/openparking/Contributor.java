@@ -1,13 +1,3 @@
-<<<<<<< HEAD
-package com.example.openparking;
-
-
-// Place Holder: To be completed later
-public class Contributor {
-
-
-}
-=======
 package com.example.openparking;
 
 import android.location.Address;
@@ -56,4 +46,3 @@ public class Contributor {
                 '}';
     }
 }
->>>>>>> refs/remotes/origin/dev
