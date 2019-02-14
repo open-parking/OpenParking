@@ -49,39 +49,26 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    // Test Buttons
     Button btnMap;
     Button btnFileWrite;
+    Button btnFileRead;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //Check google services
         if(isServicesOK())
         {
             init();
         }
 
-
     }
 
     private void init()
     {
-
-        // Map Button
-        btnMap  =  findViewById(R.id.btnMap);
-        btnMap.setOnClickListener(new View.OnClickListener() {
-              @Override
-              public void onClick(View v) {
-                  Log.v(TAG, "Clicked Map Button");
-
-                  Intent intent = new Intent(MainActivity.this, MapsActivity.class);
-                  startActivity(intent);
-
-              }
-
-        });
-
         // Login Interface
         username = (EditText)findViewById(R.id.etUsername);
         password = (EditText)findViewById(R.id.etPassword);
@@ -95,6 +82,22 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        /* Test Buttons */
+
+        // Map Button
+        btnMap  =  findViewById(R.id.btnMap);
+        btnMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.v(TAG, "Clicked Map Button");
+
+                Intent intent = new Intent(MainActivity.this, MapsActivity.class);
+                startActivity(intent);
+
+            }
+
+        });
+
         // Write to File Button
         btnFileWrite  = (Button) findViewById(R.id.btnFileWrite);
         btnFileWrite.setOnClickListener(new View.OnClickListener() {
@@ -104,6 +107,18 @@ public class MainActivity extends AppCompatActivity {
 
                 //Testing Writing to file
                 generateNoteOnSD( "Hello", "World");
+            }
+        });
+
+        // Read from File Button
+        btnFileRead  = findViewById(R.id.btnFileRead);
+        btnFileRead.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.v(TAG, "Clicked Read Button");
+
+                //Testing Writing to file
+                generateNoteOnSD( "Read", "World");
             }
         });
     }
