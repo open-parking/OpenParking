@@ -87,3 +87,4 @@ OpenParking Code/.idea/workspace.xml
 OpenParking Code/.gradle/4.10.1/fileHashes/fileHashes.bin
 OpenParking Code/.gradle/4.10.1/fileHashes/fileHashes.bin
 *.lock
+*.ser
