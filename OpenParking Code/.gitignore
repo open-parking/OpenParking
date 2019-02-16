@@ -15,6 +15,9 @@
 /captures
 .externalNativeBuild
 
+workspace.xml
+.idea/workspace.xml
+Code/.idea/workspace.xml
 OpenParking Code/.idea/workspace.xml
+
 OpenParking Code/.gradle/4.10.1/fileHashes/fileHashes.bin
-OpenParking Code/.idea/workspace.xml
