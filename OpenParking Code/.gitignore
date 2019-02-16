@@ -2,7 +2,7 @@
 *.lock
 *.ser
 *.iml
-.gradle
+*.gradle
 /local.properties
 /.idea/caches
 /.idea/libraries
@@ -14,3 +14,7 @@
 /build
 /captures
 .externalNativeBuild
+
+OpenParking Code/.idea/workspace.xml
+OpenParking Code/.gradle/4.10.1/fileHashes/fileHashes.bin
+OpenParking Code/.idea/workspace.xml
