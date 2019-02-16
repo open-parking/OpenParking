@@ -50,8 +50,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    // Test Buttons
     Button btnMap;
     Button btnFileWrite;
+    Button btnFileRead;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,14 +62,11 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
-
-
-
+        //Check google services
         if(isServicesOK())
         {
             init();
         }
-
 
     }
 
@@ -78,7 +77,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void init()
     {
-
 
         // Login Interface
         username = (EditText)findViewById(R.id.etUsername);
@@ -110,6 +108,22 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
+        /* Test Buttons */
+
+        // Map Button
+        btnMap  =  findViewById(R.id.btnMap);
+        btnMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.v(TAG, "Clicked Map Button");
+
+                Intent intent = new Intent(MainActivity.this, MapsActivity.class);
+                startActivity(intent);
+
+            }
+
+        });
+
         // Write to File Button
         btnFileWrite  = (Button) findViewById(R.id.btnFileWrite);
         btnFileWrite.setOnClickListener(new View.OnClickListener() {
@@ -122,7 +136,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // Read from File Button
+        btnFileRead  = findViewById(R.id.btnFileRead);
+        btnFileRead.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.v(TAG, "Clicked Read Button");
 
+                //Testing Writing to file
+                generateNoteOnSD( "Read", "World");
+
+        /// Sign up Buttom
         Button btnSignup = (Button) findViewById(R.id.btnSignup);
         btnSignup.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -131,7 +155,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
+        //Sign In Button
         Button btnSignin = (Button) findViewById(R.id.btnSignin);
         btnSignin.setOnClickListener(new View.OnClickListener() {
             @Override
