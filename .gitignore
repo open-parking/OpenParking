@@ -5,6 +5,8 @@
 *.xml
 *.iml
 *.gradle
+*.properties
+
 
 !activity_main.xml
 !activity_maps.xml
@@ -37,3 +39,7 @@ Code/.idea/workspace.xml
 OpenParking Code/.idea/workspace.xml
 
 OpenParking Code/.gradle/4.10.1/fileHashes/fileHashes.bin
+OpenParking Code/.idea/libraries/
+OpenParking Code/.idea/caches/
+OpenParking Code/.gradle/
+OpenParking Code/app/src/debug/res/values/google_maps_api.xml
