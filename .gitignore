@@ -4,6 +4,7 @@
 *.ser
 *.xml
 *.iml
+*.gradle
 
 !activity_main.xml
 !activity_maps.xml
@@ -29,11 +30,9 @@
 !strings.xml
 !styles.xml
 
-OpenParking Code/.idea/workspace.xml
-OpenParking Code/.idea/workspace.xml
-
 workspace.xml
 .idea/workspace.xml
+**/.idea/workspace.xml
 Code/.idea/workspace.xml
 OpenParking Code/.idea/workspace.xml
 

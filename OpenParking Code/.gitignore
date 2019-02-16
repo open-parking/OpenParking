@@ -17,6 +17,7 @@
 
 workspace.xml
 .idea/workspace.xml
+**/.idea/workspace.xml
 Code/.idea/workspace.xml
 OpenParking Code/.idea/workspace.xml
 
