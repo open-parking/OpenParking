@@ -1,5 +1,4 @@
 package com.example.openparking;
-/* how about now?*/
 
 
 import android.content.Intent;

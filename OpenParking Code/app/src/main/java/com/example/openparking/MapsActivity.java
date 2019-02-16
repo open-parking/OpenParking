@@ -1,5 +1,4 @@
 package com.example.openparking;
-/* doest  it work now?*/
 
 import android.Manifest;
 import android.content.pm.PackageManager;
