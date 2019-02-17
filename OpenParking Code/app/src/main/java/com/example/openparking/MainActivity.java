@@ -139,12 +139,14 @@ public class MainActivity extends AppCompatActivity {
         // Read from File Button
         btnFileRead  = findViewById(R.id.btnFileRead);
         btnFileRead.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.v(TAG, "Clicked Read Button");
+           @Override
+           public void onClick(View v) {
+               Log.v(TAG, "Clicked Read Button");
 
-                //Testing Writing to file
-                generateNoteOnSD( "Read", "World");
+               //Testing Writing to file
+               generateNoteOnSD("Read", "World");
+           }
+       });
 
         /// Sign up Buttom
         Button btnSignup = (Button) findViewById(R.id.btnSignup);
