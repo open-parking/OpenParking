@@ -94,20 +94,6 @@ public class MainActivity extends AppCompatActivity {
         });
 */
 
-        // Map Button
-        btnMap  =  findViewById(R.id.btnMap);
-        btnMap.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.v(TAG, "Clicked Map Button");
-
-                Intent intent = new Intent(MainActivity.this, MapsActivity.class);
-                startActivity(intent);
-
-            }
-
-        });
-
         /* Test Buttons */
 
         // Map Button
@@ -119,9 +105,7 @@ public class MainActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(MainActivity.this, MapsActivity.class);
                 startActivity(intent);
-
             }
-
         });
 
         // Write to File Button
@@ -139,6 +123,7 @@ public class MainActivity extends AppCompatActivity {
         // Read from File Button
         btnFileRead  = findViewById(R.id.btnFileRead);
         btnFileRead.setOnClickListener(new View.OnClickListener() {
+
            @Override
            public void onClick(View v) {
                Log.v(TAG, "Clicked Read Button");
