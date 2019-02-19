@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
     // Test Buttons
     Button btnTest;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -92,7 +93,8 @@ public class MainActivity extends AppCompatActivity {
         });
 */
 
-        /// Sign up Buttom
+
+        /// Sign up Button
         Button btnSignup = (Button) findViewById(R.id.btnSignup);
         btnSignup.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,18 +112,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        /* Test Buttons */
 
         // Test Button
-        btnTest =  findViewById(R.id.btnTest);
+        btnTest  =  findViewById(R.id.btnTest);
         btnTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.v(TAG, "Clicked Map Button");
+                Log.v(TAG, "Clicked Test Button");
 
-                Intent intent = new Intent(MainActivity.this, PayPalActivity.class);
+
+                Intent intent = new Intent(MainActivity.this, Test_Activity.class);
                 startActivity(intent);
-
             }
 
         });
@@ -148,21 +149,5 @@ public class MainActivity extends AppCompatActivity {
         return false;
     }
 
-    // Testing Writing external storage
-    public void generateNoteOnSD( String sFileName, String sBody) {
-        try {
-            File root = new File(Environment.getExternalStorageDirectory(), "Notes");
-            if (!root.exists()) {
-                root.mkdirs();
-            }
-            File gpxfile = new File(root, sFileName);
-            FileWriter writer = new FileWriter(gpxfile);
-            writer.append(sBody);
-            writer.flush();
-            writer.close();
-            Toast.makeText(getApplicationContext(), "Saved", Toast.LENGTH_SHORT).show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+
 }

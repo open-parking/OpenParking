@@ -15,28 +15,10 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <Button
-            android:id="@+id/btnMap"
+            android:id="@+id/btnTest"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Map" />
-
-        <Button
-            android:id="@+id/btnFileWrite"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Write to File" />
-
-        <Button
-            android:id="@+id/btnFileRead"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Read from File" />
-
-        <Button
-            android:id="@+id/btnPayPal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="PayPal" />
+            android:text="Test" />
     </LinearLayout>
 
     <!--  Login  -->
