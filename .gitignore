@@ -16,6 +16,8 @@
 !activity_second.xml
 !activity_test_.xml
 !content_test_.xml
+!activity_pay_pal.xml
+!activity_payment_details.xml
 
 
 !bg_login.xml
@@ -45,3 +47,4 @@ OpenParking Code/.idea/libraries/
 OpenParking Code/.idea/caches/
 OpenParking Code/.gradle/
 OpenParking Code/app/src/debug/res/values/google_maps_api.xml
+.DS_Store
