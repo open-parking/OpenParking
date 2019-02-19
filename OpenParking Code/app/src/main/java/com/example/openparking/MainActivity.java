@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
         username = (EditText)findViewById(R.id.etUsername);
         password = (EditText)findViewById(R.id.etPassword);
         Info = (TextView)findViewById(R.id.tvInfo);
-        Login = (Button)findViewById(R.id.button_login);
+        Login = (Button)findViewById(R.id.btnSignin);
         Info.setText("Number of attempts remaining: 5");
 
         /*
@@ -94,20 +94,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 */
-
-        // Map Button
-        btnMap  =  findViewById(R.id.btnMap);
-        btnMap.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.v(TAG, "Clicked Map Button");
-
-                Intent intent = new Intent(MainActivity.this, MapsActivity.class);
-                startActivity(intent);
-
-            }
-
-        });
 
         /* Test Buttons */
 
@@ -134,9 +120,7 @@ public class MainActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(MainActivity.this, MapsActivity.class);
                 startActivity(intent);
-
             }
-
         });
 
         // Write to File Button
@@ -154,6 +138,7 @@ public class MainActivity extends AppCompatActivity {
         // Read from File Button
         btnFileRead  = findViewById(R.id.btnFileRead);
         btnFileRead.setOnClickListener(new View.OnClickListener() {
+
            @Override
            public void onClick(View v) {
                Log.v(TAG, "Clicked Read Button");

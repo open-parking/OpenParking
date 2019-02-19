@@ -128,7 +128,7 @@
         android:inputType="textEmailAddress"
         android:padding="16dp"
         android:textColorHint="@color/login_form_details"
-        app:layout_constraintBottom_toTopOf="@+id/button_login"
+        app:layout_constraintBottom_toTopOf="@+id/btnSignin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etUsername" />
@@ -145,7 +145,7 @@
         app:layout_constraintBottom_toTopOf="@+id/forgot_password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_login" />
+        app:layout_constraintTop_toBottomOf="@+id/btnSignin" />
 
     <TextView
         android:id="@+id/forgot_password"

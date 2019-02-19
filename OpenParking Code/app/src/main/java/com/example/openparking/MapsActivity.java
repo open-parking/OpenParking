@@ -11,6 +11,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -29,6 +30,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.Random;
+
 public class MapsActivity extends FragmentActivity implements
         OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
@@ -41,6 +44,26 @@ public class MapsActivity extends FragmentActivity implements
     private Location lastLocation;
     private Marker currentLocationMarker;
     private static final int Request_User_Location_Code = 99;
+    private static final String TAG = "Maps Activity";
+
+
+    // Test Values for Random Markers in Long Beach
+    double scale_value  = 1000000.0;
+    int parallel = 33;
+    int meridian = -118;
+
+    //Test Area from (Hilltop Park) to (7th and Studebaker)
+    
+    // Latitude Range
+    private static final int maxLat =800471;
+    private static final int minLat =774571;
+    // Longitude Range
+    private static final int maxLon =167585;
+    private static final int minLon =103137;
+
+    private static final int NUM_MARKERS = 16;
+
+
 
 
     @Override
@@ -102,6 +125,36 @@ public class MapsActivity extends FragmentActivity implements
 
             mMap.setMyLocationEnabled(true);
         }
+
+        // Create Test Markers for Open Parking Locations
+        mMap.addMarker(new MarkerOptions()
+                .position(new LatLng(33.782000, -118.110000))
+                .title("Hello Marker"));
+
+        // Randomized Markers
+        for (int i = 0; i < NUM_MARKERS; i++ )
+        {
+            int randLat = new Random().nextInt(maxLat-minLat)+minLat;
+            int randLon = new Random().nextInt(maxLon-minLon)+minLon;
+            double randLatD = (double)(randLat/scale_value) + parallel;
+            double randLonD = (1-(double)(randLon/scale_value)) + meridian -1;
+            Log.v(TAG, "Random int Latitude: " + String.valueOf(randLat) + " Longitude: " + String.valueOf(randLon));
+            Log.v(TAG, "Random dob Latitude: " + String.valueOf(randLatD) + " Longitude: " + String.valueOf(randLonD));
+
+
+            //Log.v(TAG, "Random Latitude: " + String.valueOf(randLatD) + " Longitude: " + String.valueOf(randLonD));
+
+
+
+            mMap.addMarker(new MarkerOptions()
+                    .position(new LatLng(randLatD, randLonD))
+                    .title("Random Marker: " + String.valueOf(i) ));
+        }
+
+        // Move Camera to LongBeach
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(longbeach));
+        mMap.moveCamera(CameraUpdateFactory.zoomTo(12));
+
     }
 
     public boolean checkUserLocationPermission()
