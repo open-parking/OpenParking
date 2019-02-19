@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
         username = (EditText)findViewById(R.id.etUsername);
         password = (EditText)findViewById(R.id.etPassword);
         Info = (TextView)findViewById(R.id.tvInfo);
-        Login = (Button)findViewById(R.id.button_login);
+        Login = (Button)findViewById(R.id.btnSignin);
         Info.setText("Number of attempts remaining: 5");
 
         /*
