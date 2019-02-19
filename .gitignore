@@ -7,6 +7,8 @@
 *.iml
 *.gradle
 *.properties
+*.DS_Store
+
 
 # Ignore maps key
 OpenParking Code/app/src/debug/res/values/google_maps_api.xml
@@ -20,6 +22,8 @@ OpenParking Code/app/src/debug/res/values/google_maps_api.xml
 !activity_second.xml
 !activity_test_.xml
 !content_test_.xml
+!activity_pay_pal.xml
+!activity_payment_details.xml
 
 # Do Not ignore login resources
 !bg_login.xml

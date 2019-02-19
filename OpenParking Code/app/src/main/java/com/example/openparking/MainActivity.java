@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
     Button btnMap;
     Button btnFileWrite;
     Button btnFileRead;
+    Button btnPayPal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,6 +96,20 @@ public class MainActivity extends AppCompatActivity {
 */
 
         /* Test Buttons */
+
+        // PayPal Button
+        btnPayPal =  findViewById(R.id.btnPayPal);
+        btnPayPal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.v(TAG, "Clicked Map Button");
+
+                Intent intent = new Intent(MainActivity.this, PayPalActivity.class);
+                startActivity(intent);
+
+            }
+
+        });
 
         // Map Button
         btnMap  =  findViewById(R.id.btnMap);
