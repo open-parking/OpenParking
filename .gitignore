@@ -19,6 +19,7 @@ OpenParking Code/app/src/debug/res/values/google_maps_api.xml
 !activity_profile.xml
 !activity_second.xml
 !activity_test_.xml
+!content_test_.xml
 
 # Do Not ignore login resources
 !bg_login.xml
@@ -32,6 +33,7 @@ OpenParking Code/app/src/debug/res/values/google_maps_api.xml
 
 # Do Not ignore resources 
 !colors.xml
+!dimens.xml
 !parking_instance_locations.xml
 !strings.xml
 !styles.xml
