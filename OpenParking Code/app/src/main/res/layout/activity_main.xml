@@ -19,24 +19,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Test" />
-
-        <Button
-            android:id="@+id/btnMap"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Map" />
-
-        <Button
-            android:id="@+id/btnFileWrite"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Write to File" />
-
-        <Button
-            android:id="@+id/btnFileRead"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Read from File" />
     </LinearLayout>
 
     <!--  Login  -->

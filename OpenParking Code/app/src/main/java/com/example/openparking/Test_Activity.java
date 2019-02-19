@@ -9,10 +9,11 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
+
 
 public class Test_Activity extends AppCompatActivity {
+
+    private static final String TAG = "TestActivity";
 
     // Test Buttons
     Button btnMap;
@@ -36,6 +37,8 @@ public class Test_Activity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        init();
     }
 
     private void init()
@@ -49,7 +52,7 @@ public class Test_Activity extends AppCompatActivity {
             public void onClick(View v) {
                 Log.v(TAG, "Clicked Map Button");
 
-                Intent intent = new Intent(MainActivity.this, MapsActivity.class);
+                Intent intent = new Intent(Test_Activity.this, MapsActivity.class);
                 startActivity(intent);
 
             }
@@ -91,7 +94,7 @@ public class Test_Activity extends AppCompatActivity {
             public void onClick(View v) {
                 Log.v(TAG, "Clicked PayPal Button");
 
-                Intent intent = new Intent(MainActivity.this, PayPal.class);
+                Intent intent = new Intent(Test_Activity.this, PayPal.class);
                 startActivity(intent);
 
             }
