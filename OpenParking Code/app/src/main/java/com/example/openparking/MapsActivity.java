@@ -148,7 +148,7 @@ public class MapsActivity extends FragmentActivity implements
 
             mMap.addMarker(new MarkerOptions()
                     .position(new LatLng(randLatD, randLonD))
-                    .title("Random Marker: " + String.valueOf(i) ));
+                    .title("Parking Instance: " + String.valueOf(i) ));
         }
 
         // Move Camera to LongBeach
