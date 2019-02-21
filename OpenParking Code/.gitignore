@@ -43,6 +43,7 @@ workspace.xml
 .idea/workspace.xml
 **/.idea/workspace.xml
 Code/.idea/workspace.xml
+OpenParking*Code/.idea/workspace.xml
 OpenParking Code/.idea/workspace.xml
 
 # Also Ignore these
@@ -53,6 +54,8 @@ OpenParking Code/.gradle/
 
 OpenParking Code/.gradle/4.10.1/fileHashes/fileHashes.bin
 OpenParking Code/.gradle/4.10.1/fileHashes/fileHashes.lock
+**/fileHashes.bin
+**/fileHashes.lock
 
 **/fileHashes
 **/.idea

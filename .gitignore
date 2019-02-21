@@ -10,6 +10,8 @@
 
 # Ignore maps key
 OpenParking Code/app/src/debug/res/values/google_maps_api.xml
+OpenParking*Code/app/src/debug/res/values/google_maps_api.xml
+
 
 # Do Not ignore the activities
 !activity_main.xml
@@ -44,6 +46,8 @@ workspace.xml
 **/.idea/workspace.xml
 Code/.idea/workspace.xml
 OpenParking Code/.idea/workspace.xml
+OpenParking*Code/.idea/workspace.xml
+
 
 # Also Ignore these
 OpenParking Code/.gradle/4.10.1/fileHashes/fileHashes.bin
@@ -51,8 +55,8 @@ OpenParking Code/.idea/libraries/
 OpenParking Code/.idea/caches/
 OpenParking Code/.gradle/
 
-OpenParking Code/.gradle/4.10.1/fileHashes/fileHashes.bin
-OpenParking Code/.gradle/4.10.1/fileHashes/fileHashes.lock
+OpenParking*Code/.gradle/4.10.1/fileHashes/fileHashes.bin
+OpenParking*Code/.gradle/4.10.1/fileHashes/fileHashes.lock
 
 **/fileHashes
 **/.idea
