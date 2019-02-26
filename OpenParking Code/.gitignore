@@ -50,6 +50,8 @@ Code/.idea/workspace.xml
 OpenParking*Code/.idea/workspace.xml
 
 # Also Ignore these
+**/fileHashes.bin
+**/fileHashes.lock
 OpenParking*Code/.gradle/4.10.1/fileHashes/fileHashes.bin
 OpenParking*Code/.idea/libraries/
 OpenParking*Code/.idea/caches/
