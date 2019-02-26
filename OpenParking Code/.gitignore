@@ -42,6 +42,9 @@ OpenParking Code/app/src/debug/res/values/google_maps_api.xml
 !strings.xml
 !styles.xml
 
+# Do Not ignore
+!build.gradle
+
 # Ignore workspace.xml
 workspace.xml
 .idea/workspace.xml
@@ -57,3 +60,4 @@ OpenParking*Code/.idea/libraries/
 OpenParking*Code/.idea/caches/
 OpenParking*Code/.gradle/
 OpenParking*Code/.idea/libraries/Gradle__com_android_support_viewpager_28_0_0_aar.xml
+OpenParking Code/.idea/libraries/Gradle__com_android_support_asynclayoutinflater_28_0_0_aar.xml
