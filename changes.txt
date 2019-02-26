@@ -1,0 +1,5 @@
+Version 0.1 - Register and Sign-in for registered Users
+	      Map view around User with local ParkingInstances displayed
+	      Partial Paypal functionality
+	      Database for users with respective classes
+	      UI for current features
