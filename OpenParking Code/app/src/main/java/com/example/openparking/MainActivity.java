@@ -51,9 +51,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // Test Buttons
-    Button btnMap;
-    Button btnFileWrite;
-    Button btnFileRead;
+    Button btnTest;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,46 +93,8 @@ public class MainActivity extends AppCompatActivity {
         });
 */
 
-        /* Test Buttons */
 
-        // Map Button
-        btnMap  =  findViewById(R.id.btnMap);
-        btnMap.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.v(TAG, "Clicked Map Button");
-
-                Intent intent = new Intent(MainActivity.this, MapsActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        // Write to File Button
-        btnFileWrite  = (Button) findViewById(R.id.btnFileWrite);
-        btnFileWrite.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.v(TAG, "Clicked Write Button");
-
-                //Testing Writing to file
-                generateNoteOnSD( "Hello", "World");
-            }
-        });
-
-        // Read from File Button
-        btnFileRead  = findViewById(R.id.btnFileRead);
-        btnFileRead.setOnClickListener(new View.OnClickListener() {
-
-           @Override
-           public void onClick(View v) {
-               Log.v(TAG, "Clicked Read Button");
-
-               //Testing Writing to file
-               generateNoteOnSD("Read", "World");
-           }
-       });
-
-        /// Sign up Buttom
+        /// Sign up Button
         Button btnSignup = (Button) findViewById(R.id.btnSignup);
         btnSignup.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -149,6 +110,21 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, LoginActivity.class));
             }
+        });
+
+
+        // Test Button
+        btnTest  =  findViewById(R.id.btnTest);
+        btnTest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.v(TAG, "Clicked Test Button");
+
+
+                Intent intent = new Intent(MainActivity.this, Test_Activity.class);
+                startActivity(intent);
+            }
+
         });
     }
 
@@ -173,21 +149,5 @@ public class MainActivity extends AppCompatActivity {
         return false;
     }
 
-    // Testing Writing external storage
-    public void generateNoteOnSD( String sFileName, String sBody) {
-        try {
-            File root = new File(Environment.getExternalStorageDirectory(), "Notes");
-            if (!root.exists()) {
-                root.mkdirs();
-            }
-            File gpxfile = new File(root, sFileName);
-            FileWriter writer = new FileWriter(gpxfile);
-            writer.append(sBody);
-            writer.flush();
-            writer.close();
-            Toast.makeText(getApplicationContext(), "Saved", Toast.LENGTH_SHORT).show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+
 }

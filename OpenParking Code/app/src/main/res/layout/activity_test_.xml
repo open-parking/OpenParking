@@ -23,6 +23,40 @@
 
     <include layout="@layout/content_test_" />
 
+    <!--  Test Buttons  -->
+    <LinearLayout
+        android:paddingTop="64dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf ="@id/toolbar"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+        <Button
+            android:id="@+id/btnMap"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Map" />
+
+        <Button
+            android:id="@+id/btnFileWrite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Write to File" />
+
+        <Button
+            android:id="@+id/btnFileRead"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Read from File" />
+
+        <Button
+            android:id="@+id/btnPayPal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PayPal" />
+    </LinearLayout>
+
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"

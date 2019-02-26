@@ -7,6 +7,8 @@
 *.iml
 *.gradle
 *.properties
+*.DS_Store
+
 
 # Ignore maps key
 OpenParking Code/app/src/debug/res/values/google_maps_api.xml
@@ -22,6 +24,8 @@ OpenParking*Code/app/src/debug/res/values/google_maps_api.xml
 !activity_second.xml
 !activity_test_.xml
 !content_test_.xml
+!activity_pay_pal.xml
+!activity_payment_details.xml
 
 # Do Not ignore login resources
 !bg_login.xml
@@ -50,13 +54,8 @@ OpenParking*Code/.idea/workspace.xml
 
 
 # Also Ignore these
-OpenParking Code/.gradle/4.10.1/fileHashes/fileHashes.bin
-OpenParking Code/.idea/libraries/
-OpenParking Code/.idea/caches/
-OpenParking Code/.gradle/
-
 OpenParking*Code/.gradle/4.10.1/fileHashes/fileHashes.bin
-OpenParking*Code/.gradle/4.10.1/fileHashes/fileHashes.lock
-
-**/fileHashes
-**/.idea
+OpenParking*Code/.idea/libraries/
+OpenParking*Code/.idea/caches/
+OpenParking*Code/.gradle/
+OpenParking*Code/.idea/libraries/Gradle__com_android_support_viewpager_28_0_0_aar.xml
