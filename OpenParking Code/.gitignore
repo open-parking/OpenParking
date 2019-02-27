@@ -41,6 +41,9 @@ OpenParking Code/app/src/debug/res/values/google_maps_api.xml
 !strings.xml
 !styles.xml
 
+# Do Not ignore
+!build.gradle
+
 # Ignore workspace.xml
 workspace.xml
 .idea/workspace.xml
@@ -49,12 +52,14 @@ Code/.idea/workspace.xml
 OpenParking*Code/.idea/workspace.xml
 
 # Also Ignore these
+**/fileHashes.bin
+**/fileHashes.lock
 OpenParking*Code/.gradle/4.10.1/fileHashes/fileHashes.bin
 OpenParking*Code/.idea/libraries/
 OpenParking*Code/.idea/caches/
 OpenParking*Code/.gradle/
 OpenParking*Code/.idea/libraries/Gradle__com_android_support_viewpager_28_0_0_aar.xml
-**/fileHashes.bin
-**/fileHashes.lock
-**/fileHashes
-**/.idea
+**fileHashes.bin
+**fileHashes.lock
+**fileHashes
+**.idea
