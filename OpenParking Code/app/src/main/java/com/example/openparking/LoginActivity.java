@@ -26,7 +26,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private Button buttonSignIn;
     private EditText editTextEmail;
     private EditText editTextPassword;
-    private TextView textViewSignin;
+    private TextView Signup;
 
     private FirebaseAuth firebaseAuth;
     private ProgressDialog progressDialog;
@@ -40,19 +40,19 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         if(firebaseAuth.getCurrentUser() != null){
             finish();
-            startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+            startActivity(new Intent(getApplicationContext(), SignupActivity.class));
         }
 
 
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
         buttonSignIn = (Button) findViewById(R.id.buttonSignin);
-        textViewSignin = (TextView) findViewById(R.id.textViewSignup);
+        Signup = (TextView) findViewById(R.id.textViewSignup);
 
         progressDialog = new ProgressDialog(this);
 
         buttonSignIn.setOnClickListener(this);
-        textViewSignin.setOnClickListener(this);
+        Signup.setOnClickListener(this);
 
     }
 
@@ -89,7 +89,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             Toast.makeText(LoginActivity.this, "Sign in successful!", Toast.LENGTH_SHORT).show();
 
                             finish();
-                            startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
                         }
                         else{
                             progressDialog.dismiss();
@@ -109,9 +109,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             userLogin();
         }
 
-        if(v == textViewSignin){
+        if(v == Signup){
             finish();
-            startActivity(new Intent(this, MainActivity.class));
+            startActivity(new Intent(this, SignupActivity.class));
         }
     }
 }
