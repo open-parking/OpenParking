@@ -55,6 +55,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="PayPal" />
+
+        <Button
+            android:id="@+id/btnRating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rating" />
     </LinearLayout>
 
     <android.support.design.widget.FloatingActionButton
