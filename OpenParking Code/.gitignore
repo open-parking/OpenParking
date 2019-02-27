@@ -43,6 +43,7 @@ OpenParking Code/app/src/debug/res/values/google_maps_api.xml
 
 # Do Not ignore
 !build.gradle
+!AndroidManifest.xml
 
 # Ignore workspace.xml
 workspace.xml
