@@ -1,6 +1,7 @@
 package com.example.openparking;
 
 import android.content.Intent;
+import android.media.Rating;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
@@ -26,6 +27,7 @@ public class Test_Activity extends AppCompatActivity {
     Button btnFileWrite;
     Button btnFileRead;
     Button btnPayPal;
+    Button btnRating;
 
 
     @Override
@@ -99,6 +101,20 @@ public class Test_Activity extends AppCompatActivity {
                 Log.v(TAG, "Clicked PayPal Button");
 
                 Intent intent = new Intent(Test_Activity.this, PayPalActivity.class);
+                startActivity(intent);
+
+            }
+
+        });
+
+        // Rating Button
+        btnRating  = findViewById(R.id.btnRating);
+        btnRating.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.v(TAG, "Clicked Rating Button");
+
+                Intent intent = new Intent(Test_Activity.this, RatingActivity.class);
                 startActivity(intent);
 
             }
