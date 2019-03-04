@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,6 +19,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 
 import org.w3c.dom.Text;
 
@@ -86,31 +89,58 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         progressDialog.show();
 
         firebaseAuth.createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    if(task.isSuccessful()){
-                        //user is successfully registered and logged in
-                        //we will start the profile activity here
-                        //display a toast only
-                        progressDialog.dismiss();
-                        Toast.makeText(SignupActivity.this, "Registered Successfully", Toast.LENGTH_SHORT).show();
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if(task.isSuccessful()){
+                            //store first and last name in user instance!!
+                            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                            /*
+                            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
 
+                                    .setDisplayName(firstName + " " + lastName)
+                                    .build();
 
-                        finish();
-                        startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+                            user.updateProfile(profileUpdates);
+                            */
+                            sendEmailVerification();
+
+                            FirebaseAuth.getInstance().signOut();
+                            System.out.println("Signing out");
+
+                            progressDialog.dismiss();
+                            Toast.makeText(SignupActivity.this, "Please verify your email then sign in again.", Toast.LENGTH_SHORT).show();
+
+                            finish();
+
+                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+
+                        }
+                        else{
+                            progressDialog.dismiss();
+                            Toast.makeText(SignupActivity.this, "Registration Failed, please try again", Toast.LENGTH_SHORT).show();
+                        }
                     }
-                    else{
-                        progressDialog.dismiss();
-                        Toast.makeText(SignupActivity.this, "Registration Failed, please try again", Toast.LENGTH_SHORT).show();
-
-                    }
-                }
-        });
+                });
 
     }
 
+    public void sendEmailVerification() {
+        // [START send_email_verification]
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        FirebaseUser user = auth.getCurrentUser();
 
+        user.sendEmailVerification()
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Log.d("TAG", "Email sent.");
+                        }
+                    }
+                });
+        // [END send_email_verification]
+    }
 
     @Override
     public void onClick(View view) {
