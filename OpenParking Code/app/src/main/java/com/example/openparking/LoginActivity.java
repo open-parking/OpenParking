@@ -31,6 +31,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private FirebaseAuth firebaseAuth;
     private ProgressDialog progressDialog;
 
+    public User user;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +44,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             finish();
             startActivity(new Intent(getApplicationContext(), SignupActivity.class));
         }
-
+        user = new User();
 
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
@@ -59,8 +61,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void userLogin()
     {
-        String email = editTextEmail.getText().toString().trim();
-        String password = editTextPassword.getText().toString().trim();
+        final String email = editTextEmail.getText().toString().trim();
+        final String password = editTextPassword.getText().toString().trim();
 
         if(TextUtils.isEmpty(email)) {
             //email is empty
@@ -87,7 +89,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             //Start the profile acivity
                             progressDialog.dismiss();
                             Toast.makeText(LoginActivity.this, "Sign in successful!", Toast.LENGTH_SHORT).show();
-
+                            user.setFirstName("");
+                            user.setEmail(email);
                             finish();
                             startActivity(new Intent(getApplicationContext(), MainActivity.class));
                         }
