@@ -26,6 +26,7 @@ OpenParking Code/app/src/debug/res/values/google_maps_api.xml
 !content_test_.xml
 !activity_pay_pal.xml
 !activity_payment_details.xml
+!activity_rating.xml
 
 # Do Not ignore login resources
 !bg_login.xml
