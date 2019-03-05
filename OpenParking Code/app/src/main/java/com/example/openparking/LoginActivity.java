@@ -107,7 +107,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                             if(checkIfEmailVerified()){
                                 Toast.makeText(LoginActivity.this, "Sign in successful!", Toast.LENGTH_SHORT).show();
-
+                                user.setFirstName("");
+                                user.setEmail(email);
                                 finish();
                                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
                             }
@@ -116,16 +117,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 progressDialog.dismiss();
                                 Toast.makeText(LoginActivity.this, "Sign in failed, please try again", Toast.LENGTH_SHORT).show();
                             }
-                            Toast.makeText(LoginActivity.this, "Sign in successful!", Toast.LENGTH_SHORT).show();
-                            user.setFirstName("");
-                            user.setEmail(email);
-                            finish();
-                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                        }
-                        else{
-                            progressDialog.dismiss();
-                            Toast.makeText(LoginActivity.this, "Sign in failed, please try again", Toast.LENGTH_SHORT).show();
-
                         }
                     }
                 });
