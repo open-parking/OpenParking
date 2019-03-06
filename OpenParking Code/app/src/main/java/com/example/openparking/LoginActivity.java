@@ -37,6 +37,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private FirebaseAuth firebaseAuth;
     private ProgressDialog progressDialog;
 
+    public User user;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +59,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         progressDialog = new ProgressDialog(this);
 
+        user = new User();
+
         buttonSignIn.setOnClickListener(this);
         Signup.setOnClickListener(this);
 
@@ -74,8 +78,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void userLogin()
     {
-        String email = editTextEmail.getText().toString().trim();
-        String password = editTextPassword.getText().toString().trim();
+        final String email = editTextEmail.getText().toString().trim();
+        final String password = editTextPassword.getText().toString().trim();
 
         if(TextUtils.isEmpty(email)) {
             //email is empty
