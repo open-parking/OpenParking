@@ -38,6 +38,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private ProgressDialog progressDialog;
 
     public User user;
+    public Contributor contributor;
+    public Vehicle vehicle;
+    
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
