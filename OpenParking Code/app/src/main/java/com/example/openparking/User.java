@@ -16,7 +16,6 @@ public class User {
                 '}';
     }
 
-    //not used for now
     /*public User(String firstName, String lastName, String email, String password) {
         this.firstName = firstName;
         this.lastName = lastName;

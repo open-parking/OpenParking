@@ -50,7 +50,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             finish();
             startActivity(new Intent(getApplicationContext(), SignupActivity.class));
         }
-        user = new User();
+
 
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
@@ -58,6 +58,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         Signup = (TextView) findViewById(R.id.textViewSignup);
 
         progressDialog = new ProgressDialog(this);
+
+        user = new User();
 
         buttonSignIn.setOnClickListener(this);
         Signup.setOnClickListener(this);
