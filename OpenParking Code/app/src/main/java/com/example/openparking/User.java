@@ -5,6 +5,8 @@ public class User {
     String lastName;
     String email;
     String password;
+    int numRating;
+    int sumRating;
 
     @Override
     public String toString() {
@@ -13,6 +15,8 @@ public class User {
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", number of rating='" + numRating + '\'' +
+                ", sum of rating='" + sumRating + '\'' +
                 '}';
     }
 
@@ -53,5 +57,21 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public int getNumRating() {
+        return numRating;
+    }
+
+    public void setNumRating(int numRating) {
+        this.numRating = numRating;
+    }
+
+    public int getSumRating() {
+        return sumRating;
+    }
+
+    public void setSumRating(int sumRating) {
+        this.sumRating = sumRating;
     }
 }
