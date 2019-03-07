@@ -6,12 +6,7 @@ public class Contributor {
     User user;
     String acceptedPayment;
     Address address;
-
-    public Contributor(User user, String acceptedPayment, Address address) {
-        this.user = user;
-        this.acceptedPayment = acceptedPayment;
-        this.address = address;
-    }
+    double contributorRating;
 
     public User getUser() {
         return user;
@@ -37,12 +32,21 @@ public class Contributor {
         this.address = address;
     }
 
+    public double getContributorRating() {
+        return contributorRating;
+    }
+
+    public void setContributorRating(double contributorRating) {
+        this.contributorRating = contributorRating;
+    }
+
     @Override
     public String toString() {
         return "Contributor{" +
                 "user=" + user +
                 ", acceptedPayment='" + acceptedPayment + '\'' +
                 ", address=" + address +
+                ", contributorRating=" + contributorRating + '\'' +
                 '}';
     }
 }

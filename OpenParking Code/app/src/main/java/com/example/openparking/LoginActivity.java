@@ -40,7 +40,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public User user;
     public Contributor contributor;
     public Vehicle vehicle;
-    
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +63,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         progressDialog = new ProgressDialog(this);
 
         user = new User();
+        contributor = new Contributor();
+        vehicle = new Vehicle();
 
         buttonSignIn.setOnClickListener(this);
         Signup.setOnClickListener(this);
@@ -112,9 +114,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                             if(checkIfEmailVerified()){
                                 Toast.makeText(LoginActivity.this, "Sign in successful!", Toast.LENGTH_SHORT).show();
+                                finish();
                                 user.setFirstName("");
                                 user.setEmail(email);
-                                finish();
                                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
                             }
                             else

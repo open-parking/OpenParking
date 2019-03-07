@@ -4,7 +4,7 @@ public class User {
     String firstName;
     String lastName;
     String email;
-    String password;
+    double userRating;
 
     @Override
     public String toString() {
@@ -12,16 +12,17 @@ public class User {
                 "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
+                ", userRating='" + userRating + '\'' +
                 '}';
     }
 
-    /*public User(String firstName, String lastName, String email, String password) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.password = password;
-    }*/
+    public double getUserRating() {
+        return userRating;
+    }
+
+    public void setUserRating(double userRating) {
+        this.userRating = userRating;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -45,13 +46,5 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 }
