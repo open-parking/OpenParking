@@ -5,6 +5,7 @@ public class User {
     String lastName;
     String email;
     double userRating;
+    int timesUserRated;
 
     @Override
     public String toString() {
@@ -13,7 +14,16 @@ public class User {
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", userRating='" + userRating + '\'' +
+                ", timesUserRated='" + timesUserRated + '\'' +
                 '}';
+    }
+
+    public int getTimesUserRated() {
+        return timesUserRated;
+    }
+
+    public void setTimesUserRated(int timesUserRated) {
+        this.timesUserRated = timesUserRated;
     }
 
     public double getUserRating() {
