@@ -38,7 +38,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private ProgressDialog progressDialog;
 
     public User user;
-    public Contributor contributor;
     public Vehicle vehicle;
 
 
@@ -63,7 +62,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         progressDialog = new ProgressDialog(this);
 
         user = new User();
-        contributor = new Contributor();
         vehicle = new Vehicle();
 
         buttonSignIn.setOnClickListener(this);
