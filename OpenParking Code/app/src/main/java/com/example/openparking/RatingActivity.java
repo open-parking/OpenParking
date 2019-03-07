@@ -7,7 +7,13 @@ import android.widget.Button;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import android.content.Intent;
+
 public class RatingActivity extends AppCompatActivity {
+
+    private FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
