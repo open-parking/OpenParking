@@ -7,14 +7,6 @@ public class Vehicle {
     String color;
     String licensePlate;
 
-    public Vehicle(String brand, String model, String year, String color, String licensePlate) {
-        this.brand = brand;
-        this.model = model;
-        this.year = year;
-        this.color = color;
-        this.licensePlate = licensePlate;
-    }
-
     public String getBrand() {
         return brand;
     }
