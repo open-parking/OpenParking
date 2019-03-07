@@ -7,7 +7,13 @@ import android.widget.Button;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import android.content.Intent;
+
 public class RatingActivity extends AppCompatActivity {
+
+    private FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +24,19 @@ public class RatingActivity extends AppCompatActivity {
         final TextView mRatingScale = (TextView) findViewById(R.id.tvRatingScale);
         Button submitButton = (Button) findViewById(R.id.submit_button);
         final TextView ratingDisplayTextView = (TextView) findViewById(R.id.rating_display_text_View);
+
+
+        //Use this template to get data from Firebase about classes we want to use
+        firebaseAuth = FirebaseAuth.getInstance();
+        if(firebaseAuth.getCurrentUser() == null)
+        {
+            finish();
+            startActivity(new Intent(this, LoginActivity.class));
+        }
+        FirebaseUser fuser = firebaseAuth.getCurrentUser();
+        User user = new User();
+        user.setId(fuser.getUid());
+
 
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
