@@ -19,6 +19,19 @@ public class RatingActivity extends AppCompatActivity {
         Button submitButton = (Button) findViewById(R.id.submit_button);
         final TextView ratingDisplayTextView = (TextView) findViewById(R.id.rating_display_text_View);
 
+
+        //Use this template to get data from Firebase about classes we want to use
+        firebaseAuth = FirebaseAuth.getInstance();
+        if(firebaseAuth.getCurrentUser() == null)
+        {
+            finish();
+            startActivity(new Intent(this, LoginActivity.class));
+        }
+        FirebaseUser fuser = firebaseAuth.getCurrentUser();
+        User user = new User();
+        user.setId(fuser.getUid());
+
+
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
