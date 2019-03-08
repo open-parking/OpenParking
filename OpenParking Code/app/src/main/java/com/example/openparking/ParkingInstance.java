@@ -8,7 +8,6 @@ import java.util.Date;
 
 public class ParkingInstance {
 
-    private Contributor contributor;
     private User user;
     private Vehicle vehicle;
     private Address address;
@@ -38,9 +37,8 @@ public class ParkingInstance {
     */
 
 
-    public ParkingInstance(Contributor contributor, User user, Vehicle vehicle, Address address )
+    public ParkingInstance( User user, Vehicle vehicle, Address address )
     {
-        this.contributor = contributor;
         this.user = user;
         this.vehicle = vehicle;
         this.address = address;
