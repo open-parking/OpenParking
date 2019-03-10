@@ -1,6 +1,7 @@
 package com.example.openparking;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Build;
@@ -64,6 +65,9 @@ public class MapsActivity extends FragmentActivity implements
 
     private static final int NUM_MARKERS = 8;
 
+    //Test for info window
+    static final LatLng PARKINGSPOT = new LatLng(33.782896, -118.110230);
+    //Marker parkingSpot = mMap.addMarker(new MarkerOptions().position(PARKINGSPOT).title("Parking Spot Test").snippet("Parking available: 9:00am to 6:00pm Mon - Thur $3/hr"));
 
 
 
@@ -191,6 +195,14 @@ public class MapsActivity extends FragmentActivity implements
 
         // Set a listener for info window events.
         mMap.setOnInfoWindowClickListener(this);
+
+        mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+            @Override
+            public void onInfoWindowClick(Marker marker) {
+                Intent intent = new Intent(MapsActivity.this, ProfileActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     public boolean checkUserLocationPermission()

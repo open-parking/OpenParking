@@ -3,7 +3,6 @@
 *.bin
 *.lock
 *.ser
-*.xml
 *.iml
 *.gradle
 *.properties
