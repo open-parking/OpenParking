@@ -4,27 +4,50 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg_login"
     tools:context=".ProfileActivity">
 
     <LinearLayout
-        android:layout_width="395dp"
-        android:layout_height="715dp"
+        android:layout_width="377dp"
+        android:layout_height="660dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:srcCompat="@tools:sample/avatars" />
 
         <EditText
             android:id="@+id/textViewUserEmail"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="151dp"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="Welcome!" />
+            android:text="Welcome!"
+            android:textAlignment="center"/>
+
+        <Button
+            android:id="@+id/buttonMainMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Main Menu" />
 
         <Button
             android:id="@+id/buttonLogout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Log Out" />
+
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

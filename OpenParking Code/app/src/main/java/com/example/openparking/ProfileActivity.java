@@ -17,6 +17,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
     private TextView textViewUserEmail;
     private Button buttonLogout;
+    private Button buttonMainMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +44,9 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         buttonLogout = (Button) findViewById(R.id.buttonLogout);
 
         buttonLogout.setOnClickListener(this);
+        buttonMainMenu = (Button) findViewById(R.id.buttonMainMenu);
+
+        buttonLogout.setOnClickListener(this);
     }
 
     @Override
@@ -51,6 +55,11 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             firebaseAuth.signOut();
             finish();
             startActivity(new Intent(this, LoginActivity.class));
+        }
+        if(view == buttonMainMenu){
+            firebaseAuth.signOut();
+            finish();
+            startActivity(new Intent(this, MainActivity.class));
         }
     }
 }

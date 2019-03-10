@@ -11,6 +11,7 @@ import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -132,6 +133,22 @@ public class MapsActivity extends FragmentActivity implements
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
+        if(mMap != null)
+        {
+            mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+                @Override
+                public View getInfoWindow(Marker marker) {
+                    return null;
+                }
+
+                @Override
+                public View getInfoContents(Marker marker) {
+                    View row = getLayoutInflater().inflate(R.layout.custom_window, null);
+
+                    return null;
+                }
+            });
+        }
         // Replacing this section with users location
         // Add a marker in Long Beach and move the camera
         LatLng longbeach = new LatLng(33.782896, -118.110230);
