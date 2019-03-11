@@ -1,6 +1,8 @@
 package com.example.openparking;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.provider.ContactsContract;
@@ -19,17 +21,25 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+
+    //Test Button - Do Not Remove Until Release
+    private Button btnTest;
 
 
     private Button buttonSignIn;
     private EditText editTextEmail;
     private EditText editTextPassword;
-    private TextView textViewSignin;
+    private TextView Signup;
 
     private FirebaseAuth firebaseAuth;
     private ProgressDialog progressDialog;
+
+    public User user;
+    public Vehicle vehicle;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,27 +50,39 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         if(firebaseAuth.getCurrentUser() != null){
             finish();
-            startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+            startActivity(new Intent(getApplicationContext(), SignupActivity.class));
         }
 
 
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
         buttonSignIn = (Button) findViewById(R.id.buttonSignin);
-        textViewSignin = (TextView) findViewById(R.id.textViewSignup);
+        Signup = (TextView) findViewById(R.id.textViewSignup);
 
         progressDialog = new ProgressDialog(this);
 
+        user = new User();
+        vehicle = new Vehicle();
+
         buttonSignIn.setOnClickListener(this);
-        textViewSignin.setOnClickListener(this);
+        Signup.setOnClickListener(this);
+
+        /// Test Button
+        btnTest = findViewById(R.id.btnTest);
+        btnTest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, Test_Activity.class));
+            }
+        });
 
     }
 
 
     private void userLogin()
     {
-        String email = editTextEmail.getText().toString().trim();
-        String password = editTextPassword.getText().toString().trim();
+        final String email = editTextEmail.getText().toString().trim();
+        final String password = editTextPassword.getText().toString().trim();
 
         if(TextUtils.isEmpty(email)) {
             //email is empty
@@ -84,23 +106,53 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
-                            //Start the profile acivity
+                            //Start the profile activity
                             progressDialog.dismiss();
-                            Toast.makeText(LoginActivity.this, "Sign in successful!", Toast.LENGTH_SHORT).show();
 
-                            finish();
-                            startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
-                        }
-                        else{
-                            progressDialog.dismiss();
-                            Toast.makeText(LoginActivity.this, "Sign in failed, please try again", Toast.LENGTH_SHORT).show();
 
+                            if(checkIfEmailVerified()){
+                                Toast.makeText(LoginActivity.this, "Sign in successful!", Toast.LENGTH_SHORT).show();
+                                finish();
+                                user.setFirstName("");
+                                user.setEmail(email);
+                                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                            }
+                            else
+                            {
+                                progressDialog.dismiss();
+                                Toast.makeText(LoginActivity.this, "Sign in failed, please try again", Toast.LENGTH_SHORT).show();
+                            }
                         }
                     }
                 });
     }
 
+    private Boolean checkIfEmailVerified()
+    {
 
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+
+        if(user.isEmailVerified()) {
+            finish();
+            return true;
+        }
+        else {
+            new AlertDialog.Builder(this)
+                    .setTitle("Verify Email")
+                    .setMessage("Please verify your email then try again.")
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    })
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .show();
+
+            firebaseAuth.signOut();
+            return false;
+        }
+    }
 
     @Override
     public void onClick(View v) {
@@ -109,9 +161,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             userLogin();
         }
 
-        if(v == textViewSignin){
+        if(v == Signup){
             finish();
-            startActivity(new Intent(this, MainActivity.class));
+            startActivity(new Intent(this, SignupActivity.class));
         }
     }
 }

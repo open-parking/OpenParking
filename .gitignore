@@ -3,7 +3,6 @@
 *.bin
 *.lock
 *.ser
-*.xml
 *.iml
 *.gradle
 *.properties
@@ -11,7 +10,6 @@
 
 /gradle/
 /build/
-
 
 # Ignore maps key
 OpenParking Code/app/src/debug/res/values/google_maps_api.xml
@@ -29,6 +27,8 @@ OpenParking*Code/app/src/debug/res/values/google_maps_api.xml
 !content_test_.xml
 !activity_pay_pal.xml
 !activity_payment_details.xml
+!activity_rating.xml
+
 
 # Do Not ignore login resources
 !bg_login.xml
@@ -39,6 +39,7 @@ OpenParking*Code/app/src/debug/res/values/google_maps_api.xml
 !ic_launcher.xml
 !ic_launcher_background.xml
 !ic_launcher_foreground.xml
+!rounded_button.xml
 
 # Do Not ignore resources 
 !colors.xml
@@ -68,3 +69,7 @@ OpenParking*Code/.gradle/
 OpenParking*Code/.idea/libraries/Gradle__com_android_support_viewpager_28_0_0_aar.xml
 OpenParking Code/.idea/libraries/Gradle__android_arch_core_runtime_1_1_1_aar.xml
 OpenParking Code/.gradle/4.10.1/fileHashes/fileHashes.bin
+.idea/misc.xml
+.idea/vcs.xml
+.idea/modules.xml
+OpenParking Code/app/src/main/AndroidManifest.xml

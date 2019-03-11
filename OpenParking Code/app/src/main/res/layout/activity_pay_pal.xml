@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg_login"
     tools:context=".PayPalActivity">
 
     <LinearLayout
@@ -14,15 +15,18 @@
 
         <EditText
             android:id="@+id/edtAmount"
-            android:hint="Enter Amount"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_width="324dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:hint="Enter Amount" />
 
         <Button
             android:id="@+id/btnPayNow"
-            android:text="Pay Now"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_width="334dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/rounded_button"
+            android:text="Pay Now" />
 
     </LinearLayout>
 
