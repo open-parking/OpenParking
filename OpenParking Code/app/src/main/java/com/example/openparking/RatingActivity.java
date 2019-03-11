@@ -14,6 +14,7 @@ import android.content.Intent;
 public class RatingActivity extends AppCompatActivity {
 
     private FirebaseAuth firebaseAuth;
+    double userRatingTotal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,14 +35,18 @@ public class RatingActivity extends AppCompatActivity {
             startActivity(new Intent(this, LoginActivity.class));
         }
         FirebaseUser fuser = firebaseAuth.getCurrentUser();
-        User user = new User();
+        final User user = new User();
         user.setId(fuser.getUid());
 
 
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ratingDisplayTextView.setText("You rating is: " + mRatingBar.getRating());
+                //ratingDisplayTextView.setText("Your rating is: " + mRatingBar.getRating());
+                userRatingTotal = user.getUserRating() * user.getTimesUserRated() + mRatingBar.getRating();
+                user.setTimesUserRated(user.getTimesUserRated() + 1);
+                user.setUserRating(userRatingTotal / user.getTimesUserRated());
+                ratingDisplayTextView.setText("Your average rating is: " + user.getUserRating());
             }
         });
 
