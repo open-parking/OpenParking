@@ -4,10 +4,11 @@ SearchActivity
 
 profile / changing information
 rounding rating avg
-pretty paypal reciepts
+pretty paypal receipts
 date / scheduling implementation
 processing fee
 payment preferences
 
 privacy policy
+terms of service
 contributor conduct
