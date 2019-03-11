@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+
 public class ProfileActivity extends AppCompatActivity implements View.OnClickListener {
 
     private FirebaseAuth firebaseAuth;
@@ -24,22 +25,18 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-
         firebaseAuth = FirebaseAuth.getInstance();
-        if(firebaseAuth.getCurrentUser() == null)
-        {
-            finish();
-            startActivity(new Intent(this, LoginActivity.class));
-        }
-
-
         FirebaseUser user = firebaseAuth.getCurrentUser();
+
+        if(user == null)
+        {
+            startActivity(new Intent(ProfileActivity.this, LoginActivity.class));
+        }
 
 
         textViewUserEmail = (TextView) findViewById(R.id.textViewUserEmail);
 
         textViewUserEmail.setText("Welcome " + user.getEmail());
-
 
         buttonLogout = (Button) findViewById(R.id.buttonLogout);
 
@@ -57,7 +54,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             startActivity(new Intent(this, LoginActivity.class));
         }
         if(view == buttonMainMenu){
-            firebaseAuth.signOut();
             finish();
             startActivity(new Intent(this, MainActivity.class));
         }
