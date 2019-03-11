@@ -1,0 +1,8 @@
+SetAsContributorActivity
+CreateParkingInstanceActivity
+SearchActivity
+
+profile / changing information
+rounding rating avg
+pretty paypal reciepts
+date / scheduling implementation
