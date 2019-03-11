@@ -18,6 +18,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
     private TextView textViewUserEmail;
     private Button buttonLogout;
+    private Button buttonMainMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +49,10 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             firebaseAuth.signOut();
             finish();
             startActivity(new Intent(this, LoginActivity.class));
+        }
+        if(view == buttonMainMenu){
+            finish();
+            startActivity(new Intent(ProfileActivity.this, MainActivity.class));
         }
     }
 }
