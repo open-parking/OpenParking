@@ -6,3 +6,8 @@ profile / changing information
 rounding rating avg
 pretty paypal reciepts
 date / scheduling implementation
+processing fee
+payment preferences
+
+privacy policy
+contributor conduct
