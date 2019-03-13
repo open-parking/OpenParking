@@ -30,6 +30,8 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
     private Button buttonRegister;
     private EditText editTextEmail;
     private EditText editTextPassword;
+    private EditText editTextFirstName;
+    //private EditText editTextLastName;
     private TextView textViewSignin;
 
     private ProgressDialog progressDialog;
@@ -56,8 +58,11 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
 
 
         buttonRegister = (Button) findViewById(R.id.buttonRegister);
+
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
+        editTextFirstName = (EditText) findViewById(R.id.editTextFirstName);
+        //editTextLastName = (EditText) findViewById(R.id.editTextLastName);
 
         textViewSignin = (TextView) findViewById(R.id.textViewSignin);
 
@@ -70,17 +75,25 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
     private void registerUser() {
         String email = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
+        final String firstName = editTextFirstName.getText().toString().trim();
+        //final String lastName = editTextLastName.getText().toString().trim();
 
         if(TextUtils.isEmpty(email)) {
             //email is empty
             Toast.makeText(this, "Please enter email", Toast.LENGTH_SHORT).show();
-            //stopping the function execution further
+            //stopping any further function execution
             return;
         }
         if(TextUtils.isEmpty(password)) {
             //password is empty
             Toast.makeText(this, "Please enter password", Toast.LENGTH_SHORT).show();
-            //stopping the function execution further
+            //stopping any further function execution
+            return;
+        }
+        if(TextUtils.isEmpty(firstName)) {
+            //first name is empty
+            Toast.makeText(this, "Please enter first name", Toast.LENGTH_SHORT).show();
+            //stopping any further function execution
             return;
         }
         //if validations are passed,
@@ -95,14 +108,14 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                         if(task.isSuccessful()){
                             //store first and last name in user instance!!
                             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                            /*
+
                             UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
 
-                                    .setDisplayName(firstName + " " + lastName)
+                                    .setDisplayName(firstName)
                                     .build();
 
                             user.updateProfile(profileUpdates);
-                            */
+
                             sendEmailVerification();
 
                             FirebaseAuth.getInstance().signOut();

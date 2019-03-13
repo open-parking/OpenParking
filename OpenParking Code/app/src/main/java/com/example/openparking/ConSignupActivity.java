@@ -35,8 +35,8 @@ public class ConSignupActivity extends AppCompatActivity implements View.OnClick
 
     @Override
     public void onClick(View view) {
-        if(view == buttonUpdate)
-        {
+        if (view == buttonUpdate) {
             contributorUpdate();
         }
+    }
 }
