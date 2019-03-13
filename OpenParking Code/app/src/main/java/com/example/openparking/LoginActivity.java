@@ -33,7 +33,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private EditText editTextEmail;
     private EditText editTextPassword;
     private TextView Signup;
-
+    private TextView textViewForgotPassword;
     private FirebaseAuth firebaseAuth;
     private ProgressDialog progressDialog;
 
@@ -45,7 +45,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
         firebaseAuth = FirebaseAuth.getInstance();
 
         if(firebaseAuth.getCurrentUser() != null){
@@ -58,7 +57,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
         buttonSignIn = (Button) findViewById(R.id.buttonSignin);
         Signup = (TextView) findViewById(R.id.textViewSignup);
-
+        textViewForgotPassword = (TextView) findViewById(R.id.textViewForgotPassword);
         progressDialog = new ProgressDialog(this);
 
         user = new User();
@@ -66,16 +65,23 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         buttonSignIn.setOnClickListener(this);
         Signup.setOnClickListener(this);
+        textViewForgotPassword.setOnClickListener(this);
+        textViewForgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, PasswordRecovery.class));
 
+            }
+        });
         /// Test Button
         btnTest = findViewById(R.id.btnTest);
         btnTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(LoginActivity.this, Test_Activity.class));
+
             }
         });
-
     }
 
 
@@ -165,5 +171,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             finish();
             startActivity(new Intent(this, SignupActivity.class));
         }
+
+
     }
 }
