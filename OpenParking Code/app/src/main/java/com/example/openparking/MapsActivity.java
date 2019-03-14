@@ -17,13 +17,12 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.location.LocationListener;
-
-
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
+
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -32,6 +31,13 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.IOException;
 import java.util.List;
@@ -53,8 +59,9 @@ public class MapsActivity extends FragmentActivity implements
     private static final int Request_User_Location_Code = 99;
     private static final String TAG = "Maps Activity";
 
-    //private EditText addressSearchText;
-   // private Button   addressSearchButton;
+    // [START declare_database_ref]
+    private DatabaseReference mDatabase;
+    // [END declare_database_ref]
 
 
 
@@ -131,6 +138,11 @@ public class MapsActivity extends FragmentActivity implements
         // Set a preference for minimum and maximum zoom.
         //mMap.setMinZoomPreference(6.0f);
         //mMap.setMaxZoomPreference(14.0f);
+
+
+        // [START initialize_database_ref]
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        // [END initialize_database_ref]
     }
 
     private LatLng randomLongBeachLocation()
@@ -372,6 +384,41 @@ public class MapsActivity extends FragmentActivity implements
             //mMap.addMarker(new MarkerOptions().position(latLng).title("Search Result"));
             mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
         }
+    }
+
+    public String getUid() {
+        return "42";
+    }
+
+    public void basicQueryValueListener() {
+        String myUserId = getUid();
+        Query myParkingInstanceQuery = mDatabase.child("user-posts").child(myUserId)
+                .orderByChild("starCount");
+
+        // [START basic_query_value_listener]
+        // My top posts by number of stars
+        myParkingInstanceQuery.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
+                    // TODO: handle the post
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Getting Post failed, log a message
+                Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
+                // ...
+            }
+        });
+        // [END basic_query_value_listener]
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        basicQueryValueListener();
     }
 
 
