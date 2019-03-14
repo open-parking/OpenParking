@@ -345,11 +345,7 @@ public class MapsActivity extends FragmentActivity implements
     }
 
     public void onMapSearch(View view) {
-
-        //private EditText addressSearchText;
-        // private Button   addressSearchButton;
-
-
+        
         EditText addressSearchText = findViewById(R.id.address_search_text);
         String location = addressSearchText.getText().toString();
         List<Address> addressList = null;
