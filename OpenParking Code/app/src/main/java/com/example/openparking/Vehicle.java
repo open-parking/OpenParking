@@ -7,6 +7,14 @@ public class Vehicle {
     String color;
     String licensePlate;
 
+    public Vehicle() {
+        this.brand = "";
+        this.model = "";
+        this.year = "";
+        this.color = "";
+        this.licensePlate = "";
+    }
+
     public String getBrand() {
         return brand;
     }
