@@ -11,4 +11,4 @@ payment preferences
 
 privacy policy
 terms of service
-contributor conduct
+contributor code of conduct
