@@ -23,6 +23,7 @@
         <activity android:name=".PasswordRecovery"></activity>
         <activity android:name=".PaymentDetails" />
         <activity android:name=".PayPalActivity" />
+        <activity android:name=".RatingActivity" />
         <activity
             android:name=".Test_Activity"
             android:label="@string/title_activity_test_"

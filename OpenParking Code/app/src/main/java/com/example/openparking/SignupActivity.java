@@ -2,6 +2,7 @@ package com.example.openparking;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -28,8 +29,17 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
 
 
     private Button buttonRegister;
+
     private EditText editTextEmail;
+    private String email;
+
     private EditText editTextPassword;
+    private String password;
+
+    private EditText editTextName;
+    private String name;
+
+
     private TextView textViewSignin;
 
     private ProgressDialog progressDialog;
@@ -58,6 +68,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         buttonRegister = (Button) findViewById(R.id.buttonRegister);
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
+        editTextName = (EditText) findViewById(R.id.editTextName);
 
         textViewSignin = (TextView) findViewById(R.id.textViewSignin);
 
@@ -68,8 +79,9 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
 
 
     private void registerUser() {
-        String email = editTextEmail.getText().toString().trim();
-        String password = editTextPassword.getText().toString().trim();
+        email = editTextEmail.getText().toString().trim();
+        password = editTextPassword.getText().toString().trim();
+        name = editTextName.getText().toString().trim();
 
         if(TextUtils.isEmpty(email)) {
             //email is empty
@@ -80,6 +92,12 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         if(TextUtils.isEmpty(password)) {
             //password is empty
             Toast.makeText(this, "Please enter password", Toast.LENGTH_SHORT).show();
+            //stopping the function execution further
+            return;
+        }
+        if(TextUtils.isEmpty(name)) {
+            //name is empty
+            Toast.makeText(this, "Please enter name", Toast.LENGTH_SHORT).show();
             //stopping the function execution further
             return;
         }
@@ -94,15 +112,16 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
                             //store first and last name in user instance!!
-                            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                            /*
+                            FirebaseUser user = firebaseAuth.getCurrentUser();
+
                             UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
 
-                                    .setDisplayName(firstName + " " + lastName)
+                                    .setDisplayName(name)
+                                    .setPhotoUri(Uri.parse("gs://openparking-491.appspot.com/default-profile.gif"))
                                     .build();
 
                             user.updateProfile(profileUpdates);
-                            */
+
                             sendEmailVerification();
 
                             FirebaseAuth.getInstance().signOut();
