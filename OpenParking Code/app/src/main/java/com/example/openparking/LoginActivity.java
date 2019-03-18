@@ -28,7 +28,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     //Test Button - Do Not Remove Until Release
     private Button btnTest;
 
-
     private Button buttonSignIn;
     private EditText editTextEmail;
     private EditText editTextPassword;
