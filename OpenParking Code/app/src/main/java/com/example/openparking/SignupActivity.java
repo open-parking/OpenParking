@@ -22,11 +22,15 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.w3c.dom.Text;
 
 public class SignupActivity extends AppCompatActivity implements View.OnClickListener {
-
 
     private Button buttonRegister;
 
@@ -39,11 +43,13 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
     private EditText editTextName;
     private String name;
 
-
     private TextView textViewSignin;
+
 
     private ProgressDialog progressDialog;
     private FirebaseAuth firebaseAuth;
+    private FirebaseDatabase mDatabase;
+    private DatabaseReference usersRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +60,8 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
 
 
         firebaseAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance();
+        usersRef = mDatabase.getReference();
 
         if(firebaseAuth.getCurrentUser() != null){
             finish();
@@ -113,14 +121,39 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                         if(task.isSuccessful()){
                             //store first and last name in user instance!!
                             FirebaseUser user = firebaseAuth.getCurrentUser();
-
                             UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
 
                                     .setDisplayName(name)
                                     .setPhotoUri(Uri.parse("gs://openparking-491.appspot.com/default-profile.gif"))
                                     .build();
-
                             user.updateProfile(profileUpdates);
+
+                            /*
+                            ------------------------------------
+                            Creating user in FireBase database
+                            ------------------------------------
+                             */
+                            User mUser = new User();
+                            mUser.setName(name);
+                            mUser.setEmail(email);
+                            String uID = user.getUid();
+                            mUser.setId(uID);
+
+                            usersRef.child("users").child(uID).setValue(mUser);
+
+                            /*
+                            usersRef.addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                    progressDialog.dismiss();
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+                                    Log.w("TAG", "Failed to read from database", databaseError.toException());
+                                }
+                            });
+                            */
 
                             sendEmailVerification();
 
