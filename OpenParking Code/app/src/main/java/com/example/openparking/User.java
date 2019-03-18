@@ -3,8 +3,7 @@ package com.example.openparking;
 import android.location.Address;
 
 public class User {
-    String firstName;
-    String lastName;
+    String name;
     String email;
     double userRating;
     int timesUserRated;
@@ -16,8 +15,7 @@ public class User {
     int timesContributorRated;
 
     public User() {
-        this.firstName = "";
-        this.lastName = "";
+        this.name = "";
         this.email = "";
         this.userRating = 0;
         this.timesUserRated = 0;
@@ -32,8 +30,7 @@ public class User {
     @java.lang.Override
     public java.lang.String toString() {
         return "User{" +
-                "firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
+                "name='" + name +
                 ", email='" + email + '\'' +
                 ", userRating=" + userRating +
                 ", timesUserRated=" + timesUserRated +
@@ -110,20 +107,12 @@ public class User {
         this.userRating = userRating;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getName() {
+        return name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getEmail() {

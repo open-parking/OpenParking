@@ -118,7 +118,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             if(checkIfEmailVerified()){
                                 Toast.makeText(LoginActivity.this, "Sign in successful!", Toast.LENGTH_SHORT).show();
                                 finish();
-                                user.setFirstName("");
+                                user.setName("");
                                 user.setEmail(email);
                                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
                             }
