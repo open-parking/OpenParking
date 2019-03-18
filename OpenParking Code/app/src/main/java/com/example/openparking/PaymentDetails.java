@@ -17,7 +17,7 @@ public class PaymentDetails extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment_details);
 
-        txtId = (TextView)findViewById(R.id.txtId);
+        //txtId = (TextView)findViewById(R.id.txtId);
         txtAmount = (TextView)findViewById(R.id.txtAmount);
         txtStatus = (TextView)findViewById(R.id.txtStatus);
 
@@ -35,9 +35,9 @@ public class PaymentDetails extends AppCompatActivity {
 
     private void showDetails(JSONObject response, String paymentAmount) {
         try{
-            txtId.setText(response.getString("id"));
+            //txtId.setText(response.getString("id"));
             txtStatus.setText(response.getString("state"));
-            txtAmount.setText("$"+paymentAmount);
+            txtAmount.setText("You successfully paid "+"$"+paymentAmount+" for parking");
 
         } catch (JSONException e) {
             e.printStackTrace();
