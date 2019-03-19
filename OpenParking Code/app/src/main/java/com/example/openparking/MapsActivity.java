@@ -40,6 +40,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -55,7 +56,7 @@ public class MapsActivity extends FragmentActivity implements
     private GoogleApiClient googleApiClient;
     private LocationRequest locationRequest;
     private Location lastLocation;
-    private Marker currentLocationMarker;
+    private Marker currentLocationMarker;//To be removed later,
     private static final int Request_User_Location_Code = 99;
     private static final String TAG = "Maps Activity";
 
@@ -64,21 +65,26 @@ public class MapsActivity extends FragmentActivity implements
     // [END declare_database_ref]
 
 
+    List <ParkingInstance> parkingSpaceList;
 
-    // Test Values for Random Markers in Long Beach
+
+    // [START Test Values for Random Markers in Long Beach]
+
+    // Test Area Latitude and Longitude
+    // from (Hilltop Park) to (7th and Studebaker)
     double scale_value  = 1000000.0;
     int parallel = 33;
     int meridian = -118;
 
-    //Test Area from (Hilltop Park) to (7th and Studebaker)
-    // Latitude Range
+    // Latitude Range (numbers must be adjusted with scale_value)
     private static final int maxLat =800471;
     private static final int minLat =774571;
-    // Longitude Range
+    // Longitude Range(numbers must be adjusted with scale_value)
     private static final int maxLon =167585;
     private static final int minLon =103137;
-
     private static final int NUM_MARKERS = 8;
+    // [END Test Values for Random Markers in Long Beach]
+
 
     class ParkingInfoWindow implements GoogleMap.InfoWindowAdapter {
 
@@ -140,6 +146,8 @@ public class MapsActivity extends FragmentActivity implements
         //mMap.setMaxZoomPreference(14.0f);
 
 
+        parkingSpaceList = new ArrayList<>();
+
         // [START initialize_database_ref]
         mDatabase = FirebaseDatabase.getInstance().getReference();
         // [END initialize_database_ref]
@@ -173,6 +181,34 @@ public class MapsActivity extends FragmentActivity implements
 
         }
     }
+
+    private void addRandomMarkersToList(int num_markers)
+    {
+        for (int i = 0; i < num_markers; i++ ) {
+            LatLng random_coords = randomLongBeachLocation();
+            ParkingInstance testInstance = new ParkingInstance(random_coords);
+
+            parkingSpaceList.add(testInstance);
+        }
+    }
+
+    private void displayMarkersOnList(GoogleMap googleMap)
+    {
+        mMap = googleMap;
+        for (int i = 0; i < parkingSpaceList.size(); i++ )
+        {
+
+            mMap.addMarker(new MarkerOptions()
+                    .position(parkingSpaceList.get(i).getLatlng())
+                    .title("List: " + String.valueOf(i) )
+                    .snippet("Hours: 9:00am - 6:00pm\nPrice: $3/hr")
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.openparkinglogo_small))
+                    .flat(true)
+            );
+        }
+    }
+
+
 
     /**
      * Manipulates the map once available.
@@ -219,8 +255,11 @@ public class MapsActivity extends FragmentActivity implements
                 .title("Hello Marker"));
 
         // Randomized Markers
-        addRandomMarkers(mMap, NUM_MARKERS);
+        //addRandomMarkers(mMap, NUM_MARKERS);
 
+        // Load Markers From ParkingInstanceList
+        addRandomMarkersToList(NUM_MARKERS);
+        displayMarkersOnList(mMap);
 
         // Move Camera to LongBeach
         mMap.moveCamera(CameraUpdateFactory.newLatLng(longbeach));
@@ -370,19 +409,26 @@ public class MapsActivity extends FragmentActivity implements
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            Address address = addressList.get(0);
-            LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
+            if(!addressList.isEmpty())
+            {
+                Address address = addressList.get(0);
+                LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
 
-            //Marker Options
-            MarkerOptions markerOptions = new MarkerOptions();
-            markerOptions.position(latLng);
-            markerOptions.title("Search Result");
-            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
+                //Marker Options
+                MarkerOptions markerOptions = new MarkerOptions();
+                markerOptions.position(latLng);
+                markerOptions.title("Search Result");
+                markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
 
-            mMap.addMarker(markerOptions);
+                mMap.addMarker(markerOptions);
 
-            //mMap.addMarker(new MarkerOptions().position(latLng).title("Search Result"));
-            mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
+                //mMap.addMarker(new MarkerOptions().position(latLng).title("Search Result"));
+                mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
+            }else
+            {
+                Log.v(TAG, "onMapSearch: addressList isEmpty()");
+            }
+
         }
     }
 
@@ -392,8 +438,12 @@ public class MapsActivity extends FragmentActivity implements
 
     public void basicQueryValueListener() {
         String myUserId = getUid();
-        Query myParkingInstanceQuery = mDatabase.child("user-posts").child(myUserId)
-                .orderByChild("starCount");
+        String myZipcode = "90840";
+
+        Query myParkingInstanceQuery = mDatabase.child("parking-instances").child(myZipcode);
+
+        /**Query myParkingInstanceQuery = mDatabase.child("user-posts").child(myUserId)
+                .orderByChild("starCount");**/
 
         // [START basic_query_value_listener]
         // My top posts by number of stars
@@ -402,6 +452,7 @@ public class MapsActivity extends FragmentActivity implements
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
                     // TODO: handle the post
+                    //postSnapshot.
                 }
             }
 

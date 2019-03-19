@@ -1,0 +1,7 @@
+git rm --cache 'OpenParking Code/.gradle/4.10.1/fileHashes/fileHashes.bin'
+git rm --cache 'OpenParking Code/.gradle/4.10.1/fileHashes/fileHashes.lock'
+git rm --cache 'OpenParking Code/.idea/libraries/Gradle__com_squareup_javawriter_2_1_1_jar.xml'
+git rm --cache 'OpenParking Code/.idea/libraries/Gradle__com_junit_4_12_jar.xml'
+git rm --cache 'OpenParking Code/.idea/libraries/Gradle__org_hamcrest_core_1_3_jar.xml'
+git rm --cache 'OpenParking Code/.idea/libraries/Gradle__org_hamcrest_library_1_3_jar.xml'
+git rm --cache 'OpenParking Code/app/src/debug/res/values/google_maps_api.xml'
