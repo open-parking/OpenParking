@@ -3,3 +3,10 @@ Version 0.1 - Register and Sign-in for registered Users
 	      Partial Paypal functionality
 	      Database for users with respective classes
 	      UI for current features
+
+Version 0.2 - Full Paypal functionality
+	      Ratings Implementation
+	      MapView Search
+	      Email verification
+	      Basic profile
+	      UI for current features

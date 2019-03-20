@@ -3,12 +3,14 @@
 *.bin
 *.lock
 *.ser
-*.xml
 *.iml
 *.gradle
 *.properties
 *.DS_Store
 
+
+/gradle/
+/build/
 
 # Ignore maps key
 OpenParking Code/app/src/debug/res/values/google_maps_api.xml
@@ -24,6 +26,7 @@ OpenParking Code/app/src/debug/res/values/google_maps_api.xml
 !content_test_.xml
 !activity_pay_pal.xml
 !activity_payment_details.xml
+!activity_rating.xml
 
 # Do Not ignore login resources
 !bg_login.xml
@@ -34,6 +37,8 @@ OpenParking Code/app/src/debug/res/values/google_maps_api.xml
 !ic_launcher.xml
 !ic_launcher_background.xml
 !ic_launcher_foreground.xml
+!rounded_button.xml
+
 
 # Do Not ignore resources 
 !colors.xml
@@ -42,16 +47,27 @@ OpenParking Code/app/src/debug/res/values/google_maps_api.xml
 !strings.xml
 !styles.xml
 
+# Do Not ignore
+!build.gradle
+!AndroidManifest.xml
+
 # Ignore workspace.xml
 workspace.xml
 .idea/workspace.xml
 **/.idea/workspace.xml
 Code/.idea/workspace.xml
-OpenParking Code/.idea/workspace.xml
+OpenParking*Code/.idea/workspace.xml
 
 # Also Ignore these
-OpenParking Code/.gradle/4.10.1/fileHashes/fileHashes.bin
-OpenParking Code/.idea/libraries/
-OpenParking Code/.idea/caches/
-OpenParking Code/.gradle/
-OpenParking Code/.idea/libraries/Gradle__com_android_support_viewpager_28_0_0_aar.xml
+**/fileHashes.bin
+**/fileHashes.lock
+OpenParking*Code/.gradle/4.10.1/fileHashes/fileHashes.bin
+OpenParking*Code/.idea/libraries/
+OpenParking*Code/.idea/caches/
+OpenParking*Code/.gradle/
+OpenParking*Code/.idea/libraries/Gradle__com_android_support_viewpager_28_0_0_aar.xml
+**fileHashes.bin
+**fileHashes.lock
+**fileHashes
+**.idea
+

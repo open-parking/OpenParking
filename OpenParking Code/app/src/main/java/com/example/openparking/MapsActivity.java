@@ -2,8 +2,9 @@ package com.example.openparking;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
-//import android.location.LocationListener;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,6 +13,8 @@ import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -30,13 +33,17 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.io.IOException;
+import java.util.List;
 import java.util.Random;
 
 public class MapsActivity extends FragmentActivity implements
         OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
-        LocationListener {
+        LocationListener,
+        GoogleMap.OnInfoWindowClickListener
+{
 
     private GoogleMap mMap;
     private GoogleApiClient googleApiClient;
@@ -46,6 +53,10 @@ public class MapsActivity extends FragmentActivity implements
     private static final int Request_User_Location_Code = 99;
     private static final String TAG = "Maps Activity";
 
+    //private EditText addressSearchText;
+   // private Button   addressSearchButton;
+
+
 
     // Test Values for Random Markers in Long Beach
     double scale_value  = 1000000.0;
@@ -53,7 +64,6 @@ public class MapsActivity extends FragmentActivity implements
     int meridian = -118;
 
     //Test Area from (Hilltop Park) to (7th and Studebaker)
-    
     // Latitude Range
     private static final int maxLat =800471;
     private static final int minLat =774571;
@@ -61,9 +71,46 @@ public class MapsActivity extends FragmentActivity implements
     private static final int maxLon =167585;
     private static final int minLon =103137;
 
-    private static final int NUM_MARKERS = 16;
+    private static final int NUM_MARKERS = 8;
 
+    class ParkingInfoWindow implements GoogleMap.InfoWindowAdapter {
 
+        // These are both viewgroups containing an ImageView with id "badge" and two TextViews with id
+        // "title" and "snippet".
+        private final View mWindow;
+
+        private final View mContents;
+
+        ParkingInfoWindow() {
+            mWindow = getLayoutInflater().inflate(R.layout.custom_info_window, null);
+            mContents = getLayoutInflater().inflate(R.layout.custom_info_contents, null);
+        }
+
+        @Override
+        public View getInfoWindow(Marker marker) {
+            /**
+            if (mOptions.getCheckedRadioButtonId() != R.id.custom_info_window) {
+                // This means that getInfoContents will be called.
+                return null;
+            }
+            render(marker, mWindow);
+             **/
+            return mWindow;
+        }
+
+        @Override
+        public View getInfoContents(Marker marker) {
+            /**
+            if (mOptions.getCheckedRadioButtonId() != R.id.custom_info_contents) {
+                // This means that the default info contents will be used.
+                return null;
+            }
+            render(marker, mContents);
+             **/
+            return mContents;
+        }
+
+    }
 
 
     @Override
@@ -86,6 +133,34 @@ public class MapsActivity extends FragmentActivity implements
         //mMap.setMaxZoomPreference(14.0f);
     }
 
+    private LatLng randomLongBeachLocation()
+    {
+        int randLat = new Random().nextInt(maxLat-minLat)+minLat;
+        int randLon = new Random().nextInt(maxLon-minLon)+minLon;
+        double randLatD = (double)(randLat/scale_value) + parallel;
+        double randLonD = (1-(double)(randLon/scale_value)) + meridian -1;
+        Log.v(TAG, "Random int Latitude: " + String.valueOf(randLat) + " Longitude: " + String.valueOf(randLon));
+        Log.v(TAG, "Random dob Latitude: " + String.valueOf(randLatD) + " Longitude: " + String.valueOf(randLonD));
+
+        return new LatLng(randLatD, randLonD);
+    }
+
+    private void addRandomMarkers(GoogleMap googleMap, int num_markers)
+    {
+        mMap = googleMap;
+        for (int i = 0; i < num_markers; i++ )
+        {
+
+            mMap.addMarker(new MarkerOptions()
+                    .position(randomLongBeachLocation())
+                    .title("Parking Instance: " + String.valueOf(i) )
+                    .snippet("Hours: 9:00am - 6:00pm\nPrice: $3/hr")
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.openparkinglogo_small))
+                    .flat(true)
+            );
+
+        }
+    }
 
     /**
      * Manipulates the map once available.
@@ -132,29 +207,15 @@ public class MapsActivity extends FragmentActivity implements
                 .title("Hello Marker"));
 
         // Randomized Markers
-        for (int i = 0; i < NUM_MARKERS; i++ )
-        {
-            int randLat = new Random().nextInt(maxLat-minLat)+minLat;
-            int randLon = new Random().nextInt(maxLon-minLon)+minLon;
-            double randLatD = (double)(randLat/scale_value) + parallel;
-            double randLonD = (1-(double)(randLon/scale_value)) + meridian -1;
-            Log.v(TAG, "Random int Latitude: " + String.valueOf(randLat) + " Longitude: " + String.valueOf(randLon));
-            Log.v(TAG, "Random dob Latitude: " + String.valueOf(randLatD) + " Longitude: " + String.valueOf(randLonD));
+        addRandomMarkers(mMap, NUM_MARKERS);
 
-
-            //Log.v(TAG, "Random Latitude: " + String.valueOf(randLatD) + " Longitude: " + String.valueOf(randLonD));
-
-
-
-            mMap.addMarker(new MarkerOptions()
-                    .position(new LatLng(randLatD, randLonD))
-                    .title("Random Marker: " + String.valueOf(i) ));
-        }
 
         // Move Camera to LongBeach
         mMap.moveCamera(CameraUpdateFactory.newLatLng(longbeach));
         mMap.moveCamera(CameraUpdateFactory.zoomTo(12));
 
+        // Set a listener for info window events.
+        mMap.setOnInfoWindowClickListener(this);
     }
 
     public boolean checkUserLocationPermission()
@@ -275,4 +336,43 @@ public class MapsActivity extends FragmentActivity implements
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
     }
+
+    @Override
+    public void onInfoWindowClick(Marker marker)
+    {
+        Toast.makeText(this, "Info window clicked", Toast.LENGTH_SHORT).show();
+
+    }
+
+    public void onMapSearch(View view) {
+        
+        EditText addressSearchText = findViewById(R.id.address_search_text);
+        String location = addressSearchText.getText().toString();
+        List<Address> addressList = null;
+
+        if (location != null || !location.equals("")) {
+            Geocoder geocoder = new Geocoder(this);
+            try {
+                addressList = geocoder.getFromLocationName(location, 1);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Address address = addressList.get(0);
+            LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
+
+            //Marker Options
+            MarkerOptions markerOptions = new MarkerOptions();
+            markerOptions.position(latLng);
+            markerOptions.title("Search Result");
+            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
+
+            mMap.addMarker(markerOptions);
+
+            //mMap.addMarker(new MarkerOptions().position(latLng).title("Search Result"));
+            mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
+        }
+    }
+
+
 }
