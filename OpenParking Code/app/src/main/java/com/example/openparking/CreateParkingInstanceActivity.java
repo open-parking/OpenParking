@@ -1,11 +1,19 @@
 package com.example.openparking;
 
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.location.Address;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import android.content.Intent;
+import android.location.Location;
+import com.google.android.gms.maps.model.LatLng;
+import java.util.List;
+import java.util.Locale;
 
-public class CreateParkingInstanceActivity {
+import android.location.Geocoder;
+
+public class CreateParkingInstanceActivity extends AppCompatActivity {
     Address address;
     User user;
     private FirebaseAuth firebaseAuth;
@@ -32,6 +40,9 @@ public class CreateParkingInstanceActivity {
         List<Address> addresses;
         geocoder = new Geocoder(this, Locale.getDefault());
 
+        double latitude = 1.531;
+        double longitude = 1.5234;
+        //later on do some fancy stuff to get latlong for here, for now this is a dummy variable(s)
         addresses = geocoder.getFromLocation(latitude, longitude, 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
 
         String address = addresses.get(0).getAddressLine(0); // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
