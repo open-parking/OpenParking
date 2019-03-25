@@ -1,4 +1,5 @@
 package com.example.openparking;
+import java.util.ArrayList;
 
 public class SearchActivity {
     /*
@@ -22,4 +23,8 @@ public class SearchActivity {
                        (c) Precomputation or data delivery before calling views to load data even faster? (start getting nearby ParkingInstance data at login?)
                    Can views be done faster? (Precomputation or algorithmic implementations)
      */
+    ArrayList<ParkingInstance> pList = new ArrayList<ParkingInstance>();
+    //get current location, to sort instanced by closest
+    //maybe option to show in map view??
+    //need to constant refresh with new instances...
 }
