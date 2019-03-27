@@ -1,9 +1,9 @@
-
+package com.example.openparking;
 
 public class ParkingSpace {
 
     private String address;
-    private int zipcode;
+    private String zipcode;
     private Double latitude;
     private Double longitude;
     private Double cost;
@@ -20,10 +20,10 @@ public class ParkingSpace {
 
     public ParkingSpace( )
     {
-
+        //Used by FireBase
     }
 
-    public ParkingSpace( String address, int zipcode, Double latitude, Double longitude, Double cost, String openTime, String closeTime)
+    public ParkingSpace( String address, String zipcode, Double latitude, Double longitude, Double cost, String openTime, String closeTime)
     {
         this.address = address;
         this.zipcode = zipcode;
@@ -42,11 +42,11 @@ public class ParkingSpace {
         this.address = address;
     }
 
-    public int getZipcode() {
+    public String getZipcode() {
         return zipcode;
     }
 
-    public void setZipcode(int zipcode) {
+    public void setZipcode(String zipcode) {
         this.zipcode = zipcode;
     }
 
