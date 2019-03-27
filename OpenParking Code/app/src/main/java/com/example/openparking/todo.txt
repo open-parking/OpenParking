@@ -11,6 +11,8 @@ finalize ratings
 date / scheduling implementation
 processing fee
 payment preferences
+move Vehicle out from ParkingInstance and into User
+what happens what a ParkingInstance is used/being used?
 
 privacy policy
 terms of service
