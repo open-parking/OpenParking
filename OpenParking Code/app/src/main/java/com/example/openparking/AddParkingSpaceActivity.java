@@ -30,6 +30,7 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
     private EditText editTextCloseTime;
 
     private DatabaseReference mDatabase;
+    private ParkingSpace test;
 
 
     @Override
@@ -81,15 +82,17 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
                 final String open   = editTextOpenTime.getText().toString().trim();
                 final String close  = editTextCloseTime.getText().toString().trim();
 
-                writeNewParkingInstace(address, zipcode, lat, lon, cost, open, close);
+                writeNewParkingSpace(address, zipcode, lat, lon, cost, open, close);
             }
 
         });
     }
 
-    private void writeNewParkingInstace(String Address,String zipCode, Double latitude, Double longitude, Double cost, String openTime, String closeTime ) {
-        ParkingInstance pi = new ParkingInstance(Address,zipCode, latitude, longitude, cost, openTime, closeTime);
+    private void writeNewParkingSpace(String Address,String zipCode, Double latitude, Double longitude, Double cost, String openTime, String closeTime )
+    {
 
-        mDatabase.child("ZipCodes").child(zipCode).setValue(pi);
+        ParkingSpace ps = new ParkingSpace(Address,zipCode, latitude, longitude, cost, openTime, closeTime);
+        Log.v(TAG, "Sending to mDatabase");
+        mDatabase.child("ZipCodes").child(zipCode).push().setValue(ps);
     }
 }
