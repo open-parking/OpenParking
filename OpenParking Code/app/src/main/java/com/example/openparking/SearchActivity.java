@@ -58,21 +58,20 @@ public class SearchActivity extends AppCompatActivity {
         /*
             We might need to keep track of where the user is at in terms of scrolling tiles, so we can
             see if we need to load more tiles? Do we want a tile class or something?
-
-            int loadMoreTiles(int currentTile) {
-
-                Did the user scroll so that there are only n left loaded tiles?
-                Then we should get more tile data, load it, and update currentTile and arraylists so
-                we can all this automatically.
-
-                return currentTile + 20
-            }
         */
+        int loadMoreTiles(int currentTile) {
+
+            /*Did the user scroll so that there are only n left loaded tiles?
+                    Then we should get more tile data, load it, and update currentTile and arraylists so
+            we can all this automatically.*/
+
+            return currentTile + 20
+        }
 
 
     }
 
-
+    //more info should load ViewParkingInstanceActivity
     //get current location, to sort instanced by closest
     //maybe option to show in map view??
     //need to constant refresh with new instances...
