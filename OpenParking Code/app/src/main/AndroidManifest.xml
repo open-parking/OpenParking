@@ -20,7 +20,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".PasswordRecovery"></activity>
+        <activity android:name=".CreateParkingActivity"></activity>
+        <activity android:name=".PasswordRecovery" />
         <activity android:name=".PaymentDetails" />
         <activity android:name=".PayPalActivity" />
         <activity android:name=".RatingActivity" />
