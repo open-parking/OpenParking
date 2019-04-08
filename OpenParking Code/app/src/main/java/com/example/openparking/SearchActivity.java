@@ -65,7 +65,7 @@ public class SearchActivity extends AppCompatActivity {
                     Then we should get more tile data, load it, and update currentTile and arraylists so
             we can all this automatically.*/
 
-            return currentTile + 20
+            return currentTile + 20;
         }
 
 
