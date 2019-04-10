@@ -23,6 +23,13 @@ public class SearchActivity extends AppCompatActivity {
             Rating
             Preferred Payment Method (icon)
 
+        SHOULD BE SORTABLE BY:
+            Distance from user
+            Availability
+            Price
+            Rating
+            Preferred Payment Method (icon)
+
         When a tile is selected, should call ViewParkingInstance activity like how we should do for map view
 
         How will we get ParkingInstance data from Firebase and show a sorted list to the user?
@@ -36,13 +43,13 @@ public class SearchActivity extends AppCompatActivity {
     int currentIndex = 1;
 
     //scrollable text view? redraw when needed?
-    int loadMoreResults(int currentIndex) {
+    int loadResults(int currentIndex) {
 
-            /*When the user presses the arrow buttons, load more tile data.
-              Do we need a seperate function for front and back? how about sorting?
+            /*When the user presses the arrow buttons, load tile data.
+              Do we need a seperate function for forward and backward arrows? (back means we can load what we had before?)) how about sorting?
             * */
 
-        return currentTile + 40;
+        return currentIndex++;
     }
 
     @Override
