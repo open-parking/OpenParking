@@ -72,7 +72,7 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Log.v(TAG, "Clicked Send Button");
 
-                //TODO: SEND DATA TO FIREBASE
+                //DONE: SEND DATA TO FIREBASE
 
                 final String address= editTextAddress.getText().toString().trim();
                 final String zipcode= editTextZipCode.getText().toString().trim();

@@ -1,5 +1,7 @@
 package com.example.openparking;
 
+import com.google.android.gms.maps.model.LatLng;
+
 public class ParkingSpace {
 
     private String address;
@@ -9,10 +11,6 @@ public class ParkingSpace {
     private Double cost;
     private String openTime;
     private String closeTime;
-
-
-
-    private int price;
 
     //CSULB Latitude and Longitude
     //private final double latitude = 33.782896;
@@ -66,6 +64,11 @@ public class ParkingSpace {
         this.longitude = longitude;
     }
 
+    public LatLng getLatLng()
+    {
+        return new LatLng(latitude, longitude);
+    }
+
     public Double getCost() {
         return cost;
     }
@@ -90,12 +93,6 @@ public class ParkingSpace {
         this.closeTime = closeTime;
     }
 
-    public int getPrice() {
-        return price;
-    }
 
-    public void setPrice(int price) {
-        this.price = price;
-    }
 
 }

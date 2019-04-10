@@ -32,6 +32,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -65,9 +66,9 @@ public class MapsActivity extends FragmentActivity implements
     // [END declare_database_ref]
 
 
-    List <ParkingInstance> parkingSpaceList;
-
-
+    List <ParkingInstance> parkingInstanceList; //List of parking spaces with a car in them
+    List <ParkingSpace> parkingSpaceList;       //List of parking spaces that are available for reservation
+    
     // [START Test Values for Random Markers in Long Beach]
 
     // Test Area Latitude and Longitude
@@ -146,13 +147,19 @@ public class MapsActivity extends FragmentActivity implements
         //mMap.setMaxZoomPreference(14.0f);
 
 
+        parkingInstanceList = new ArrayList<>();
         parkingSpaceList = new ArrayList<>();
 
         // [START initialize_database_ref]
         mDatabase = FirebaseDatabase.getInstance().getReference();
+
         // [END initialize_database_ref]
+
+        loadParkingSpacesFromDataBase("90815");
     }
 
+    // Generates random Latitude Longitude coordinates to be placed in the ParkingInstance ArrayList.
+    // These Random Coordinates help test the map markers .
     private LatLng randomLongBeachLocation()
     {
         int randLat = new Random().nextInt(maxLat-minLat)+minLat;
@@ -165,6 +172,12 @@ public class MapsActivity extends FragmentActivity implements
         return new LatLng(randLatD, randLonD);
     }
 
+
+    /** Adds map markers on the map at random coordinates withing Long Beach.
+    *   This function is no longer used. It was replaced by:
+    *      addRandomMarkersToParkingInstanceList() and
+    *      displayMarkersOnList().
+    **/
     private void addRandomMarkers(GoogleMap googleMap, int num_markers)
     {
         mMap = googleMap;
@@ -182,24 +195,122 @@ public class MapsActivity extends FragmentActivity implements
         }
     }
 
-    private void addRandomMarkersToList(int num_markers)
+    /**
+     *  This function is for testing purposes only.
+     *  Generates Random Coordinates and saved them to ParkingInstanceList.
+     **/
+    private void addRandomMarkersToParkingInstanceList(int num_markers)
     {
         for (int i = 0; i < num_markers; i++ ) {
             LatLng random_coords = randomLongBeachLocation();
             ParkingInstance testInstance = new ParkingInstance(random_coords);
 
-            parkingSpaceList.add(testInstance);
+            parkingInstanceList.add(testInstance);
         }
     }
 
+    /** Work in Progress
+     * TODO: TEST ZIPCODE 90815
+     *
+     * @param zipCode the zipcode area that we want to load from the database
+     */
+
+    private void loadParkingSpacesFromDataBase(String zipCode)
+    {
+
+        mDatabase.child("ZipCodes").child(zipCode).addChildEventListener(
+                new ChildEventListener() {
+
+                    @Override
+                    public void onChildAdded(DataSnapshot dataSnapshot, String previousChildName) {
+                        Log.d(TAG, "onChildAdded:" + dataSnapshot.getKey());
+
+                        // A new parking space has been added, add it to the displayed list
+                        //ParkingSpace ps = new ParkingSpace();
+                        ParkingSpace ps = dataSnapshot.getValue(ParkingSpace.class);
+
+                        if(!ps.equals(null))
+                        {
+                            Log.d(TAG, "onChildAdded: " +  "ps is good");
+
+                            String address = ps.getAddress();
+                            String hours = "Hours: " + ps.getOpenTime() + " to " + ps.getCloseTime();
+
+                            //Add marker to map
+                            mMap.addMarker(new MarkerOptions()
+                                    .position(ps.getLatLng())
+                                    .title(address)
+                                    .snippet(hours)
+                                    //.icon(BitmapDescriptorFactory.fromResource(R.drawable.openparkinglogo_small))
+                                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
+                                    .flat(true)
+                            );
+                        }
+                        else
+                        {
+                            Log.d(TAG, "onChildAdded: " +  "ps is null");
+                        }
+                    }
+
+                    @Override
+                    public void onChildChanged(DataSnapshot dataSnapshot, String previousChildName) {
+                        Log.d(TAG, "onChildChanged:" + dataSnapshot.getKey());
+
+                        // A comment has changed, use the key to determine if we are displaying this
+                        // comment and if so displayed the changed comment.
+                        //Comment newComment = dataSnapshot.getValue(Comment.class);
+                        //String commentKey = dataSnapshot.getKey();
+
+                        // ...
+                    }
+
+                    @Override
+                    public void onChildRemoved(DataSnapshot dataSnapshot) {
+                        Log.d(TAG, "onChildRemoved:" + dataSnapshot.getKey());
+
+                        // A comment has changed, use the key to determine if we are displaying this
+                        // comment and if so remove it.
+                        // commentKey = dataSnapshot.getKey();
+
+                        // ...
+                    }
+
+                    @Override
+                    public void onChildMoved(DataSnapshot dataSnapshot, String previousChildName) {
+                        Log.d(TAG, "onChildMoved:" + dataSnapshot.getKey());
+
+                        // A comment has changed position, use the key to determine if we are
+                        // displaying this comment and if so move it.
+                        //Comment movedComment = dataSnapshot.getValue(Comment.class);
+                        //String commentKey = dataSnapshot.getKey();
+
+                        // ...
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        Log.w(TAG, "postComments:onCancelled", databaseError.toException());
+                        //Toast.makeText(mContext, "Failed to load comments.",
+                        //Toast.LENGTH_SHORT).show();
+                    }
+
+                });
+    }
+
+
+    /**
+     * Displays on the map the markers stored in ParkingInstanceList.
+     *
+     * @param googleMap
+     */
     private void displayMarkersOnList(GoogleMap googleMap)
     {
         mMap = googleMap;
-        for (int i = 0; i < parkingSpaceList.size(); i++ )
+        for (int i = 0; i < parkingInstanceList.size(); i++ )
         {
 
             mMap.addMarker(new MarkerOptions()
-                    .position(parkingSpaceList.get(i).getLatlng())
+                    .position(parkingInstanceList.get(i).getLatlng())
                     .title("List: " + String.valueOf(i) )
                     .snippet("Hours: 9:00am - 6:00pm\nPrice: $3/hr")
                     .icon(BitmapDescriptorFactory.fromResource(R.drawable.openparkinglogo_small))
@@ -227,7 +338,7 @@ public class MapsActivity extends FragmentActivity implements
         // Add a marker in Long Beach and move the camera
         LatLng longbeach = new LatLng(33.782896, -118.110230);
 
-        mMap.addMarker(new MarkerOptions().position(longbeach).title("Marker in Long Beach"));
+        //mMap.addMarker(new MarkerOptions().position(longbeach).title("Marker in Long Beach"));// Test Marker
         mMap.moveCamera(CameraUpdateFactory.newLatLng(longbeach));
         mMap.moveCamera(CameraUpdateFactory.zoomTo(12));
 
@@ -250,16 +361,18 @@ public class MapsActivity extends FragmentActivity implements
         }
 
         // Create Test Markers for Open Parking Locations
-        mMap.addMarker(new MarkerOptions()
-                .position(new LatLng(33.782000, -118.110000))
-                .title("Hello Marker"));
+
+        // Test Marker
+        //mMap.addMarker(new MarkerOptions()
+                //.position(new LatLng(33.782000, -118.110000))
+                //.title("Hello Marker"));
 
         // Randomized Markers
         //addRandomMarkers(mMap, NUM_MARKERS);
 
         // Load Markers From ParkingInstanceList
-        addRandomMarkersToList(NUM_MARKERS);
-        displayMarkersOnList(mMap);
+        //addRandomMarkersToParkingInstanceList(NUM_MARKERS);
+        //displayMarkersOnList(mMap);
 
         // Move Camera to LongBeach
         mMap.moveCamera(CameraUpdateFactory.newLatLng(longbeach));
