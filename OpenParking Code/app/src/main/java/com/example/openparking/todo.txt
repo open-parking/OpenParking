@@ -1,13 +1,18 @@
-SetAsContributorActivity
 CreateParkingInstanceActivity
+ViewParkingInstanceActivity
 SearchActivity
 
+parking instance this, parking instance that aaaaa
+lmao
+uploading images and other data
 profile / changing information
-rounding rating avg
-pretty paypal receipts
+finalize transactions
+finalize ratings
 date / scheduling implementation
 processing fee
 payment preferences
+move Vehicle out from ParkingInstance and into User
+what happens what a ParkingInstance is used/being used?
 
 privacy policy
 terms of service

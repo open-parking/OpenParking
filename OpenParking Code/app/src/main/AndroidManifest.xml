@@ -24,6 +24,7 @@
             android:name=".AddParkingSpaceActivity"
             android:label="@string/title_activity_add_parking_instance"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".CreateParkingActivity"></activity>
         <activity android:name=".PasswordRecovery" />
         <activity android:name=".PaymentDetails" />
         <activity android:name=".PayPalActivity" />

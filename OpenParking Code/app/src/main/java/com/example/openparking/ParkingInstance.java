@@ -1,10 +1,8 @@
 package com.example.openparking;
 
-
 import android.location.Address;
 import com.google.android.gms.maps.model.LatLng;
 import java.util.Date;
-
 
 public class ParkingInstance {
 
@@ -29,30 +27,11 @@ public class ParkingInstance {
     private final double latitude = 33.782896;
     private final double longitude = -118.110230;
 
-
-/*
-    public ParkingInstance( Address address )
-    {
-        //this.contributor = contributor;
-        //this.user = user;
-        //this.vehicle = vehicle;
-        this.address = address;
-
-
-        latlng = new LatLng(latitude, longitude);
-        this.starttime = new  Date();
-        endtime = new  Date();
-    }
-    */
-
-
     public ParkingInstance( User user, Vehicle vehicle, Address address )
     {
         this.user = user;
         this.vehicle = vehicle;
         this.address = address;
-
-
         this.latlng = new LatLng(latitude, longitude);
         this.starttime = new  Date();
         endtime = new  Date();
