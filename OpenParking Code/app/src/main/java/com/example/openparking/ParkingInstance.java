@@ -17,7 +17,9 @@ public class ParkingInstance {
     private String desc;
     private Date availabilityStart; //Time when it is available
     private Date availabilityEnd; //Time when availability ends
+
     //TODO: scheduling throughout the week?
+
     private String preferredPaymentMethod;
 
     private Date starttime; //Time when vehicle parked at the address;
@@ -51,9 +53,23 @@ public class ParkingInstance {
         this.address = address;
 
 
-        latlng = new LatLng(latitude, longitude);
+        this.latlng = new LatLng(latitude, longitude);
         this.starttime = new  Date();
         endtime = new  Date();
+    }
+
+    // This constructor only initializes the Latitude and Longitude.
+    // Used for testing purposes in MapsActivity
+    public ParkingInstance(LatLng coords )
+    {
+        this.user = null;
+        this.vehicle = null;
+        this.address = null;
+
+
+        this.latlng = coords;
+        this.starttime = new  Date();
+        this.endtime = new  Date();
     }
 
     public User getUser() {
