@@ -33,19 +33,25 @@ public class SearchActivity extends AppCompatActivity {
             (b) Get data from Firebase and sort and show to user (can new data conflict with this?)
      */
 
+    //Don't think we actually need ParkingInstance arraylists, can get data as strings and ints...
     ArrayList<ParkingInstance> pList = new ArrayList<ParkingInstance>(); //data from firebase, most likely unsorted
     ArrayList<ParkingInstance> vList = new ArrayList<ParkingInstance>(); //data we've shown to the user
     int tilesToDisplay = 6; //6-8?
     int currentIndex = 1;
 
-    //scrollable text view? redraw when needed?
-    int loadResults(int currentIndex) {
+    void sortByPrice() {
 
-            /*When the user presses the arrow buttons, load tile data.
-              Do we need a seperate function for forward and backward arrows? (back means we can load what we had before?)) how about sorting?
-            * */
+        //Sort the data that we currently have in pList and update the view with the sorted info
+    }
 
-        return currentIndex++;
+    void loadResults(int arrow) {
+
+            /*When the user presses the arrow buttons, load tile data (add to plist?)
+              if the right arrow is pressed, this function will be called with a positive integer.
+                then get more data and update our viewable list
+              if the left arrow is pressed, this function will be called with a negative integer.
+                then go back into the data we previously had and update our viewable list to reflect it
+            */
     }
 
     @Override
