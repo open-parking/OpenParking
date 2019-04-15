@@ -158,6 +158,13 @@ public class MapsActivity extends FragmentActivity implements
         loadParkingSpacesFromDataBase("90815");
     }
 
+    /**
+    @Override
+    public boolean onMarkerClick(final Marker marker)
+    {
+        return false;// temp
+    }
+    **/
     // Generates random Latitude Longitude coordinates to be placed in the ParkingInstance ArrayList.
     // These Random Coordinates help test the map markers .
     private LatLng randomLongBeachLocation()
@@ -501,10 +508,12 @@ public class MapsActivity extends FragmentActivity implements
 
     }
 
+    // WIP
     @Override
     public void onInfoWindowClick(Marker marker)
     {
         Toast.makeText(this, "Info window clicked", Toast.LENGTH_SHORT).show();
+        Log.v(TAG, "onInfoWindowClick: Info Window clicked");
 
     }
 
