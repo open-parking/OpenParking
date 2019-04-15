@@ -49,10 +49,8 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
     private String email;
 
     private EditText editTextPassword;
-    private String password;
-
-    private EditText editTextName;
-    private String name;
+    private EditText editTextFirstName;
+    //private EditText editTextLastName;
 
     private TextView textViewSignin;
 
@@ -100,9 +98,12 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
 
 
         buttonRegister = (Button) findViewById(R.id.buttonRegister);
+
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
-        editTextName = (EditText) findViewById(R.id.editTextName);
+        editTextFirstName = (EditText) findViewById(R.id.editTextFirstName);
+        //editTextLastName = (EditText) findViewById(R.id.editTextLastName);
+
 
         textViewSignin = (TextView) findViewById(R.id.textViewSignin);
 
@@ -147,20 +148,28 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void registerUser() {
-        email = editTextEmail.getText().toString().trim();
-        password = editTextPassword.getText().toString().trim();
-        name = editTextName.getText().toString().trim();
+        String email = editTextEmail.getText().toString().trim();
+        String password = editTextPassword.getText().toString().trim();
+        final String firstName = editTextFirstName.getText().toString().trim();
+        //final String lastName = editTextLastName.getText().toString().trim();
+
 
         if(TextUtils.isEmpty(email)) {
             //email is empty
             Toast.makeText(this, "Please enter email", Toast.LENGTH_SHORT).show();
-            //stopping the function execution further
+            //stopping any further function execution
             return;
         }
         if(TextUtils.isEmpty(password)) {
             //password is empty
             Toast.makeText(this, "Please enter password", Toast.LENGTH_SHORT).show();
-            //stopping the function execution further
+            //stopping any further function execution
+            return;
+        }
+        if(TextUtils.isEmpty(firstName)) {
+            //first name is empty
+            Toast.makeText(this, "Please enter first name", Toast.LENGTH_SHORT).show();
+            //stopping any further function execution
             return;
         }
         if(TextUtils.isEmpty(name)) {
@@ -180,40 +189,15 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
                             //store first and last name in user instance!!
-                            FirebaseUser user = firebaseAuth.getCurrentUser();
+                            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
                             UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
 
-                                    .setDisplayName(name)
-                                    .setPhotoUri(Uri.parse("gs://openparking-491.appspot.com/default-profile.gif"))
+                                    .setDisplayName(firstName)
+
                                     .build();
                             user.updateProfile(profileUpdates);
 
-                            /*
-                            ------------------------------------
-                            Creating user in FireBase database
-                            ------------------------------------
-                             */
-                            User mUser = new User();
-                            mUser.setName(name);
-                            mUser.setEmail(email);
-                            String uID = user.getUid();
-                            mUser.setId(uID);
-
-                            usersRef.child("users").child(uID).setValue(mUser);
-
-                            /*
-                            usersRef.addValueEventListener(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                    progressDialog.dismiss();
-                                }
-
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError databaseError) {
-                                    Log.w("TAG", "Failed to read from database", databaseError.toException());
-                                }
-                            });
-                            */
 
                             sendEmailVerification();
 
