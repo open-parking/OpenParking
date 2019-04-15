@@ -8,6 +8,8 @@ import com.google.firebase.auth.FirebaseUser;
 import android.content.Intent;
 import android.location.Location;
 import com.google.android.gms.maps.model.LatLng;
+
+import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
@@ -51,8 +53,8 @@ public class CreateParkingInstanceActivity extends AppCompatActivity {
             String country = addresses.get(0).getCountryName();
             String postalCode = addresses.get(0).getPostalCode();
             String knownName = addresses.get(0).getFeatureName(); // Only if available else return NULL
-        }catch (Exception e)
-        {
+        }
+        catch(IOException e){
 
         }
 

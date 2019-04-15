@@ -12,44 +12,52 @@ public class SearchActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     /*
         A list view of ParkingInstances
-        Categories: Price, Distance, Rating, New, ... (time of availability)
-        Should display 6-8 instances at a time with a scrolling view
+        Should display a scrolling view with up to 6 instancesvisible at a time.
         Tile data per Instance:
             Primary image
             Location
             Availability
             Price
-            Distance from user
             Rating
             Preferred Payment Method (icon)
 
         SHOULD BE SORTABLE BY:
-            Distance from user
-            Availability
             Price
             Rating
             Preferred Payment Method (icon)
 
         When a tile is selected, should call ViewParkingInstance activity like how we should do for map view
 
-        How will we get ParkingInstance data from Firebase and show a sorted list to the user?
-            (a) Keep multiple versions of list already sorted in Firebase, can just call it
-            (b) Get data from Firebase and sort and show to user (can new data conflict with this?)
+        HYPOTHETICALLY Firebase will be able to give us data that is already sorted, so we will go with that.
+
+        All we need to do then is only get data of instances close to user's latlongitude
+
+        So then:
+            1) get sorted firebase data
+            2) build list of relatively close parking instances
+            3) show list to user
      */
 
+    //Don't think we actually need ParkingInstance arraylists, can get data as strings and ints...
     ArrayList<ParkingInstance> pList = new ArrayList<ParkingInstance>(); //data from firebase, most likely unsorted
     ArrayList<ParkingInstance> vList = new ArrayList<ParkingInstance>(); //data we've shown to the user
     int tilesToDisplay = 6; //6-8?
     int currentIndex = 1;
 
-    //scrollable text view? redraw when needed?
-    int loadResults(int currentIndex) {
+    /*
+        1) get sorted data from firebase and store in plist
+        2) build vlist of parkinginstances that are relatively close to user
+        3) when next is called, repeat 1 and 2 as needed
+     */
 
-            /*When the user presses the arrow buttons, load tile data.
-              Do we need a seperate function for forward and backward arrows? (back means we can load what we had before?)) how about sorting?
-            * */
+    void loadResults(int arrow) {
 
-        return currentIndex++;
+            /*When the user presses the arrow buttons, load tile data (add to plist?)
+              if the right arrow is pressed, this function will be called with a positive integer.
+                then get more data and update our viewable list
+              if the left arrow is pressed, this function will be called with a negative integer.
+                then go back into the data we previously had and update our viewable list to reflect it
+            */
     }
 
     @Override
@@ -69,10 +77,7 @@ public class SearchActivity extends AppCompatActivity {
         user.setId(fuser.getUid());
 
     }
-    //SCRAP real time scrolling tiles!, lets do moderate scrolling list with arrows.
 
     //more info should load ViewParkingInstanceActivity
-    //get current location, to sort instanced by closest
-    //maybe option to show in map view??
-    //need to constant refresh with new instances...
+    //will getting new data from firebase conflict with our already sorted instances?
 }
