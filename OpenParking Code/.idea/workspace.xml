@@ -6,16 +6,11 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="onChild" />
-    <option name="TOOL_WINDOW_LOG_LEVEL" value="debug" />
+    <option name="TOOL_WINDOW_LOG_LEVEL" value="verbose" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1e0d2453-6f86-44c0-b937-61f344f54860" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gradle/4.10.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10.1/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/openparking/MapsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/openparking/MapsActivity.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -168,14 +163,14 @@
         <counts>
           <entry key="dummy" value="5" />
           <entry key="gradle" value="97" />
-          <entry key="java" value="5993" />
+          <entry key="java" value="6236" />
           <entry key="xml" value="387" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="Groovy" value="97" />
-          <entry key="JAVA" value="5993" />
+          <entry key="JAVA" value="6236" />
           <entry key="PLAIN_TEXT" value="5" />
           <entry key="XML" value="387" />
         </counts>
@@ -229,8 +224,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/openparking/MapsActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="510" column="10" lean-forward="true" selection-start-line="510" selection-start-column="10" selection-end-line="510" selection-end-column="10" />
+            <state relative-caret-position="102">
+              <caret line="518" column="38" lean-forward="true" selection-start-line="518" selection-start-column="38" selection-end-line="518" selection-end-column="38" />
               <folding>
                 <element signature="class#ParkingInfoWindow#0;class#MapsActivity#0" />
                 <element signature="docComment;method#displayMarkersOnList#0;class#MapsActivity#0" />
@@ -2438,10 +2433,10 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-10" />
-    <option name="width" value="980" />
-    <option name="height" value="1040" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="952" />
+    <option name="width" value="977" />
+    <option name="height" value="1038" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -2579,24 +2574,24 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <frame x="762" y="0" width="781" height="830" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Capture Tool" order="0" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" sideWeight="0.4980916" visible="true" weight="0.19932885" />
+      <window_info content_ui="combo" id="Project" order="1" sideWeight="0.4980916" visible="true" weight="0.18030514" />
       <window_info id="Captures" order="2" sideWeight="0.5019084" side_tool="true" weight="0.18255034" />
       <window_info id="Structure" order="3" side_tool="true" />
       <window_info id="Build Variants" order="4" side_tool="true" />
       <window_info id="Image Layers" order="5" />
       <window_info id="Designer" order="6" />
       <window_info id="Favorites" order="7" side_tool="true" />
-      <window_info anchor="bottom" id="Logcat" order="0" weight="0.41642228" />
+      <window_info active="true" anchor="bottom" id="Logcat" order="0" visible="true" weight="0.421365" />
       <window_info anchor="bottom" id="TODO" order="1" />
-      <window_info anchor="bottom" id="Android Profiler" order="2" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Android Profiler" order="2" />
       <window_info anchor="bottom" id="Terminal" order="3" weight="0.32777232" />
       <window_info anchor="bottom" id="Event Log" order="4" sideWeight="0.2852349" side_tool="true" weight="0.34604105" />
       <window_info anchor="bottom" id="Version Control" order="5" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Build" order="6" sideWeight="0.7147651" visible="true" weight="0.3328446" />
+      <window_info anchor="bottom" id="Build" order="6" sideWeight="0.7147651" weight="0.3328446" />
       <window_info anchor="bottom" id="Run" order="7" weight="0.3289689" />
       <window_info anchor="bottom" id="Debug" order="8" />
       <window_info anchor="right" id="Device File Explorer" order="0" side_tool="true" />
@@ -2891,8 +2886,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/openparking/MapsActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="510" column="10" lean-forward="true" selection-start-line="510" selection-start-column="10" selection-end-line="510" selection-end-column="10" />
+        <state relative-caret-position="102">
+          <caret line="518" column="38" lean-forward="true" selection-start-line="518" selection-start-column="38" selection-end-line="518" selection-end-column="38" />
           <folding>
             <element signature="class#ParkingInfoWindow#0;class#MapsActivity#0" />
             <element signature="docComment;method#displayMarkersOnList#0;class#MapsActivity#0" />

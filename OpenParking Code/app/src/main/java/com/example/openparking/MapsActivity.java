@@ -515,6 +515,18 @@ public class MapsActivity extends FragmentActivity implements
         Toast.makeText(this, "Info window clicked", Toast.LENGTH_SHORT).show();
         Log.v(TAG, "onInfoWindowClick: Info Window clicked");
 
+        //Steps for passing Data to other Activity
+        // 1. Create New Intent object
+
+        // 2. intent.putExtra(String key, Object data)
+
+        // 3. startActivity(intent)
+
+        //In new Activity
+        // 4. getIntent()
+
+        // 5. intent.getStringExtra(String key)
+
     }
 
     public void onMapSearch(View view) {
