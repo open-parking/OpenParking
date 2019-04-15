@@ -1,30 +1,22 @@
 package com.example.openparking;
 
-import android.location.Address;
-
 public class User {
-    String firstName;
-    String lastName;
+    String name;
     String email;
     double userRating;
     int timesUserRated;
     String id;
-    boolean isContributor;
     String acceptedPayment;
-    Address address;
     double contributorRating;
     int timesContributorRated;
 
     public User() {
-        this.firstName = "";
-        this.lastName = "";
+        this.name = "";
         this.email = "";
         this.userRating = 0;
         this.timesUserRated = 0;
         this.id = "";
-        this.isContributor = false;
         this.acceptedPayment = "";
-        //this.address = address;
         this.contributorRating = 0;
         this.timesContributorRated = 0;
     }
@@ -32,26 +24,15 @@ public class User {
     @java.lang.Override
     public java.lang.String toString() {
         return "User{" +
-                "firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
+                "name='" + name +
                 ", email='" + email + '\'' +
                 ", userRating=" + userRating +
                 ", timesUserRated=" + timesUserRated +
                 ", id='" + id + '\'' +
-                ", isContributor=" + isContributor +
                 ", acceptedPayment='" + acceptedPayment + '\'' +
-                ", address=" + address +
                 ", contributorRating=" + contributorRating +
                 ", timesContributorRated=" + timesContributorRated +
                 '}';
-    }
-
-    public boolean isContributor() {
-        return isContributor;
-    }
-
-    public void setContributor(boolean contributor) {
-        isContributor = contributor;
     }
 
     public String getAcceptedPayment() {
@@ -60,14 +41,6 @@ public class User {
 
     public void setAcceptedPayment(String acceptedPayment) {
         this.acceptedPayment = acceptedPayment;
-    }
-
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
     }
 
     public double getContributorRating() {
@@ -110,20 +83,12 @@ public class User {
         this.userRating = userRating;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getName() {
+        return name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getEmail() {

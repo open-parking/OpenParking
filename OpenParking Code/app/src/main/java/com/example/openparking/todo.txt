@@ -1,14 +1,20 @@
-SetAsContributorActivity
 CreateParkingInstanceActivity
+ViewParkingInstanceActivity
 SearchActivity
 
+uploading images and other data
 profile / changing information
-rounding rating avg
-pretty paypal receipts
+finalize transactions
+finalize ratings
 date / scheduling implementation
 processing fee
 payment preferences
+UI for searchactivity and complete it as well
+connect components together
+move Vehicle out from ParkingInstance and into User
+what happens what a ParkingInstance is used/being used? (should not be shown to others)
+how do we resolve/confirm that a ParkingInstance is correctly empty? (Have contributor confirm if user has left the space, or tell them to settle their conflicts before making parkinginstance available for other people to try and use)
 
 privacy policy
 terms of service
-contributor conduct
+contributor code of conduct

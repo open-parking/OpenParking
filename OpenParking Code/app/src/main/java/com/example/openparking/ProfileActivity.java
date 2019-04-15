@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -16,6 +17,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
     private FirebaseAuth firebaseAuth;
 
+    private ImageView profileImage;
     private TextView textViewUserEmail;
     private Button buttonLogout;
     private Button buttonMainMenu;
@@ -33,10 +35,12 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             startActivity(new Intent(ProfileActivity.this, LoginActivity.class));
         }
 
+        profileImage = (ImageView) findViewById(R.id.profileImage);
 
         textViewUserEmail = (TextView) findViewById(R.id.textViewUserEmail);
 
-        textViewUserEmail.setText("Welcome " + user.getDisplayName());
+
+        textViewUserEmail.setText("Welcome " + user.getDisplayName() + "!");
 
         buttonLogout = (Button) findViewById(R.id.buttonLogout);
         buttonLogout.setOnClickListener(this);

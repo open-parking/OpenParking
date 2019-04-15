@@ -1,7 +1,6 @@
 package com.example.openparking;
 
 import android.content.Intent;
-import android.media.Rating;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
@@ -24,6 +23,7 @@ public class Test_Activity extends AppCompatActivity {
 
     // Test Buttons
     Button btnMap;
+    Button btnAddParkingSpace;
     Button btnFileWrite;
     Button btnFileRead;
     Button btnPayPal;
@@ -63,6 +63,19 @@ public class Test_Activity extends AppCompatActivity {
                 Intent intent = new Intent(Test_Activity.this, MapsActivity.class);
                 startActivity(intent);
 
+            }
+
+        });
+
+        //Add Parking Instance Button
+        btnAddParkingSpace  =  findViewById(R.id.btnAddParkingSpace);
+        btnAddParkingSpace.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.v(TAG, "Clicked Parking Space Button");
+
+                Intent intent = new Intent(Test_Activity.this, AddParkingSpaceActivity.class);
+                startActivity(intent);
             }
 
         });
