@@ -6,144 +6,109 @@ import java.util.Date;
 
 public class ParkingInstance {
 
-    private User user;
+    private String sellerID;
+    private String buyerID;
+
     private Vehicle vehicle;
-    private Address address;
-    private LatLng latlng; //Possibly redundant, could be derived from address variable
 
-    private int price;
-    private String desc;
-    private Date availabilityStart; //Time when it is available
-    private Date availabilityEnd; //Time when availability ends
+    private ParkingSpace parkingSpace;
 
-    //TODO: scheduling throughout the week?
+    //private String desc;
 
     private String preferredPaymentMethod;
 
-    private Date starttime; //Time when vehicle parked at the address;
-    private Date endtime;   //Time when vehicle left the parking spot.
+    private Date startTime; //Time when vehicle parked at the address;
+    private Date endTime;   //Time when vehicle left the parking spot.
 
-    //CSULB Latitude and Longitude
-    private final double latitude = 33.782896;
-    private final double longitude = -118.110230;
 
-    public ParkingInstance( User user, Vehicle vehicle, Address address )
+    public ParkingInstance(String sellerID, ParkingSpace parkingSpace)
     {
-        this.user = user;
-        this.vehicle = vehicle;
-        this.address = address;
-        this.latlng = new LatLng(latitude, longitude);
-        this.starttime = new  Date();
-        endtime = new  Date();
+        this.sellerID = sellerID;
+        this.parkingSpace = parkingSpace;
     }
 
-    // This constructor only initializes the Latitude and Longitude.
-    // Used for testing purposes in MapsActivity
-    public ParkingInstance(LatLng coords )
+    public ParkingInstance(String sellerID, ParkingSpace parkingSpace, String preferredPaymentMethod)
     {
-        this.user = null;
-        this.vehicle = null;
-        this.address = null;
-
-
-        this.latlng = coords;
-        this.starttime = new  Date();
-        this.endtime = new  Date();
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public Vehicle getVehicle() {
-        return vehicle;
-    }
-
-    public void setVehicle(Vehicle vehicle) {
-        this.vehicle = vehicle;
-    }
-
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
-    }
-
-    public LatLng getLatlng() {
-        return latlng;
-    }
-
-    public void setLatlng(LatLng latlng) {
-        this.latlng = latlng;
-    }
-
-    public int getPrice() {
-        return price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
-    public String getDesc() {
-        return desc;
-    }
-
-    public void setDesc(String desc) {
-        this.desc = desc;
-    }
-
-    public Date getAvailabilityStart() {
-        return availabilityStart;
-    }
-
-    public void setAvailabilityStart(Date availabilityStart) {
-        this.availabilityStart = availabilityStart;
-    }
-
-    public Date getAvailabilityEnd() {
-        return availabilityEnd;
-    }
-
-    public void setAvailabilityEnd(Date availabilityEnd) {
-        this.availabilityEnd = availabilityEnd;
-    }
-
-    public String getPreferredPaymentMethod() {
-        return preferredPaymentMethod;
-    }
-
-    public void setPreferredPaymentMethod(String preferredPaymentMethod) {
+        this.sellerID = sellerID;
+        this.parkingSpace = parkingSpace;
         this.preferredPaymentMethod = preferredPaymentMethod;
     }
 
-    public Date getStarttime() {
-        return starttime;
+    public ParkingInstance(String sellerID, ParkingSpace parkingSpace, String preferredPaymentMethod, Date startTime, Date endTime) {
+        this.sellerID = sellerID;
+        this.parkingSpace = parkingSpace;
+        this.preferredPaymentMethod = preferredPaymentMethod;
+        this.startTime = startTime;
+        this.endTime = endTime;
     }
 
-    public void setStarttime(Date starttime) {
-        this.starttime = starttime;
+
+    public String getSellerID()
+    {
+        return sellerID;
+    }
+    public void setSellerID(String sellerID)
+    {
+        this.sellerID = sellerID;
     }
 
-    public Date getEndtime() {
-        return endtime;
+
+    public String getBuyerID()
+    {
+        return buyerID;
+    }
+    public void setBuyerID(String buyerID)
+    {
+        this.buyerID = buyerID;
     }
 
-    public void setEndtime(Date endtime) {
-        this.endtime = endtime;
+
+    public Vehicle getVehicle()
+    {
+        return vehicle;
+    }
+    public void setVehicle(Vehicle vehicle)
+    {
+        this.vehicle = vehicle;
     }
 
-    public double getLatitude() {
-        return latitude;
+
+    public ParkingSpace getParkingSpace()
+    {
+        return parkingSpace;
+    }
+    public void setParkingSpace(ParkingSpace parkingSpace)
+    {
+        this.parkingSpace = parkingSpace;
     }
 
-    public double getLongitude() {
-        return longitude;
+
+    public String getPreferredPaymentMethod()
+    {
+        return preferredPaymentMethod;
+    }
+    public void setPreferredPaymentMethod(String preferredPaymentMethod)
+    {
+        this.preferredPaymentMethod = preferredPaymentMethod;
+    }
+
+
+    public Date getStartTime()
+    {
+        return startTime;
+    }
+    public void setStartTime(Date startTime)
+    {
+        this.startTime = startTime;
+    }
+
+
+    public Date getEndTime()
+    {
+        return endTime;
+    }
+    public void setEndTime(Date endTime)
+    {
+        this.endTime = endTime;
     }
 }

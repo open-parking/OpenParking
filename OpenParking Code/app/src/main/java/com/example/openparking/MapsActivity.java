@@ -160,6 +160,7 @@ public class MapsActivity extends FragmentActivity implements
 
     // Generates random Latitude Longitude coordinates to be placed in the ParkingInstance ArrayList.
     // These Random Coordinates help test the map markers .
+    /*
     private LatLng randomLongBeachLocation()
     {
         int randLat = new Random().nextInt(maxLat-minLat)+minLat;
@@ -171,13 +172,14 @@ public class MapsActivity extends FragmentActivity implements
 
         return new LatLng(randLatD, randLonD);
     }
+    */
 
 
     /** Adds map markers on the map at random coordinates withing Long Beach.
     *   This function is no longer used. It was replaced by:
     *      addRandomMarkersToParkingInstanceList() and
     *      displayMarkersOnList().
-    **/
+
     private void addRandomMarkers(GoogleMap googleMap, int num_markers)
     {
         mMap = googleMap;
@@ -194,11 +196,12 @@ public class MapsActivity extends FragmentActivity implements
 
         }
     }
+     **/
 
     /**
      *  This function is for testing purposes only.
      *  Generates Random Coordinates and saved them to ParkingInstanceList.
-     **/
+
     private void addRandomMarkersToParkingInstanceList(int num_markers)
     {
         for (int i = 0; i < num_markers; i++ ) {
@@ -208,6 +211,7 @@ public class MapsActivity extends FragmentActivity implements
             parkingInstanceList.add(testInstance);
         }
     }
+     **/
 
     /** Work in Progress
      * TODO: TEST ZIPCODE 90815
@@ -302,7 +306,7 @@ public class MapsActivity extends FragmentActivity implements
      * Displays on the map the markers stored in ParkingInstanceList.
      *
      * @param googleMap
-     */
+
     private void displayMarkersOnList(GoogleMap googleMap)
     {
         mMap = googleMap;
@@ -318,7 +322,7 @@ public class MapsActivity extends FragmentActivity implements
             );
         }
     }
-
+     */
 
 
     /**
