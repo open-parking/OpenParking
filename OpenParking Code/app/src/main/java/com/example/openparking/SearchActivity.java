@@ -12,20 +12,16 @@ public class SearchActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     /*
         A list view of ParkingInstances
-        Categories: Price, Distance, Rating, New, ... (time of availability)
-        Should display 6-8 instances at a time with a scrolling view
+        Should display a scrolling view with up to 6 instancesvisible at a time.
         Tile data per Instance:
             Primary image
             Location
             Availability
             Price
-            Distance from user
             Rating
             Preferred Payment Method (icon)
 
         SHOULD BE SORTABLE BY:
-            Distance from user
-            Availability
             Price
             Rating
             Preferred Payment Method (icon)
@@ -69,10 +65,7 @@ public class SearchActivity extends AppCompatActivity {
         user.setId(fuser.getUid());
 
     }
-    //SCRAP real time scrolling tiles!, lets do moderate scrolling list with arrows.
 
     //more info should load ViewParkingInstanceActivity
-    //get current location, to sort instanced by closest
-    //maybe option to show in map view??
-    //need to constant refresh with new instances...
+    //will getting new data from firebase conflict with our already sorted instances?
 }
