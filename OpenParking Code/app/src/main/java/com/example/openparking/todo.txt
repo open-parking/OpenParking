@@ -2,7 +2,6 @@ CreateParkingInstanceActivity
 ViewParkingInstanceActivity
 SearchActivity
 
-remove vehicle
 uploading images and other data
 profile / changing information
 finalize transactions

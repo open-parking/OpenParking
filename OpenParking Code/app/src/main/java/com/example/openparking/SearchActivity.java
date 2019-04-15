@@ -28,9 +28,14 @@ public class SearchActivity extends AppCompatActivity {
 
         When a tile is selected, should call ViewParkingInstance activity like how we should do for map view
 
-        How will we get ParkingInstance data from Firebase and show a sorted list to the user?
-            (a) Keep multiple versions of list already sorted in Firebase, can just call it
-            (b) Get data from Firebase and sort and show to user (can new data conflict with this?)
+        HYPOTHETICALLY Firebase will be able to give us data that is already sorted, so we will go with that.
+
+        All we need to do then is only get data of instances close to user's latlongitude
+
+        So then:
+            1) get sorted firebase data
+            2) build list of relatively close parking instances
+            3) show list to user
      */
 
     //Don't think we actually need ParkingInstance arraylists, can get data as strings and ints...
@@ -39,10 +44,11 @@ public class SearchActivity extends AppCompatActivity {
     int tilesToDisplay = 6; //6-8?
     int currentIndex = 1;
 
-    void sortByPrice() {
-
-        //Sort the data that we currently have in pList and update the view with the sorted info
-    }
+    /*
+        1) get sorted data from firebase and store in plist
+        2) build vlist of parkinginstances that are relatively close to user
+        3) when next is called, repeat 1 and 2 as needed
+     */
 
     void loadResults(int arrow) {
 
