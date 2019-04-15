@@ -66,7 +66,7 @@ public class MapsActivity extends FragmentActivity implements
     // [END declare_database_ref]
 
 
-    List <ParkingInstance> parkingInstanceList; //List of parking spaces with a car in them
+    List <ParkingInstance> parkingInstanceList; //List of parking spaces with a car in them //THIS LIST NOT CURRENTLY USED
     List <ParkingSpace> parkingSpaceList;       //List of parking spaces that are available for reservation
     
     // [START Test Values for Random Markers in Long Beach]

@@ -42,6 +42,7 @@ public class CreateParkingInstanceActivity extends AppCompatActivity {
 
         double latitude = 1.531;
         double longitude = 1.5234;
+
         //later on do some fancy stuff to get latlong for here, for now this is a dummy variable(s)
         try{
             addresses = geocoder.getFromLocation(latitude, longitude, 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
