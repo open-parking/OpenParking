@@ -1,6 +1,7 @@
 package com.example.openparking;
 
 public class Vehicle {
+    //TODO: Remove this
     String brand;
     String model;
     String year;
