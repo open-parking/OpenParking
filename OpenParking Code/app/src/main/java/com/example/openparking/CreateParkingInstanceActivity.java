@@ -8,6 +8,8 @@ import com.google.firebase.auth.FirebaseUser;
 import android.content.Intent;
 import android.location.Location;
 import com.google.android.gms.maps.model.LatLng;
+
+import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
@@ -43,14 +45,20 @@ public class CreateParkingInstanceActivity extends AppCompatActivity {
         double latitude = 1.531;
         double longitude = 1.5234;
         //later on do some fancy stuff to get latlong for here, for now this is a dummy variable(s)
-        addresses = geocoder.getFromLocation(latitude, longitude, 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
+        try{
+            addresses = geocoder.getFromLocation(latitude, longitude, 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
+            String address = addresses.get(0).getAddressLine(0); // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
+            String city = addresses.get(0).getLocality();
+            String state = addresses.get(0).getAdminArea();
+            String country = addresses.get(0).getCountryName();
+            String postalCode = addresses.get(0).getPostalCode();
+            String knownName = addresses.get(0).getFeatureName(); // Only if available else return NULL
+        }
+        catch(IOException e){
 
-        String address = addresses.get(0).getAddressLine(0); // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
-        String city = addresses.get(0).getLocality();
-        String state = addresses.get(0).getAdminArea();
-        String country = addresses.get(0).getCountryName();
-        String postalCode = addresses.get(0).getPostalCode();
-        String knownName = addresses.get(0).getFeatureName(); // Only if available else return NULL
+        }
+
+
         //lets save the address and the lat long of it
 
         //upload a picture?
