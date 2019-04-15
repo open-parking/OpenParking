@@ -172,12 +172,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
             //stopping any further function execution
             return;
         }
-        if(TextUtils.isEmpty(name)) {
-            //name is empty
-            Toast.makeText(this, "Please enter name", Toast.LENGTH_SHORT).show();
-            //stopping the function execution further
-            return;
-        }
+        
         //if validations are passed,
         //we will first show a progress bar
         progressDialog.setMessage("Registering User...");
