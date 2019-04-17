@@ -1,6 +1,7 @@
 package com.example.openparking;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
@@ -42,6 +43,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
@@ -66,8 +68,9 @@ public class MapsActivity extends FragmentActivity implements
     // [END declare_database_ref]
 
 
-    List <ParkingInstance> parkingInstanceList; //List of parking spaces with a car in them //THIS LIST NOT CURRENTLY USED
-    List <ParkingSpace> parkingSpaceList;       //List of parking spaces that are available for reservation
+    List <ParkingInstance> parkingInstanceList;         // List of parking spaces with a car in them //THIS LIST NOT CURRENTLY USED
+    List <ParkingSpace> parkingSpaceList;               //List of parking spaces that are available for reservation
+    HashMap<String, ParkingSpace>parkingSpaceHashMap;   // for quick look up from marker ID to parkingSpace
     
     // [START Test Values for Random Markers in Long Beach]
 
@@ -149,6 +152,7 @@ public class MapsActivity extends FragmentActivity implements
 
         parkingInstanceList = new ArrayList<>();
         parkingSpaceList = new ArrayList<>();
+        parkingSpaceHashMap = new HashMap<>();
 
         // [START initialize_database_ref]
         mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -240,10 +244,22 @@ public class MapsActivity extends FragmentActivity implements
                         {
                             Log.d(TAG, "onChildAdded: " +  "ps is good");
 
+                            parkingSpaceList.add(ps);
+
                             String address = ps.getAddress();
                             String hours = "Hours: " + ps.getOpenTime() + " to " + ps.getCloseTime();
 
-                            //Add marker to map
+                            MarkerOptions mo = new MarkerOptions();
+                            mo.position(ps.getLatLng());
+                            mo.title(address);
+                            mo.snippet(hours);
+                            mo.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
+                            mo.flat(true);
+
+                            //Add marker to map AND get its ID
+                            String markerID = mMap.addMarker(mo).getId();
+
+                            /** OLD WAY OF ADDING A MARKER TO THE MAP
                             mMap.addMarker(new MarkerOptions()
                                     .position(ps.getLatLng())
                                     .title(address)
@@ -251,7 +267,9 @@ public class MapsActivity extends FragmentActivity implements
                                     //.icon(BitmapDescriptorFactory.fromResource(R.drawable.openparkinglogo_small))
                                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
                                     .flat(true)
-                            );
+                            );**/
+
+                            parkingSpaceHashMap.put(markerID, ps);
                         }
                         else
                         {
@@ -517,10 +535,15 @@ public class MapsActivity extends FragmentActivity implements
 
         //Steps for passing Data to other Activity
         // 1. Create New Intent object
+        Intent intent = new Intent(MapsActivity.this, ViewParkingInstance.class);
 
         // 2. intent.putExtra(String key, Object data)
+        ParkingSpace ps  = parkingSpaceHashMap.get(marker.getId());
+        intent.putExtra("parkingInstance", ps);
 
         // 3. startActivity(intent)
+        Toast.makeText(this, "Starting new Activity", Toast.LENGTH_SHORT).show();
+        startActivity(intent);
 
         //In new Activity
         // 4. getIntent()
