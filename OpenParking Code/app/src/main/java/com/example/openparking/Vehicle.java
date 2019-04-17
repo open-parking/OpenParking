@@ -5,14 +5,12 @@ public class Vehicle {
     String model;
     String year;
     String color;
-    String licensePlate;
 
     public Vehicle() {
         this.brand = "";
         this.model = "";
         this.year = "";
         this.color = "";
-        this.licensePlate = "";
     }
 
     public String getBrand() {
@@ -47,13 +45,6 @@ public class Vehicle {
         this.color = color;
     }
 
-    public String getLicensePlate() {
-        return licensePlate;
-    }
-
-    public void setLicensePlate(String licensePlate) {
-        this.licensePlate = licensePlate;
-    }
 
     @Override
     public String toString() {
@@ -62,7 +53,6 @@ public class Vehicle {
                 ", model='" + model + '\'' +
                 ", year='" + year + '\'' +
                 ", color='" + color + '\'' +
-                ", license plate='" + licensePlate + '\'' +
                 '}';
     }
 }

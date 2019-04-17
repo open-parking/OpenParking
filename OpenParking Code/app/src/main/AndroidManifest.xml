@@ -20,11 +20,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".CreateParkingInstanceActivity"></activity>
         <activity
             android:name=".AddParkingSpaceActivity"
             android:label="@string/title_activity_add_parking_instance"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".CreateParkingActivity"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".CreateParkingActivity" />
         <activity android:name=".PasswordRecovery" />
         <activity android:name=".PaymentDetails" />
         <activity android:name=".PayPalActivity" />

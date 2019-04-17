@@ -9,8 +9,6 @@ public class ParkingInstance {
     private String sellerID;
     private String buyerID;
 
-    private Vehicle vehicle;
-
     private ParkingSpace parkingSpace;
 
     //private String desc;
@@ -60,16 +58,6 @@ public class ParkingInstance {
     public void setBuyerID(String buyerID)
     {
         this.buyerID = buyerID;
-    }
-
-
-    public Vehicle getVehicle()
-    {
-        return vehicle;
-    }
-    public void setVehicle(Vehicle vehicle)
-    {
-        this.vehicle = vehicle;
     }
 
 

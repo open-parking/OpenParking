@@ -10,6 +10,8 @@ public class User {
     double contributorRating;
     int timesContributorRated;
 
+    Vehicle vehicle;
+
     public User() {
         this.name = "";
         this.email = "";
@@ -97,5 +99,22 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Vehicle getVehicle()
+    {
+        return vehicle;
+    }
+
+    public void setVehicle(String brand, String model, String year, String color)
+    {
+        vehicle.setBrand(brand);
+        vehicle.setModel(model);
+        vehicle.setYear(year);
+        vehicle.setColor(color);
+    }
+    public void setVehicle(Vehicle vehicle)
+    {
+        this.vehicle = vehicle;
     }
 }

@@ -28,6 +28,7 @@ public class Test_Activity extends AppCompatActivity {
     Button btnFileRead;
     Button btnPayPal;
     Button btnRating;
+    Button btnCreateParking;
 
 
     @Override
@@ -132,6 +133,18 @@ public class Test_Activity extends AppCompatActivity {
 
             }
 
+        });
+
+
+        // Create Parking Instance Button
+        btnCreateParking = findViewById((R.id.btnCreateParking));
+        btnCreateParking.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.v(TAG, "Clicked create parking instance button");
+                Intent intent = new Intent(Test_Activity.this, CreateParkingInstanceActivity.class);
+                startActivity(intent);
+            }
         });
 
     }
