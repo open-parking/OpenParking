@@ -33,7 +33,13 @@ public class ViewParkingInstance extends AppCompatActivity {
     ParkingSpace ps;
     TextView address;
     TextView zip;
+    TextView latitude;
+    TextView longitude;
+    TextView cost;
     TextView openTime;
+    TextView closeTime;
+
+
 
 
     @Override
@@ -47,9 +53,15 @@ public class ViewParkingInstance extends AppCompatActivity {
 
 
         ps = new ParkingSpace();
+
         address = (TextView) findViewById(R.id.viewAddress);
         zip = (TextView) findViewById(R.id.viewZipCode);
+        latitude = (TextView) findViewById(R.id.viewLatitude);
+        longitude = (TextView) findViewById(R.id.viewLongitude);
+
+        cost = (TextView) findViewById(R.id.viewCost);
         openTime = (TextView) findViewById(R.id.viewOpenTime);
+        closeTime = (TextView) findViewById(R.id.viewCloseTime);
 
         getParkingSpaceData();
         showParkingSpaceData();
@@ -80,7 +92,12 @@ public class ViewParkingInstance extends AppCompatActivity {
         {
             address.setText(ps.getAddress());
             zip.setText(ps.getZipcode());
+            latitude.setText("" + ps.getLatitude());
+            longitude.setText("" + ps.getLongitude());
+
+            cost.setText("" + ps.getCost());
             openTime.setText(ps.getOpenTime());
+            closeTime.setText(ps.getCloseTime());
         }
 
 
