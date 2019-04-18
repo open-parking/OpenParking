@@ -544,11 +544,19 @@ public class MapsActivity extends FragmentActivity implements
         // 3. startActivity(intent)
         Toast.makeText(this, "Starting new Activity", Toast.LENGTH_SHORT).show();
         startActivity(intent);
+            startActivity(intent);
 
-        //In new Activity
-        // 4. getIntent()
+            //In new Activity
+            // 4. getIntent()
 
-        // 5. intent.getStringExtra(String key)
+            // 5. intent.getStringExtra(String key)
+        }
+        else
+        {
+            Toast.makeText(this, "Not a parking space marker!", Toast.LENGTH_SHORT).show();
+        }
+
+
 
     }
 
