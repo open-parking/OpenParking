@@ -547,7 +547,7 @@ public class MapsActivity extends FragmentActivity implements
             intent.putExtra("parkingInstance", ps);
 
             // 3. startActivity(intent)
-            Toast.makeText(this, "Starting new Activity", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Starting new Activity", Toast.LENGTH_SHORT).show();
             startActivity(intent);
 
             //In new Activity
