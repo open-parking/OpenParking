@@ -542,17 +542,29 @@ public class MapsActivity extends FragmentActivity implements
         Intent intent = new Intent(MapsActivity.this, ViewParkingInstance.class);
 
         // 2. intent.putExtra(String key, Object data)
-        ParkingSpace ps  = parkingSpaceHashMap.get(marker.getId());
-        intent.putExtra("parkingInstance", ps);
+        ParkingSpace ps  = new ParkingSpace();
+        ps = parkingSpaceHashMap.get(marker.getId());
 
-        // 3. startActivity(intent)
-        Toast.makeText(this, "Starting new Activity", Toast.LENGTH_SHORT).show();
-        startActivity(intent);
+        //CHECK IF THE MARKER BELONGS TO A VALID PARKING SPACE
+        if(!(ps == null))
+        {
+            intent.putExtra("parkingInstance", ps);
 
-        //In new Activity
-        // 4. getIntent()
+            // 3. startActivity(intent)
+            //Toast.makeText(this, "Starting new Activity", Toast.LENGTH_SHORT).show();
+            startActivity(intent);
 
-        // 5. intent.getStringExtra(String key)
+            //In new Activity
+            // 4. getIntent()
+
+            // 5. intent.getStringExtra(String key)
+        }
+        else
+        {
+            Toast.makeText(this, "Not a parking space marker!", Toast.LENGTH_SHORT).show();
+        }
+
+
 
     }
 

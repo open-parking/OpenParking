@@ -32,7 +32,7 @@
         android:textAlignment="center" />
 
     <TextView
-        android:id="@+id/viewOpenTime"
+        android:id="@+id/viewLatitude"
         android:layout_width="371dp"
         android:layout_height="wrap_content"
         android:drawableLeft="@drawable/avatar"
@@ -41,8 +41,62 @@
         android:paddingBottom="10dp"
         android:paddingTop="60dp"
 
+        android:text="Latitude"
+
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/viewLongitude"
+        android:layout_width="371dp"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/avatar"
+        android:paddingLeft="120dp"
+        android:paddingRight="110dp"
+        android:paddingBottom="10dp"
+        android:paddingTop="90dp"
+
+        android:text="Longitude"
+
+        android:textAlignment="center" />
+    <TextView
+        android:id="@+id/viewCost"
+        android:layout_width="371dp"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/avatar"
+        android:paddingLeft="120dp"
+        android:paddingRight="110dp"
+        android:paddingBottom="10dp"
+        android:paddingTop="120dp"
+
+        android:text="Cost"
+
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/viewOpenTime"
+        android:layout_width="371dp"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/avatar"
+        android:paddingLeft="120dp"
+        android:paddingRight="110dp"
+        android:paddingBottom="10dp"
+        android:paddingTop="150dp"
+
         android:text="OpenTime"
 
         android:textAlignment="center" />
 
+    <TextView
+        android:id="@+id/viewCloseTime"
+        android:layout_width="371dp"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/avatar"
+        android:paddingLeft="120dp"
+        android:paddingRight="110dp"
+        android:paddingBottom="10dp"
+        android:paddingTop="180dp"
+
+        android:text="CloseTime"
+
+        android:textAlignment="center" />
 </android.support.constraint.ConstraintLayout>
