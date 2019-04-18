@@ -23,6 +23,7 @@ public class RatingActivity extends AppCompatActivity {
 
         final RatingBar mRatingBar = (RatingBar) findViewById(R.id.ratingBar);
         final TextView mRatingScale = (TextView) findViewById(R.id.tvRatingScale);
+
         Button submitButton = (Button) findViewById(R.id.submit_button);
         final TextView ratingDisplayTextView = (TextView) findViewById(R.id.rating_display_text_View);
 

@@ -65,6 +65,9 @@
         <activity
             android:name=".SignupActivity"
             android:label="Signup" />
+        <activity
+            android:name=".ViewParkingInstance"
+            android:label="View Parking Details" />
     </application>
 
 </manifest>

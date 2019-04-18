@@ -1,8 +1,11 @@
 package com.example.openparking;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.android.gms.maps.model.LatLng;
 
-public class ParkingSpace {
+public class ParkingSpace implements Parcelable{
 
     private String address;
     private String zipcode;
@@ -93,6 +96,45 @@ public class ParkingSpace {
         this.closeTime = closeTime;
     }
 
+    //---Parcelable Functions---
+    public int describeContents(){
+        return 0;
+    }
 
+    public void writeToParcel(Parcel out, int flags)
+    {
+        out.writeString(address);
+        out.writeString(zipcode);
+        out.writeDouble(latitude);
+        out.writeDouble(longitude);
+        out.writeDouble(cost);
+        out.writeString(openTime);
+        out.writeString(closeTime);
+    }
+
+    public ParkingSpace(Parcel in) {
+        this.address    = in.readString();
+        this.zipcode    = in.readString();
+        this.latitude   = in.readDouble();
+        this.longitude  = in.readDouble();
+        this.cost       = in.readDouble();
+        this.openTime   = in.readString();
+        this.openTime   = in.readString();
+    }
+
+    public static final Parcelable.Creator<ParkingSpace> CREATOR
+            = new Parcelable.Creator<ParkingSpace>() {
+
+        public ParkingSpace createFromParcel(Parcel in)
+        {
+            return new ParkingSpace(in);
+        }
+
+        public ParkingSpace[] newArray(int size)
+        {
+            return new ParkingSpace[size];
+        }
+    };
+    //---END Parcelable Functions---
 
 }
