@@ -1,0 +1,86 @@
+{
+  "project_info": {
+    "project_number": "276164100150",
+    "firebase_url": "https://openparking-491.firebaseio.com",
+    "project_id": "openparking-491",
+    "storage_bucket": "openparking-491.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:276164100150:android:714327535a6799c4",
+        "android_client_info": {
+          "package_name": "Open.Parking"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "276164100150-prsc6m6g3j3tjijh7tf15i50tk69mqp7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCM1qUeNa09pvEiUxT8Nj50leOcSzfD90E"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:276164100150:android:b121d6dc415b639a",
+        "android_client_info": {
+          "package_name": "com.example.openparking"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "276164100150-nh27p2vgu2gpp4pa83m4mp0vu0bk4rfv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.openparking",
+            "certificate_hash": "629dcefbae2537cab494e368e60c915af157b588"
+          }
+        },
+        {
+          "client_id": "276164100150-prsc6m6g3j3tjijh7tf15i50tk69mqp7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCM1qUeNa09pvEiUxT8Nj50leOcSzfD90E"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "276164100150-prsc6m6g3j3tjijh7tf15i50tk69mqp7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
