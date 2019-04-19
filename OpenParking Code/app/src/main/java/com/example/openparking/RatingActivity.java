@@ -37,7 +37,7 @@ public class RatingActivity extends AppCompatActivity {
         }
         FirebaseUser fuser = firebaseAuth.getCurrentUser();
         final User user = new User();
-        user.setId(fuser.getUid());
+        user.setId(fuser.getUid());//USER ID
 
 
         submitButton.setOnClickListener(new View.OnClickListener() {

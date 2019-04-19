@@ -149,7 +149,7 @@ public class ParkingSpace implements Parcelable{
         //this.latlng = new LatLng(latitude, longitude);
         this.cost       = in.readDouble();
         this.openTime   = in.readString();
-        this.openTime   = in.readString();
+        this.closeTime   = in.readString();
     }
 
     public static final Parcelable.Creator<ParkingSpace> CREATOR
