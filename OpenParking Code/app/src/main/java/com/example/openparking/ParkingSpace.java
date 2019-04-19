@@ -7,6 +7,7 @@ import com.google.android.gms.maps.model.LatLng;
 
 public class ParkingSpace implements Parcelable{
 
+    private String ownerID;
     private String address;
     private String zipcode;
     private Double latitude;
@@ -24,15 +25,27 @@ public class ParkingSpace implements Parcelable{
         //Used by FireBase
     }
 
-    public ParkingSpace( String address, String zipcode, Double latitude, Double longitude, Double cost, String openTime, String closeTime)
+    public ParkingSpace( String owner, String address, String zipcode, Double latitude, Double longitude, Double cost, String openTime, String closeTime)
     {
+        this.ownerID = owner;
         this.address = address;
         this.zipcode = zipcode;
         this.latitude = latitude;
         this.longitude = longitude;
+        //this.latlng = new LatLng(latitude, longitude); //Not necessary due to firebase, its easier to just use doubles
         this.cost = cost;
         this.openTime = openTime;
         this.closeTime = closeTime;
+    }
+
+    public String getOwnerID()
+    {
+        return ownerID;
+    }
+
+    public void setOwnerID(String ID)
+    {
+        this.ownerID = ID;
     }
 
     public String getAddress() {
@@ -67,9 +80,19 @@ public class ParkingSpace implements Parcelable{
         this.longitude = longitude;
     }
 
-    public LatLng getLatLng()
+    public LatLng getLatlng()
     {
         return new LatLng(latitude, longitude);
+        //return latlng;
+        // using google's LatLng class gives problems when using firebase
+        // due to no public constructor with no arguments.
+    }
+
+    public void setLatlng(LatLng latlng)
+    {
+        //this.latlng = latlng;
+        this.latitude = latlng.latitude;
+        this.longitude = latlng.longitude;
     }
 
     public Double getCost() {
@@ -80,19 +103,19 @@ public class ParkingSpace implements Parcelable{
         this.cost = cost;
     }
 
-    public String getOpenTime() {
+    public String getOpentime() {
         return openTime;
     }
 
-    public void setOpenTime(String openTime) {
+    public void setOpentime(String openTime) {
         this.openTime = openTime;
     }
 
-    public String getCloseTime() {
+    public String getClosetime() {
         return closeTime;
     }
 
-    public void setCloseTime(String closeTime) {
+    public void setClosetime(String closeTime) {
         this.closeTime = closeTime;
     }
 
@@ -103,20 +126,27 @@ public class ParkingSpace implements Parcelable{
 
     public void writeToParcel(Parcel out, int flags)
     {
+        out.writeString(ownerID);
         out.writeString(address);
         out.writeString(zipcode);
         out.writeDouble(latitude);
         out.writeDouble(longitude);
+        //out.writeDouble(latlng.latitude);
+        //out.writeDouble(latlng.longitude);
         out.writeDouble(cost);
         out.writeString(openTime);
         out.writeString(closeTime);
     }
 
     public ParkingSpace(Parcel in) {
+        this.ownerID    = in.readString();
         this.address    = in.readString();
         this.zipcode    = in.readString();
         this.latitude   = in.readDouble();
         this.longitude  = in.readDouble();
+        //Double latitude   = in.readDouble();
+        //Double longitude  = in.readDouble();
+        //this.latlng = new LatLng(latitude, longitude);
         this.cost       = in.readDouble();
         this.openTime   = in.readString();
         this.openTime   = in.readString();
