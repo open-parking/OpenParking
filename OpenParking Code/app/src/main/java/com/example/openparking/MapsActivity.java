@@ -251,10 +251,10 @@ public class MapsActivity extends FragmentActivity implements
                             parkingSpaceList.add(ps);
 
                             String address = ps.getAddress();
-                            String hours = "Hours: " + ps.getOpenTime() + " to " + ps.getCloseTime();
+                            String hours = "Hours: " + ps.getOpentime() + " to " + ps.getClosetime();
 
                             MarkerOptions mo = new MarkerOptions();
-                            mo.position(ps.getLatLng());
+                            mo.position(ps.getLatlng());
                             mo.title(address);
                             mo.snippet(hours);
                             mo.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));

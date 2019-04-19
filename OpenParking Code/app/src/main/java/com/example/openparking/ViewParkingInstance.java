@@ -92,6 +92,7 @@ public class ViewParkingInstance extends AppCompatActivity {
         {
             address.setText(ps.getAddress());
             zip.setText(ps.getZipcode());
+
             latitude.setText("" + ps.getLatitude());
             longitude.setText("" + ps.getLongitude());
 
