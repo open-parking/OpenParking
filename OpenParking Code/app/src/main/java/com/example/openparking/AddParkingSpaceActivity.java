@@ -1,8 +1,13 @@
 package com.example.openparking;
 
-//TODO THIS ACTIVITY IS FOR TESTING THE CONNECTION TO THE DATABASE
-// USE THIS ACTIVITY TO TEST: ADDING PARKING INSTANCES TO DATABASE
+//TODO
+// Get owner ID and save it as a property of ParkingSpace Class
+// Translate from address to latitude longitude coordinates
 
+//DONE:
+// USE THIS ACTIVITY TO TEST ADDING PARKING INSTANCES TO DATABASE
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -13,6 +18,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -31,6 +38,9 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
 
     private DatabaseReference mDatabase;
     private ParkingSpace test;
+
+    private FirebaseAuth firebaseAuth;
+    private String userID;
 
 
     @Override
@@ -58,6 +68,16 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
         editTextOpenTime    = findViewById(R.id.editTextOpenTime);
         editTextCloseTime   = findViewById(R.id.editTextCloseTime);
 
+        // Get userID
+        firebaseAuth = FirebaseAuth.getInstance();
+        if(firebaseAuth.getCurrentUser() == null)
+        {
+            finish();
+            startActivity(new Intent(this, LoginActivity.class));
+        }
+        FirebaseUser fuser = firebaseAuth.getCurrentUser();
+        userID = fuser.getUid();
+
         init();
 
     }
@@ -72,6 +92,7 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Log.v(TAG, "Clicked Send Button");
 
+                //TODO Send New Version of ParkingSpace to firebase
                 //DONE: SEND DATA TO FIREBASE
 
                 final String address= editTextAddress.getText().toString().trim();
@@ -82,16 +103,16 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
                 final String open   = editTextOpenTime.getText().toString().trim();
                 final String close  = editTextCloseTime.getText().toString().trim();
 
-                writeNewParkingSpace(address, zipcode, lat, lon, cost, open, close);
+                writeNewParkingSpace(userID, address, zipcode, lat, lon, cost, open, close);
             }
 
         });
     }
 
-    private void writeNewParkingSpace(String Address,String zipCode, Double latitude, Double longitude, Double cost, String openTime, String closeTime )
+    private void writeNewParkingSpace(String ownerID, String Address,String zipCode, Double latitude, Double longitude, Double cost, String openTime, String closeTime )
     {
 
-        ParkingSpace ps = new ParkingSpace(Address,zipCode, latitude, longitude, cost, openTime, closeTime);
+        ParkingSpace ps = new ParkingSpace(ownerID, Address,zipCode, latitude, longitude, cost, openTime, closeTime);
         Log.v(TAG, "Sending to mDatabase");
         mDatabase.child("ZipCodes").child(zipCode).push().setValue(ps);
     }
