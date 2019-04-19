@@ -80,7 +80,7 @@ public class ViewParkingInstance extends AppCompatActivity {
         {
             address.setText(ps.getAddress());
             zip.setText(ps.getZipcode());
-            openTime.setText(ps.getOpenTime());
+            openTime.setText(ps.getOpentime());
         }
 
 
