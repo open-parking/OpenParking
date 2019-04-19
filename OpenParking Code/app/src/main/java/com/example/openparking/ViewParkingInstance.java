@@ -97,8 +97,8 @@ public class ViewParkingInstance extends AppCompatActivity {
             longitude.setText("" + ps.getLongitude());
 
             cost.setText("" + ps.getCost());
-            openTime.setText(ps.getOpenTime());
-            closeTime.setText(ps.getCloseTime());
+            openTime.setText(ps.getOpentime());
+            closeTime.setText(ps.getClosetime());
         }
 
 
