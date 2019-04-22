@@ -21,24 +21,9 @@ public class ElementAdapter extends RecyclerView.Adapter<ElementAdapter.ElementV
         this.mCtx = mCtx;
         this.elementList = elementList;
     }
-
-    @NonNull
-    @Override
-    public ElementViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        LayoutInflater inflater = LayoutInflater.from(mCtx);
-        View view = inflater.inflate(R.layout.list_layout, null);
-        ElementViewHolder holder = new ElementViewHolder(view);
-        return new ElementViewHolder(view);
-    }
-
-    @Override
-    public void onBindViewHolder(@NonNull ElementViewHolder elementViewHolder, int i) {
-
-    }
-
     @Override
     public int getItemCount() {
-        return 0;
+        return elementList.size();
     }
 
     class ElementViewHolder extends RecyclerView.ViewHolder{
@@ -53,6 +38,27 @@ public class ElementAdapter extends RecyclerView.Adapter<ElementAdapter.ElementV
             textViewDesc = itemView.findViewById(R.id.textViewShortDesc);
             textViewRating = itemView.findViewById(R.id.textViewRating);
             textViewPrice = itemView.findViewById(R.id.textViewPrice);
+
         }
     }
+    @NonNull
+    @Override
+    public ElementViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+        LayoutInflater inflater = LayoutInflater.from(mCtx);
+        View view = inflater.inflate(R.layout.list_layout, null);
+        ElementViewHolder holder = new ElementViewHolder(view);
+        return new ElementViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(ElementViewHolder elementViewHolder, int position) {
+        Element element = elementList.get(position);
+
+        elementViewHolder.textViewTitle.setText(element.getTitle());
+        elementViewHolder.textViewDesc .setText(element.getShortdesc());
+        elementViewHolder.textViewRating.setText(String.valueOf(element.getRating()));
+        elementViewHolder.textViewPrice.setText(String.valueOf(element.getPrice()));
+        elementViewHolder.imageView.setImageDrawable(mCtx.getResources().getDrawable(element.getImage()));
+    }
+
 }
