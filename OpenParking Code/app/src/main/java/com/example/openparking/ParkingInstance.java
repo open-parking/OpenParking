@@ -13,7 +13,6 @@ public class ParkingInstance {
 
     //private String desc;
 
-    private String preferredPaymentMethod;
 
     private Date startTime; //Time when vehicle parked at the address;
     private Date endTime;   //Time when vehicle left the parking spot.
@@ -25,17 +24,10 @@ public class ParkingInstance {
         this.parkingSpace = parkingSpace;
     }
 
-    public ParkingInstance(String sellerID, ParkingSpace parkingSpace, String preferredPaymentMethod)
-    {
-        this.sellerID = sellerID;
-        this.parkingSpace = parkingSpace;
-        this.preferredPaymentMethod = preferredPaymentMethod;
-    }
 
     public ParkingInstance(String sellerID, ParkingSpace parkingSpace, String preferredPaymentMethod, Date startTime, Date endTime) {
         this.sellerID = sellerID;
         this.parkingSpace = parkingSpace;
-        this.preferredPaymentMethod = preferredPaymentMethod;
         this.startTime = startTime;
         this.endTime = endTime;
     }
@@ -71,16 +63,6 @@ public class ParkingInstance {
     }
 
 
-    public String getPreferredPaymentMethod()
-    {
-        return preferredPaymentMethod;
-    }
-    public void setPreferredPaymentMethod(String preferredPaymentMethod)
-    {
-        this.preferredPaymentMethod = preferredPaymentMethod;
-    }
-
-
     public Date getStartTime()
     {
         return startTime;
@@ -98,5 +80,10 @@ public class ParkingInstance {
     public void setEndTime(Date endTime)
     {
         this.endTime = endTime;
+    }
+
+    public String toString()
+    {
+        return "Seller ID: " + sellerID + ", Address: " + parkingSpace;
     }
 }

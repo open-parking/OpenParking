@@ -148,8 +148,8 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void registerUser() {
-        String email = editTextEmail.getText().toString().trim();
-        String password = editTextPassword.getText().toString().trim();
+        final String email = editTextEmail.getText().toString().trim();
+        final String password = editTextPassword.getText().toString().trim();
         final String firstName = editTextFirstName.getText().toString().trim();
         //final String lastName = editTextLastName.getText().toString().trim();
 
@@ -172,7 +172,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
             //stopping any further function execution
             return;
         }
-        
+
         //if validations are passed,
         //we will first show a progress bar
         progressDialog.setMessage("Registering User...");
@@ -193,6 +193,18 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                                     .build();
                             user.updateProfile(profileUpdates);
 
+                            /*
+                            ------------------------------------
+                            Creating user in FireBase database
+                            ------------------------------------
+                             */
+                            User mUser = new User();
+                            mUser.setName(firstName);
+                            mUser.setEmail(email);
+                            String uID = user.getUid();
+                            mUser.setId(uID);
+
+                            usersRef.child("users").child(uID).setValue(mUser);
 
                             sendEmailVerification();
 
@@ -204,7 +216,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
 
                             finish();
 
-                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
 
                         }
                         else{

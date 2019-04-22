@@ -95,4 +95,10 @@ public class ParkingSpace {
 
 
 
+    public String toString()
+    {
+        return address + ", " + zipcode;
+    }
+
+
 }
