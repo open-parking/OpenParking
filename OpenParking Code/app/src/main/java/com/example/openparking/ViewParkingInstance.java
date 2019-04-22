@@ -12,6 +12,10 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+
 public class ViewParkingInstance extends AppCompatActivity {
     /*
         A full page view of the ParkingInstance selected
@@ -30,6 +34,9 @@ public class ViewParkingInstance extends AppCompatActivity {
             11. Back arrow on upper left corner which takes them back to whatever they were doing before
      */
     private static final String TAG = "ViewParkingInstance";
+
+    private DatabaseReference mDatabase;
+
     ParkingSpace ps;
     TextView address;
     TextView zip;
@@ -41,6 +48,8 @@ public class ViewParkingInstance extends AppCompatActivity {
     TextView ownerName;
 
 
+    String ownerID;
+    String ownerName_str;
 
 
     @Override
@@ -51,6 +60,9 @@ public class ViewParkingInstance extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_viewparkinginstance);
+
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+
 
 
         ps = new ParkingSpace();
@@ -65,6 +77,8 @@ public class ViewParkingInstance extends AppCompatActivity {
         closeTime = (TextView) findViewById(R.id.viewCloseTime);
 
         ownerName = (TextView) findViewById(R.id.viewOwner);
+        ownerID = "NOT SET";
+        ownerName_str = "NOT SET";
 
         getParkingSpaceData();
         showParkingSpaceData();
@@ -83,6 +97,15 @@ public class ViewParkingInstance extends AppCompatActivity {
         // 5. intent.getStringExtra(String key)
         //intent.getParcelableExtra()
         ps = intent.getParcelableExtra("parkingInstance");
+        ownerID = ps.getOwnerID();
+
+
+        //---------------------------------
+
+        //Request owner info from data base
+        //ownerName_str =
+        Query userQuery = mDatabase.child("users").child(ownerID);
+        User owner = userQuery.
 
     }
 
@@ -102,6 +125,8 @@ public class ViewParkingInstance extends AppCompatActivity {
             cost.setText("" + ps.getCost());
             openTime.setText(ps.getOpentime());
             closeTime.setText(ps.getClosetime());
+
+            ownerName.setText(ownerName_str);
         }
 
 
