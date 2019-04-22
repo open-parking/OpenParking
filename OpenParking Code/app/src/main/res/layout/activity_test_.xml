@@ -66,6 +66,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Rating" />
+
+        <Button
+            android:id="@+id/btnParkingList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Parking List" />
     </LinearLayout>
 
     <android.support.design.widget.FloatingActionButton
