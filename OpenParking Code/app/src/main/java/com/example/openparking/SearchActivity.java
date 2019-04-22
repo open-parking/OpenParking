@@ -3,13 +3,20 @@ package com.example.openparking;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import java.util.ArrayList;
+import java.util.List;
 import android.location.Address;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import android.content.Intent;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 
 public class SearchActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
+    RecyclerView recyclerView;
+    ElementAdapter adapter;
+
+    List<Element> elementList;
     /*
         A list view of ParkingInstances
         Should display a scrolling view with up to 6 instancesvisible at a time.
@@ -63,12 +70,12 @@ public class SearchActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.TODO);
+        setContentView(R.layout.activity_parking_list2);
+        elementList = new ArrayList<>();
 
         //Use this template to get data from Firebase about classes we want to use
         firebaseAuth = FirebaseAuth.getInstance();
-        if(firebaseAuth.getCurrentUser() == null)
-        {
+        if (firebaseAuth.getCurrentUser() == null) {
             finish();
             startActivity(new Intent(this, LoginActivity.class));
         }
@@ -76,8 +83,51 @@ public class SearchActivity extends AppCompatActivity {
         final User user = new User();
         user.setId(fuser.getUid());
 
+        //more info should load ViewParkingInstanceActivity
+        //will getting new data from firebase conflict with our already sorted instances?
+
+
+        recyclerView = findViewById(R.id.recyclerView);
+        recyclerView.setHasFixedSize(true);
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        //adding some items to our list
+        elementList.add(
+                new Element(
+                        1,
+                        "1801 Tulane Ave\n" +
+                                "Long Beach, CA 90815",
+                        "2 parking spaces - Open Monday - Thursday, Pay Per Day",
+                        4.3,
+                        5,
+                        R.drawable.parkingspot1));
+
+        elementList.add(
+                new Element(
+                        1,
+                        "6005 E Atherton St\n" +
+                                "Long Beach, CA 90815",
+                        "2 parking spaces - Open Monday - Thursday, Pay Per Hour",
+                        5.0,
+                        0.50,
+                        R.drawable.parkingspot2));
+
+        elementList.add(
+                new Element(
+                        1,
+                        "1521 Hackett Ave\n" +
+                                "Long Beach, CA 90815",
+                        "1 parking spaces - Open Monday - Thursday, Pay Per Day",
+                        4.7,
+                        6,
+                        R.drawable.parkingspot3));
+
+        //creating recyclerview adapter
+        ElementAdapter adapter = new ElementAdapter(this, elementList);
+
+        //setting adapter to recyclerview
+        recyclerView.setAdapter(adapter);
     }
 
-    //more info should load ViewParkingInstanceActivity
-    //will getting new data from firebase conflict with our already sorted instances?
+
 }
