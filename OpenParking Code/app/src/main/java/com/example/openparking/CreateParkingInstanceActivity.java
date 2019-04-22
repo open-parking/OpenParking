@@ -24,6 +24,7 @@ public class CreateParkingInstanceActivity extends AppCompatActivity {
 
     private ParkingSpace parkingSpace;
     private ParkingInstance parkingInstance;
+    private User seller;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +36,7 @@ public class CreateParkingInstanceActivity extends AppCompatActivity {
         ref = mDatabase.getReference();
         testRef = ref.child("ZipCodes").child("90815").child("-Lb0SP_Qw2HzEbnDVCxm");
 
+        // READING from database and retrieving a parking space object
         testRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -48,16 +50,45 @@ public class CreateParkingInstanceActivity extends AppCompatActivity {
         });
 
 
+
         FirebaseUser mUser = firebaseAuth.getCurrentUser();
         parkingInstance = new ParkingInstance(mUser.getUid(), parkingSpace);
-        if(parkingInstance.getSellerID() == mUser.getUid())
-        {
-            Log.d("TAG", "Parking instance creation successful! " + parkingInstance.toString());
-        }
-        else
-        {
-            Log.d("TAG", "Parking instance creation failed. ");
-        }
+
+
+        // WRITING to database after creating a parking instance object
+        ref.child("parkingInstances").push().setValue(parkingInstance);
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Log.d("TAG", "Database write successful! " + parkingInstance.toString());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.d("TAG", "Database write failed");
+            }
+        });
+
+
+
+
+        //READING from firebase by using the sellerID from parkingInstance to retrieve a user
+        ref.child("users").child(parkingInstance.getSellerID());
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                seller = dataSnapshot.getValue(User.class);
+                Log.d("TAG", "The seller is " + seller.toString());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.d("TAG", "Reading seller from database FAILED...");
+            }
+        });
+
+
+
 
         //DISPLAY NEWLY CREATED PARKING INSTANCE IN THE UI
     }
