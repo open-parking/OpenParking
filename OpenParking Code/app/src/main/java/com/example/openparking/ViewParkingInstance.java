@@ -38,6 +38,7 @@ public class ViewParkingInstance extends AppCompatActivity {
     TextView cost;
     TextView openTime;
     TextView closeTime;
+    TextView ownerName;
 
 
 
@@ -62,6 +63,8 @@ public class ViewParkingInstance extends AppCompatActivity {
         cost = (TextView) findViewById(R.id.viewCost);
         openTime = (TextView) findViewById(R.id.viewOpenTime);
         closeTime = (TextView) findViewById(R.id.viewCloseTime);
+
+        ownerName = (TextView) findViewById(R.id.viewOwner);
 
         getParkingSpaceData();
         showParkingSpaceData();
