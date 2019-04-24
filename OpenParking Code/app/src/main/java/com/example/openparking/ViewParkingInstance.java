@@ -12,9 +12,12 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 public class ViewParkingInstance extends AppCompatActivity {
     /*
@@ -104,9 +107,34 @@ public class ViewParkingInstance extends AppCompatActivity {
 
         //Request owner info from data base
         //ownerName_str =
-        Query userQuery = mDatabase.child("users").child(ownerID);
-        User owner = userQuery.
+       // Query userQuery = mDatabase.child("users").child(ownerID).child("name");
+        ///User owner = userQuery.
 
+        getOwnerDataFromFireBase();
+
+    }
+
+    private void getOwnerDataFromFireBase()
+    {
+        mDatabase.child("users").child(ownerID).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // ...
+                Log.v(TAG, "onDataChange()");
+
+                User owner = dataSnapshot.getValue(User.class);
+                ownerName_str = owner.name;
+                ownerName.setText(ownerName_str);
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // ...
+                Log.v(TAG, "onCancelled()");
+                ownerName_str = "DataBase error";
+            }
+        });
     }
 
     private void showParkingSpaceData()
