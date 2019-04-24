@@ -99,4 +99,18 @@
         android:text="CloseTime"
 
         android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/viewOwner"
+        android:layout_width="371dp"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/avatar"
+        android:paddingLeft="120dp"
+        android:paddingRight="110dp"
+        android:paddingBottom="10dp"
+        android:paddingTop="210dp"
+
+        android:text="OwnerName"
+
+        android:textAlignment="center" />
 </android.support.constraint.ConstraintLayout>
