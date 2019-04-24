@@ -15,7 +15,7 @@ public class SearchActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     RecyclerView recyclerView;
     ElementAdapter adapter;
-    List<Element> elementList;
+    ArrayList<Element> elementList;
     int tilesToDisplay = 6; //6-8?
     int currentIndex = 1;
     /*
