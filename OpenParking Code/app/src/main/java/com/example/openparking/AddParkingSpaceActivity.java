@@ -8,6 +8,8 @@ package com.example.openparking;
 // USE THIS ACTIVITY TO TEST ADDING PARKING INSTANCES TO DATABASE
 
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -23,10 +25,13 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.List;
+
 public class AddParkingSpaceActivity extends AppCompatActivity {
     private static final String TAG = "AddParkingInstanceAct";
 
     Button btnSend;
+    Button btnCoordinate;
 
     private EditText editTextAddress;
     private EditText editTextZipCode;
@@ -92,26 +97,60 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Log.v(TAG, "Clicked Send Button");
 
-                //TODO Send New Version of ParkingSpace to firebase
+
                 //DONE: SEND DATA TO FIREBASE
 
-                final String address= editTextAddress.getText().toString().trim();
-                final String zipcode= editTextZipCode.getText().toString().trim();
-                final Double lat    = Double.parseDouble(editTextLatitude.getText().toString());
-                final Double lon    = Double.parseDouble(editTextLongitude.getText().toString());
-                final Double cost   = Double.parseDouble(editTextCost.getText().toString());
-                final String open   = editTextOpenTime.getText().toString().trim();
-                final String close  = editTextCloseTime.getText().toString().trim();
+                final String address = editTextAddress.getText().toString().trim();
+                final String zipcode = editTextZipCode.getText().toString().trim();
+                final Double lat = Double.parseDouble(editTextLatitude.getText().toString());
+                final Double lon = Double.parseDouble(editTextLongitude.getText().toString());
+                final Double cost = Double.parseDouble(editTextCost.getText().toString());
+                final String open = editTextOpenTime.getText().toString().trim();
+                final String close = editTextCloseTime.getText().toString().trim();
 
                 writeNewParkingSpace(userID, address, zipcode, lat, lon, cost, open, close);
+
+                //TODO Clear all edit text
+                editTextAddress.setText("Address");
+                editTextAddress.setText("Zipcode");
+                editTextLatitude.setText("Latitude");
+                editTextLongitude.setText("Longitude");
+                editTextCost.setText("Price per hour");
+                editTextOpenTime.setText("Open Time");
+                editTextCloseTime.setText("Close Time");
             }
 
+        });
+
+        btnCoordinate = findViewById(R.id.btnCoords);
+        btnCoordinate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                //TODO: Get Coordinates from maps api
+
+                Geocoder geocoder = new Geocoder(<your context>);
+                List<Address> addresses;
+                addresses = geocoder.getFromLocationName(editTextAddress.getText().toString().trim(), 1);
+
+
+                if(addresses.size() > 0) {
+                    double latitude= addresses.get(0).getLatitude();
+                    double longitude= addresses.get(0).getLongitude();
+                }
+                else{
+                    //Not a valid address
+
+                    //TODO: Set text: Invalid Address
+                }
+
+            }
         });
     }
 
     private void writeNewParkingSpace(String ownerID, String Address,String zipCode, Double latitude, Double longitude, Double cost, String openTime, String closeTime )
     {
-
         ParkingSpace ps = new ParkingSpace(ownerID, Address,zipCode, latitude, longitude, cost, openTime, closeTime);
         Log.v(TAG, "Sending to mDatabase");
         mDatabase.child("ZipCodes").child(zipCode).push().setValue(ps);
