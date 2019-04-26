@@ -1,116 +1,168 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_login">
 
 
     <TextView
         android:id="@+id/viewAddress"
-        android:layout_width="371dp"
-        android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/avatar"
-        android:paddingLeft="120dp"
-        android:paddingRight="110dp"
-        android:paddingBottom="10dp"
+        android:layout_width="370dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@drawable/et_bg"
+        android:gravity="center"
         android:text="Address"
-
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/viewZipCode"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.52"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewCloseTime" />
 
     <TextView
         android:id="@+id/viewZipCode"
-        android:layout_width="371dp"
-        android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/avatar"
-        android:paddingLeft="120dp"
-        android:paddingRight="110dp"
-        android:paddingBottom="10dp"
-        android:paddingTop="30dp"
-
+        android:layout_width="370dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:background="@drawable/et_bg"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:gravity="center"
         android:text="ZipCode"
-
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/viewLongitude"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewAddress" />
 
     <TextView
         android:id="@+id/viewLatitude"
-        android:layout_width="371dp"
-        android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/avatar"
-        android:paddingLeft="120dp"
-        android:paddingRight="110dp"
-        android:paddingBottom="10dp"
-        android:paddingTop="60dp"
-
+        android:layout_width="370dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="9dp"
+        android:background="@drawable/et_bg"
+        android:gravity="center"
         android:text="Latitude"
-
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewLongitude" />
 
     <TextView
         android:id="@+id/viewLongitude"
-        android:layout_width="371dp"
-        android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/avatar"
-        android:paddingLeft="120dp"
-        android:paddingRight="110dp"
-        android:paddingBottom="10dp"
-        android:paddingTop="90dp"
-
+        android:layout_width="370dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@drawable/et_bg"
+        android:gravity="center"
         android:text="Longitude"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/viewLatitude"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.52"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewZipCode" />
 
-        android:textAlignment="center" />
     <TextView
         android:id="@+id/viewCost"
-        android:layout_width="371dp"
-        android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/avatar"
-        android:paddingLeft="120dp"
-        android:paddingRight="110dp"
-        android:paddingBottom="10dp"
-        android:paddingTop="120dp"
-
+        android:layout_width="370dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/et_bg"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:gravity="center"
         android:text="Cost"
-
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/viewOpenTime"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewOwner" />
 
     <TextView
         android:id="@+id/viewOpenTime"
-        android:layout_width="371dp"
-        android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/avatar"
-        android:paddingLeft="120dp"
-        android:paddingRight="110dp"
-        android:paddingBottom="10dp"
-        android:paddingTop="150dp"
+        android:layout_width="370dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="8dp"
 
+        android:layout_marginLeft="8dp"
+        android:background="@drawable/et_bg"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:gravity="center"
         android:text="OpenTime"
-
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/viewCloseTime"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewCost" />
 
     <TextView
         android:id="@+id/viewCloseTime"
-        android:layout_width="371dp"
-        android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/avatar"
-        android:paddingLeft="120dp"
-        android:paddingRight="110dp"
-        android:paddingBottom="10dp"
-        android:paddingTop="180dp"
-
+        android:layout_width="370dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:background="@drawable/et_bg"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:gravity="center"
         android:text="CloseTime"
-
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/viewAddress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewOpenTime" />
 
     <TextView
         android:id="@+id/viewOwner"
-        android:layout_width="371dp"
-        android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/avatar"
-        android:paddingLeft="120dp"
-        android:paddingRight="110dp"
-        android:paddingBottom="10dp"
-        android:paddingTop="210dp"
-
+        android:layout_width="370dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@drawable/et_bg"
+        android:gravity="center"
         android:text="OwnerName"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/viewCost"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        android:textAlignment="center" />
+    <Button
+        android:id="@+id/btn_book"
+        android:layout_width="287dp"
+        android:layout_height="68dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="32dp"
+        android:text="Book"
+        android:background="@drawable/rounded_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewLatitude" />
 </android.support.constraint.ConstraintLayout>
