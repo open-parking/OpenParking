@@ -159,7 +159,9 @@ public class MapsActivity extends FragmentActivity implements
 
         // [END initialize_database_ref]
 
-        loadParkingSpacesFromDataBase("90815");
+        //loadParkingSpacesFromDataBase("90815");
+        //loadParkingSpacesFromDataBase("90802");
+
     }
 
     /**
@@ -186,7 +188,7 @@ public class MapsActivity extends FragmentActivity implements
     */
 
 
-    /** Adds map markers on the map at random coordinates withing Long Beach.
+    /** Adds map markers on the map at random coordinates within Long Beach.
     *   This function is no longer used. It was replaced by:
     *      addRandomMarkersToParkingInstanceList() and
     *      displayMarkersOnList().
@@ -224,12 +226,9 @@ public class MapsActivity extends FragmentActivity implements
     }
      **/
 
-    /** Work in Progress
-     * TODO: TEST ZIPCODE 90815
-     *
+    /**
      * @param zipCode the zipcode area that we want to load from the database
      */
-
     private void loadParkingSpacesFromDataBase(String zipCode)
     {
 
@@ -254,7 +253,7 @@ public class MapsActivity extends FragmentActivity implements
                             String hours = "Hours: " + ps.getOpentime() + " to " + ps.getClosetime();
 
                             MarkerOptions mo = new MarkerOptions();
-                            mo.position(ps.getLatlng());
+                            mo.position(new LatLng(ps.getLatitude(), ps.getLongitude() ) );
                             mo.title(address);
                             mo.snippet(hours);
                             mo.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
@@ -574,6 +573,7 @@ public class MapsActivity extends FragmentActivity implements
         String location = addressSearchText.getText().toString();
         List<Address> addressList = null;
 
+        //Move Camera to search result and load parking spaces from zipcode
         if (location != null || !location.equals("")) {
             Geocoder geocoder = new Geocoder(this);
             try {
@@ -588,15 +588,19 @@ public class MapsActivity extends FragmentActivity implements
                 LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
 
                 //Marker Options
-                MarkerOptions markerOptions = new MarkerOptions();
-                markerOptions.position(latLng);
-                markerOptions.title("Search Result");
-                markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
+                //MarkerOptions markerOptions = new MarkerOptions();
+                //markerOptions.position(latLng);
+                //markerOptions.title("Search Result");
+                //markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
 
-                mMap.addMarker(markerOptions);
+                //Search Result Marker
+                //mMap.addMarker(markerOptions);
 
-                //mMap.addMarker(new MarkerOptions().position(latLng).title("Search Result"));
+                //Move Camera
                 mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
+
+                //Load Parking Spaces
+                loadParkingSpacesFromDataBase(address.getPostalCode());
             }else
             {
                 Log.v(TAG, "onMapSearch: addressList isEmpty()");
