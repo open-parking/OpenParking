@@ -32,7 +32,7 @@ public class ParkingSpace implements Parcelable{
         this.zipcode = zipcode;
         this.latitude = latitude;
         this.longitude = longitude;
-        //this.latlng = new LatLng(latitude, longitude); //Not necessary due to firebase, its easier to just use doubles
+        //this.latlng = new LatLng(latitude, longitude); //LatLng not compatible with firebase
         this.cost = cost;
         this.openTime = openTime;
         this.closeTime = closeTime;
@@ -80,19 +80,27 @@ public class ParkingSpace implements Parcelable{
         this.longitude = longitude;
     }
 
-    public LatLng getLatlng()
-    {
-        return new LatLng(latitude, longitude);
+    //LatLng not Compatible with firebase
+    //public LatLng getLatlng()
+    //{
+        //return new LatLng(latitude, longitude);
         //return latlng;
         // using google's LatLng class gives problems when using firebase
         // due to no public constructor with no arguments.
-    }
+    //}
 
-    public void setLatlng(LatLng latlng)
-    {
+    //LatLng not Compatible with firebase
+    //public void setLatlng(LatLng latlng)
+    //{
         //this.latlng = latlng;
-        this.latitude = latlng.latitude;
-        this.longitude = latlng.longitude;
+        //this.latitude = latlng.latitude;
+        //this.longitude = latlng.longitude;
+   // }
+
+    public void setLatlng(Double latitude, Double longitude)
+    {
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
     public Double getCost() {

@@ -55,25 +55,41 @@
         android:inputType="textPostalAddress"
         android:paddingLeft="15dp" />
 
-    <EditText
-        android:id="@+id/editTextZipCode"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_margin="15dp"
-        android:autofillHints=""
-        android:background="@drawable/et_bg"
-        android:hint="Enter the ZipCode"
-        android:inputType="number"
-        android:paddingLeft="15dp" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="50dp">
+        <EditText
+            android:id="@+id/editTextZipCode"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_margin="15dp"
+            android:autofillHints=""
+            android:background="@drawable/et_bg"
+            android:hint="Enter the ZipCode"
+            android:inputType="number"
+            android:paddingLeft="15dp" />
 
-    <EditText
+
+
+        <Button
+            android:id="@+id/btnCoords"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_margin="15dp"
+            android:text="GetCoordinates" />
+
+    </LinearLayout>
+
+
+        <EditText
         android:id="@+id/editTextLatitude"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_margin="15dp"
         android:autofillHints=""
-        android:hint="Enter the Latitude"
+        android:hint="Latitude"
         android:inputType="text"
+        android:focusable="false"
         android:paddingLeft="16dp"
         android:paddingRight="16dp" />
 
@@ -83,8 +99,9 @@
         android:layout_height="50dp"
         android:layout_margin="15dp"
         android:autofillHints=""
-        android:hint="Enter the Longitude"
+        android:hint="Longitude"
         android:inputType="text"
+        android:focusable="false"
         android:paddingLeft="16dp"
         android:paddingRight="16dp" />
 
