@@ -10,10 +10,7 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1e0d2453-6f86-44c0-b937-61f344f54860" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/openparking/AddParkingSpaceActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/openparking/AddParkingSpaceActivity.java" afterDir="false" />
-    </list>
+    <list default="true" id="1e0d2453-6f86-44c0-b937-61f344f54860" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,7 +68,7 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/openparking/MapsActivity.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="306">
-              <caret line="165" lean-forward="true" selection-start-line="165" selection-end-line="165" />
+              <caret line="165" selection-start-line="165" selection-end-line="165" />
             </state>
           </provider>
         </entry>
@@ -745,7 +742,7 @@
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/openparking/MapsActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
-          <caret line="165" lean-forward="true" selection-start-line="165" selection-end-line="165" />
+          <caret line="165" selection-start-line="165" selection-end-line="165" />
         </state>
       </provider>
     </entry>
