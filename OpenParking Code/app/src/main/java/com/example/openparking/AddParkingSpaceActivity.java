@@ -55,14 +55,14 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        //FloatingActionButton fab = findViewById(R.id.fab);
+        //fab.setOnClickListener(new View.OnClickListener() {
+         //   @Override
+        //    public void onClick(View view) {
+        //        Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+         //               .setAction("Action", null).show();
+         //   }
+        //});
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         editTextAddress     = findViewById(R.id.editTextAddress);
@@ -72,6 +72,9 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
         editTextCost        = findViewById(R.id.editTextCost);
         editTextOpenTime    = findViewById(R.id.editTextOpenTime);
         editTextCloseTime   = findViewById(R.id.editTextCloseTime);
+
+        btnSend = findViewById(R.id.btnSend);
+        btnCoordinate = findViewById(R.id.btnCoords);
 
         // Get userID
         firebaseAuth = FirebaseAuth.getInstance();
@@ -91,7 +94,7 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
         /* Test Buttons */
 
         // Map Button
-        btnSend = findViewById(R.id.btnSend);
+        //btnSend = findViewById(R.id.btnSend);
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -122,7 +125,7 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
 
         });
 
-        btnCoordinate = findViewById(R.id.btnCoords);
+        //btnCoordinate = findViewById(R.id.btnCoords);
         btnCoordinate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -130,20 +133,28 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
 
                 //TODO: Get Coordinates from maps api
 
-                Geocoder geocoder = new Geocoder(<your context>);
+                Geocoder geocoder = new Geocoder(v.getContext());
                 List<Address> addresses;
-                addresses = geocoder.getFromLocationName(editTextAddress.getText().toString().trim(), 1);
+                try{
+                    addresses = geocoder.getFromLocationName(editTextAddress.getText().toString().trim(), 1);
 
-
-                if(addresses.size() > 0) {
-                    double latitude= addresses.get(0).getLatitude();
-                    double longitude= addresses.get(0).getLongitude();
+                    if(addresses.size() > 0) {
+                        double latitude= addresses.get(0).getLatitude();
+                        double longitude= addresses.get(0).getLongitude();
+                        editTextLatitude.setText(Double.toString(latitude));
+                        editTextLongitude.setText(Double.toString(longitude));
+                    }
+                    else{
+                        //Not a valid address
+                        editTextAddress.setText("Not Valid Address");
+                    }
+                }catch(Exception e)
+                {
+                    Log.v(TAG, ":error getting coordinates");
                 }
-                else{
-                    //Not a valid address
 
-                    //TODO: Set text: Invalid Address
-                }
+
+
 
             }
         });
