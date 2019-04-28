@@ -159,8 +159,11 @@ public class MapsActivity extends FragmentActivity implements
 
         // [END initialize_database_ref]
 
+        //Parking Spaces are now loaded when user clicks the search button
         //loadParkingSpacesFromDataBase("90815");
         //loadParkingSpacesFromDataBase("90802");
+
+        //TODO: Get users location, get zipcode and load parking spaces
 
     }
 
