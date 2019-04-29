@@ -20,7 +20,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ParkingList"></activity>
         <activity
             android:name=".AddParkingSpaceActivity"
             android:label="@string/title_activity_add_parking_instance"
@@ -30,6 +29,7 @@
         <activity android:name=".PaymentDetails" />
         <activity android:name=".PayPalActivity" />
         <activity android:name=".RatingActivity" />
+        <activity android:name=".ParkingListActivity" />
         <activity
             android:name=".Test_Activity"
             android:label="@string/title_activity_test_"
