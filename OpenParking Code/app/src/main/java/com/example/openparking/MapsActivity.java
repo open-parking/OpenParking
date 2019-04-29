@@ -156,7 +156,6 @@ public class MapsActivity extends FragmentActivity implements
 
         // [START initialize_database_ref]
         mDatabase = FirebaseDatabase.getInstance().getReference();
-
         // [END initialize_database_ref]
 
         //Parking Spaces are now loaded when user clicks the search button
@@ -565,8 +564,6 @@ public class MapsActivity extends FragmentActivity implements
         {
             Toast.makeText(this, "Not a parking space marker!", Toast.LENGTH_SHORT).show();
         }
-
-
 
     }
 
