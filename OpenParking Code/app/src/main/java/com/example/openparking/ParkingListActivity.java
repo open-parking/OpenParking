@@ -14,7 +14,7 @@ public class ParkingListActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_parking_list);
         Log.d(TAG, "onCreate: started.");
 
         initImageBitmaps();
@@ -23,24 +23,24 @@ public class ParkingListActivity extends AppCompatActivity{
         Log.d(TAG, "initImageBitmaps: preparing bitmaps.");
 
         mImageUrls.add("https://c1.staticflickr.com/5/4636/25316407448_de5fbf183d_o.jpg");
-        mNames.add("Havasu Falls");
-        mImagePrice.add("5 Dollars");
+        mNames.add("132 Fake St.");
+
 
         mImageUrls.add("https://i.redd.it/tpsnoz5bzo501.jpg");
-        mNames.add("Trondheim");
-        mImagePrice.add("5 Dollars");
+        mNames.add("1530 Hackett Ave");
+
 
         mImageUrls.add("https://i.redd.it/qn7f9oqu7o501.jpg");
-        mNames.add("Portugal");
-        mImagePrice.add("5 Dollars");
+        mNames.add("1541 Hackett Ave");
+
 
         mImageUrls.add("https://i.redd.it/j6myfqglup501.jpg");
-        mNames.add("Rocky Mountain National Park");
+        mNames.add("Rocky Mountain");
         mImagePrice.add("5 Dollars");
 
         mImageUrls.add("https://i.redd.it/0h2gm1ix6p501.jpg");
         mNames.add("Mahahual");
-        mImagePrice.add("5 Dollars");
+
 
         mImageUrls.add("https://i.redd.it/k98uzl68eh501.jpg");
         mNames.add("Frozen Lake");
@@ -52,17 +52,17 @@ public class ParkingListActivity extends AppCompatActivity{
 
         mImageUrls.add("https://i.redd.it/obx4zydshg601.jpg");
         mNames.add("Austrailia");
-        mImagePrice.add("5 Dollars");
+
 
         mImageUrls.add("https://i.imgur.com/ZcLLrkY.jpg");
         mNames.add("Washington");
-        mImagePrice.add("5 Dollars");
+
 
         initRecyclerView();
     }
     private void initRecyclerView(){
         Log.d(TAG, "initRecyclerView: init recyclerview.");
-        RecyclerView recyclerView = findViewById(R.id.);
+        RecyclerView recyclerView = findViewById(R.id.recyclerv_view);
         RecyclerViewAdapter adapter = new RecyclerViewAdapter(this, mNames, mImageUrls);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
