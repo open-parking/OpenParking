@@ -9,12 +9,21 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import android.content.Intent;
 
 public class RatingActivity extends AppCompatActivity {
 
     private FirebaseAuth firebaseAuth;
     double userRatingTotal;
+    private FirebaseDatabase mDatabase;
+    private DatabaseReference usersRef;
+
+    public RatingActivity(FirebaseDatabase mDatabase) {
+        this.mDatabase = mDatabase;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +57,11 @@ public class RatingActivity extends AppCompatActivity {
                 user.setTimesUserRated(user.getTimesUserRated() + 1);
                 user.setUserRating(userRatingTotal / user.getTimesUserRated());
                 ratingDisplayTextView.setText("Your average rating is: " + user.getUserRating());
+
+                User mUser = new User();
+                mUser.setUserRating(userRatingTotal);
+                String uID = user.getId();
+                mUser.setId(uID);
             }
         });
 
