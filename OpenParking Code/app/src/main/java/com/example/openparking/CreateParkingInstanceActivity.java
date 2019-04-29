@@ -25,6 +25,7 @@ public class CreateParkingInstanceActivity extends AppCompatActivity {
     private ParkingSpace parkingSpace;
     private ParkingInstance parkingInstance;
     private User seller;
+    private String address;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,15 +33,20 @@ public class CreateParkingInstanceActivity extends AppCompatActivity {
         setContentView(R.layout.activity_create_parking_instance);
 
         firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser mUser = firebaseAuth.getCurrentUser();
         mDatabase = FirebaseDatabase.getInstance();
         ref = mDatabase.getReference();
         testRef = ref.child("ZipCodes").child("90815").child("-Lb0SP_Qw2HzEbnDVCxm");
 
+        parkingSpace = new ParkingSpace();
+
+        //parkingSpace = new ParkingSpace();
         // READING from database and retrieving a parking space object
         testRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                parkingSpace = dataSnapshot.getValue(ParkingSpace.class);
+                ParkingSpace temp = dataSnapshot.getValue(ParkingSpace.class);
+                parkingSpace.setAddress(temp.getAddress());
                 Log.d("TAG", "Database read successful! " + parkingSpace.toString());
             }
             @Override
@@ -49,10 +55,11 @@ public class CreateParkingInstanceActivity extends AppCompatActivity {
             }
         });
 
-
-
-        FirebaseUser mUser = firebaseAuth.getCurrentUser();
         parkingInstance = new ParkingInstance(mUser.getUid(), parkingSpace);
+
+
+
+
 
 
         // WRITING to database after creating a parking instance object
@@ -60,7 +67,7 @@ public class CreateParkingInstanceActivity extends AppCompatActivity {
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Log.d("TAG", "Database write successful! " + parkingInstance.toString());
+                Log.d("TAG", "Database write successful! Address = " + parkingSpace.getAddress() + ", instance: " + parkingInstance.toString());
             }
 
             @Override
@@ -70,7 +77,7 @@ public class CreateParkingInstanceActivity extends AppCompatActivity {
         });
 
 
-
+        parkingInstance = new ParkingInstance(mUser.getUid(), parkingSpace);
 
         //READING from firebase by using the sellerID from parkingInstance to retrieve a user
         ref.child("users").child(parkingInstance.getSellerID());

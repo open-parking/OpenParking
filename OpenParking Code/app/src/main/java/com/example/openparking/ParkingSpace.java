@@ -19,6 +19,7 @@ public class ParkingSpace {
     public ParkingSpace( )
     {
         //Used by FireBase
+        this.address = "Shit's fucked...";
     }
 
     public ParkingSpace( String address, String zipcode, Double latitude, Double longitude, Double cost, String openTime, String closeTime)
@@ -30,6 +31,17 @@ public class ParkingSpace {
         this.cost = cost;
         this.openTime = openTime;
         this.closeTime = closeTime;
+    }
+
+    public ParkingSpace(ParkingSpace parkingSpace)
+    {
+        this.address = parkingSpace.getAddress();
+        this.zipcode = parkingSpace.getZipcode();
+        this.latitude = parkingSpace.getLatitude();
+        this.longitude = parkingSpace.getLongitude();
+        this.cost = parkingSpace.getCost();
+        this.openTime = parkingSpace.getOpenTime();
+        this.closeTime = parkingSpace.getCloseTime();
     }
 
     public String getAddress() {

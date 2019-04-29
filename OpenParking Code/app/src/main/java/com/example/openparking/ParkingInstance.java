@@ -18,6 +18,15 @@ public class ParkingInstance {
     private Date endTime;   //Time when vehicle left the parking spot.
 
 
+    public ParkingInstance()
+    {
+        sellerID = "defaultSeller";
+        buyerID = "defaultBuyer";
+        parkingSpace = new ParkingSpace();
+        startTime = new Date();
+        endTime = new Date();
+    }
+
     public ParkingInstance(String sellerID, ParkingSpace parkingSpace)
     {
         this.sellerID = sellerID;

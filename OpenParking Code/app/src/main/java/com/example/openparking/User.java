@@ -23,6 +23,17 @@ public class User {
         this.timesContributorRated = 0;
     }
 
+    public User(String name, String email, double userRating, int timesUserRated, String id, String acceptedPayment, double contributorRating, int timesContributorRated) {
+        this.name = name;
+        this.email = email;
+        this.userRating = userRating;
+        this.timesUserRated = timesUserRated;
+        this.id = id;
+        this.acceptedPayment = acceptedPayment;
+        this.contributorRating = contributorRating;
+        this.timesContributorRated = timesContributorRated;
+    }
+
     @java.lang.Override
     public java.lang.String toString() {
         return "User{" +
