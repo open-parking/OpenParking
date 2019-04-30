@@ -1,23 +1,37 @@
 package com.example.openparking;
 
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.openparking.Config.Config;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.paypal.android.sdk.payments.PayPalConfiguration;
+import com.paypal.android.sdk.payments.PayPalPayment;
+import com.paypal.android.sdk.payments.PayPalService;
+import com.paypal.android.sdk.payments.PaymentActivity;
+import com.paypal.android.sdk.payments.PaymentConfirmation;
+
+import org.json.JSONException;
+
+import java.math.BigDecimal;
 
 public class ViewParkingInstance extends AppCompatActivity {
     /*
@@ -37,6 +51,11 @@ public class ViewParkingInstance extends AppCompatActivity {
             11. Back arrow on upper left corner which takes them back to whatever they were doing before
      */
     private static final String TAG = "ViewParkingInstance";
+    public static final int PAYPAL_REQUEST_CODE = 7171;
+    private static PayPalConfiguration config = new PayPalConfiguration()
+            .environment(PayPalConfiguration.ENVIRONMENT_SANDBOX)
+            .clientId(Config.PAYPAL_CLIENT_ID);
+
 
     private DatabaseReference mDatabase;
 
@@ -50,23 +69,18 @@ public class ViewParkingInstance extends AppCompatActivity {
     TextView closeTime;
     TextView ownerName;
 
-
     String ownerID;
     String ownerName_str;
 
+    Button btnBook;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-        //Toast.makeText(this, "View Started", Toast.LENGTH_SHORT).show();
-
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_viewparkinginstance);
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
-
-
 
         ps = new ParkingSpace();
 
@@ -86,6 +100,26 @@ public class ViewParkingInstance extends AppCompatActivity {
         getParkingSpaceData();
         showParkingSpaceData();
 
+        //Start PayPal Service
+        Intent intent = new Intent(this,PayPalService.class);
+        intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION,config);
+        startService(intent);
+
+        btnBook = (Button)findViewById(R.id.btn_book);
+
+        btnBook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                processPayment();
+            }
+        });
+    }
+
+    @Override
+    protected void onDestroy()
+    {
+        stopService(new Intent(this,PayPalService.class));
+        super.onDestroy();
     }
 
     private void getParkingSpaceData()
@@ -102,16 +136,14 @@ public class ViewParkingInstance extends AppCompatActivity {
         ps = intent.getParcelableExtra("parkingInstance");
         ownerID = ps.getOwnerID();
 
-
         //---------------------------------
 
         //Request owner info from data base
         //ownerName_str =
-       // Query userQuery = mDatabase.child("users").child(ownerID).child("name");
+        // Query userQuery = mDatabase.child("users").child(ownerID).child("name");
         ///User owner = userQuery.
 
         getOwnerDataFromFireBase();
-
     }
 
     private void getOwnerDataFromFireBase()
@@ -125,7 +157,6 @@ public class ViewParkingInstance extends AppCompatActivity {
                 User owner = dataSnapshot.getValue(User.class);
                 ownerName_str = owner.name;
                 ownerName.setText(ownerName_str);
-
             }
 
             @Override
@@ -156,9 +187,40 @@ public class ViewParkingInstance extends AppCompatActivity {
 
             ownerName.setText(ownerName_str);
         }
-
-
     }
 
+    private void processPayment()
+    {
+        PayPalPayment payPalPayment = new PayPalPayment(new BigDecimal(ps.getCost()),"USD",
+                "Pay For Parking", PayPalPayment.PAYMENT_INTENT_SALE);
+        Intent intent = new Intent(this, PaymentActivity.class);
+        intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION,config);
+        intent.putExtra(PaymentActivity.EXTRA_PAYMENT,payPalPayment);
+        startActivityForResult(intent, PAYPAL_REQUEST_CODE);
+    }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data)
+    {
+        if (requestCode == PAYPAL_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                PaymentConfirmation confirmation = data.getParcelableExtra(PaymentActivity.EXTRA_RESULT_CONFIRMATION);
+                if (confirmation != null) {
+                    try {
+                        String paymentDetails = confirmation.toJSONObject().toString(4);
+
+                        startActivity(new Intent(this, PaymentDetails.class)
+                                .putExtra("PaymentDetails", paymentDetails)
+                                .putExtra("PaymentAmount", ps.getCost()));
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            } else if (resultCode == Activity.RESULT_CANCELED)
+                Toast.makeText(this, "Cancel", Toast.LENGTH_SHORT).show();
+        } else if (resultCode == PaymentActivity.RESULT_EXTRAS_INVALID)
+            Toast.makeText(this, "Invalid", Toast.LENGTH_SHORT).show();
+    }
 }
