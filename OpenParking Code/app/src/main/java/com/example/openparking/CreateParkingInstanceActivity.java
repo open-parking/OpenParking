@@ -39,10 +39,11 @@ public class CreateParkingInstanceActivity extends AppCompatActivity {
         mUser = firebaseAuth.getCurrentUser();
         mDatabase = FirebaseDatabase.getInstance();
         ref = mDatabase.getReference();
-        testRef = ref.child("ZipCodes").child("90815").child("-Lb0SP_Qw2HzEbnDVCxm");
+
 
         parkingSpace = new ParkingSpace();
         parkingInstance = new ParkingInstance();
+        parkingInstance.setSellerID(mUser.getUid());
 
         /*
         // READING from database and retrieving a parking space object
@@ -60,13 +61,14 @@ public class CreateParkingInstanceActivity extends AppCompatActivity {
         });
         */
 
-
+        testRef = ref.child("ParkingSpaces").child("90815").child("-Lb0SP_Qw2HzEbnDVCxm");
+        String temp = testRef.getKey();
         readData(testRef, new OnGetDataListener() {
             @Override
             public void onSuccess(DataSnapshot dataSnapshot) {
-                parkingSpace = dataSnapshot.getValue(String.class);
-                Log.d("TAG", "Database read successful! " + parkingSpace.toString());
-                parkingInstance = new ParkingInstance(mUser.getUid(), parkingSpace);
+                parkingInstance.setParkingSpaceID(dataSnapshot.getKey());
+                Log.d("TAG", "Database read successful! " + parkingInstance.getParkingSpaceID());
+                //parkingInstance = new ParkingInstance(mUser.getUid(), parkingSpace);
 
                 writeData();
                 readUser();
@@ -113,12 +115,12 @@ public class CreateParkingInstanceActivity extends AppCompatActivity {
     public void writeData()
     {
         // WRITING to database after creating a parking instance object
-        testRef = ref.child("parkingInstances");
-        testRef.child(parkingInstance.getParkingSpace().getAddress()).setValue(parkingInstance);
+        testRef = ref.child("ParkingInstances").child(parkingInstance.getParkingSpaceID());
+        testRef.setValue(parkingInstance);
         testRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Log.d("TAG", "Database write successful! Address = " + parkingSpace.getAddress() + ", instance: " + parkingInstance.toString());
+                Log.d("TAG", "Database write successful! Instance: " + parkingInstance.toString());
             }
 
             @Override

@@ -85,11 +85,11 @@ public class ParkingInstance {
     }
 
 
-    public String getParkingSpace()
+    public String getParkingSpaceID()
     {
         return parkingSpaceID;
     }
-    public void setParkingSpace(String parkingSpace)
+    public void setParkingSpaceID(String parkingSpaceID)
     {
         this.parkingSpaceID = parkingSpaceID;
     }
@@ -123,4 +123,13 @@ public class ParkingInstance {
     {
         this.endTime = endTime;
     }
+
+
+    public  String toString()
+    {
+        return "Seller ID: " + sellerID +
+                ",    ParkingSpace ID: " + parkingSpaceID +
+                ",    Buyer ID: " + buyerID;
+    }
+
 }
