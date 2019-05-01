@@ -1,83 +1,152 @@
 package com.example.openparking;
 
+import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.location.Address;
+import android.util.Log;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import android.content.Intent;
-import android.location.Location;
-import com.google.android.gms.maps.model.LatLng;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
-import java.io.IOException;
-import java.util.List;
-import java.util.Locale;
-
-import android.location.Geocoder;
+import com.example.openparking.OnGetDataListener;
 
 public class CreateParkingInstanceActivity extends AppCompatActivity {
-    Address address;
-    User user;
+
+
     private FirebaseAuth firebaseAuth;
+    private FirebaseUser mUser;
+
+    private FirebaseDatabase mDatabase;
+    private DatabaseReference ref;
+    private DatabaseReference testRef;
+
+    private ParkingSpace parkingSpace;
+    private ParkingInstance parkingInstance;
+    private User seller;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.TODO);
+        setContentView(R.layout.activity_create_parking_instance);
 
-        //Use this template to get data from Firebase about classes we want to use
         firebaseAuth = FirebaseAuth.getInstance();
-        if(firebaseAuth.getCurrentUser() == null)
-        {
-            finish();
-            startActivity(new Intent(this, LoginActivity.class));
-        }
-        FirebaseUser fuser = firebaseAuth.getCurrentUser();
-        final User user = new User();
-        user.setId(fuser.getUid());
-
-        // asking them for info
-        //ok great, what's your address?
-        Geocoder geocoder;
-        List<Address> addresses;
-        geocoder = new Geocoder(this, Locale.getDefault());
-
-        double latitude = 1.531;
-        double longitude = 1.5234;
-
-        //later on do some fancy stuff to get latlong for here, for now this is a dummy variable(s)
-        try{
-            addresses = geocoder.getFromLocation(latitude, longitude, 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
-            String address = addresses.get(0).getAddressLine(0); // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
-            String city = addresses.get(0).getLocality();
-            String state = addresses.get(0).getAdminArea();
-            String country = addresses.get(0).getCountryName();
-            String postalCode = addresses.get(0).getPostalCode();
-            String knownName = addresses.get(0).getFeatureName(); // Only if available else return NULL
-        }
-        catch(IOException e){
-
-        }
+        mUser = firebaseAuth.getCurrentUser();
+        mDatabase = FirebaseDatabase.getInstance();
+        ref = mDatabase.getReference();
 
 
-        //lets save the address and the lat long of it
+        parkingSpace = new ParkingSpace();
+        parkingInstance = new ParkingInstance();
+        parkingInstance.setSellerID(mUser.getUid());
 
-        //upload a picture?
+        /*
+        // READING from database and retrieving a parking space object
+        testRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                parkingSpace = dataSnapshot.getValue(ParkingSpace.class);
 
-        //availablity dates?
+                Log.d("TAG", "Database read successful! " + parkingSpace.toString());
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.d("TAG", "Database read failed");
+            }
+        });
+        */
 
-        //description?
+        testRef = ref.child("ParkingSpaces").child("90815").child("-Lb0SP_Qw2HzEbnDVCxm");
+        String temp = testRef.getKey();
+        readData(testRef, new OnGetDataListener() {
+            @Override
+            public void onSuccess(DataSnapshot dataSnapshot) {
+                parkingInstance.setParkingSpaceID(dataSnapshot.getKey());
+                Log.d("TAG", "Database read successful! " + parkingInstance.getParkingSpaceID());
+                //parkingInstance = new ParkingInstance(mUser.getUid(), parkingSpace);
 
-        //preferred payment, have one? if not, set one?
+                writeData();
+                readUser();
+            }
 
-        //price?
+            @Override
+            public void onStart() {
+                Log.d("ONSTART", "Started");
+            }
 
-        //confirm?
+            @Override
+            public void onFailure(DatabaseError databaseError) {
+                Log.d("ONFAILURE", "Failed");
+            }
+        });
 
-        //upload to firebase and show them how an expanded view would look like
 
 
+
+
+
+
+        //DISPLAY NEWLY CREATED PARKING INSTANCE IN THE UI
     }
 
+
+
+    public void readData(DatabaseReference ref, final OnGetDataListener listener){
+        System.out.println("Reached READDATA function");
+        listener.onStart();
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                listener.onSuccess(dataSnapshot);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                listener.onFailure(databaseError);
+            }
+        });
+    }
+
+    public void writeData()
+    {
+        // WRITING to database after creating a parking instance object
+        testRef = ref.child("ParkingInstances").child(parkingInstance.getParkingSpaceID());
+        testRef.setValue(parkingInstance);
+        testRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Log.d("TAG", "Database write successful! Instance: " + parkingInstance.toString());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.d("TAG", "Database write failed");
+            }
+        });
+    }
+
+    public void readUser()
+    {
+        //READING from firebase by using the sellerID from parkingInstance to retrieve a user
+        ref.child("users").child(parkingInstance.getSellerID());
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                seller = dataSnapshot.getValue(User.class);
+                Log.d("TAG", "Read Successful! The seller is " + seller.toString());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.d("TAG", "Read Failed, seller unknown...");
+            }
+        });
+
+    }
 
 }
