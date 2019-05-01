@@ -11,7 +11,7 @@ public class ParkingInstance {
 
     private Vehicle vehicle;
 
-    private ParkingSpace parkingSpace;
+    private String parkingSpaceID;
 
     //private String desc;
 
@@ -20,23 +20,35 @@ public class ParkingInstance {
     private Date startTime; //Time when vehicle parked at the address;
     private Date endTime;   //Time when vehicle left the parking spot.
 
-
-    public ParkingInstance(String sellerID, ParkingSpace parkingSpace)
+    public ParkingInstance()
     {
-        this.sellerID = sellerID;
-        this.parkingSpace = parkingSpace;
+        sellerID = "No Seller";
+        buyerID = "No Buyer";
+        vehicle = new Vehicle();
+        parkingSpaceID = "No Parking Space";
+        preferredPaymentMethod = "No preferred payment method";
+        startTime = new Date();
+        endTime = new Date();
     }
 
-    public ParkingInstance(String sellerID, ParkingSpace parkingSpace, String preferredPaymentMethod)
+
+
+    public ParkingInstance(String sellerID, String parkingSpaceID)
     {
         this.sellerID = sellerID;
-        this.parkingSpace = parkingSpace;
+        this.parkingSpaceID = parkingSpaceID;
+    }
+
+    public ParkingInstance(String sellerID, String parkingSpaceID, String preferredPaymentMethod)
+    {
+        this.sellerID = sellerID;
+        this.parkingSpaceID = parkingSpaceID;
         this.preferredPaymentMethod = preferredPaymentMethod;
     }
 
-    public ParkingInstance(String sellerID, ParkingSpace parkingSpace, String preferredPaymentMethod, Date startTime, Date endTime) {
+    public ParkingInstance(String sellerID, String parkingSpaceID, String preferredPaymentMethod, Date startTime, Date endTime) {
         this.sellerID = sellerID;
-        this.parkingSpace = parkingSpace;
+        this.parkingSpaceID = parkingSpaceID;
         this.preferredPaymentMethod = preferredPaymentMethod;
         this.startTime = startTime;
         this.endTime = endTime;
@@ -73,13 +85,13 @@ public class ParkingInstance {
     }
 
 
-    public ParkingSpace getParkingSpace()
+    public String getParkingSpace()
     {
-        return parkingSpace;
+        return parkingSpaceID;
     }
-    public void setParkingSpace(ParkingSpace parkingSpace)
+    public void setParkingSpace(String parkingSpace)
     {
-        this.parkingSpace = parkingSpace;
+        this.parkingSpaceID = parkingSpaceID;
     }
 
 
