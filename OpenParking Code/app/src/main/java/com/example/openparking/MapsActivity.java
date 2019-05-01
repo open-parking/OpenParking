@@ -242,7 +242,6 @@ public class MapsActivity extends FragmentActivity implements
 
                             //Add marker to map
                             mMap.addMarker(new MarkerOptions()
-                                    .position(ps.getLatLng())
                                     .title(address)
                                     .snippet(hours)
                                     //.icon(BitmapDescriptorFactory.fromResource(R.drawable.openparkinglogo_small))
