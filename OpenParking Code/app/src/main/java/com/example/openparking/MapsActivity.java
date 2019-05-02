@@ -234,7 +234,7 @@ public class MapsActivity extends FragmentActivity implements
     private void loadParkingSpacesFromDataBase(String zipCode)
     {
 
-        mDatabase.child("ZipCodes").child(zipCode).addChildEventListener(
+        mDatabase.child("ParkingSpaces").child(zipCode).addChildEventListener( //OLD TABLE NAME WAS "ZipCodes"
                 new ChildEventListener() {
 
                     @Override
