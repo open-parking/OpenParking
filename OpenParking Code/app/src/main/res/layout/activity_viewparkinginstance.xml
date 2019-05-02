@@ -19,6 +19,7 @@
         android:background="@drawable/et_bg"
         android:gravity="center"
         android:text="Address"
+
         android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/viewZipCode"
         app:layout_constraintEnd_toEndOf="parent"
