@@ -23,16 +23,14 @@ public class User {
 
     @java.lang.Override
     public java.lang.String toString() {
-        return "User{" +
-                "name='" + name +
-                ", email='" + email + '\'' +
-                ", userRating=" + userRating +
-                ", timesUserRated=" + timesUserRated +
-                ", id='" + id + '\'' +
-                ", acceptedPayment='" + acceptedPayment + '\'' +
-                ", contributorRating=" + contributorRating +
-                ", timesContributorRated=" + timesContributorRated +
-                '}';
+        return  "Name = " + name +
+                ", Email = " + email +
+                ", UserRating = " + userRating +
+                ", TimesUserRated = " + timesUserRated +
+                ", ID = " + id +
+                ", AcceptedPayment = " + acceptedPayment +
+                ", ContributorRating = " + contributorRating +
+                ", TimesContributorRated = " + timesContributorRated;
     }
 
     public String getAcceptedPayment() {

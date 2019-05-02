@@ -133,8 +133,8 @@ public class CreateParkingInstanceActivity extends AppCompatActivity {
     public void readUser()
     {
         //READING from firebase by using the sellerID from parkingInstance to retrieve a user
-        ref.child("users").child(parkingInstance.getSellerID());
-        ref.addValueEventListener(new ValueEventListener() {
+        testRef = ref.child("users").child(parkingInstance.getSellerID());
+        testRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 seller = dataSnapshot.getValue(User.class);
@@ -146,6 +146,13 @@ public class CreateParkingInstanceActivity extends AppCompatActivity {
                 Log.d("TAG", "Read Failed, seller unknown...");
             }
         });
+
+
+
+
+
+
+
 
     }
 
