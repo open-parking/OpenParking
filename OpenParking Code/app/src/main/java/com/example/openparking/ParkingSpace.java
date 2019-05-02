@@ -15,6 +15,7 @@ public class ParkingSpace implements Parcelable{
     private Double cost;
     private String openTime;
     private String closeTime;
+    private Boolean reserved;
 
     //CSULB Latitude and Longitude
     //private final double latitude = 33.782896;
@@ -36,6 +37,7 @@ public class ParkingSpace implements Parcelable{
         this.cost = cost;
         this.openTime = openTime;
         this.closeTime = closeTime;
+        this.reserved = false;
     }
 
     public String getOwnerID()
@@ -127,6 +129,16 @@ public class ParkingSpace implements Parcelable{
         this.closeTime = closeTime;
     }
 
+    public Boolean getReservedStatus()
+    {
+        return this.reserved;
+    }
+
+    public  void setReservedStatus(Boolean status)
+    {
+        this.reserved = status;
+    }
+
     //---Parcelable Functions---
     public int describeContents(){
         return 0;
@@ -144,6 +156,7 @@ public class ParkingSpace implements Parcelable{
         out.writeDouble(cost);
         out.writeString(openTime);
         out.writeString(closeTime);
+        out.writeByte((byte) (reserved ? 1 : 0));     //if reserved == true, byte == 1
     }
 
     public ParkingSpace(Parcel in) {
@@ -158,6 +171,7 @@ public class ParkingSpace implements Parcelable{
         this.cost       = in.readDouble();
         this.openTime   = in.readString();
         this.closeTime   = in.readString();
+        this.reserved = in.readByte() != 0;     //myBoolean == true if byte != 0
     }
 
     public static final Parcelable.Creator<ParkingSpace> CREATOR
