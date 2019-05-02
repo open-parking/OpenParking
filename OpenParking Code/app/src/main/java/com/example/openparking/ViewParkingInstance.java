@@ -74,6 +74,8 @@ public class ViewParkingInstance extends AppCompatActivity {
 
     Button btnBook;
 
+    String costStr; //var passed to PaymentDetail Activity
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -96,6 +98,7 @@ public class ViewParkingInstance extends AppCompatActivity {
         ownerName = (TextView) findViewById(R.id.viewOwner);
         ownerID = "NOT SET";
         ownerName_str = "NOT SET";
+        costStr = "NOT SET";
 
         getParkingSpaceData();
         showParkingSpaceData();
@@ -191,6 +194,7 @@ public class ViewParkingInstance extends AppCompatActivity {
 
     private void processPayment()
     {
+        costStr = ps.getCost().toString();
         PayPalPayment payPalPayment = new PayPalPayment(new BigDecimal(ps.getCost()),"USD",
                 "Pay For Parking", PayPalPayment.PAYMENT_INTENT_SALE);
         Intent intent = new Intent(this, PaymentActivity.class);
@@ -211,7 +215,7 @@ public class ViewParkingInstance extends AppCompatActivity {
 
                         startActivity(new Intent(this, PaymentDetails.class)
                                 .putExtra("PaymentDetails", paymentDetails)
-                                .putExtra("PaymentAmount", ps.getCost()));
+                                .putExtra("PaymentAmount", costStr));
 
 
                     } catch (JSONException e) {
