@@ -15,6 +15,8 @@
 OpenParking Code/app/src/debug/res/values/google_maps_api.xml
 OpenParking*Code/app/src/debug/res/values/google_maps_api.xml
 
+#Ignore paypal config, it cointains a unique ID.
+OpenParking*Code/app/src/main/java.com/example/openparking/Config/Config.java
 
 # Do Not ignore the activities
 !activity_main.xml
