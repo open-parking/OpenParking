@@ -164,6 +164,6 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
     {
         ParkingSpace ps = new ParkingSpace(ownerID, Address,zipCode, latitude, longitude, cost, openTime, closeTime);
         Log.v(TAG, "Sending to mDatabase");
-        mDatabase.child("ZipCodes").child(zipCode).push().setValue(ps);
+        mDatabase.child("ParkingSpaces").child(zipCode).push().setValue(ps);// OLD TABLE NAME = ZipCodes
     }
 }
