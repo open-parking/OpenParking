@@ -79,31 +79,37 @@
             android:text="GetCoordinates" />
 
     </LinearLayout>
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <EditText
+            android:id="@+id/editTextLatitude"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_margin="15dp"
+            android:autofillHints=""
+            android:hint="Latitude"
+            android:inputType="text"
+            android:focusable="false"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp" />
 
         <EditText
-        android:id="@+id/editTextLatitude"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_margin="15dp"
-        android:autofillHints=""
-        android:hint="Latitude"
-        android:inputType="text"
-        android:focusable="false"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp" />
+            android:id="@+id/editTextLongitude"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_margin="15dp"
+            android:autofillHints=""
+            android:hint="Longitude"
+            android:inputType="text"
+            android:focusable="false"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp" />
 
-    <EditText
-        android:id="@+id/editTextLongitude"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_margin="15dp"
-        android:autofillHints=""
-        android:hint="Longitude"
-        android:inputType="text"
-        android:focusable="false"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp" />
+    </LinearLayout>
+
+
+
 
     <EditText
         android:id="@+id/editTextCost"
@@ -111,32 +117,38 @@
         android:layout_height="50dp"
         android:layout_margin="15dp"
         android:autofillHints=""
-        android:hint="Enter the cost per hour"
+        android:hint="Enter the cost"
         android:inputType="text"
         android:paddingLeft="16dp"
         android:paddingRight="16dp" />
-
-    <EditText
-        android:id="@+id/editTextOpenTime"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_margin="15dp"
-        android:autofillHints=""
-        android:hint="Open Time"
-        android:inputType="text"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp" />
+        android:layout_height="50dp">
 
-    <EditText
-        android:id="@+id/editTextCloseTime"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_margin="15dp"
-        android:autofillHints=""
-        android:hint="Close Time"
-        android:inputType="text"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp" />
+        <EditText
+            android:id="@+id/editTextOpenTime"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_margin="15dp"
+            android:autofillHints="Open Time"
+            android:hint="Open Time"
+            android:inputType="text"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp" />
+
+        <EditText
+            android:id="@+id/editTextCloseTime"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_margin="15dp"
+            android:autofillHints="Close Time"
+            android:hint="Close Time"
+            android:inputType="text"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp" />
+    </LinearLayout>
+
+
 
     <Button
         android:id="@+id/btnSend"
