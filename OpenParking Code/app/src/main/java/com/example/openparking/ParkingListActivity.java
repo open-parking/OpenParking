@@ -77,10 +77,6 @@ public class ParkingListActivity extends AppCompatActivity{
         //initRecyclerView();
     }
 
-    private void loadDataFromFireBase()
-    {
-
-    }
     private void setTestData()
     {
         mNames.add("132 Fake St.");
