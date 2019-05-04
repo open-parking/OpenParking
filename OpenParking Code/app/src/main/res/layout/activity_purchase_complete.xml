@@ -7,51 +7,87 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg_login">
 
-    <ImageView
-        android:id="@+id/checkImage"
-        android:layout_width="match_parent"
-        android:layout_height="235dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:src="@drawable/check" />
-
-
-    <TextView
-        android:id="@+id/complete"
-        android:layout_width="370dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:background="@drawable/et_bg"
-        android:gravity="center"
-        android:text="Booking complete!"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/viewCost"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkImage" />
-
-    <Button
-        android:id="@+id/btn_book"
-        android:layout_width="287dp"
-        android:layout_height="68dp"
+    <LinearLayout
+        android:layout_width="377dp"
+        android:layout_height="577dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginBottom="32dp"
-        android:text="Ok"
-        android:background="@drawable/rounded_button"
+        android:layout_marginBottom="8dp"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/viewLatitude" />
+        app:layout_constraintTop_toTopOf="parent" >
+
+
+
+        <ImageView
+            android:id="@+id/checkImage"
+            android:layout_width="match_parent"
+            android:layout_height="235dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:src="@drawable/check" />
+
+
+        <TextView
+            android:id="@+id/complete"
+            android:layout_width="370dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/et_bg"
+            android:gravity="center"
+            android:text="Booking complete!"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toTopOf="@+id/viewCost"
+            app:layout_constraintTop_toBottomOf="@+id/checkImage" />
+
+        <Button
+            android:id="@+id/btn_viewParking"
+            android:onClick="ShowPopup"
+            android:layout_width="match_parent"
+            android:layout_height="68dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="32dp"
+            android:background="@drawable/rounded_button"
+            android:gravity="center"
+            android:text="View Parking Details"
+            app:layout_constraintTop_toBottomOf="@+id/complete" />
+
+        <Button
+            android:id="@+id/btn_mainMenu"
+            android:layout_width="match_parent"
+            android:layout_height="68dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="32dp"
+            android:text="Main Menu"
+            android:background="@drawable/rounded_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_viewParking" />
+
+
+
+    </LinearLayout>
+
 
 </android.support.constraint.ConstraintLayout>

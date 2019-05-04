@@ -79,6 +79,12 @@
             android:layout_height="wrap_content"
             android:text="Create Parking Instance" />
 
+        <Button
+            android:id="@+id/btnPurchaseComplete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Purchase confirmation page" />
+
     </LinearLayout>
 
     <android.support.design.widget.FloatingActionButton
