@@ -68,9 +68,9 @@ public class MapsActivity extends FragmentActivity implements
     // [END declare_database_ref]
 
 
-    List <ParkingInstance> parkingInstanceList;         // List of parking spaces with a car in them //THIS LIST NOT CURRENTLY USED
-    List <ParkingSpace> parkingSpaceList;               //List of parking spaces that are available for reservation
-    HashMap<String, ParkingSpace>parkingSpaceHashMap;   // for quick look up from marker ID to parkingSpace
+    List <ParkingInstance> parkingInstanceList;         // List of parking spaces with a car in them. //THIS LIST NOT CURRENTLY USED.
+    List <ParkingSpace> parkingSpaceList;               // List of parking spaces that are available for reservation.
+    HashMap<String, ParkingSpace>parkingSpaceHashMap;   // For quick look up from marker ID to parkingSpace.
     
     // [START Test Values for Random Markers in Long Beach]
 
@@ -87,6 +87,7 @@ public class MapsActivity extends FragmentActivity implements
     private static final int maxLon =167585;
     private static final int minLon =103137;
     private static final int NUM_MARKERS = 8;
+
     // [END Test Values for Random Markers in Long Beach]
 
 
