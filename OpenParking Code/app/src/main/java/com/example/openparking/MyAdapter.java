@@ -63,6 +63,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
                 .into(holder.image);
 
         holder.imageName.setText(parkingSpaceList.get(position).getAddress());
+        holder.cost.setText("$" + parkingSpaceList.get(position).getCost() + "");
 
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,11 +86,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
     public class ViewHolder extends RecyclerView.ViewHolder{
         CircleImageView image;
         TextView imageName;
+        TextView cost;
         RelativeLayout parentLayout;
         public ViewHolder(View itemView) {
             super(itemView);
             image = itemView.findViewById(R.id.image);
             imageName = itemView.findViewById(R.id.image_name);
+            cost = itemView.findViewById(R.id.image_price);
             parentLayout = itemView.findViewById(R.id.parent_layout);
         }
     }
