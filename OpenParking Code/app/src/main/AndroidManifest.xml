@@ -20,6 +20,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".PurchaseCompleteActivity"></activity>
         <activity
             android:name=".AddParkingSpaceActivity"
             android:label="@string/title_activity_add_parking_instance"
