@@ -19,7 +19,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
     private static final String TAG = "MyAdapter";
-    private ArrayList<String> mImageNames = new ArrayList<>();
+    //private ArrayList<String> mImageNames = new ArrayList<>();
     private ArrayList<String> mImages = new ArrayList<>();
     private List<ParkingSpace> parkingSpaceList;
 
@@ -67,9 +67,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d(TAG, "onClick: clicked on: " + mImageNames.get(position));
+                Log.d(TAG, "onClick: clicked on: " + parkingSpaceList.get(position).getAddress());
 
-                Toast.makeText(mContext, mImageNames.get(position), Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, parkingSpaceList.get(position).getAddress(), Toast.LENGTH_SHORT).show();
 
             }
         });
