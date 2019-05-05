@@ -1,16 +1,27 @@
 package com.example.openparking;
 
+import android.app.Dialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
+import com.example.openparking.Config.RecyclerTouchListener;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,6 +33,7 @@ public class ParkingListActivity extends AppCompatActivity{
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
+
 
 
     //vars
@@ -36,6 +48,11 @@ public class ParkingListActivity extends AppCompatActivity{
     // [START declare_database_ref]
     private DatabaseReference mDatabase;
     // [END declare_database_ref]
+
+    private ParkingSpace ps;
+    private User owner;
+    private Dialog myDialog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +83,11 @@ public class ParkingListActivity extends AppCompatActivity{
         mAdapter = new MyAdapter(this, parkingSpaceList, mImageUrls);
         recyclerView.setAdapter(mAdapter);
 
+        ps = new ParkingSpace();
+        owner = new User();
+        myDialog = new Dialog(this);
+
+
         //FireBase
         //loadImagesFromFireBase();
         loadParkingSpacesFromDataBase("90815");
@@ -75,6 +97,19 @@ public class ParkingListActivity extends AppCompatActivity{
         //setTestData();
 
         //initRecyclerView();
+
+        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), recyclerView, new RecyclerTouchListener.ClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                retrieveOwner();
+                showPopup(view);
+            }
+
+            @Override
+            public void onLongClick(View view, int position) {
+
+            }
+        }));
     }
 
     private void setTestData()
@@ -153,7 +188,7 @@ public class ParkingListActivity extends AppCompatActivity{
 
                         // A new parking space has been added, add it to the displayed list
                         //ParkingSpace ps = new ParkingSpace();
-                        ParkingSpace ps = dataSnapshot.getValue(ParkingSpace.class);
+                        ps = dataSnapshot.getValue(ParkingSpace.class);
 
                         if(!ps.equals(null))
                         {
@@ -221,5 +256,89 @@ public class ParkingListActivity extends AppCompatActivity{
     private void loadImagesFromFireBase()
     {
 
+    }
+
+    private void retrieveOwner()
+    {
+        DatabaseReference ref = mDatabase.child("users").child(ps.getOwnerID());
+
+        //Retrieve seller information using ps.getOwnerID()
+        readData(ref, new OnGetDataListener() {
+            @Override
+            public void onSuccess(DataSnapshot dataSnapshot) {
+                owner = dataSnapshot.getValue(User.class);
+                Log.d("TAG", "Read successful, Owner: " + owner.toString());
+            }
+
+            @Override
+            public void onStart() {
+                Log.d("ONSTART", "Started");
+            }
+
+            @Override
+            public void onFailure(DatabaseError databaseError) {
+                Log.d("ONFAILURE", "Failed");
+            }
+        });
+    }
+
+    public void readData(DatabaseReference ref, final OnGetDataListener listener){
+        System.out.println("Reached READDATA function");
+        listener.onStart();
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                listener.onSuccess(dataSnapshot);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                listener.onFailure(databaseError);
+            }
+        });
+    }
+
+    public void showPopup(View v) {
+        TextView txtclose;
+        Button btnFollow;
+        TextView txtSellerName;
+        TextView txtAddress;
+        TextView txtIsAvailable;
+        TextView txtOpenClose;
+        TextView txtCost;
+
+        myDialog.setContentView(R.layout.custom_window);
+
+        txtclose =(TextView) myDialog.findViewById(R.id.txtclose);
+        txtclose.setText("X");
+
+        btnFollow = (Button) myDialog.findViewById(R.id.btnfollow);
+        txtclose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                myDialog.dismiss();
+            }
+        });
+
+        txtSellerName = (TextView) myDialog.findViewById(R.id.txtSellerName);
+        txtSellerName.setText(owner.getName());
+
+        txtAddress = (TextView) myDialog.findViewById(R.id.txtAddress);
+        txtAddress.setText(ps.getAddress());
+
+        txtIsAvailable = (TextView) myDialog.findViewById(R.id.txtIsAvailable);
+        if(ps.getReservedStatus())
+            txtIsAvailable.setText("Available");
+        else
+            txtIsAvailable.setText("Sold");
+
+        txtOpenClose = (TextView) myDialog.findViewById(R.id.txtOpenClose);
+        txtOpenClose.setText("From " + ps.getOpentime() + " to " + ps.getClosetime());
+
+        txtCost = (TextView) myDialog.findViewById(R.id.txtCost);
+        txtCost.setText("$" + ps.getCost() + "0");
+
+        myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        myDialog.show();
     }
 }
