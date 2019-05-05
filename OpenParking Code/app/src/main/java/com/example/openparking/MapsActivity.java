@@ -604,8 +604,8 @@ public class MapsActivity extends FragmentActivity implements
 
     private void retrieveOwner()
     {
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-        ref = mDatabase.child("users").child(ps.getOwnerID());
+        DatabaseReference ref = mDatabase.child("users").child(ps.getOwnerID());
+
         //Retrieve seller information using ps.getOwnerID()
         readData(ref, new OnGetDataListener() {
             @Override
@@ -613,12 +613,6 @@ public class MapsActivity extends FragmentActivity implements
                 owner = new User();
                 owner = dataSnapshot.getValue(User.class);
                 Log.d("TAG", "Read successful, Owner: " + owner.toString());
-
-                //Replace textview elements in pop-up parking view (custom_window)
-                //with selected parking space details
-                String ownerName = owner.getName();
-                System.out.println("######################" + ownerName);
-                sellerName.setText(ownerName);
             }
 
             @Override
@@ -735,9 +729,17 @@ public class MapsActivity extends FragmentActivity implements
     public void showPopup() {
         TextView txtclose;
         Button btnFollow;
-        //myDialog.setContentView(R.layout.custom_window);
+        TextView txtSellerName;
+        TextView txtAddress;
+        TextView txtIsAvailable;
+        TextView txtOpenClose;
+        TextView txtCost;
+
+        myDialog.setContentView(R.layout.custom_window);
+
         txtclose =(TextView) myDialog.findViewById(R.id.txtclose);
         txtclose.setText("X");
+
         btnFollow = (Button) myDialog.findViewById(R.id.btnfollow);
         txtclose.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -745,6 +747,25 @@ public class MapsActivity extends FragmentActivity implements
                 myDialog.dismiss();
             }
         });
+
+        txtSellerName = (TextView) myDialog.findViewById(R.id.txtSellerName);
+        txtSellerName.setText(owner.getName());
+
+        txtAddress = (TextView) myDialog.findViewById(R.id.txtAddress);
+        txtAddress.setText(ps.getAddress() + ", " + ps.getZipcode());
+
+        txtIsAvailable = (TextView) myDialog.findViewById(R.id.txtIsAvailable);
+        if(ps.getReservedStatus())
+            txtIsAvailable.setText("Available");
+        else
+            txtIsAvailable.setText("Sold");
+
+        txtOpenClose = (TextView) myDialog.findViewById(R.id.txtOpenClose);
+        txtOpenClose.setText("From " + ps.getOpentime() + " to " + ps.getClosetime());
+
+        txtCost = (TextView) myDialog.findViewById(R.id.txtCost);
+        txtCost.setText("$" + ps.getCost() + "0");
+
         myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         myDialog.show();
     }

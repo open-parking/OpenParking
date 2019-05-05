@@ -40,6 +40,7 @@
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/txtAddress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -70,6 +71,7 @@
             android:layout_height="100dp">
 
             <TextView
+                android:id="@+id/txtIsAvailable"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="2 Spots"
@@ -84,19 +86,16 @@
             android:layout_width="0dp"
             android:layout_height="100dp">
 
+
             <TextView
+                android:id="@+id/txtOpenClose"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="8:00am to 6:00pm"
-                android:textSize="15sp"
-                android:textColor="@color/whitebg"
-                android:gravity="center"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center_horizontal|center_vertical"
                 android:text="Mon - Fri"
-                android:textSize="18sp"
-                android:textColor="@color/whitebg"/>
+                android:textColor="@color/whitebg"
+                android:textSize="18sp" />
         </LinearLayout>
         <LinearLayout
             android:background="@color/lightBlue"
@@ -107,6 +106,7 @@
             android:layout_height="100dp">
 
             <TextView
+                android:id="@+id/txtCost"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="$3 dollars"
@@ -115,7 +115,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Per Hour"
+                android:text="Per Day"
                 android:textSize="18sp"
                 android:textColor="@color/whitebg"/>
         </LinearLayout>
