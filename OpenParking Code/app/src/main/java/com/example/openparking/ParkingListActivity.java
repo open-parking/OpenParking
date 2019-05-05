@@ -1,11 +1,18 @@
 package com.example.openparking;
 
+import android.app.Dialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
+import com.example.openparking.Config.RecyclerTouchListener;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -37,6 +44,8 @@ public class ParkingListActivity extends AppCompatActivity{
     private DatabaseReference mDatabase;
     // [END declare_database_ref]
 
+    private Dialog myDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d(TAG, "onCreate: started.");
@@ -66,6 +75,8 @@ public class ParkingListActivity extends AppCompatActivity{
         mAdapter = new MyAdapter(this, parkingSpaceList, mImageUrls);
         recyclerView.setAdapter(mAdapter);
 
+        myDialog = new Dialog(this);
+
         //FireBase
         //loadImagesFromFireBase();
         loadParkingSpacesFromDataBase("90815");
@@ -75,6 +86,18 @@ public class ParkingListActivity extends AppCompatActivity{
         //setTestData();
 
         //initRecyclerView();
+
+        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), recyclerView, new RecyclerTouchListener.ClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                showPopup(view);
+            }
+
+            @Override
+            public void onLongClick(View view, int position) {
+
+            }
+        }));
     }
 
     private void setTestData()
@@ -221,5 +244,23 @@ public class ParkingListActivity extends AppCompatActivity{
     private void loadImagesFromFireBase()
     {
 
+    }
+
+
+    public void showPopup(View v) {
+        TextView txtclose;
+        Button btnFollow;
+        myDialog.setContentView(R.layout.custom_window);
+        txtclose =(TextView) myDialog.findViewById(R.id.txtclose);
+        txtclose.setText("X");
+        btnFollow = (Button) myDialog.findViewById(R.id.btnfollow);
+        txtclose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                myDialog.dismiss();
+            }
+        });
+        myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        myDialog.show();
     }
 }

@@ -33,7 +33,7 @@ public class PurchaseCompleteActivity extends AppCompatActivity implements View.
 
 
 
-    public void ShowPopup(View v) {
+    public void showPopup(View v) {
         TextView txtclose;
         Button btnFollow;
         myDialog.setContentView(R.layout.custom_window);
@@ -58,7 +58,7 @@ public class PurchaseCompleteActivity extends AppCompatActivity implements View.
     {
         if(view == buttonViewParking)
         {
-            ShowPopup(view);
+            showPopup(view);
         }
         if(view == buttonMainMenu)
         {
