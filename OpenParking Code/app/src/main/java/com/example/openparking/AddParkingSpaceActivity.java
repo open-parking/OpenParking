@@ -45,7 +45,6 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
     private EditText editTextCloseTime;
 
     private DatabaseReference mDatabase;
-    private ParkingSpace test;
 
     private FirebaseAuth firebaseAuth;
     private String userID;
