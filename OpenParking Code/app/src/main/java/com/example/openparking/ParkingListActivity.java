@@ -91,7 +91,6 @@ public class ParkingListActivity extends AppCompatActivity{
         //FireBase
         //loadImagesFromFireBase();
         loadParkingSpacesFromDataBase("90815");
-
         //Test Info
         setTestImages();
         //setTestData();
