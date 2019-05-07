@@ -162,7 +162,7 @@ public class ParkingListActivity extends AppCompatActivity{
 
         mImageUrls.add("https://i.redd.it/obx4zydshg601.jpg");
 
-        mImageUrls.add("https://i.imgur.com/ZcLLrkY.jpg");
+        mImageUrls.add("https://i.redd.it/glin0nwndo501.jpg");
     }
 
     private void initRecyclerView(){

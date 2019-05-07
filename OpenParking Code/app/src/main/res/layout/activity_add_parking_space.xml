@@ -92,44 +92,57 @@
             android:inputType="number"
             android:paddingLeft="15dp" />
 
+            <EditText
+                android:id="@+id/editTextZipCode"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_margin="15dp"
+                android:autofillHints=""
+                android:background="@drawable/et_bg"
+                android:hint="Enter the ZipCode"
+                android:inputType="number"
+                android:paddingLeft="15dp" />
 
 
-        <Button
-            android:id="@+id/btnCoords"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_margin="15dp"
-            android:text="GetCoordinates" />
+            <Button
+                android:id="@+id/btnCoords"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_margin="15dp"
+                android:background="@drawable/rounded_button"
+                android:text="GetCoordinates" />
 
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp">
-        <EditText
-            android:id="@+id/editTextLatitude"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_margin="15dp"
-            android:autofillHints=""
-            android:hint="Latitude"
-            android:inputType="text"
-            android:focusable="false"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp" />
+        </LinearLayout>
 
-        <EditText
-            android:id="@+id/editTextLongitude"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_margin="15dp"
-            android:autofillHints=""
-            android:hint="Longitude"
-            android:inputType="text"
-            android:focusable="false"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    </LinearLayout>
+            <EditText
+                android:id="@+id/editTextLatitude"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_margin="15dp"
+                android:autofillHints=""
+                android:focusable="false"
+                android:hint="Latitude"
+                android:inputType="text"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp" />
+
+            <EditText
+                android:id="@+id/editTextLongitude"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_margin="15dp"
+                android:autofillHints=""
+                android:focusable="false"
+                android:hint="Longitude"
+                android:inputType="text"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp" />
+
+        </LinearLayout>
 
 
 
@@ -144,42 +157,51 @@
         android:inputType="text"
         android:paddingLeft="16dp"
         android:paddingRight="16dp" />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp">
 
-        <EditText
-            android:id="@+id/editTextOpenTime"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_margin="15dp"
-            android:autofillHints="Open Time"
-            android:hint="Open Time"
-            android:inputType="text"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <EditText
-            android:id="@+id/editTextCloseTime"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
+            <EditText
+                android:id="@+id/editTextOpenTime"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_margin="15dp"
+                android:autofillHints="Open Time"
+                android:hint="Open Time"
+                android:inputType="text"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp" />
+
+            <EditText
+                android:id="@+id/editTextCloseTime"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_margin="15dp"
+                android:autofillHints="Close Time"
+                android:hint="Close Time"
+                android:inputType="text"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp" />
+        </LinearLayout>
+
+
+        <Button
+            android:id="@+id/btnPicture"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_margin="15dp"
-            android:autofillHints="Close Time"
-            android:hint="Close Time"
-            android:inputType="text"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp" />
+            android:background="@drawable/rounded_button"
+            android:text="Add Picture " />
+
+        <Button
+            android:id="@+id/btnSend"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:background="@drawable/rounded_button"
+            android:text="Send" />
+
     </LinearLayout>
-
-
-
-    <Button
-        android:id="@+id/btnSend"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="15dp"
-        android:text="Send" />
-
-</LinearLayout>
 
 </android.support.design.widget.CoordinatorLayout>
