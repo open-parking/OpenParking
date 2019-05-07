@@ -30,6 +30,7 @@ public class Test_Activity extends AppCompatActivity {
     Button btnRating;
     Button btnParkingList;
     Button btnCreateParkingInstance;
+    Button btnPurchaseComplete;
 
 
 
@@ -156,6 +157,19 @@ public class Test_Activity extends AppCompatActivity {
                 Log.v(TAG, "Clicked Create Parking Instance Button");
                 Intent intent = new Intent(Test_Activity.this, CreateParkingInstanceActivity.class);
                 startActivity(intent);
+            }
+        });
+
+
+        btnPurchaseComplete = findViewById(R.id.btnPurchaseComplete);
+        btnPurchaseComplete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                Log.v(TAG, "Clicked Purchase Complete Button");
+                Intent intent = new Intent(Test_Activity.this, PurchaseCompleteActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
 

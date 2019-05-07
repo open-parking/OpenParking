@@ -1,8 +1,11 @@
 package com.example.openparking;
 
 import android.Manifest;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -15,7 +18,9 @@ import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -33,6 +38,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -71,7 +78,16 @@ public class MapsActivity extends FragmentActivity implements
     List <ParkingInstance> parkingInstanceList;         // List of parking spaces with a car in them. //THIS LIST NOT CURRENTLY USED.
     List <ParkingSpace> parkingSpaceList;               // List of parking spaces that are available for reservation.
     HashMap<String, ParkingSpace>parkingSpaceHashMap;   // For quick look up from marker ID to parkingSpace.
-    
+
+
+    private ParkingSpace ps;
+    //Dialog for displaying popup parking space details
+    private Dialog myDialog;
+    //Owner retrieved from database
+    private User owner;
+
+    private TextView sellerName;
+
     // [START Test Values for Random Markers in Long Beach]
 
     // Test Area Latitude and Longitude
@@ -141,6 +157,18 @@ public class MapsActivity extends FragmentActivity implements
             checkUserLocationPermission();
         }
 
+        // [START initialize_database_ref]
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        // [END initialize_database_ref]
+
+        myDialog = new Dialog(this);
+        myDialog.setContentView(R.layout.custom_window);
+        ps = new ParkingSpace();
+
+        owner = new User();
+        sellerName = (TextView)findViewById(R.id.txtSellerName);
+
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -155,9 +183,7 @@ public class MapsActivity extends FragmentActivity implements
         parkingSpaceList = new ArrayList<>();
         parkingSpaceHashMap = new HashMap<>();
 
-        // [START initialize_database_ref]
-        mDatabase = FirebaseDatabase.getInstance().getReference();
-        // [END initialize_database_ref]
+
 
         //Parking Spaces are now loaded when user clicks the search button
         //loadParkingSpacesFromDataBase("90815");
@@ -544,7 +570,6 @@ public class MapsActivity extends FragmentActivity implements
         Intent intent = new Intent(MapsActivity.this, ViewParkingInstance.class);
 
         // 2. intent.putExtra(String key, Object data)
-        ParkingSpace ps  = new ParkingSpace();
         ps = parkingSpaceHashMap.get(marker.getId());
 
         //CHECK IF THE MARKER BELONGS TO A VALID PARKING SPACE
@@ -552,9 +577,12 @@ public class MapsActivity extends FragmentActivity implements
         {
             intent.putExtra("parkingInstance", ps);
 
+            retrieveOwner();
+
+            showPopup();
             // 3. startActivity(intent)
             //Toast.makeText(this, "Starting new Activity", Toast.LENGTH_SHORT).show();
-            startActivity(intent);
+            //startActivity(intent);
 
             //In new Activity
             // 4. getIntent()
@@ -566,6 +594,53 @@ public class MapsActivity extends FragmentActivity implements
             Toast.makeText(this, "Not a parking space marker!", Toast.LENGTH_SHORT).show();
         }
 
+
+
+
+
+
+        //display custom_window.xml
+    }
+
+    private void retrieveOwner()
+    {
+        DatabaseReference ref = mDatabase.child("users").child(ps.getOwnerID());
+
+        //Retrieve seller information using ps.getOwnerID()
+        readData(ref, new OnGetDataListener() {
+            @Override
+            public void onSuccess(DataSnapshot dataSnapshot) {
+                owner = new User();
+                owner = dataSnapshot.getValue(User.class);
+                Log.d("TAG", "Read successful, Owner: " + owner.toString());
+            }
+
+            @Override
+            public void onStart() {
+                Log.d("ONSTART", "Started");
+            }
+
+            @Override
+            public void onFailure(DatabaseError databaseError) {
+                Log.d("ONFAILURE", "Failed");
+            }
+        });
+    }
+
+    public void readData(DatabaseReference ref, final OnGetDataListener listener){
+        System.out.println("Reached READDATA function");
+        listener.onStart();
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                listener.onSuccess(dataSnapshot);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                listener.onFailure(databaseError);
+            }
+        });
     }
 
     public void onMapSearch(View view) {
@@ -651,4 +726,47 @@ public class MapsActivity extends FragmentActivity implements
     }
 
 
+    public void showPopup() {
+        TextView txtclose;
+        Button btnFollow;
+        TextView txtSellerName;
+        TextView txtAddress;
+        TextView txtIsAvailable;
+        TextView txtOpenClose;
+        TextView txtCost;
+
+        myDialog.setContentView(R.layout.custom_window);
+
+        txtclose =(TextView) myDialog.findViewById(R.id.txtclose);
+        txtclose.setText("X");
+
+        btnFollow = (Button) myDialog.findViewById(R.id.btnfollow);
+        txtclose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                myDialog.dismiss();
+            }
+        });
+
+        txtSellerName = (TextView) myDialog.findViewById(R.id.txtSellerName);
+        txtSellerName.setText(owner.getName());
+
+        txtAddress = (TextView) myDialog.findViewById(R.id.txtAddress);
+        txtAddress.setText(ps.getAddress() + ", " + ps.getZipcode());
+
+        txtIsAvailable = (TextView) myDialog.findViewById(R.id.txtIsAvailable);
+        if(ps.getReservedStatus())
+            txtIsAvailable.setText("Available");
+        else
+            txtIsAvailable.setText("Sold");
+
+        txtOpenClose = (TextView) myDialog.findViewById(R.id.txtOpenClose);
+        txtOpenClose.setText("From " + ps.getOpentime() + " to " + ps.getClosetime());
+
+        txtCost = (TextView) myDialog.findViewById(R.id.txtCost);
+        txtCost.setText("$" + ps.getCost() + "0");
+
+        myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        myDialog.show();
+    }
 }
