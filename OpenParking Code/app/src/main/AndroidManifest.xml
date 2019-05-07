@@ -23,7 +23,8 @@
         <activity
             android:name=".AddParkingSpaceActivity"
             android:label="@string/title_activity_add_parking_instance"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait" />
         <activity android:name=".CreateParkingActivity" />
         <activity android:name=".PasswordRecovery" />
         <activity android:name=".PaymentDetails" />
@@ -34,9 +35,11 @@
             android:name=".Test_Activity"
             android:label="@string/title_activity_test_"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".SecondActivity" />
         <activity android:name=".ProfileActivity" />
-        <activity android:name=".MainActivity" />
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait"
+            />
         <activity android:name=".CreateParkingInstanceActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
