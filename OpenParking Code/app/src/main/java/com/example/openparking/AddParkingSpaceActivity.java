@@ -176,9 +176,12 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
 
     private void writeNewParkingSpace(String ownerID, String Address,String zipCode, Double latitude, Double longitude, Double cost, String openTime, String closeTime )
     {
+        // Send Parking Space to FireBase
         ParkingSpace ps = new ParkingSpace(ownerID, Address,zipCode, latitude, longitude, cost, openTime, closeTime);
         Log.v(TAG, "Sending to mDatabase");
         mDatabase.child("ParkingSpaces").child(zipCode).push().setValue(ps);// OLD TABLE NAME = ZipCodes
+
+        // Get id of Parking Space
         String postID = mDatabase.child("ParkingSpaces").child(zipCode).getKey();
         Log.v(TAG, "postID: " + postID);
         mDatabase.child("ParkingSpaces").child(zipCode).child(postID).child("id").setValue(postID);
