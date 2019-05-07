@@ -7,4 +7,10 @@
     android:background="@drawable/bg_login"
     tools:context=".CreateParkingActivity">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="Processing..."
+        />
 </android.support.constraint.ConstraintLayout>

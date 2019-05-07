@@ -1,6 +1,7 @@
 package com.example.openparking;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
@@ -53,6 +54,7 @@ public class ParkingListActivity extends AppCompatActivity{
     private User owner;
     private Dialog myDialog;
 
+    private Intent create;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,6 +89,7 @@ public class ParkingListActivity extends AppCompatActivity{
         owner = new User();
         myDialog = new Dialog(this);
 
+        create = new Intent(ParkingListActivity.this, CreateParkingInstanceActivity.class);
 
         //FireBase
         //loadImagesFromFireBase();
@@ -102,7 +105,7 @@ public class ParkingListActivity extends AppCompatActivity{
             @Override
             public void onClick(View view, int position) {
                 retrieveOwner();
-                showPopup(view);
+                showPopup();
             }
 
             @Override
@@ -298,7 +301,7 @@ public class ParkingListActivity extends AppCompatActivity{
         });
     }
 
-    public void showPopup(View v) {
+    public void showPopup() {
         TextView txtclose;
         Button btnFollow;
         TextView txtSellerName;
@@ -313,6 +316,15 @@ public class ParkingListActivity extends AppCompatActivity{
         txtclose.setText("X");
 
         btnFollow = (Button) myDialog.findViewById(R.id.btnfollow);
+        btnFollow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                myDialog.dismiss();
+                startActivity(create);
+                finish();
+            }
+        });
+
         txtclose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -324,7 +336,7 @@ public class ParkingListActivity extends AppCompatActivity{
         txtSellerName.setText(owner.getName());
 
         txtAddress = (TextView) myDialog.findViewById(R.id.txtAddress);
-        txtAddress.setText(ps.getAddress());
+        txtAddress.setText(ps.getAddress() + ", " + ps.getZipcode());
 
         txtIsAvailable = (TextView) myDialog.findViewById(R.id.txtIsAvailable);
         if(ps.getReservedStatus())

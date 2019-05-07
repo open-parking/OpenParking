@@ -88,6 +88,9 @@ public class MapsActivity extends FragmentActivity implements
 
     private TextView sellerName;
 
+    //intent to go from maps to createparkinginstance activity
+    Intent create;
+
     // [START Test Values for Random Markers in Long Beach]
 
     // Test Area Latitude and Longitude
@@ -168,6 +171,7 @@ public class MapsActivity extends FragmentActivity implements
         owner = new User();
         sellerName = (TextView)findViewById(R.id.txtSellerName);
 
+        create = new Intent(MapsActivity.this, CreateParkingInstanceActivity.class);
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -567,7 +571,7 @@ public class MapsActivity extends FragmentActivity implements
 
         //Steps for passing Data to other Activity
         // 1. Create New Intent object
-        Intent intent = new Intent(MapsActivity.this, ViewParkingInstance.class);
+        //create = new Intent(MapsActivity.this, ViewParkingInstance.class);
 
         // 2. intent.putExtra(String key, Object data)
         ps = parkingSpaceHashMap.get(marker.getId());
@@ -575,7 +579,7 @@ public class MapsActivity extends FragmentActivity implements
         //CHECK IF THE MARKER BELONGS TO A VALID PARKING SPACE
         if(!(ps == null))
         {
-            intent.putExtra("parkingInstance", ps);
+            create.putExtra("parkingSpace", ps);
 
             retrieveOwner();
 
@@ -613,6 +617,9 @@ public class MapsActivity extends FragmentActivity implements
                 owner = new User();
                 owner = dataSnapshot.getValue(User.class);
                 Log.d("TAG", "Read successful, Owner: " + owner.toString());
+
+                TextView txtSellerName = (TextView) myDialog.findViewById(R.id.txtSellerName);
+                txtSellerName.setText(owner.getName());
             }
 
             @Override
@@ -741,6 +748,16 @@ public class MapsActivity extends FragmentActivity implements
         txtclose.setText("X");
 
         btnFollow = (Button) myDialog.findViewById(R.id.btnfollow);
+        btnFollow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                myDialog.dismiss();
+                create.putExtra("parkingSpace", ps);
+                startActivity(create);
+                finish();
+            }
+        });
+
         txtclose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -748,8 +765,8 @@ public class MapsActivity extends FragmentActivity implements
             }
         });
 
-        txtSellerName = (TextView) myDialog.findViewById(R.id.txtSellerName);
-        txtSellerName.setText(owner.getName());
+        //txtSellerName = (TextView) myDialog.findViewById(R.id.txtSellerName);
+        //txtSellerName.setText(owner.getName());
 
         txtAddress = (TextView) myDialog.findViewById(R.id.txtAddress);
         txtAddress.setText(ps.getAddress() + ", " + ps.getZipcode());
