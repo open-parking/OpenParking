@@ -30,11 +30,11 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
     private static final int ERROR_DIALOG_REQUEST = 9001;
-    private Button test;
-    private Button paypal;
-    private Button parking;
-    private Button vehicle;
+    private Button buy;
+    private Button sell;
     private Button account;
+    private Button viewMyListings;
+    private Button viewMyRating;
 
 
     // Test Buttons
@@ -66,11 +66,11 @@ public class MainActivity extends AppCompatActivity {
 
         // Login Interface
 
-        test = (Button)findViewById(R.id.btnTest);
-        account = (Button)findViewById(R.id.btnAccount);
-        paypal = (Button)findViewById(R.id.btnPayPal);
-        parking = (Button)findViewById(R.id.btnParking);
-        vehicle = (Button)findViewById(R.id.btnVehicle);
+        buy = (Button) findViewById(R.id.btnBuy);
+        sell = (Button) findViewById(R.id.btnSell);
+        account = (Button) findViewById(R.id.btnAccount);
+
+
         /// Test Button
         Button btnTest = (Button) findViewById(R.id.btnTest);
         btnTest.setOnClickListener(new View.OnClickListener() {
