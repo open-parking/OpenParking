@@ -24,9 +24,11 @@ import android.content.Intent;
 public class RatingActivity extends AppCompatActivity {
 
     private FirebaseAuth firebaseAuth;
-    double userRatingTotal;
+    double contributorRatingTotal;
     private FirebaseDatabase mDatabase;
     private DatabaseReference usersRef;
+    private static final String TAG = "RatingActivity";
+
 
     /*public RatingActivity(FirebaseDatabase mDatabase) {
         this.mDatabase = mDatabase;
@@ -58,42 +60,33 @@ public class RatingActivity extends AppCompatActivity {
         final User user = new User();
         user.setId(fuser.getUid());//USER ID
 
+        final String uID = user.getId();
+
 
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                mDatabase.child("users").child(userRatingTotal).addChildEventListener(
+                usersRef.child("users").addChildEventListener(
                         new ChildEventListener() {
 
                             @Override
                             public void onChildAdded(DataSnapshot dataSnapshot, String previousChildName) {
-                                Log.d(TAG, "onChildAdded:" + dataSnapshot.getKey());
-
                                 User mUser = new User();
-                                mUser.setUserRating(userRatingTotal);
-                                String uID = user.getId();
-                                mUser.setId(uID);
-                                mUser= dataSnapshot.getValue(User.class);
-
-                                    Log.d(TAG, "onChildAdded: " +  "ps is good");
-
-                                    parkingSpaceList.add(ps);
-
-                                    String address = ps.getAddress();
-                                    String hours = "Hours: " + ps.getOpentime() + " to " + ps.getClosetime();
-
-                                    MarkerOptions mo = new MarkerOptions();
-                                    mo.position(new LatLng(ps.getLatitude(), ps.getLongitude() ) );
-                                    mo.title(address);
-                                    mo.snippet(hours);
-                                    mo.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
-                                    mo.flat(true);
-
-                                    //Add marker to map AND get its ID
-                                    String markerID = mMap.addMarker(mo).getId();
-
-                                    parkingSpaceHashMap.put(markerID, ps);
+                                mUser = dataSnapshot.getValue(User.class);
+                                if(mUser.getId().equals(uID)) {
+                                    mUser.setTimesContributorRated(mUser.getTimesContributorRated());
+                                    if(mUser.getTimesContributorRated() < 1){
+                                        contributorRatingTotal = mRatingBar.getRating();
+                                    } else {
+                                        contributorRatingTotal = mUser.getContributorRating() * mUser.getTimesContributorRated() + mRatingBar.getRating();
+                                    }
+                                    mUser.setContributorRating(contributorRatingTotal / (mUser.getTimesContributorRated()+1));
+                                    mUser.setTimesContributorRated(mUser.getTimesContributorRated()+1);
+                                    usersRef.child("users").child(uID).child("contributorRating").setValue(mUser.getContributorRating());
+                                    usersRef.child("users").child(uID).child("timesContributorRated").setValue(mUser.getTimesContributorRated());
+                                    ratingDisplayTextView.setText("Your average rating is: " + mUser.getContributorRating());
+                                }
                             }
 
                             @Override
@@ -139,12 +132,6 @@ public class RatingActivity extends AppCompatActivity {
                             }
 
                         });
-
-                //ratingDisplayTextView.setText("Your rating is: " + mRatingBar.getRating());
-                userRatingTotal = user.getUserRating() * user.getTimesUserRated() + mRatingBar.getRating();
-                user.setTimesUserRated(user.getTimesUserRated() + 1);
-                user.setUserRating(userRatingTotal / user.getTimesUserRated());
-                ratingDisplayTextView.setText("Your average rating is: " + user.getUserRating());
             }
         });
 
