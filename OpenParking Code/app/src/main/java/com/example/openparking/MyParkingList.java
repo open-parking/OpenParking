@@ -37,8 +37,6 @@ public class MyParkingList extends AppCompatActivity{
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
 
-
-
     //vars
     private ArrayList<String> mNames = new ArrayList<>();
     private ArrayList<String> mImageUrls = new ArrayList<>();
@@ -49,7 +47,6 @@ public class MyParkingList extends AppCompatActivity{
     // Are we still using this HashMap? can I re-purpose it?
 
     // [START declare_database_ref]
-    private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     private DatabaseReference mDatabase;
     // [END declare_database_ref]
 
@@ -58,9 +55,6 @@ public class MyParkingList extends AppCompatActivity{
     private Dialog myDialog;
 
     private Intent create;
-
-    final FirebaseUser fuser = firebaseAuth.getCurrentUser();
-    final User user = new User();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +72,6 @@ public class MyParkingList extends AppCompatActivity{
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        user.setId(fuser.getUid());
         parkingSpaceList = new ArrayList<>();
         parkingSpaceHashMap = new HashMap<>();
 
@@ -222,9 +215,10 @@ public class MyParkingList extends AppCompatActivity{
                         // A new parking space has been added, add it to the displayed list
                         //ParkingSpace ps = new ParkingSpace();
                         ps = dataSnapshot.getValue(ParkingSpace.class);
-
-
-
+                        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+                        FirebaseUser fuser = firebaseAuth.getCurrentUser();
+                        User user = new User();
+                        user.setId(fuser.getUid());
 
                         if(!ps.equals(null))
                         {
