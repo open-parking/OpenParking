@@ -50,7 +50,7 @@
     </LinearLayout>
 
     <RatingBar
-        android:id="@+id/ratingBar2"
+        android:id="@+id/ratingBar3"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:layout_gravity="center"
