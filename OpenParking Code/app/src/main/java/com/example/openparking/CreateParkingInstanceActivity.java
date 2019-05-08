@@ -45,10 +45,10 @@ public class CreateParkingInstanceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_parking_instance);
 
+        parkingSpace = new ParkingSpace();
+
         Intent intent = getIntent();
         parkingSpace = intent.getParcelableExtra("parkingSpace");
-        //test passed object
-        System.out.println("!!!!!!!!!!!!!!!!! " + parkingSpace.getAddress());
 
         firebaseAuth = FirebaseAuth.getInstance();
         buyer = firebaseAuth.getCurrentUser();
@@ -75,6 +75,7 @@ public class CreateParkingInstanceActivity extends AppCompatActivity {
         // start confirmation activity
         startActivity(complete);
 
+        finish();
         /*
         // READING from database and retrieving a parking space object
         testRef.addValueEventListener(new ValueEventListener() {

@@ -106,7 +106,14 @@ public class ParkingListActivity extends AppCompatActivity{
             public void onClick(View view, int position) {
                 ps = parkingSpaceList.get(position);
                 System.out.println("Parking Space: " + ps.getAddress());
+
                 retrieveOwner();
+
+
+                //pass parking space object to next activity
+                create.putExtra("parkingSpace", ps);
+
+
                 showPopup();
             }
 
@@ -194,6 +201,9 @@ public class ParkingListActivity extends AppCompatActivity{
                         // A new parking space has been added, add it to the displayed list
                         //ParkingSpace ps = new ParkingSpace();
                         ps = dataSnapshot.getValue(ParkingSpace.class);
+
+
+
 
                         if(!ps.equals(null))
                         {
@@ -342,9 +352,9 @@ public class ParkingListActivity extends AppCompatActivity{
 
         txtIsAvailable = (TextView) myDialog.findViewById(R.id.txtIsAvailable);
         if(ps.getReservedStatus())
-            txtIsAvailable.setText("Available");
-        else
             txtIsAvailable.setText("Sold");
+        else
+            txtIsAvailable.setText("Available");
 
         txtOpenClose = (TextView) myDialog.findViewById(R.id.txtOpenClose);
         txtOpenClose.setText("From " + ps.getOpentime() + " to " + ps.getClosetime());

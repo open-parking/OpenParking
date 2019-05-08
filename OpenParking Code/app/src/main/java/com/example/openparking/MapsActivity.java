@@ -773,9 +773,9 @@ public class MapsActivity extends FragmentActivity implements
 
         txtIsAvailable = (TextView) myDialog.findViewById(R.id.txtIsAvailable);
         if(ps.getReservedStatus())
-            txtIsAvailable.setText("Available");
-        else
             txtIsAvailable.setText("Sold");
+        else
+            txtIsAvailable.setText("Available");
 
         txtOpenClose = (TextView) myDialog.findViewById(R.id.txtOpenClose);
         txtOpenClose.setText("From " + ps.getOpentime() + " to " + ps.getClosetime());

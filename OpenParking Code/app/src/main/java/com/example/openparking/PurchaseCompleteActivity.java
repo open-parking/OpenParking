@@ -27,6 +27,7 @@ public class PurchaseCompleteActivity extends AppCompatActivity implements View.
     private Dialog myDialog;
 
     private DatabaseReference mDatabase;
+    private DatabaseReference testRef;
 
     private ParkingSpace parkingSpace;
     private User owner;
@@ -41,7 +42,6 @@ public class PurchaseCompleteActivity extends AppCompatActivity implements View.
         Intent intent = getIntent();
         parkingSpace = intent.getParcelableExtra("parkingSpace");
 
-        System.out.println("##############" + parkingSpace.getAddress());
 
         buttonViewParking = (Button)findViewById(R.id.btn_viewParking);
         buttonViewParking.setOnClickListener(this);
@@ -53,6 +53,13 @@ public class PurchaseCompleteActivity extends AppCompatActivity implements View.
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
         owner = new User();
+        retrieveOwner();
+
+        //update database to show parking space as taken
+        parkingSpace.setReservedStatus(Boolean.TRUE);
+        System.out.println("Parkingspace isReserved: " + parkingSpace.getReservedStatus());
+        writeData();
+
     }
 
 
@@ -98,6 +105,23 @@ public class PurchaseCompleteActivity extends AppCompatActivity implements View.
         });
     }
 
+    public void writeData()
+    {
+        // WRITING to database after creating a parking instance object
+        testRef = mDatabase.child("ParkingSpaces").child(parkingSpace.getZipcode());
+        testRef.setValue(parkingSpace);
+        testRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Log.d("TAG", "Database write successful!");
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.d("TAG", "Database write failed");
+            }
+        });
+    }
 
 
 
@@ -138,9 +162,9 @@ public class PurchaseCompleteActivity extends AppCompatActivity implements View.
 
         txtIsAvailable = (TextView) myDialog.findViewById(R.id.txtIsAvailable);
         if(parkingSpace.getReservedStatus())
-            txtIsAvailable.setText("Available");
-        else
             txtIsAvailable.setText("Sold");
+        else
+            txtIsAvailable.setText("Available");
 
         txtOpenClose = (TextView) myDialog.findViewById(R.id.txtOpenClose);
         txtOpenClose.setText("From " + parkingSpace.getOpentime() + " to " + parkingSpace.getClosetime());
