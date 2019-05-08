@@ -47,12 +47,15 @@
             android:id="@+id/buttonMainMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/rounded_button"
+            android:layout_marginBottom="20dp"
             android:text="Main Menu" />
 
         <Button
             android:id="@+id/buttonLogout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="53dp"
+            android:background="@drawable/rounded_button"
             android:text="Log Out" />
 
     </LinearLayout>

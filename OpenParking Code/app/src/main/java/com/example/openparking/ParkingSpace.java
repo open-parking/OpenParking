@@ -7,6 +7,7 @@ import com.google.android.gms.maps.model.LatLng;
 
 public class ParkingSpace implements Parcelable{
 
+    private String id;
     private String ownerID;
     private String address;
     private String zipcode;
@@ -28,6 +29,7 @@ public class ParkingSpace implements Parcelable{
 
     public ParkingSpace( String owner, String address, String zipcode, Double latitude, Double longitude, Double cost, String openTime, String closeTime)
     {
+        this.id = "NOT SET";
         this.ownerID = owner;
         this.address = address;
         this.zipcode = zipcode;
@@ -38,6 +40,16 @@ public class ParkingSpace implements Parcelable{
         this.openTime = openTime;
         this.closeTime = closeTime;
         this.reserved = false;
+    }
+
+    public String getID()
+    {
+        return this.id;
+    }
+
+    public void setID(String ID)
+    {
+        this.id = ID;
     }
 
     public String getOwnerID()
@@ -146,6 +158,7 @@ public class ParkingSpace implements Parcelable{
 
     public void writeToParcel(Parcel out, int flags)
     {
+        out.writeString(id);
         out.writeString(ownerID);
         out.writeString(address);
         out.writeString(zipcode);
@@ -160,6 +173,7 @@ public class ParkingSpace implements Parcelable{
     }
 
     public ParkingSpace(Parcel in) {
+        this.id         = in.readString();
         this.ownerID    = in.readString();
         this.address    = in.readString();
         this.zipcode    = in.readString();
