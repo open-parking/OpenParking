@@ -55,47 +55,40 @@
         android:inputType="textPostalAddress"
         android:paddingLeft="15dp" />
 
-    <EditText
-        android:id="@+id/editTextCity"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_margin="15dp"
-        android:autofillHints="City"
-        android:background="@drawable/et_bg"
-        android:hint="Enter the City"
-        android:inputType="textPostalAddress"
-        android:paddingLeft="15dp" />
+        android:layout_height="50dp">
 
-    <EditText
-        android:id="@+id/editTextState"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_margin="15dp"
-        android:autofillHints="State"
-        android:background="@drawable/et_bg"
-        android:hint="Enter the State"
-        android:inputType="textPostalAddress"
-        android:paddingLeft="15dp" />
+        <AutoCompleteTextView
+            android:id="@+id/editTextCity"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="50dp"
+            android:layout_margin="15dp"
+            android:autofillHints="City"
+            android:background="@drawable/et_bg"
+            android:hint="Enter the City"
+            android:inputType="textPostalAddress"
+            android:paddingLeft="15dp" />
+
+
+        <Spinner
+            android:id="@+id/spinner_states"
+            android:hint="State"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_gravity="right" />
+    </LinearLayout>
 
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="50dp">
-        <EditText
-            android:id="@+id/editTextZipCode"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_margin="15dp"
-            android:autofillHints=""
-            android:background="@drawable/et_bg"
-            android:hint="Enter the ZipCode"
-            android:inputType="number"
-            android:paddingLeft="15dp" />
-
             <EditText
                 android:id="@+id/editTextZipCode"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="50dp"
+                android:layout_weight="2"
                 android:layout_margin="15dp"
                 android:autofillHints=""
                 android:background="@drawable/et_bg"
@@ -103,58 +96,46 @@
                 android:inputType="number"
                 android:paddingLeft="15dp" />
 
+    </LinearLayout>
 
-            <Button
-                android:id="@+id/btnCoords"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:layout_margin="15dp"
-                android:background="@drawable/rounded_button"
-                android:text="GetCoordinates" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <EditText
-                android:id="@+id/editTextLatitude"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:layout_margin="15dp"
-                android:autofillHints=""
-                android:focusable="false"
-                android:hint="Latitude"
-                android:inputType="text"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp" />
-
-            <EditText
-                android:id="@+id/editTextLongitude"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:layout_margin="15dp"
-                android:autofillHints=""
-                android:focusable="false"
-                android:hint="Longitude"
-                android:inputType="text"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp" />
-
-        </LinearLayout>
+        <!-- Hidden
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
 
 
+        <EditText
+            android:id="@+id/editTextLatitude"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="50dp"
+            android:autofillHints=""
+            android:focusable="false"
+            android:hint="Latitude"
+            android:inputType="text"
+            />
+        <EditText
+            android:id="@+id/editTextLongitude"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="50dp"
+            android:autofillHints=""
+            android:focusable="false"
+            android:hint="Longitude"
+            android:inputType="text"
+            />
+    </LinearLayout>
+    -->
 
-
-    <EditText
+        <EditText
         android:id="@+id/editTextCost"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_margin="15dp"
         android:autofillHints=""
         android:hint="Enter the cost"
-        android:inputType="text"
+        android:inputType="number"
         android:paddingLeft="16dp"
         android:paddingRight="16dp" />
 
@@ -162,32 +143,50 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <EditText
-                android:id="@+id/editTextOpenTime"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:layout_margin="15dp"
-                android:autofillHints="Open Time"
-                android:hint="Open Time"
-                android:inputType="text"
+            <TextView
+                android:id="@+id/textViewOpenTime"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
                 android:paddingLeft="16dp"
-                android:paddingRight="16dp" />
+                android:paddingRight="16dp"
+                android:text="@string/open_label"/>
 
-            <EditText
-                android:id="@+id/editTextCloseTime"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:layout_margin="15dp"
-                android:autofillHints="Close Time"
-                android:hint="Close Time"
-                android:inputType="text"
+            <TextView
+                android:id="@+id/textViewCloseTime"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
                 android:paddingLeft="16dp"
-                android:paddingRight="16dp" />
+                android:paddingRight="16dp"
+                android:text="@string/close_label"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+            <Spinner
+                android:id="@+id/spinner_open_time"
+                android:hint="open"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+
+                android:layout_height="50dp"
+                />
+
+            <Spinner
+                android:id="@+id/spinner_close_time"
+                android:hint="close"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="50dp"
+                />
+
         </LinearLayout>
 
 
         <Button
-            android:id="@+id/btnPicture"
+            android:id="@+id/btnAddPicture"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
