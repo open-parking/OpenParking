@@ -104,6 +104,8 @@ public class ParkingListActivity extends AppCompatActivity{
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), recyclerView, new RecyclerTouchListener.ClickListener() {
             @Override
             public void onClick(View view, int position) {
+                ps = parkingSpaceList.get(position);
+                System.out.println("Parking Space: " + ps.getAddress());
                 retrieveOwner();
                 showPopup();
             }

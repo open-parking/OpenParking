@@ -55,32 +55,18 @@ public class CreateParkingInstanceActivity extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance();
         ref = mDatabase.getReference();
 
-        testRef = ref.child("ParkingSpaces").child(parkingSpace.getZipcode());
-        Query query = ref.child("ParkingSpaces").child(parkingSpace.getZipcode()).orderByChild("address").equalTo(parkingSpace.getAddress());
-        /*
-        query.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                temp = dataSnapshot.getValue(ParkingSpace.class);
-                Log.d("TAG", "Read successful! space: " + temp.getAddress());
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.d("Tag", " Read Failed");
-            }
-        });
-
-        */
-
-        parkingInstance = new ParkingInstance();
-
+        parkingSpaceID = parkingSpace.getID();
         sellerID = parkingSpace.getOwnerID();
         buyerID = buyer.getUid();
+
+        parkingInstance = new ParkingInstance();
+        parkingInstance.setParkingSpaceID(parkingSpaceID);
         parkingInstance.setSellerID(sellerID);
         parkingInstance.setBuyerID(buyerID);
 
-        //parkingInstance.setParkingSpaceID();
+        writeData();
+
 
 
         complete = new Intent(CreateParkingInstanceActivity.this, PurchaseCompleteActivity.class);
@@ -141,6 +127,7 @@ public class CreateParkingInstanceActivity extends AppCompatActivity {
 
 
 
+        /*
     public void readData(DatabaseReference ref, final OnGetDataListener listener){
         System.out.println("Reached READDATA function");
         listener.onStart();
@@ -155,6 +142,9 @@ public class CreateParkingInstanceActivity extends AppCompatActivity {
                 listener.onFailure(databaseError);
             }
         });
+    }
+
+    */
     }
 
     public void writeData()
@@ -175,6 +165,7 @@ public class CreateParkingInstanceActivity extends AppCompatActivity {
         });
     }
 
+    /*
     public void readUser()
     {
         //READING from firebase by using the sellerID from parkingInstance to retrieve a user
@@ -193,12 +184,12 @@ public class CreateParkingInstanceActivity extends AppCompatActivity {
         });
 
 
-    */
+
 
 
 
 
 
     }
-
+    */
 }
