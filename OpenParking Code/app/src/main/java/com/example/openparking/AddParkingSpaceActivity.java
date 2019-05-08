@@ -36,6 +36,10 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
     Button btnAddPicture;
     //Button btnCoordinate; // Hidden
 
+    public Double latitude;        //received from geocoder
+    public Double longitude;       //received from geocoder
+    int zipCode;            //received from geocoder
+
     private EditText editTextStreet;
     private AutoCompleteTextView editTextCity;
     //private EditText editTextState; // replaced with spinner
@@ -63,6 +67,10 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_parking_space);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        this.latitude = 0.0;
+        this.longitude = 0.0;
+        this.zipCode = 0;
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
@@ -101,7 +109,8 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
         openTimeSpinner.setAdapter(myTimeAdapter);
         closeTimeSpinner.setAdapter(myTimeAdapter);
 
-            //Populate AM PM Spinners
+
+        //Populate AM PM Spinners
         ArrayAdapter<String> myAMPM_Adapter = new ArrayAdapter<String>(AddParkingSpaceActivity.this,
                 android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.am_pm));
         myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -129,43 +138,37 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Log.v(TAG, "Clicked Send Button");
 
-                //TODO: Check Street Address Validity
-
+                //Get address from user Input
                 String address =            editTextStreet.getText().toString().trim();
                 address = address + ", " +  editTextCity.getText().toString().trim();
                 address = address + ", " +  stateSpinner.getSelectedItem().toString();
-
                 final String zipcode = editTextZipCode.getText().toString().trim();
 
+                // Check Street Address Validity
+                if(!verifyAddress(address))
+                {
+                    // Notify User and reset input boxes
 
-                // WIP
-                //final Double lat = Double.parseDouble(editTextLatitude.getText().toString());
-                //final Double lon = Double.parseDouble(editTextLongitude.getText().toString());
-                final Double lat = 0.0;
-                final Double lon = 0.0;
-                final Double cost = Double.parseDouble(editTextCost.getText().toString());
-                //final String open = editTextOpenTime.getText().toString().trim();
-                //final String close = editTextCloseTime.getText().toString().trim();
-                final String open = openTimeSpinner.getSelectedItem().toString();
-                final String close = closeTimeSpinner.getSelectedItem().toString();
+                    //toast
+                    resetInputs();
 
-                //TODO: add loading bar or message
+                }
+                else {
+                    //Get Cost and Times
+                    final Double cost = Double.parseDouble(editTextCost.getText().toString());
+                    final String open = openTimeSpinner.getSelectedItem().toString() + openTimeAMPMSpinner.getSelectedItem().toString();
+                    final String close = closeTimeSpinner.getSelectedItem().toString() + closeTimeAMPMSpinner.getSelectedItem().toString();
 
-                writeNewParkingSpace(userID, address, zipcode, lat, lon, cost, open, close);
+                    // Send to Fire Base
+                    writeNewParkingSpace(userID, address, zipcode, latitude, longitude, cost, open, close);
 
+                    // Reset inputs
+                    resetInputs();
 
-                // Reset inputs
-                editTextStreet.setText("");
-                editTextCity.setText("");
-                stateSpinner.setSelection(1);
-                editTextZipCode.setText("Zipcode");
-                //editTextLatitude.setText("");
-                //editTextLongitude.setText("");
-                editTextCost.setText("Price per hour");
-                //editTextOpenTime.setText("Open Time");
-                //editTextCloseTime.setText("Close Time");
-                openTimeSpinner.setSelection(1);
-                closeTimeSpinner.setSelection(1);
+                    //toast
+                    //TODO: show loading bar or toast message
+
+                }
             }
 
         });
@@ -210,6 +213,33 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
         */
     }
 
+    private boolean verifyAddress(String address)
+    {
+        Geocoder geocoder = new Geocoder(this);
+        List<Address> addresses;
+        try{
+            addresses = geocoder.getFromLocationName(address, 1);
+
+            if(addresses.size() > 0) {
+                this.latitude= addresses.get(0).getLatitude();
+                this.longitude= addresses.get(0).getLongitude();
+                //editTextLatitude.setText(Double.toString(latitude));   // Hidden
+                //editTextLongitude.setText(Double.toString(longitude)); // Hidden
+                return true;
+            }
+            else{
+                //Not a valid address
+                editTextStreet.setText("Not Valid");
+                editTextCity.setText("Not Valid");
+                return false;
+            }
+        }catch(Exception e)
+        {
+            Log.e(TAG, ":error verifying coordinates");
+        }
+        return false;
+    }
+
     private void writeNewParkingSpace(String ownerID, String Address,String zipCode, Double latitude, Double longitude, Double cost, String openTime, String closeTime )
     {
         // Send Parking Space to FireBase
@@ -230,5 +260,22 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
 
         //Store ID in parking space
         mDatabase.child("ParkingSpaces").child(zipCode).child(newPS_Id).child("id").setValue(newPS_Id);
+    }
+
+    private void resetInputs()
+    {
+        editTextStreet.setText("");
+        editTextCity.setText("");
+        stateSpinner.setSelection(1);
+        editTextZipCode.setText("Zipcode");
+        //editTextLatitude.setText("");
+        //editTextLongitude.setText("");
+        editTextCost.setText("Price per hour");
+        //editTextOpenTime.setText("Open Time");
+        //editTextCloseTime.setText("Close Time");
+        openTimeSpinner.setSelection(1);
+        closeTimeSpinner.setSelection(1);
+        openTimeAMPMSpinner.setSelection(1);
+        closeTimeAMPMSpinner.setSelection(2);
     }
 }
