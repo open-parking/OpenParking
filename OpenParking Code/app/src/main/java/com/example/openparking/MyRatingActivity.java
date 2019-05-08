@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -56,7 +57,11 @@ public class MyRatingActivity extends AppCompatActivity {
     {
         double rating = mUser.getContributorRating();
         rating_display_text_View.setText("Your Rating is : " + rating + " / 5.0");
-        if(rating >= 4.5)
+        if(rating == 0)
+        {
+            Toast.makeText(this, "This seller has not been rated.", Toast.LENGTH_SHORT).show();
+        }
+        else if(rating >= 4.5)
         {
             mRatingBar.setNumStars(5);
         }
