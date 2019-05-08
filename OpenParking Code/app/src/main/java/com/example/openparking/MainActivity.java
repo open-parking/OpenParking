@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // REPLACE WITH NEW ACTIVITY THAT DISPLAYS SELLER'S LISTINGS
-                startActivity(new Intent(MainActivity.this, ParkingListActivity.class));
+                startActivity(new Intent(MainActivity.this, MyParkingList.class));
             }
         });
         // My Rating Button

@@ -32,6 +32,7 @@
         <activity android:name=".PaymentDetails" />
         <activity android:name=".PayPalActivity" />
         <activity android:name=".RatingActivity" />
+        <activity android:name=".MyParkingList" />
         <activity android:name=".ParkingListActivity" />
         <activity
             android:name=".Test_Activity"
