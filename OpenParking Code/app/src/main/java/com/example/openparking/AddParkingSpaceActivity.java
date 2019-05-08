@@ -42,13 +42,13 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
     private Spinner  stateSpinner;
 
     private EditText editTextZipCode;
-    //private EditText editTextLatitude; // Hidden
-    //private EditText editTextLongitude; // Hidden
+    //private EditText editTextLatitude;    // Hidden
+    //private EditText editTextLongitude;   // Hidden
     private EditText editTextCost;
-    //private EditText editTextOpenTime;//
-    //private EditText editTextCloseTime;
-    private Spinner  openTimeSpinner;  // replaced with spinner
-    private Spinner  closeTimeSpinner; // replaced with spinner
+    //private EditText editTextOpenTime;    // replaced with spinner
+    //private EditText editTextCloseTime;   // replaced with spinner
+    private Spinner  openTimeSpinner;
+    private Spinner  closeTimeSpinner;
     private Spinner  openTimeAMPMSpinner;
     private Spinner  closeTimeAMPMSpinner;
 
@@ -81,7 +81,7 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
         closeTimeSpinner       = findViewById(R.id.spinner_close_time);
         openTimeAMPMSpinner        = findViewById(R.id.spinner_open_time_ampm);
         closeTimeAMPMSpinner        = findViewById(R.id.spinner_close_time_ampm);
-        
+
         // btnCoordinate = findViewById(R.id.btnCoords);//
         btnAddPicture = findViewById(R.id.bt_addpicture);
         btnSend = findViewById(R.id.btnSend);
@@ -101,6 +101,13 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
         openTimeSpinner.setAdapter(myTimeAdapter);
         closeTimeSpinner.setAdapter(myTimeAdapter);
 
+            //Populate AM PM Spinners
+        ArrayAdapter<String> myAMPM_Adapter = new ArrayAdapter<String>(AddParkingSpaceActivity.this,
+                android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.am_pm));
+        myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        openTimeAMPMSpinner.setAdapter(myAMPM_Adapter);
+        closeTimeAMPMSpinner.setAdapter(myAMPM_Adapter);
+
 
         // Get userID
         firebaseAuth = FirebaseAuth.getInstance();
@@ -113,7 +120,6 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
         userID = fuser.getUid();
 
         init();
-
     }
 
     private void init() {
@@ -124,7 +130,6 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
                 Log.v(TAG, "Clicked Send Button");
 
                 //TODO: Check Street Address Validity
-
 
                 String address =            editTextStreet.getText().toString().trim();
                 address = address + ", " +  editTextCity.getText().toString().trim();
