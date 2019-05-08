@@ -6,8 +6,9 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="new" />
     <option name="TOOL_WINDOW_LOG_LEVEL" value="verbose" />
-    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Firebase" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1e0d2453-6f86-44c0-b937-61f344f54860" name="Default Changelist" comment="">
@@ -15,6 +16,10 @@
       <change beforePath="$PROJECT_DIR$/.gradle/4.10.1/fileHashes/fileHashes.bin" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.10.1/fileHashes/fileHashes.lock" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.10.1/gc.properties" beforeDir="false" />
+<<<<<<< HEAD
+=======
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+>>>>>>> dev
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
 <<<<<<< Updated upstream
       <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
@@ -57,6 +62,12 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
+<<<<<<< HEAD
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/openparking/MapsActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2210">
+              <caret line="182" column="35" selection-start-line="182" selection-start-column="35" selection-end-line="182" selection-end-column="35" />
+=======
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_listitem.xml">
           <provider selected="true" editor-type-id="text-editor" />
           <provider editor-type-id="android-designer2" />
@@ -78,20 +89,31 @@
 <<<<<<< Updated upstream
             <state relative-caret-position="34">
               <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+<<<<<<< HEAD
 =======
             <state relative-caret-position="850">
               <caret line="64" selection-start-line="64" selection-end-line="64" />
 >>>>>>> Stashed changes
+=======
+>>>>>>> origin/dev
+>>>>>>> dev
             </state>
           </provider>
         </entry>
       </file>
 <<<<<<< Updated upstream
       <file pinned="false" current-in-tab="true">
+<<<<<<< HEAD
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/openparking/AddParkingSpaceActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="96">
+              <caret line="176" column="37" selection-start-line="176" selection-start-column="17" selection-end-line="176" selection-end-column="37" />
+=======
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/openparking/ParkingListActivity.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="374">
               <caret line="164" column="162" selection-start-line="164" selection-start-column="162" selection-end-line="164" selection-end-column="162" />
+<<<<<<< HEAD
 =======
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/openparking/PayPalActivity.java">
@@ -111,16 +133,30 @@
                 <element signature="method#setTestData#0;class#ParkingListActivity#0" />
               </folding>
 >>>>>>> Stashed changes
+=======
+>>>>>>> origin/dev
+>>>>>>> dev
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+<<<<<<< HEAD
 <<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_add_parking_space.xml">
+          <provider editor-type-id="android-designer2" />
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1275">
+              <caret line="75" column="38" selection-start-line="75" selection-start-column="38" selection-end-line="75" selection-end-column="38" />
+=======
+>>>>>>> dev
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_con_signup.xml">
           <provider editor-type-id="text-editor">
             <state relative-caret-position="1173">
               <caret line="69" column="56" selection-start-line="69" selection-start-column="56" selection-end-line="69" selection-end-column="56" />
+<<<<<<< HEAD
 =======
         <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
           <provider editor-type-id="android-manifest" />
@@ -137,6 +173,9 @@
             <state relative-caret-position="2397">
               <caret line="193" column="5" selection-start-line="193" selection-start-column="5" selection-end-line="193" selection-end-column="5" />
 >>>>>>> Stashed changes
+=======
+>>>>>>> origin/dev
+>>>>>>> dev
             </state>
           </provider>
           <provider selected="true" editor-type-id="android-designer2" />
@@ -154,20 +193,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>validate</find>
-      <find>random</find>
-      <find>addRandomMarkers</find>
-      <find>parkingInstanceList</find>
-      <find>googleMap</find>
-      <find>mMap</find>
-      <find>LatLng</find>
-      <find>randomLongBeachLocation</find>
-      <find>addRandomMarkersToParkingInstanceList</find>
-      <find>addMarker</find>
-      <find>longbeach</find>
-      <find>OnInfoWindowClickListener</find>
-      <find>parkingSpaceList</find>
-      <find>loadParkingSpacesFromDataBase</find>
       <find>marker</find>
       <find>parking</find>
       <find>log</find>
@@ -175,12 +200,29 @@
       <find>TAG</find>
       <find>parkin</find>
       <find>toast</find>
-      <find>mDatabase</find>
       <find>user</find>
       <find>query</find>
       <find>btnCoords</find>
       <find>buttonSignIn</find>
       <find>btnSend</find>
+      <find>txtAmount</find>
+      <find>ZipCodes</find>
+      <find>paymentAmount</find>
+      <find>amount</find>
+      <find>onActivityResult</find>
+      <find>setContentView</find>
+      <find>mImagePrice</find>
+      <find>5 Dollar</find>
+      <find>recyclerv_view</find>
+      <find>getItemCount</find>
+      <find>size</find>
+      <find>parkingInstanceList</find>
+      <find>parkingSpaceList</find>
+      <find>mContext</find>
+      <find>mImageNames</find>
+      <find>imageName</find>
+      <find>mDatabase</find>
+      <find>mDa</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -203,18 +245,27 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_test_.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/ParkingSpace.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/openparking/Config/ParkingSpace.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_viewparkinginstance.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/openparking/ProfileActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/openparking/ViewParkingInstance.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/items_layout.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/openparking/Element.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/openparking/ElementAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_parking_list2.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/openparking/ParkingList.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/openparking/AddParkingSpaceActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/openparking/ParkingSpace.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/openparking/MapsActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/list_layout.xml" />
+<<<<<<< HEAD
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_parking_list.xml" />
+        <option value="$PROJECT_DIR$/app/build.gradle" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_listitem.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/openparking/Test_Activity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/openparking/SearchActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/openparking/ViewParkingInstance.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/openparking/Config/Config.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_viewparkinginstance.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/openparking/MapsActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/openparking/RecyclerViewAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/openparking/myRecyclerViewAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/openparking/mAdapter.java" />
+=======
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/openparking/RecyclerViewAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/openparking/Test_Activity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/openparking/SearchActivity.java" />
@@ -231,11 +282,23 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_listitem.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_add_parking_space.xml" />
         <option value="$PROJECT_DIR$/app/build.gradle" />
+>>>>>>> origin/dev
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/openparking/ParkingListActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/openparking/MyAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_add_parking_space.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/openparking/ParkingSpace.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/openparking/AddParkingSpaceActivity.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
+<<<<<<< HEAD
+    <option name="x" value="-10" />
+    <option name="y" value="-10" />
+    <option name="width" value="1940" />
+    <option name="height" value="1050" />
+=======
     <option name="x" value="-8" />
 <<<<<<< Updated upstream
     <option name="width" value="977" />
@@ -248,12 +311,20 @@
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
+>>>>>>> origin/dev
   </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+<<<<<<< HEAD
+      <pane id="AndroidView" />
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
+      <pane id="ProjectPane" />
+=======
       <pane id="ProjectPane" />
 <<<<<<< Updated upstream
 =======
@@ -307,15 +378,23 @@
       </pane>
 <<<<<<< Updated upstream
       <pane id="PackagesPane" />
+<<<<<<< HEAD
 =======
 >>>>>>> Stashed changes
+=======
+>>>>>>> origin/dev
+>>>>>>> dev
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="android.project.structure.last.selected" value="app" />
     <property name="android.project.structure.proportion" value="0.15" />
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
+<<<<<<< HEAD
     <property name="device.picker.selection" value="Pixel_2_XL_API_28" />
+=======
+    <property name="device.picker.selection" value="Nexus_5X_API_24_for_OpenParking" />
+>>>>>>> dev
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="instant.run" />
   </component>
@@ -429,26 +508,49 @@
   <component name="ToolWindowManager">
 <<<<<<< Updated upstream
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+<<<<<<< HEAD
 =======
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
 >>>>>>> Stashed changes
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> dev
     <editor active="true" />
+>>>>>>> origin/dev
     <layout>
+<<<<<<< HEAD
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.48920864" visible="true" weight="0.23667377" />
       <window_info id="Structure" order="1" sideWeight="0.51079136" side_tool="true" weight="0.23697917" />
+=======
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4861111" visible="true" weight="0.2590604" />
+      <window_info id="Structure" order="1" sideWeight="0.5069444" side_tool="true" weight="0.3295302" />
+>>>>>>> dev
       <window_info id="Capture Tool" order="2" />
-      <window_info id="Captures" order="3" sideWeight="0.5019084" side_tool="true" weight="0.18255034" />
+      <window_info id="Captures" order="3" sideWeight="0.5138889" side_tool="true" weight="0.2536913" />
       <window_info id="Build Variants" order="4" side_tool="true" />
       <window_info id="Image Layers" order="5" />
       <window_info id="Designer" order="6" />
       <window_info id="Favorites" order="7" side_tool="true" />
+<<<<<<< HEAD
+      <window_info id="Resources Explorer" order="8" sideWeight="0.49305555" weight="0.3295302" />
+      <window_info active="true" anchor="bottom" id="Logcat" order="0" sideWeight="0.49395972" visible="true" weight="0.25036603" />
+=======
       <window_info id="Resources Explorer" order="8" weight="0.3295302" />
 <<<<<<< Updated upstream
       <window_info anchor="bottom" id="Logcat" order="0" sideWeight="0.8463087" weight="0.611898" />
+>>>>>>> origin/dev
       <window_info anchor="bottom" id="Android Profiler" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32827735" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49932885" weight="0.32796487" />
       <window_info anchor="bottom" id="Debug" order="3" />
       <window_info anchor="bottom" id="Terminal" order="4" sideWeight="0.28710938" weight="0.23654391" />
+<<<<<<< HEAD
+      <window_info anchor="bottom" id="Event Log" order="5" sideWeight="0.5060403" side_tool="true" visible="true" weight="0.25036603" />
+      <window_info anchor="bottom" id="Version Control" order="6" show_stripe_button="false" />
+      <window_info anchor="bottom" id="TODO" order="7" weight="0.32991204" />
+      <window_info anchor="bottom" id="Build" order="8" sideWeight="0.70738256" weight="0.31771597" />
+      <window_info anchor="bottom" id="Find" order="9" sideWeight="0.49731544" visible="true" weight="0.329429" />
+=======
       <window_info anchor="bottom" id="Event Log" order="5" sideWeight="0.2872483" side_tool="true" visible="true" weight="0.14447592" />
       <window_info anchor="bottom" id="Version Control" order="6" show_stripe_button="false" />
       <window_info anchor="bottom" id="TODO" order="7" weight="0.32991204" />
@@ -465,13 +567,19 @@
       <window_info anchor="bottom" id="Build" order="8" sideWeight="0.7137527" visible="true" weight="0.39328277" />
 >>>>>>> Stashed changes
       <window_info anchor="bottom" id="Find" order="9" />
+>>>>>>> origin/dev
       <window_info anchor="right" id="Device File Explorer" order="0" side_tool="true" />
       <window_info anchor="right" id="Capture Analysis" order="1" />
       <window_info anchor="right" id="Gradle" order="2" />
       <window_info anchor="right" id="Theme Preview" order="3" />
       <window_info anchor="right" id="Palette&#9;" order="4" />
+<<<<<<< HEAD
+      <window_info anchor="right" id="Preview" order="5" weight="0.2409396" />
+=======
       <window_info anchor="right" id="Preview" order="5" weight="0.20671141" />
+>>>>>>> origin/dev
       <window_info anchor="right" id="Assistant" order="6" weight="0.35637584" />
+      <window_info anchor="right" id="Hierarchy" order="7" weight="0.3295302" />
     </layout>
     <layout-to-restore>
       <window_info id="Capture Tool" order="0" />
@@ -499,6 +607,18 @@
       <window_info anchor="right" id="Preview" order="5" weight="0.2785235" />
       <window_info anchor="right" id="Assistant" order="6" weight="0.35637584" />
     </layout-to-restore>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/openparking/ViewParkingInstance.java</url>
+          <line>174</line>
+          <properties />
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/.gitignore">
@@ -543,6 +663,102 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="18" selection-start-line="8" selection-start-column="18" selection-end-line="8" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/OpenParking Code.iml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" column="37" selection-start-line="13" selection-start-column="37" selection-end-line="13" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gradlew">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2241" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gradlew.bat">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1043" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/local.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" selection-start-line="8" selection-end-line="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/openparking/Contributor.java" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/openparking/LoginActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="332">
+          <caret line="56" column="20" selection-start-line="56" selection-start-column="8" selection-end-line="56" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_viewparkinginstance.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="16" column="38" lean-forward="true" selection-start-line="16" selection-start-column="38" selection-end-line="16" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/openparking/Config/Config.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="133" selection-start-line="3" selection-start-column="133" selection-end-line="3" selection-end-column="133" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/openparking/PaymentDetails.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="224">
+          <caret line="39" column="89" selection-start-line="39" selection-start-column="89" selection-end-line="39" selection-end-column="89" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/openparking/PayPalActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="303">
+          <caret line="33" column="22" selection-start-line="33" selection-start-column="16" selection-end-line="33" selection-end-column="22" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_con_signup.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/openparking/Test_Activity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-591">
+          <caret line="79" column="86" selection-start-line="79" selection-start-column="63" selection-end-line="79" selection-end-column="86" />
+          <folding>
+            <element signature="e#1651#1943#0" expanded="true" />
+            <element signature="e#1942#1943#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/openparking/ViewParkingInstance.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3145">
+          <caret line="217" column="69" selection-start-line="217" selection-start-column="69" selection-end-line="217" selection-end-column="69" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#onDestroy#0;class#ViewParkingInstance#0" />
+          </folding>
+=======
     <entry file="file://$PROJECT_DIR$/OpenParking Code.iml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
@@ -665,10 +881,17 @@
       <provider editor-type-id="text-editor">
         <state relative-caret-position="310">
           <caret line="72" column="56" selection-start-line="72" selection-start-column="56" selection-end-line="72" selection-end-column="56" />
+>>>>>>> origin/dev
         </state>
       </provider>
       <provider selected="true" editor-type-id="android-designer2" />
     </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/openparking/ParkingInstance.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="8" column="28" selection-start-line="8" selection-start-column="28" selection-end-line="8" selection-end-column="28" />
+=======
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_maps.xml">
       <provider editor-type-id="text-editor" />
       <provider selected="true" editor-type-id="android-designer2" />
@@ -677,10 +900,18 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
           <caret line="17" column="17" selection-start-line="17" selection-start-column="17" selection-end-line="17" selection-end-column="17" />
+>>>>>>> origin/dev
         </state>
       </provider>
       <provider editor-type-id="android-designer2" />
     </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_create_parking.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="38" lean-forward="true" selection-start-line="16" selection-start-column="38" selection-end-line="16" selection-end-column="38" />
+=======
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_password_recovery.xml">
 =======
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_parking_list.xml" />
@@ -693,10 +924,28 @@
       <provider editor-type-id="text-editor">
         <state relative-caret-position="225">
           <caret line="54" column="56" selection-start-line="54" selection-start-column="56" selection-end-line="54" selection-end-column="56" />
+>>>>>>> origin/dev
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
 <<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/openparking/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="30" selection-start-line="10" selection-start-column="30" selection-end-line="10" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_create_parking_instance.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="43" selection-start-line="7" selection-start-column="43" selection-end-line="7" selection-end-column="43" />
+=======
+>>>>>>> dev
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_pay_pal.xml">
       <provider editor-type-id="text-editor" />
 =======
@@ -713,10 +962,20 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="361">
           <caret line="54" column="42" lean-forward="true" selection-start-line="54" selection-start-column="42" selection-end-line="54" selection-end-column="42" />
+>>>>>>> origin/dev
         </state>
       </provider>
       <provider editor-type-id="android-designer2" />
     </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/circlebackground.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/openparking/SignupActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="45" column="20" selection-start-line="45" selection-start-column="8" selection-end-line="45" selection-end-column="20" />
+=======
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_purchase_complete.xml">
       <provider selected="true" editor-type-id="text-editor" />
       <provider editor-type-id="android-designer2" />
@@ -733,18 +992,87 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
           <caret line="20" column="53" selection-start-line="20" selection-start-column="53" selection-end-line="20" selection-end-column="53" />
+>>>>>>> origin/dev
         </state>
       </provider>
       <provider editor-type-id="android-designer2" />
     </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/openparking/SetAsContributorActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+=======
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_signup.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
           <caret line="77" column="57" selection-start-line="77" selection-start-column="57" selection-end-line="77" selection-end-column="57" />
+>>>>>>> origin/dev
         </state>
       </provider>
       <provider editor-type-id="android-designer2" />
     </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/parkingspot1.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/parkingspot2.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/parkingspot3.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/profile_han.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/round_profile.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/rounded_button.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/userphoto.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/title.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/items_layout.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-898" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/custom_window.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/custom_info_window.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/custom_info_contents.xml">
+      <provider selected="true" editor-type-id="android-designer2" />
+      <provider editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/content_test_.xml">
+      <provider selected="true" editor-type-id="android-designer2" />
+      <provider editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/content_add_parking_space.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_second.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_test_.xml">
+      <provider selected="true" editor-type-id="android-designer2" />
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="55" selection-start-line="3" selection-start-column="55" selection-end-line="3" selection-end-column="55" />
+=======
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_test_.xml">
       <provider editor-type-id="text-editor">
         <state relative-caret-position="51">
@@ -788,10 +1116,59 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
           <caret line="22" column="12" selection-start-line="22" selection-start-column="12" selection-end-line="22" selection-end-column="12" />
+>>>>>>> origin/dev
         </state>
       </provider>
       <provider editor-type-id="android-designer2" />
     </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/parking_instance_locations.xml" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/openparking/MyAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="364">
+          <caret line="75" column="11" lean-forward="true" selection-start-line="75" selection-start-column="11" selection-end-line="75" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_listitem.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/openparking/ParkingListActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="22" column="41" selection-start-line="22" selection-start-column="33" selection-end-line="22" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider editor-type-id="android-manifest" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="969">
+          <caret line="57" column="26" lean-forward="true" selection-start-line="57" selection-start-column="26" selection-end-line="57" selection-end-column="26" />
+          <folding>
+            <element signature="e#2795#2820#0" expanded="true" />
+            <element signature="e#3183#3212#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/openparking/ParkingSpace.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="27" column="5" lean-forward="true" selection-start-line="27" selection-start-column="5" selection-end-line="27" selection-end-column="5" />
+          <folding>
+            <element signature="e#1966#2003#0" />
+            <element signature="e#2487#2625#0" />
+            <element signature="e#4665#4666#0" expanded="true" />
+            <element signature="e#4716#4717#0" expanded="true" />
+            <element signature="e#4776#4777#0" expanded="true" />
+            <element signature="e#4829#4830#0" expanded="true" />
+          </folding>
+=======
     <entry file="file://$PROJECT_DIR$/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
@@ -822,10 +1199,25 @@
       <provider editor-type-id="text-editor">
         <state relative-caret-position="2720">
           <caret line="160" column="56" selection-start-line="160" selection-start-column="56" selection-end-line="160" selection-end-column="56" />
+>>>>>>> origin/dev
         </state>
       </provider>
       <provider selected="true" editor-type-id="android-designer2" />
     </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_parking_list.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="41" selection-start-line="12" selection-start-column="41" selection-end-line="12" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/openparking/MapsActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2210">
+          <caret line="182" column="35" selection-start-line="182" selection-start-column="35" selection-end-line="182" selection-end-column="35" />
+=======
     <entry file="file://$PROJECT_DIR$/app/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="495">
@@ -861,10 +1253,25 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
           <caret line="16" column="34" selection-start-line="16" selection-start-column="34" selection-end-line="16" selection-end-column="34" />
+>>>>>>> origin/dev
         </state>
       </provider>
       <provider editor-type-id="android-manifest" />
     </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_add_parking_space.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1275">
+          <caret line="75" column="38" selection-start-line="75" selection-start-column="38" selection-end-line="75" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/openparking/AddParkingSpaceActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="96">
+          <caret line="176" column="37" selection-start-line="176" selection-start-column="17" selection-end-line="176" selection-end-column="37" />
+=======
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/openparking/User.java">
       <provider selected="true" editor-type-id="text-editor">
 <<<<<<< Updated upstream
@@ -882,6 +1289,7 @@
 <<<<<<< Updated upstream
         <state relative-caret-position="374">
           <caret line="164" column="162" selection-start-line="164" selection-start-column="162" selection-end-line="164" selection-end-column="162" />
+<<<<<<< HEAD
 =======
         <state relative-caret-position="1258">
           <caret line="96" column="59" selection-start-line="96" selection-start-column="59" selection-end-line="96" selection-end-column="59" />
@@ -911,6 +1319,9 @@
             <element signature="method#setTestData#0;class#ParkingListActivity#0" />
           </folding>
 >>>>>>> Stashed changes
+=======
+>>>>>>> origin/dev
+>>>>>>> dev
         </state>
       </provider>
     </entry>
