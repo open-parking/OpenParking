@@ -99,7 +99,6 @@ public class MainActivity extends AppCompatActivity {
         myListings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // REPLACE WITH NEW ACTIVITY THAT DISPLAYS SELLER'S LISTINGS
                 startActivity(new Intent(MainActivity.this, MyParkingList.class));
             }
         });
@@ -107,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
         myRating.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, RatingActivity.class));
+                startActivity(new Intent(MainActivity.this, MyRatingActivity.class));
             }
         });
 
