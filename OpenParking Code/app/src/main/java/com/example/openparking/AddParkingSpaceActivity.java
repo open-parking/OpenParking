@@ -11,8 +11,6 @@ import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -20,6 +18,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -33,7 +32,10 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
     Button btnSend;
     Button btnCoordinate;
 
-    private EditText editTextAddress;
+    private EditText editTextStreet;
+    private EditText editTextCity;
+    private EditText editTextState;
+
     private EditText editTextZipCode;
     private EditText editTextLatitude;
     private EditText editTextLongitude;
@@ -42,7 +44,6 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
     private EditText editTextCloseTime;
 
     private DatabaseReference mDatabase;
-    private ParkingSpace test;
 
     private FirebaseAuth firebaseAuth;
     private String userID;
@@ -65,7 +66,10 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
         //});
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        editTextAddress     = findViewById(R.id.editTextAddress);
+        editTextStreet     = findViewById(R.id.editTextStreet);
+        editTextCity     = findViewById(R.id.editTextCity);
+        editTextState     = findViewById(R.id.editTextState);
+
         editTextZipCode     = findViewById(R.id.editTextZipCode);
         editTextLatitude    = findViewById(R.id.editTextLatitude);
         editTextLongitude   = findViewById(R.id.editTextLongitude);
@@ -73,7 +77,7 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
         editTextOpenTime    = findViewById(R.id.editTextOpenTime);
         editTextCloseTime   = findViewById(R.id.editTextCloseTime);
 
-        btnSend = findViewById(R.id.btnSend);
+        btnSend = findViewById(R.id.btnPicture);
         btnCoordinate = findViewById(R.id.btnCoords);
 
         // Get userID
@@ -103,7 +107,10 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
 
                 //DONE: SEND DATA TO FIREBASE
 
-                final String address = editTextAddress.getText().toString().trim();
+                String address =            editTextStreet.getText().toString().trim();
+                address = address + ", " +  editTextCity.getText().toString().trim();
+                address = address + ", " +  editTextState.getText().toString().trim();
+
                 final String zipcode = editTextZipCode.getText().toString().trim();
                 final Double lat = Double.parseDouble(editTextLatitude.getText().toString());
                 final Double lon = Double.parseDouble(editTextLongitude.getText().toString());
@@ -114,8 +121,11 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
                 writeNewParkingSpace(userID, address, zipcode, lat, lon, cost, open, close);
 
                 //TODO Clear all edit text
-                editTextAddress.setText("Address");
-                editTextAddress.setText("Zipcode");
+                editTextStreet.setText("Street");
+                editTextCity.setText("City");
+                editTextState.setText("State");
+
+                editTextZipCode.setText("Zipcode");
                 editTextLatitude.setText("Latitude");
                 editTextLongitude.setText("Longitude");
                 editTextCost.setText("Price per hour");
@@ -136,7 +146,11 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
                 Geocoder geocoder = new Geocoder(v.getContext());
                 List<Address> addresses;
                 try{
-                    addresses = geocoder.getFromLocationName(editTextAddress.getText().toString().trim(), 1);
+                    String address =            editTextStreet.getText().toString().trim();
+                    address = address + ", " +  editTextCity.getText().toString().trim();
+                    address = address + ", " +  editTextState.getText().toString().trim();
+
+                    addresses = geocoder.getFromLocationName(address, 1);
 
                     if(addresses.size() > 0) {
                         double latitude= addresses.get(0).getLatitude();
@@ -146,24 +160,37 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
                     }
                     else{
                         //Not a valid address
-                        editTextAddress.setText("Not Valid Address");
+                        editTextStreet.setText("Not Valid");
+                        editTextCity.setText("Not Valid");
+                        editTextState.setText("Not Valid");
                     }
                 }catch(Exception e)
                 {
                     Log.v(TAG, ":error getting coordinates");
                 }
-
-
-
-
             }
         });
     }
 
     private void writeNewParkingSpace(String ownerID, String Address,String zipCode, Double latitude, Double longitude, Double cost, String openTime, String closeTime )
     {
+        // Send Parking Space to FireBase
         ParkingSpace ps = new ParkingSpace(ownerID, Address,zipCode, latitude, longitude, cost, openTime, closeTime);
         Log.v(TAG, "Sending to mDatabase");
-        mDatabase.child("ParkingSpaces").child(zipCode).push().setValue(ps);// OLD TABLE NAME = ZipCodes
+
+
+        //Send To Firebase
+        DatabaseReference zipRef  = mDatabase.child("ParkingSpaces").child(zipCode);
+        DatabaseReference newPS_Ref = zipRef.push();
+        newPS_Ref.setValue(ps);
+
+
+        // Get the unique ID generated by a push()
+        String newPS_Id = newPS_Ref.getKey();
+        Log.v(TAG, "newPS_Id: " + newPS_Id);
+
+
+        //Store ID in parking space
+        mDatabase.child("ParkingSpaces").child(zipCode).child(newPS_Id).child("id").setValue(newPS_Id);
     }
 }
