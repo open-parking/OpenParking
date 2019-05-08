@@ -1,6 +1,7 @@
 package com.example.openparking;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
@@ -12,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.openparking.Config.RecyclerTouchListener;
 import com.google.firebase.database.ChildEventListener;
@@ -53,6 +55,7 @@ public class ParkingListActivity extends AppCompatActivity{
     private User owner;
     private Dialog myDialog;
 
+    private Intent create;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,6 +90,7 @@ public class ParkingListActivity extends AppCompatActivity{
         owner = new User();
         myDialog = new Dialog(this);
 
+        create = new Intent(ParkingListActivity.this, CreateParkingInstanceActivity.class);
 
         //FireBase
         //loadImagesFromFireBase();
@@ -101,8 +105,13 @@ public class ParkingListActivity extends AppCompatActivity{
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), recyclerView, new RecyclerTouchListener.ClickListener() {
             @Override
             public void onClick(View view, int position) {
+                ps = parkingSpaceList.get(position);
+                System.out.println("Parking Space: " + ps.getAddress());
+
                 retrieveOwner();
-                showPopup(view);
+
+
+
             }
 
             @Override
@@ -142,9 +151,28 @@ public class ParkingListActivity extends AppCompatActivity{
         mImagePrice.add("9 Dollars");
     }
 
+    //TODO: replace this with a call to the database
     private void setTestImages()
     {
         Log.d(TAG, "initImageBitmaps: preparing bitmaps.");
+
+        mImageUrls.add("https://c1.staticflickr.com/5/4636/25316407448_de5fbf183d_o.jpg");
+
+        mImageUrls.add("https://i.redd.it/tpsnoz5bzo501.jpg");
+
+        mImageUrls.add("https://i.redd.it/qn7f9oqu7o501.jpg");
+
+        mImageUrls.add("https://i.redd.it/j6myfqglup501.jpg");
+
+        mImageUrls.add("https://i.redd.it/0h2gm1ix6p501.jpg");
+
+        mImageUrls.add("https://i.redd.it/k98uzl68eh501.jpg");
+
+        mImageUrls.add("https://i.redd.it/glin0nwndo501.jpg");
+
+        mImageUrls.add("https://i.redd.it/obx4zydshg601.jpg");
+
+        mImageUrls.add("https://i.redd.it/glin0nwndo501.jpg");
 
         mImageUrls.add("https://c1.staticflickr.com/5/4636/25316407448_de5fbf183d_o.jpg");
 
@@ -189,6 +217,9 @@ public class ParkingListActivity extends AppCompatActivity{
                         // A new parking space has been added, add it to the displayed list
                         //ParkingSpace ps = new ParkingSpace();
                         ps = dataSnapshot.getValue(ParkingSpace.class);
+
+
+
 
                         if(!ps.equals(null))
                         {
@@ -268,6 +299,12 @@ public class ParkingListActivity extends AppCompatActivity{
             public void onSuccess(DataSnapshot dataSnapshot) {
                 owner = dataSnapshot.getValue(User.class);
                 Log.d("TAG", "Read successful, Owner: " + owner.toString());
+
+                //pass parking space object to next activity
+                create.putExtra("parkingSpace", ps);
+
+
+                showPopup();
             }
 
             @Override
@@ -298,7 +335,7 @@ public class ParkingListActivity extends AppCompatActivity{
         });
     }
 
-    public void showPopup(View v) {
+    public void showPopup() {
         TextView txtclose;
         Button btnFollow;
         TextView txtSellerName;
@@ -313,6 +350,22 @@ public class ParkingListActivity extends AppCompatActivity{
         txtclose.setText("X");
 
         btnFollow = (Button) myDialog.findViewById(R.id.btnfollow);
+        btnFollow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!ps.getReservedStatus())
+                {
+                    myDialog.dismiss();
+                    startActivity(create);
+                    finish();
+                }
+                else
+                {
+                    Toast.makeText(getApplicationContext(), "This listing has already been sold", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
         txtclose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -324,13 +377,13 @@ public class ParkingListActivity extends AppCompatActivity{
         txtSellerName.setText(owner.getName());
 
         txtAddress = (TextView) myDialog.findViewById(R.id.txtAddress);
-        txtAddress.setText(ps.getAddress());
+        txtAddress.setText(ps.getAddress() + ", " + ps.getZipcode());
 
         txtIsAvailable = (TextView) myDialog.findViewById(R.id.txtIsAvailable);
         if(ps.getReservedStatus())
-            txtIsAvailable.setText("Available");
-        else
             txtIsAvailable.setText("Sold");
+        else
+            txtIsAvailable.setText("Available");
 
         txtOpenClose = (TextView) myDialog.findViewById(R.id.txtOpenClose);
         txtOpenClose.setText("From " + ps.getOpentime() + " to " + ps.getClosetime());

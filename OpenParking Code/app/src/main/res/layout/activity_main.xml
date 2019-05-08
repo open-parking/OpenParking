@@ -29,7 +29,7 @@
     ]]>
 
     <Button
-        android:id="@+id/btnVehicle"
+        android:id="@+id/btnMyListings"
         android:layout_width="250dp"
         android:layout_height="50dp"
         android:layout_marginStart="80dp"
@@ -38,16 +38,16 @@
         android:layout_marginEnd="80dp"
         android:layout_marginRight="80dp"
         android:layout_marginBottom="8dp"
-        android:text="Vehicle"
+        android:text="My Listings"
         android:background="@drawable/rounded_button"
-        app:layout_constraintBottom_toTopOf="@+id/btnParking"
+        app:layout_constraintBottom_toTopOf="@+id/btnMyRating"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnPayPal" />
+        app:layout_constraintTop_toBottomOf="@+id/btnAccount" />
 
     <Button
-        android:id="@+id/btnParking"
+        android:id="@+id/btnMyRating"
         android:layout_width="250dp"
         android:layout_height="50dp"
         android:layout_marginStart="80dp"
@@ -56,16 +56,16 @@
         android:layout_marginEnd="80dp"
         android:layout_marginRight="80dp"
         android:layout_marginBottom="100dp"
-        android:text="Parking"
+        android:text="My Rating"
         android:background="@drawable/rounded_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnVehicle" />
+        app:layout_constraintTop_toBottomOf="@+id/btnMyListings" />
 
     <Button
-        android:id="@+id/btnPayPal"
+        android:id="@+id/btnAccount"
         android:layout_width="250dp"
         android:layout_height="50dp"
         android:layout_marginStart="80dp"
@@ -74,13 +74,13 @@
         android:layout_marginEnd="80dp"
         android:layout_marginRight="80dp"
         android:layout_marginBottom="8dp"
-        android:text="PayPal"
+        android:text="Account"
         android:background="@drawable/rounded_button"
-        app:layout_constraintBottom_toTopOf="@+id/btnVehicle"
+        app:layout_constraintBottom_toTopOf="@+id/btnMyListings"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnAccount" />
+        app:layout_constraintTop_toBottomOf="@+id/btnSell" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -98,7 +98,7 @@
         app:srcCompat="@drawable/openparkinglogo_small" />
 
     <Button
-        android:id="@+id/btnAccount"
+        android:id="@+id/btnSell"
         android:layout_width="250dp"
         android:layout_height="50dp"
         android:layout_marginStart="81dp"
@@ -107,16 +107,16 @@
         android:layout_marginEnd="80dp"
         android:layout_marginRight="80dp"
         android:layout_marginBottom="8dp"
-        android:text="Account"
         android:background="@drawable/rounded_button"
-        app:layout_constraintBottom_toTopOf="@+id/btnPayPal"
+        android:text="Sell"
+        app:layout_constraintBottom_toTopOf="@+id/btnAccount"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnTest" />
+        app:layout_constraintTop_toBottomOf="@+id/btnBuy" />
 
     <Button
-        android:id="@+id/btnTest"
+        android:id="@+id/btnBuy"
         android:layout_width="250dp"
         android:layout_height="50dp"
         android:layout_marginStart="80dp"
@@ -125,9 +125,9 @@
         android:layout_marginEnd="80dp"
         android:layout_marginRight="80dp"
         android:layout_marginBottom="8dp"
-        android:text="Test"
+        android:text="Buy"
         android:background="@drawable/rounded_button"
-        app:layout_constraintBottom_toTopOf="@+id/btnAccount"
+        app:layout_constraintBottom_toTopOf="@+id/btnSell"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"

@@ -20,12 +20,13 @@
         android:roundIcon="@drawable/openparkinglogo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".PurchaseCompleteActivity"></activity>
+        <activity android:name=".BuyActivity"></activity>
+        <activity android:name=".PurchaseCompleteActivity" />
         <activity
             android:name=".AddParkingSpaceActivity"
             android:label="@string/title_activity_add_parking_instance"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".CreateParkingActivity" />
         <activity android:name=".PasswordRecovery" />
         <activity android:name=".PaymentDetails" />
@@ -39,8 +40,7 @@
         <activity android:name=".ProfileActivity" />
         <activity
             android:name=".MainActivity"
-            android:screenOrientation="portrait"
-            />
+            android:screenOrientation="portrait" />
         <activity android:name=".CreateParkingInstanceActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
