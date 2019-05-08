@@ -15,8 +15,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -30,21 +33,25 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
     private static final String TAG = "AddParkingInstanceAct";
 
     Button btnSend;
-    Button btnCoordinate;
+    Button btnAddPicture;
+    //Button btnCoordinate; // Hidden
 
     private EditText editTextStreet;
-    private EditText editTextCity;
-    private EditText editTextState;
+    private AutoCompleteTextView editTextCity;
+    //private EditText editTextState; // replaced with spinner
+    private Spinner  stateSpinner;
 
     private EditText editTextZipCode;
-    private EditText editTextLatitude;
-    private EditText editTextLongitude;
+    //private EditText editTextLatitude; // Hidden
+    //private EditText editTextLongitude; // Hidden
     private EditText editTextCost;
-    private EditText editTextOpenTime;
-    private EditText editTextCloseTime;
+    //private EditText editTextOpenTime;//
+    //private EditText editTextCloseTime;
+    private Spinner  openTimeSpinner;  // replaced with spinner
+    private Spinner  closeTimeSpinner; // replaced with spinner
+
 
     private DatabaseReference mDatabase;
-
     private FirebaseAuth firebaseAuth;
     private String userID;
 
@@ -55,30 +62,30 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_parking_space);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        //FloatingActionButton fab = findViewById(R.id.fab);
-        //fab.setOnClickListener(new View.OnClickListener() {
-         //   @Override
-        //    public void onClick(View view) {
-        //        Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-         //               .setAction("Action", null).show();
-         //   }
-        //});
+        
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        editTextStreet     = findViewById(R.id.editTextStreet);
-        editTextCity     = findViewById(R.id.editTextCity);
-        editTextState     = findViewById(R.id.editTextState);
+        editTextStreet      = findViewById(R.id.editTextStreet);
+        editTextCity        = findViewById(R.id.editTextCity);
+        //editTextState       = findViewById(R.id.editTextState); // Replaced by Spinner
+        stateSpinner        = findViewById(R.id.spinner_states);
 
         editTextZipCode     = findViewById(R.id.editTextZipCode);
-        editTextLatitude    = findViewById(R.id.editTextLatitude);
-        editTextLongitude   = findViewById(R.id.editTextLongitude);
+        //editTextLatitude    = findViewById(R.id.editTextLatitude); // Hidden
+        //editTextLongitude   = findViewById(R.id.editTextLongitude); // Hidden
         editTextCost        = findViewById(R.id.editTextCost);
-        editTextOpenTime    = findViewById(R.id.editTextOpenTime);
-        editTextCloseTime   = findViewById(R.id.editTextCloseTime);
+        //editTextOpenTime    = findViewById(R.id.editTextOpenTime);
+        //editTextCloseTime   = findViewById(R.id.editTextCloseTime);
 
-        btnSend = findViewById(R.id.btnPicture);
-        btnCoordinate = findViewById(R.id.btnCoords);
+        btnSend = findViewById(R.id.btnSend);
+        btnAddPicture = findViewById(R.id.bt_addpicture);
+        // btnCoordinate = findViewById(R.id.btnCoords);//
+
+        //Populate Spinner
+        ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(AddParkingSpaceActivity.this,
+                android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.state_abbreviations));
+        myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        stateSpinner.setAdapter(myAdapter);
 
         // Get userID
         firebaseAuth = FirebaseAuth.getInstance();
@@ -95,42 +102,44 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
     }
 
     private void init() {
-        /* Test Buttons */
-
-        // Map Button
-        //btnSend = findViewById(R.id.btnSend);
+        // Send Button
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.v(TAG, "Clicked Send Button");
 
-
-                //DONE: SEND DATA TO FIREBASE
-
                 String address =            editTextStreet.getText().toString().trim();
                 address = address + ", " +  editTextCity.getText().toString().trim();
-                address = address + ", " +  editTextState.getText().toString().trim();
+                address = address + ", " +  stateSpinner.getSelectedItem().toString();
 
                 final String zipcode = editTextZipCode.getText().toString().trim();
-                final Double lat = Double.parseDouble(editTextLatitude.getText().toString());
-                final Double lon = Double.parseDouble(editTextLongitude.getText().toString());
+
+
+                // WIP
+                //final Double lat = Double.parseDouble(editTextLatitude.getText().toString());
+                //final Double lon = Double.parseDouble(editTextLongitude.getText().toString());
+                final Double lat = 0.0;
+                final Double lon = 0.0;
                 final Double cost = Double.parseDouble(editTextCost.getText().toString());
-                final String open = editTextOpenTime.getText().toString().trim();
-                final String close = editTextCloseTime.getText().toString().trim();
+                //final String open = editTextOpenTime.getText().toString().trim();
+                //final String close = editTextCloseTime.getText().toString().trim();
+                final String open = "9:00am";
+                final String close = "3:00pm";
+
 
                 writeNewParkingSpace(userID, address, zipcode, lat, lon, cost, open, close);
 
-                //TODO Clear all edit text
-                editTextStreet.setText("Street");
-                editTextCity.setText("City");
-                editTextState.setText("State");
+                // Reset inputs
+                editTextStreet.setText("");
+                editTextCity.setText("");
+                stateSpinner.setSelection(1);
 
                 editTextZipCode.setText("Zipcode");
-                editTextLatitude.setText("Latitude");
-                editTextLongitude.setText("Longitude");
+                //editTextLatitude.setText("");
+                //editTextLongitude.setText("");
                 editTextCost.setText("Price per hour");
-                editTextOpenTime.setText("Open Time");
-                editTextCloseTime.setText("Close Time");
+                //editTextOpenTime.setText("Open Time");
+                //editTextCloseTime.setText("Close Time");
             }
 
         });
@@ -148,21 +157,21 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
                 try{
                     String address =            editTextStreet.getText().toString().trim();
                     address = address + ", " +  editTextCity.getText().toString().trim();
-                    address = address + ", " +  editTextState.getText().toString().trim();
+                    address = address + ", " +  stateSpinner.getSelectedItem().toString();
 
                     addresses = geocoder.getFromLocationName(address, 1);
 
                     if(addresses.size() > 0) {
                         double latitude= addresses.get(0).getLatitude();
                         double longitude= addresses.get(0).getLongitude();
-                        editTextLatitude.setText(Double.toString(latitude));
-                        editTextLongitude.setText(Double.toString(longitude));
+                        //editTextLatitude.setText(Double.toString(latitude));
+                        //editTextLongitude.setText(Double.toString(longitude));
                     }
                     else{
                         //Not a valid address
                         editTextStreet.setText("Not Valid");
                         editTextCity.setText("Not Valid");
-                        editTextState.setText("Not Valid");
+                        //editTextState.setText("Not Valid");
                     }
                 }catch(Exception e)
                 {
