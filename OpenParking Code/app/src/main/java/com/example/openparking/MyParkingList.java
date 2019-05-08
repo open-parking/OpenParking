@@ -344,7 +344,7 @@ public class MyParkingList extends AppCompatActivity{
         TextView txtOpenClose;
         TextView txtCost;
 
-        myDialog.setContentView(R.layout.custom_window);
+        myDialog.setContentView(R.layout.custom_window2);
 
         txtclose =(TextView) myDialog.findViewById(R.id.txtclose);
         txtclose.setText("X");
@@ -353,16 +353,7 @@ public class MyParkingList extends AppCompatActivity{
         btnFollow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!ps.getReservedStatus())
-                {
-                    myDialog.dismiss();
-                    startActivity(create);
-                    finish();
-                }
-                else
-                {
-                    Toast.makeText(getApplicationContext(), "This listing has already been sold", Toast.LENGTH_SHORT).show();
-                }
+                myDialog.dismiss();
             }
         });
 
