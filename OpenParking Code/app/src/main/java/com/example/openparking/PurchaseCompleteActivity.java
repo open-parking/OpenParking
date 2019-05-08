@@ -108,7 +108,7 @@ public class PurchaseCompleteActivity extends AppCompatActivity implements View.
     public void writeData()
     {
         // WRITING to database after creating a parking instance object
-        testRef = mDatabase.child("ParkingSpaces").child(parkingSpace.getZipcode());
+        testRef = mDatabase.child("ParkingSpaces").child(parkingSpace.getZipcode()).child(parkingSpace.getID());
         testRef.setValue(parkingSpace);
         testRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -143,7 +143,7 @@ public class PurchaseCompleteActivity extends AppCompatActivity implements View.
         btnFollow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                myDialog.dismiss();
             }
         });
 

@@ -29,22 +29,6 @@
     ]]>
 
     <Button
-        android:id="@+id/btnMyRating"
-        android:layout_width="250dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="80dp"
-        android:layout_marginLeft="80dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="80dp"
-        android:layout_marginRight="80dp"
-        android:background="@drawable/rounded_button"
-        android:text="My Rating"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnMyListings" />
-
-    <Button
         android:id="@+id/btnMyListings"
         android:layout_width="250dp"
         android:layout_height="50dp"
@@ -54,13 +38,31 @@
         android:layout_marginEnd="80dp"
         android:layout_marginRight="80dp"
         android:layout_marginBottom="8dp"
-        android:background="@drawable/rounded_button"
         android:text="My Listings"
-        app:layout_constraintBottom_toTopOf="@id/btnMyRating"
+        android:background="@drawable/rounded_button"
+        app:layout_constraintBottom_toTopOf="@+id/btnMyRating"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnAccount" />
+
+    <Button
+        android:id="@+id/btnMyRating"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="80dp"
+        android:layout_marginRight="80dp"
+        android:layout_marginBottom="100dp"
+        android:text="My Rating"
+        android:background="@drawable/rounded_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnMyListings" />
 
     <Button
         android:id="@+id/btnAccount"
