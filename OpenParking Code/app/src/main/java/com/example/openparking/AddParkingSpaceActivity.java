@@ -85,11 +85,20 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
         btnSend = findViewById(R.id.btnSend);
 
 
-        //Populate Spinner
+        //Populate States Spinner
         ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(AddParkingSpaceActivity.this,
                 android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.state_abbreviations));
         myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         stateSpinner.setAdapter(myAdapter);
+
+
+        //Populate Times Spinners
+        ArrayAdapter<String> myTimeAdapter = new ArrayAdapter<String>(AddParkingSpaceActivity.this,
+                android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.times));
+        myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        openTimeSpinner.setAdapter(myTimeAdapter);
+        closeTimeSpinner.setAdapter(myTimeAdapter);
+
 
         // Get userID
         firebaseAuth = FirebaseAuth.getInstance();
@@ -112,6 +121,9 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Log.v(TAG, "Clicked Send Button");
 
+                //TODO: Check Street Address Validity
+
+
                 String address =            editTextStreet.getText().toString().trim();
                 address = address + ", " +  editTextCity.getText().toString().trim();
                 address = address + ", " +  stateSpinner.getSelectedItem().toString();
@@ -127,28 +139,33 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
                 final Double cost = Double.parseDouble(editTextCost.getText().toString());
                 //final String open = editTextOpenTime.getText().toString().trim();
                 //final String close = editTextCloseTime.getText().toString().trim();
-                final String open = "9:00am";
-                final String close = "3:00pm";
+                final String open = openTimeSpinner.getSelectedItem().toString();
+                final String close = closeTimeSpinner.getSelectedItem().toString();
 
+                //TODO: add loading bar or message
 
                 writeNewParkingSpace(userID, address, zipcode, lat, lon, cost, open, close);
+
 
                 // Reset inputs
                 editTextStreet.setText("");
                 editTextCity.setText("");
                 stateSpinner.setSelection(1);
-
                 editTextZipCode.setText("Zipcode");
                 //editTextLatitude.setText("");
                 //editTextLongitude.setText("");
                 editTextCost.setText("Price per hour");
                 //editTextOpenTime.setText("Open Time");
                 //editTextCloseTime.setText("Close Time");
+                openTimeSpinner.setSelection(1);
+                closeTimeSpinner.setSelection(1);
             }
 
         });
 
         //btnCoordinate = findViewById(R.id.btnCoords);
+
+        /**
         btnCoordinate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -183,6 +200,7 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
                 }
             }
         });
+        */
     }
 
     private void writeNewParkingSpace(String ownerID, String Address,String zipCode, Double latitude, Double longitude, Double cost, String openTime, String closeTime )
