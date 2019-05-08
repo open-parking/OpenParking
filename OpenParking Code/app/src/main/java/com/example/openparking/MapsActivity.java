@@ -750,10 +750,14 @@ public class MapsActivity extends FragmentActivity implements
         btnFollow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myDialog.dismiss();
-                create.putExtra("parkingSpace", ps);
-                startActivity(create);
-                finish();
+                if (!ps.getReservedStatus()) {
+                    myDialog.dismiss();
+                    create.putExtra("parkingSpace", ps);
+                    startActivity(create);
+                    finish();
+                } else {
+                    Toast.makeText(getApplicationContext(), "This listing has already been sold", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
