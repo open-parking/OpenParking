@@ -9,20 +9,19 @@
 
     <LinearLayout
         android:layout_width="377dp"
-        android:layout_height="577dp"
+        android:layout_height="500dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="30dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" >
-
+        app:layout_constraintTop_toTopOf="parent">
 
 
         <ImageView
@@ -55,7 +54,6 @@
 
         <Button
             android:id="@+id/btn_viewParking"
-            android:onClick="ShowPopup"
             android:layout_width="match_parent"
             android:layout_height="68dp"
             android:layout_marginStart="8dp"
@@ -66,8 +64,26 @@
             android:layout_marginBottom="32dp"
             android:background="@drawable/rounded_button"
             android:gravity="center"
+            android:onClick="ShowPopup"
             android:text="View Parking Details"
-            app:layout_constraintTop_toBottomOf="@+id/complete" />
+            app:layout_constraintBottom_toTopOf="@+id/btn_rate" />
+
+
+        <Button
+            android:id="@+id/btn_rate"
+            android:layout_width="match_parent"
+            android:layout_height="68dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="32dp"
+            android:background="@drawable/rounded_button"
+            android:gravity="center"
+            android:text="Rate Transaction"
+            app:layout_constraintBottom_toTopOf="@+id/btn_mainMenu"
+            app:layout_constraintTop_toBottomOf="@+id/btn_viewParking" />
 
         <Button
             android:id="@+id/btn_mainMenu"
@@ -79,12 +95,11 @@
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginBottom="32dp"
-            android:text="Main Menu"
             android:background="@drawable/rounded_button"
+            android:text="Main Menu"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_viewParking" />
-
+            app:layout_constraintTop_toBottomOf="@+id/btn_rate" />
 
 
     </LinearLayout>

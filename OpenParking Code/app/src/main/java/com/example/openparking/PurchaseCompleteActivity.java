@@ -23,6 +23,7 @@ import java.util.HashMap;
 public class PurchaseCompleteActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button buttonViewParking;
+    private Button buttonRateSeller;
     private Button buttonMainMenu;
     private Dialog myDialog;
 
@@ -45,6 +46,9 @@ public class PurchaseCompleteActivity extends AppCompatActivity implements View.
 
         buttonViewParking = (Button)findViewById(R.id.btn_viewParking);
         buttonViewParking.setOnClickListener(this);
+
+        buttonRateSeller = (Button) findViewById(R.id.btn_rate);
+        buttonRateSeller.setOnClickListener(this);
 
         buttonMainMenu = (Button) findViewById(R.id.btn_mainMenu);
         buttonMainMenu.setOnClickListener(this);
@@ -185,6 +189,10 @@ public class PurchaseCompleteActivity extends AppCompatActivity implements View.
         if(view == buttonViewParking)
         {
             showPopup();
+        }
+        if(view == buttonRateSeller)
+        {
+            startActivity(new Intent(PurchaseCompleteActivity.this, RatingActivity.class));
         }
         if(view == buttonMainMenu)
         {
