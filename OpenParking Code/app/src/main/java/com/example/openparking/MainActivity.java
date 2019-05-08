@@ -2,6 +2,7 @@ package com.example.openparking;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.media.Rating;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -30,11 +31,11 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
     private static final int ERROR_DIALOG_REQUEST = 9001;
-    private Button test;
-    private Button paypal;
-    private Button parking;
-    private Button vehicle;
+    private Button buy;
+    private Button sell;
     private Button account;
+    private Button myListings;
+    private Button myRating;
 
 
     // Test Buttons
@@ -66,49 +67,47 @@ public class MainActivity extends AppCompatActivity {
 
         // Login Interface
 
-        test = (Button)findViewById(R.id.btnTest);
-        account = (Button)findViewById(R.id.btnAccount);
-        paypal = (Button)findViewById(R.id.btnPayPal);
-        parking = (Button)findViewById(R.id.btnParking);
-        vehicle = (Button)findViewById(R.id.btnVehicle);
-        /// Test Button
-        Button btnTest = (Button) findViewById(R.id.btnTest);
-        btnTest.setOnClickListener(new View.OnClickListener() {
+        buy = (Button) findViewById(R.id.btnBuy);
+        sell = (Button) findViewById(R.id.btnSell);
+        account = (Button) findViewById(R.id.btnAccount);
+        myListings = (Button) findViewById(R.id.btnMyListings);
+        myRating = (Button) findViewById(R.id.btnMyRating);
+
+        /// Buy Button
+        buy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, Test_Activity.class));
+                // REPLACE WITH MAP/LIST VIEW SELECTION ACTIVITY
+                startActivity(new Intent(MainActivity.this, BuyActivity.class));
+            }
+        });
+        /// Sell Button
+        sell.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, AddParkingSpaceActivity.class));
             }
         });
         /// Account Button
-        Button btnAccount = (Button) findViewById(R.id.btnAccount);
-        btnAccount.setOnClickListener(new View.OnClickListener() {
+        account.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, ProfileActivity.class));
             }
         });
-        /// PayPal Button
-        Button btnPayPal = (Button) findViewById(R.id.btnPayPal);
-        btnPayPal.setOnClickListener(new View.OnClickListener() {
+        /// My Listings Button
+        myListings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, PayPalActivity.class));
+                // REPLACE WITH NEW ACTIVITY THAT DISPLAYS SELLER'S LISTINGS
+                startActivity(new Intent(MainActivity.this, MyParkingList.class));
             }
         });
-        /// Parking Button
-        Button btnParking = (Button) findViewById(R.id.btnParking);
-        btnParking.setOnClickListener(new View.OnClickListener() {
+        // My Rating Button
+        myRating.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, ParkingInstance.class));
-            }
-        });
-        //Vehicle Button
-        Button btnVehicle = (Button) findViewById(R.id.btnVehicle);
-        btnVehicle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, Vehicle.class));
+                startActivity(new Intent(MainActivity.this, RatingActivity.class));
             }
         });
 

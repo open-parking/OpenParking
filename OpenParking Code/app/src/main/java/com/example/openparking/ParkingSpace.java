@@ -27,6 +27,21 @@ public class ParkingSpace implements Parcelable{
         //Used by FireBase
     }
 
+    public ParkingSpace( String id, String owner, String address, String zipcode, Double latitude, Double longitude, Double cost, String openTime, String closeTime)
+    {
+        this.id = id;
+        this.ownerID = owner;
+        this.address = address;
+        this.zipcode = zipcode;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        //this.latlng = new LatLng(latitude, longitude); //LatLng not compatible with firebase
+        this.cost = cost;
+        this.openTime = openTime;
+        this.closeTime = closeTime;
+        this.reserved = false;
+    }
+
     public ParkingSpace( String owner, String address, String zipcode, Double latitude, Double longitude, Double cost, String openTime, String closeTime)
     {
         this.id = "NOT SET";

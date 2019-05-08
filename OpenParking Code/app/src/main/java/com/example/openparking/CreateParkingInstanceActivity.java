@@ -12,15 +12,18 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import com.example.openparking.OnGetDataListener;
+
+import java.util.HashMap;
 
 public class CreateParkingInstanceActivity extends AppCompatActivity {
 
 
     private FirebaseAuth firebaseAuth;
-    private FirebaseUser mUser;
+    private FirebaseUser buyer;
 
     private FirebaseDatabase mDatabase;
     private DatabaseReference ref;
@@ -28,23 +31,51 @@ public class CreateParkingInstanceActivity extends AppCompatActivity {
 
     private ParkingSpace parkingSpace;
     private ParkingInstance parkingInstance;
-    private User seller;
+
+    private String parkingSpaceID;
+    private String sellerID;
+    private String buyerID;
+
+    //hashmap to be used to pass parking space object to confirmation activity
+    private HashMap<String, ParkingSpace> parkingSpaceHashMap;
+    private Intent complete;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_parking_instance);
 
+        parkingSpace = new ParkingSpace();
+
+        Intent intent = getIntent();
+        parkingSpace = intent.getParcelableExtra("parkingSpace");
+
         firebaseAuth = FirebaseAuth.getInstance();
-        mUser = firebaseAuth.getCurrentUser();
+        buyer = firebaseAuth.getCurrentUser();
         mDatabase = FirebaseDatabase.getInstance();
         ref = mDatabase.getReference();
 
 
-        parkingSpace = new ParkingSpace();
-        parkingInstance = new ParkingInstance();
-        parkingInstance.setSellerID(mUser.getUid());
+        parkingSpaceID = parkingSpace.getID();
+        sellerID = parkingSpace.getOwnerID();
+        buyerID = buyer.getUid();
 
+        parkingInstance = new ParkingInstance();
+        parkingInstance.setParkingSpaceID(parkingSpaceID);
+        parkingInstance.setSellerID(sellerID);
+        parkingInstance.setBuyerID(buyerID);
+
+        writeData();
+
+
+
+        complete = new Intent(CreateParkingInstanceActivity.this, PurchaseCompleteActivity.class);
+        complete.putExtra("parkingSpace", parkingSpace);
+        // After a parking instance object is created and pushed to the database,
+        // start confirmation activity
+        startActivity(complete);
+
+        finish();
         /*
         // READING from database and retrieving a parking space object
         testRef.addValueEventListener(new ValueEventListener() {
@@ -61,6 +92,7 @@ public class CreateParkingInstanceActivity extends AppCompatActivity {
         });
         */
 
+        /*
         testRef = ref.child("ParkingSpaces").child("90815").child("-Lb0SP_Qw2HzEbnDVCxm");
         String temp = testRef.getKey();
         readData(testRef, new OnGetDataListener() {
@@ -96,6 +128,7 @@ public class CreateParkingInstanceActivity extends AppCompatActivity {
 
 
 
+        /*
     public void readData(DatabaseReference ref, final OnGetDataListener listener){
         System.out.println("Reached READDATA function");
         listener.onStart();
@@ -110,6 +143,9 @@ public class CreateParkingInstanceActivity extends AppCompatActivity {
                 listener.onFailure(databaseError);
             }
         });
+    }
+
+    */
     }
 
     public void writeData()
@@ -130,6 +166,7 @@ public class CreateParkingInstanceActivity extends AppCompatActivity {
         });
     }
 
+    /*
     public void readUser()
     {
         //READING from firebase by using the sellerID from parkingInstance to retrieve a user
@@ -155,5 +192,5 @@ public class CreateParkingInstanceActivity extends AppCompatActivity {
 
 
     }
-
+    */
 }

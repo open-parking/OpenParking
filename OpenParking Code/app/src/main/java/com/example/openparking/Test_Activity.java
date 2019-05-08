@@ -12,6 +12,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -33,6 +36,9 @@ public class Test_Activity extends AppCompatActivity {
     Button btnPurchaseComplete;
 
 
+    FirebaseUser mUser;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +46,9 @@ public class Test_Activity extends AppCompatActivity {
         setContentView(R.layout.activity_test_);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        mUser = FirebaseAuth.getInstance().getCurrentUser();
+
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
