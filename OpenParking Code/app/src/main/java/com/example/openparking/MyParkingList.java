@@ -15,6 +15,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.openparking.Config.RecyclerTouchListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -27,8 +29,9 @@ import org.w3c.dom.Text;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
 public class MyParkingList extends AppCompatActivity{
-    private static final String TAG = "ParkingListActivity";
+    private static final String TAG = "MyParkingList";
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
@@ -46,6 +49,7 @@ public class MyParkingList extends AppCompatActivity{
     // Are we still using this HashMap? can I re-purpose it?
 
     // [START declare_database_ref]
+    private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     private DatabaseReference mDatabase;
     // [END declare_database_ref]
 
@@ -54,6 +58,9 @@ public class MyParkingList extends AppCompatActivity{
     private Dialog myDialog;
 
     private Intent create;
+
+    final FirebaseUser fuser = firebaseAuth.getCurrentUser();
+    final User user = new User();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +78,7 @@ public class MyParkingList extends AppCompatActivity{
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-
+        user.setId(fuser.getUid());
         parkingSpaceList = new ArrayList<>();
         parkingSpaceHashMap = new HashMap<>();
 
@@ -88,7 +95,7 @@ public class MyParkingList extends AppCompatActivity{
         owner = new User();
         myDialog = new Dialog(this);
 
-        create = new Intent(ParkingListActivity.this, CreateParkingInstanceActivity.class);
+        create = new Intent(MyParkingList.this, CreateParkingInstanceActivity.class);
 
         //FireBase
         //loadImagesFromFireBase();
@@ -221,15 +228,16 @@ public class MyParkingList extends AppCompatActivity{
 
                         if(!ps.equals(null))
                         {
-                            Log.d(TAG, "onChildAdded: " +  "ps is good");
+                            if(ps.getOwnerID().equals(user.getId())) {
+                                Log.d(TAG, "onChildAdded: " + "ps is good");
 
-                            parkingSpaceList.add(ps);
-                            Log.v(TAG, "onChildAdded:" + ps.getAddress());
-                            mAdapter.notifyDataSetChanged();
+                                parkingSpaceList.add(ps);
+                                Log.v(TAG, "onChildAdded:" + ps.getAddress());
+                                mAdapter.notifyDataSetChanged();
 
-                            //String address = ps.getAddress();
-                            //String hours = "Hours: " + ps.getOpentime() + " to " + ps.getClosetime();
-
+                                //String address = ps.getAddress();
+                                //String hours = "Hours: " + ps.getOpentime() + " to " + ps.getClosetime();
+                            }
                         }
                         else
                         {
