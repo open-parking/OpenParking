@@ -1,6 +1,7 @@
 package com.example.openparking;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
@@ -53,6 +54,7 @@ public class ParkingListActivity extends AppCompatActivity{
     private User owner;
     private Dialog myDialog;
 
+    private Intent create;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,6 +89,7 @@ public class ParkingListActivity extends AppCompatActivity{
         owner = new User();
         myDialog = new Dialog(this);
 
+        create = new Intent(ParkingListActivity.this, CreateParkingInstanceActivity.class);
 
         //FireBase
         //loadImagesFromFireBase();
@@ -101,8 +104,17 @@ public class ParkingListActivity extends AppCompatActivity{
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), recyclerView, new RecyclerTouchListener.ClickListener() {
             @Override
             public void onClick(View view, int position) {
+                ps = parkingSpaceList.get(position);
+                System.out.println("Parking Space: " + ps.getAddress());
+
                 retrieveOwner();
-                showPopup(view);
+
+
+                //pass parking space object to next activity
+                create.putExtra("parkingSpace", ps);
+
+
+                showPopup();
             }
 
             @Override
@@ -208,6 +220,9 @@ public class ParkingListActivity extends AppCompatActivity{
                         // A new parking space has been added, add it to the displayed list
                         //ParkingSpace ps = new ParkingSpace();
                         ps = dataSnapshot.getValue(ParkingSpace.class);
+
+
+
 
                         if(!ps.equals(null))
                         {
@@ -317,7 +332,7 @@ public class ParkingListActivity extends AppCompatActivity{
         });
     }
 
-    public void showPopup(View v) {
+    public void showPopup() {
         TextView txtclose;
         Button btnFollow;
         TextView txtSellerName;
@@ -332,6 +347,15 @@ public class ParkingListActivity extends AppCompatActivity{
         txtclose.setText("X");
 
         btnFollow = (Button) myDialog.findViewById(R.id.btnfollow);
+        btnFollow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                myDialog.dismiss();
+                startActivity(create);
+                finish();
+            }
+        });
+
         txtclose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -343,13 +367,13 @@ public class ParkingListActivity extends AppCompatActivity{
         txtSellerName.setText(owner.getName());
 
         txtAddress = (TextView) myDialog.findViewById(R.id.txtAddress);
-        txtAddress.setText(ps.getAddress());
+        txtAddress.setText(ps.getAddress() + ", " + ps.getZipcode());
 
         txtIsAvailable = (TextView) myDialog.findViewById(R.id.txtIsAvailable);
         if(ps.getReservedStatus())
-            txtIsAvailable.setText("Available");
-        else
             txtIsAvailable.setText("Sold");
+        else
+            txtIsAvailable.setText("Available");
 
         txtOpenClose = (TextView) myDialog.findViewById(R.id.txtOpenClose);
         txtOpenClose.setText("From " + ps.getOpentime() + " to " + ps.getClosetime());
