@@ -62,7 +62,7 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_parking_space);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        
+
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         editTextStreet      = findViewById(R.id.editTextStreet);
@@ -76,10 +76,14 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
         editTextCost        = findViewById(R.id.editTextCost);
         //editTextOpenTime    = findViewById(R.id.editTextOpenTime);
         //editTextCloseTime   = findViewById(R.id.editTextCloseTime);
+        openTimeSpinner        = findViewById(R.id.spinner_open_time);
+        closeTimeSpinner       = findViewById(R.id.spinner_close_time);
 
-        btnSend = findViewById(R.id.btnSend);
-        btnAddPicture = findViewById(R.id.bt_addpicture);
+
         // btnCoordinate = findViewById(R.id.btnCoords);//
+        btnAddPicture = findViewById(R.id.bt_addpicture);
+        btnSend = findViewById(R.id.btnSend);
+
 
         //Populate Spinner
         ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(AddParkingSpaceActivity.this,
