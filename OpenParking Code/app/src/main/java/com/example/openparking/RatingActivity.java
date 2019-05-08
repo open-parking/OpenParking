@@ -1,5 +1,6 @@
 package com.example.openparking;
 
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,17 +19,24 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import android.content.Intent;
 import android.widget.Toast;
 
+import java.security.acl.Owner;
+
 public class RatingActivity extends AppCompatActivity {
+
+    private ParkingSpace ps;
 
     private FirebaseAuth firebaseAuth;
     double contributorRatingTotal;
     private FirebaseDatabase mDatabase;
     private DatabaseReference usersRef;
     private static final String TAG = "RatingActivity";
+
+    private User owner;
 
 
     /*public RatingActivity(FirebaseDatabase mDatabase) {
@@ -42,6 +50,12 @@ public class RatingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rating);
+
+        ps = new ParkingSpace();
+        Intent intent = getIntent();
+        ps = intent.getParcelableExtra("parkingSpace");
+
+
 
         final RatingBar mRatingBar = (RatingBar) findViewById(R.id.ratingBar);
         final TextView mRatingScale = (TextView) findViewById(R.id.tvRatingScale);
@@ -58,11 +72,10 @@ public class RatingActivity extends AppCompatActivity {
             startActivity(new Intent(this, LoginActivity.class));
         }
         final FirebaseUser fuser = firebaseAuth.getCurrentUser();
-        final User user = new User();
-        user.setId(fuser.getUid());//USER ID
 
-        final String uID = user.getId();
 
+        owner = new User();
+        retrieveOwner();
 
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,6 +86,14 @@ public class RatingActivity extends AppCompatActivity {
 
                             @Override
                             public void onChildAdded(DataSnapshot dataSnapshot, String previousChildName) {
+                                int timesRated = owner.getTimesContributorRated();
+                                owner.setTimesContributorRated(owner.getTimesContributorRated() + 1);
+                                double rating = owner.getContributorRating();
+                                rating = ((rating * timesRated) + mRatingBar.getRating()) / owner.getTimesContributorRated();
+                                owner.setContributorRating(rating);
+                                usersRef.child("users").child(owner.getId()).setValue(owner);
+
+                                /*
                                 User mUser = new User();
                                 mUser = dataSnapshot.getValue(User.class);
                                 if(mUser.getId().equals(uID)) {
@@ -88,6 +109,7 @@ public class RatingActivity extends AppCompatActivity {
                                     usersRef.child("users").child(uID).child("timesContributorRated").setValue(mUser.getTimesContributorRated());
                                     ratingDisplayTextView.setText("Your average rating is: " + mUser.getContributorRating());
                                 }
+                                */
                             }
 
                             @Override
@@ -168,6 +190,46 @@ public class RatingActivity extends AppCompatActivity {
                     default:
                         mRatingScale.setText("");
                 }
+            }
+        });
+    }
+
+    private void retrieveOwner()
+    {
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("users").child(ps.getOwnerID());
+
+        //Retrieve seller information using ps.getOwnerID()
+        readData(ref, new OnGetDataListener() {
+            @Override
+            public void onSuccess(DataSnapshot dataSnapshot) {
+                owner = dataSnapshot.getValue(User.class);
+                Log.d("TAG", "Read successful, Owner: " + owner.toString());
+            }
+
+            @Override
+            public void onStart() {
+                Log.d("ONSTART", "Started");
+            }
+
+            @Override
+            public void onFailure(DatabaseError databaseError) {
+                Log.d("ONFAILURE", "Failed");
+            }
+        });
+    }
+
+    public void readData(DatabaseReference ref, final OnGetDataListener listener){
+        System.out.println("Reached READDATA function");
+        listener.onStart();
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                listener.onSuccess(dataSnapshot);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                listener.onFailure(databaseError);
             }
         });
     }

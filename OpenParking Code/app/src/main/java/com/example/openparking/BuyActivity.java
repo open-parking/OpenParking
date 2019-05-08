@@ -34,6 +34,6 @@ public class BuyActivity extends AppCompatActivity {
             }
         });
 
-        finish();
+        //finish();
     }
 }

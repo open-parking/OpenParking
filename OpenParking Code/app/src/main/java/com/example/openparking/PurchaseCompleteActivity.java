@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.media.Rating;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -32,6 +33,8 @@ public class PurchaseCompleteActivity extends AppCompatActivity implements View.
 
     private ParkingSpace parkingSpace;
     private User owner;
+
+    private Intent rate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +67,8 @@ public class PurchaseCompleteActivity extends AppCompatActivity implements View.
         System.out.println("Parkingspace isReserved: " + parkingSpace.getReservedStatus());
         writeData();
 
+        rate = new Intent(PurchaseCompleteActivity.this, RatingActivity.class);
+        rate.putExtra("parkingSpace", parkingSpace);
     }
 
 
@@ -192,7 +197,7 @@ public class PurchaseCompleteActivity extends AppCompatActivity implements View.
         }
         if(view == buttonRateSeller)
         {
-            startActivity(new Intent(PurchaseCompleteActivity.this, RatingActivity.class));
+            startActivity(rate);
         }
         if(view == buttonMainMenu)
         {

@@ -7,6 +7,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RatingBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -23,6 +25,7 @@ public class MyRatingActivity extends AppCompatActivity {
     private FirebaseUser fUser;
     private User mUser;
 
+    private TextView rating_display_text_View;
     private RatingBar mRatingBar;
     private Button btn_ok;
 
@@ -31,6 +34,7 @@ public class MyRatingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_rating);
 
+        rating_display_text_View = (TextView) findViewById(R.id.rating_display_text_View);
         mRatingBar = (RatingBar) findViewById(R.id.myRatingBar);
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -38,8 +42,6 @@ public class MyRatingActivity extends AppCompatActivity {
         fUser = firebaseAuth.getCurrentUser();
         mUser = new User();
         retrieveUser();
-
-
 
 
         btn_ok = (Button) findViewById(R.id.btn_ok);
@@ -54,8 +56,12 @@ public class MyRatingActivity extends AppCompatActivity {
     private void displayRating()
     {
         double rating = mUser.getContributorRating();
-
-        if(rating >= 4.5)
+        rating_display_text_View.setText("Your Rating is : " + rating + " / 5.0");
+        if(rating == 0)
+        {
+            Toast.makeText(this, "This seller has not been rated.", Toast.LENGTH_SHORT).show();
+        }
+        else if(rating >= 4.5)
         {
             mRatingBar.setNumStars(5);
         }
