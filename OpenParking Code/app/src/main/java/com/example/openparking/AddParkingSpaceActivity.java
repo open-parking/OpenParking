@@ -49,7 +49,8 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
     //private EditText editTextCloseTime;
     private Spinner  openTimeSpinner;  // replaced with spinner
     private Spinner  closeTimeSpinner; // replaced with spinner
-
+    private Spinner  openTimeAMPMSpinner;
+    private Spinner  closeTimeAMPMSpinner;
 
     private DatabaseReference mDatabase;
     private FirebaseAuth firebaseAuth;
@@ -78,8 +79,9 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
         //editTextCloseTime   = findViewById(R.id.editTextCloseTime);
         openTimeSpinner        = findViewById(R.id.spinner_open_time);
         closeTimeSpinner       = findViewById(R.id.spinner_close_time);
-
-
+        openTimeAMPMSpinner        = findViewById(R.id.spinner_open_time_ampm);
+        closeTimeAMPMSpinner        = findViewById(R.id.spinner_close_time_ampm);
+        
         // btnCoordinate = findViewById(R.id.btnCoords);//
         btnAddPicture = findViewById(R.id.bt_addpicture);
         btnSend = findViewById(R.id.btnSend);
