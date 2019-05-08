@@ -20,7 +20,8 @@
         android:roundIcon="@drawable/openparkinglogo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".BuyActivity"></activity>
+        <activity android:name=".MyRatingActivity"></activity>
+        <activity android:name=".BuyActivity" />
         <activity android:name=".PurchaseCompleteActivity" />
         <activity
             android:name=".AddParkingSpaceActivity"
