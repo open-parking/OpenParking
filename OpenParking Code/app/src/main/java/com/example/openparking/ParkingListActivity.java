@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.openparking.Config.RecyclerTouchListener;
 import com.google.firebase.database.ChildEventListener;
@@ -110,11 +111,7 @@ public class ParkingListActivity extends AppCompatActivity{
                 retrieveOwner();
 
 
-                //pass parking space object to next activity
-                create.putExtra("parkingSpace", ps);
 
-
-                showPopup();
             }
 
             @Override
@@ -283,6 +280,12 @@ public class ParkingListActivity extends AppCompatActivity{
             public void onSuccess(DataSnapshot dataSnapshot) {
                 owner = dataSnapshot.getValue(User.class);
                 Log.d("TAG", "Read successful, Owner: " + owner.toString());
+
+                //pass parking space object to next activity
+                create.putExtra("parkingSpace", ps);
+
+
+                showPopup();
             }
 
             @Override
@@ -331,9 +334,16 @@ public class ParkingListActivity extends AppCompatActivity{
         btnFollow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myDialog.dismiss();
-                startActivity(create);
-                finish();
+                if(!ps.getReservedStatus())
+                {
+                    myDialog.dismiss();
+                    startActivity(create);
+                    finish();
+                }
+                else
+                {
+                    Toast.makeText(getApplicationContext(), "This listing has already been sold", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

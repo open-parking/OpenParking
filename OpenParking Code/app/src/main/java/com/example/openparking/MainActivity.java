@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // REPLACE WITH MAP/LIST VIEW SELECTION ACTIVITY
-                startActivity(new Intent(MainActivity.this, Test_Activity.class));
+                startActivity(new Intent(MainActivity.this, BuyActivity.class));
             }
         });
         /// Sell Button
