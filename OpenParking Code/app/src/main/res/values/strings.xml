@@ -32,4 +32,23 @@
         <item>PR</item>
         <item>VI</item>
     </string-array>
+    <string-array name="times"><!-- AND COMMONWEALTH AND TERRITORIES -->
+        <item>1:00</item>
+        <item>2:00</item>
+        <item>3:00</item>
+        <item>4:00</item>
+        <item>5::0</item>
+        <item>6:00</item>
+        <item>7:00</item>
+        <item>8:00</item>
+        <item>9:00</item>
+        <item>10:00</item>
+        <item>11:00</item>
+        <item>12:00</item>
+    </string-array>
+    <string-array name="am_pm">
+        <item>am</item>
+        <item>pm</item>
+    </string-array>
+
 </resources>
