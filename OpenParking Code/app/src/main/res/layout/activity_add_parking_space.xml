@@ -209,14 +209,15 @@
             />
     </LinearLayout>
 
-
+        <!--Hidden-->
         <Button
         android:id="@+id/btnAddPicture"
-        android:layout_width="0dp" <!--Hidden-->
-        android:layout_height="0dp"<!--Hidden-->
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_margin="15dp"
         android:background="@drawable/rounded_button"
-        android:text="Add Picture " />
+        android:text="Add Picture"
+            android:visibility="gone"/>
 
         <Button
             android:id="@+id/btnGetCoords"
