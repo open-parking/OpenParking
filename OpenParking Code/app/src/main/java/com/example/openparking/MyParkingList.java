@@ -1,5 +1,4 @@
 package com.example.openparking;
-
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
@@ -16,6 +15,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.openparking.Config.RecyclerTouchListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -29,14 +30,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class ParkingListActivity extends AppCompatActivity{
-    private static final String TAG = "ParkingListActivity";
+public class MyParkingList extends AppCompatActivity{
+    private static final String TAG = "MyParkingList";
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
-
-
 
     //vars
     private ArrayList<String> mNames = new ArrayList<>();
@@ -45,7 +44,7 @@ public class ParkingListActivity extends AppCompatActivity{
 
     List<ParkingSpace> parkingSpaceList;                    // List of parking spaces that are available for reservation.
     HashMap<String, ParkingSpace> parkingSpaceHashMap;      // For quick look up from marker ID to parkingSpace.
-                                                            // Are we still using this HashMap? can I re-purpose it?
+    // Are we still using this HashMap? can I re-purpose it?
 
     // [START declare_database_ref]
     private DatabaseReference mDatabase;
@@ -73,7 +72,6 @@ public class ParkingListActivity extends AppCompatActivity{
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-
         parkingSpaceList = new ArrayList<>();
         parkingSpaceHashMap = new HashMap<>();
 
@@ -90,11 +88,12 @@ public class ParkingListActivity extends AppCompatActivity{
         owner = new User();
         myDialog = new Dialog(this);
 
-        create = new Intent(ParkingListActivity.this, CreateParkingInstanceActivity.class);
+        create = new Intent(MyParkingList.this, CreateParkingInstanceActivity.class);
 
         //FireBase
         //loadImagesFromFireBase();
         loadParkingSpacesFromDataBase("90815");
+
         //Test Info
         setTestImages();
         //setTestData();
@@ -216,21 +215,23 @@ public class ParkingListActivity extends AppCompatActivity{
                         // A new parking space has been added, add it to the displayed list
                         //ParkingSpace ps = new ParkingSpace();
                         ps = dataSnapshot.getValue(ParkingSpace.class);
-
-
-
+                        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+                        FirebaseUser fuser = firebaseAuth.getCurrentUser();
+                        User user = new User();
+                        user.setId(fuser.getUid());
 
                         if(!ps.equals(null))
                         {
-                            Log.d(TAG, "onChildAdded: " +  "ps is good");
+                            if(ps.getOwnerID().equals(user.getId())) {
+                                Log.d(TAG, "onChildAdded: " + "ps is good");
 
-                            parkingSpaceList.add(ps);
-                            Log.v(TAG, "onChildAdded:" + ps.getAddress());
-                            mAdapter.notifyDataSetChanged();
+                                parkingSpaceList.add(ps);
+                                Log.v(TAG, "onChildAdded:" + ps.getAddress());
+                                mAdapter.notifyDataSetChanged();
 
-                            //String address = ps.getAddress();
-                            //String hours = "Hours: " + ps.getOpentime() + " to " + ps.getClosetime();
-
+                                //String address = ps.getAddress();
+                                //String hours = "Hours: " + ps.getOpentime() + " to " + ps.getClosetime();
+                            }
                         }
                         else
                         {
@@ -343,7 +344,7 @@ public class ParkingListActivity extends AppCompatActivity{
         TextView txtOpenClose;
         TextView txtCost;
 
-        myDialog.setContentView(R.layout.custom_window);
+        myDialog.setContentView(R.layout.custom_window2);
 
         txtclose =(TextView) myDialog.findViewById(R.id.txtclose);
         txtclose.setText("X");
@@ -352,16 +353,7 @@ public class ParkingListActivity extends AppCompatActivity{
         btnFollow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!ps.getReservedStatus())
-                {
-                    myDialog.dismiss();
-                    startActivity(create);
-                    finish();
-                }
-                else
-                {
-                    Toast.makeText(getApplicationContext(), "This listing has already been sold", Toast.LENGTH_SHORT).show();
-                }
+                myDialog.dismiss();
             }
         });
 
