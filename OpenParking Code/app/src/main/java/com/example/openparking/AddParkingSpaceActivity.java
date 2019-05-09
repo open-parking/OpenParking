@@ -66,7 +66,7 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
     //Temp Vars
     String street;
     String city;
-    String state
+    String state;
     String address;
     String zipcode;
     String lat_Str;
@@ -79,38 +79,36 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        String street;
-        String city;
-        String state
-        String address;
-        String zipcode;
-        String lat_Str;
-        String lng_Str;
-
-        this.latitude = 0.0;
-        this.longitude = 0.0;
-        this.zipCode = 0;
+         street = "";
+         city = "";
+         state = "";
+         address = "";
+         zipcode = "";
+         lat_Str = "";
+         lng_Str = "";
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
+        //Street, City, State and ZipCode
         editTextStreet      = findViewById(R.id.editTextStreet);
         editTextCity        = findViewById(R.id.editTextCity);
-        //editTextState       = findViewById(R.id.editTextState); // Replaced by Spinner
         stateSpinner        = findViewById(R.id.spinner_states);
-
         editTextZipCode     = findViewById(R.id.editTextZipCode);
-        //editTextLatitude    = findViewById(R.id.editTextLatitude); // Hidden
-        //editTextLongitude   = findViewById(R.id.editTextLongitude); // Hidden
-        editTextCost        = findViewById(R.id.editTextCost);
-        //editTextOpenTime    = findViewById(R.id.editTextOpenTime);
-        //editTextCloseTime   = findViewById(R.id.editTextCloseTime);
-        openTimeSpinner        = findViewById(R.id.spinner_open_time);
-        closeTimeSpinner       = findViewById(R.id.spinner_close_time);
-        openTimeAMPMSpinner        = findViewById(R.id.spinner_open_time_ampm);
-        closeTimeAMPMSpinner        = findViewById(R.id.spinner_close_time_ampm);
 
-        // btnCoordinate = findViewById(R.id.btnCoords);//
+        //Latitude and Longitude
+        editTextLatitude    = findViewById(R.id.editTextLatitude); // To Be  Hidden
+        editTextLongitude   = findViewById(R.id.editTextLongitude); // To Be Hidden
+
+        //Price and Times
+        editTextCost        = findViewById(R.id.editTextCost);
+        openTimeSpinner     = findViewById(R.id.spinner_open_time);
+        closeTimeSpinner    = findViewById(R.id.spinner_close_time);
+        openTimeAMPMSpinner = findViewById(R.id.spinner_open_time_ampm);
+        closeTimeAMPMSpinner= findViewById(R.id.spinner_close_time_ampm);
+
+        //Buttons
         btnAddPicture = findViewById(R.id.bt_addpicture);
+        btnCoordinate = findViewById(R.id.btnCoords);//
         btnSend = findViewById(R.id.btnSend);
 
 
