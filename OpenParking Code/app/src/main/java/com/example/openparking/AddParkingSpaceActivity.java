@@ -173,9 +173,6 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Log.v(TAG, "Clicked Send Button");
 
-                // Toast message
-                //toast("Clicked Button Address" );
-
                 //Check for empty fields
                 if(checkForEmptyFields())
                 {
@@ -187,6 +184,7 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
                     return;
                 }
 
+                /**
                 // Check Street Address Validity
                  Log.v(TAG, "Verifying(" + address + ")");
 
@@ -256,6 +254,7 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
                     // Show result message
                     toast("Invalid Address" );
                 }
+                 **/
             }
         });
 
