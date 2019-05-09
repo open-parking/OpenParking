@@ -36,28 +36,34 @@ import java.util.Locale;
 public class AddParkingSpaceActivity extends AppCompatActivity {
     private static final String TAG = "AddParkingInstanceAct";
 
+    //Buttons
     Button btnAddPicture;
     Button btnCoordinate; // To Be Hidden // Change to  btnConfirm
     Button btnSend;
 
-
+    //Street, City, State and ZipCode
     private EditText editTextStreet;
     private EditText editTextCity;
     private Spinner  stateSpinner;
-
     private EditText editTextZipCode;
+
+    //Latitude and Longitude
     private EditText editTextLatitude;    // To Be Hidden
     private EditText editTextLongitude;   // To Be Hidden
+
+    //Price and Times
     private EditText editTextCost;
     private Spinner  openTimeSpinner;
     private Spinner  closeTimeSpinner;
     private Spinner  openTimeAMPMSpinner;
     private Spinner  closeTimeAMPMSpinner;
 
+    //Database
     private DatabaseReference mDatabase;
     private FirebaseAuth firebaseAuth;
-    private String userID;
+    private String userID;                  //To be stored with the new Parking Space
 
+    //Temp Vars
     String street;
     String city;
     String state
