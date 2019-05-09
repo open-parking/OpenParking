@@ -351,6 +351,8 @@ public class MyParkingList extends AppCompatActivity{
         TextView txtCost;
         RatingBar mRatingBar;
 
+        myDialog.setContentView(R.layout.custom_window2);
+
         mRatingBar = (RatingBar) myDialog.findViewById(R.id.ratingBar3);
         displayRating(mRatingBar);
 
@@ -397,7 +399,8 @@ public class MyParkingList extends AppCompatActivity{
     private void displayRating(RatingBar mRatingBar)
     {
         double rating = owner.getContributorRating();
-        if(rating == 0)
+        int numRated = owner.getTimesContributorRated();
+        if(numRated == 0)
         {
             Toast.makeText(this, "This seller has not been rated.", Toast.LENGTH_SHORT).show();
         }
