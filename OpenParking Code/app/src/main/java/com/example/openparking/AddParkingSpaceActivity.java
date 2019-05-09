@@ -88,7 +88,7 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
         street = "";
          city = "";
          state = "";
-         address = "";
+         address = ""; //combination of street + city + state.
          zipcode = "";
 
         //Price and Times
