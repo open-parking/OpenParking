@@ -87,6 +87,9 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
          state = "";
          address = "";
          zipcode = "";
+         price = "";
+         openTime = "";
+         closeTime = "";
          lat_Str = "";
          lng_Str = "";
 
