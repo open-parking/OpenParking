@@ -248,11 +248,12 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
         btnCoordinate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+
                 Geocoder geocoder = new Geocoder(v.getContext());
                 List<Address> addresses;
+
                 try{
-                    String address =            editTextStreet.getText().toString().trim();
+                    address =                   editTextStreet.getText().toString().trim();
                     address = address + ", " +  editTextCity.getText().toString().trim();
                     address = address + ", " +  stateSpinner.getSelectedItem().toString();
 
@@ -261,14 +262,17 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
                     if(addresses.size() > 0) {
                         double latitude= addresses.get(0).getLatitude();
                         double longitude= addresses.get(0).getLongitude();
-                        //editTextLatitude.setText(Double.toString(latitude));
-                        //editTextLongitude.setText(Double.toString(longitude));
+
+                        //Set Text
+                        editTextLatitude.setText(Double.toString(latitude));
+                        editTextLongitude.setText(Double.toString(longitude));
                     }
                     else{
-                        //Not a valid address
+                        //Set Text //Not a valid address
                         editTextStreet.setText("Not Valid");
                         editTextCity.setText("Not Valid");
-                        //editTextState.setText("Not Valid");
+                        editTextLatitude.setText(Double.toString(latitude));
+                        editTextLongitude.setText(Double.toString(longitude));
                     }
                 }catch(Exception e)
                 {
@@ -276,7 +280,6 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
                 }
             }
         });
-        */
     }
 
     private Boolean getCoords(String address, Geocoder geocoder)
