@@ -261,19 +261,20 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
                     addresses = geocoder.getFromLocationName(address, 1);
 
                     if(addresses.size() > 0) {
-                        latitude = addresses.get(0).getLatitude();
-                        longitude = addresses.get(0).getLongitude();
+                        //Get Strings
+                        lat_Str = Double.toString(addresses.get(0).getLatitude());
+                        lng_Str = Double.toString(addresses.get(0).getLongitude());
 
                         //Set Text
-                        editTextLatitude.setText(Double.toString(latitude));
-                        editTextLongitude.setText(Double.toString(longitude));
+                        editTextLatitude.setText(lat_Str);
+                        editTextLongitude.setText(lng_Str);
                     }
                     else{
                         //Set Text //Not a valid address
                         editTextStreet.setText("Not Valid");
                         editTextCity.setText("Not Valid");
-                        editTextLatitude.setText(Double.toString(latitude));
-                        editTextLongitude.setText(Double.toString(longitude));
+                        editTextLatitude.setText("?");
+                        editTextLongitude.setText("?");
                     }
                 }catch(Exception e)
                 {
