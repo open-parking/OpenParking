@@ -181,8 +181,6 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
                 {
                     //Get Coordinates
 
-
-
                 }
                 else
                 {
@@ -393,36 +391,37 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
         address = street + ", " + city + ", " + state;
 
         zipcode = editTextZipCode.getText().toString().trim();
-        cost = editTextCost.getText().toString().trim();
+        price = editTextCost.getText().toString().trim();
 
         //Check Street
         if (street.equals(""))
         {
             Log.v(TAG, "Invalid Street");
             toast("Enter Street" );
-            return;
+            return false;
         }
 
         if (city.equals(""))
         {
             Log.v(TAG, "Invalid City");
             toast("Enter City" );
-            return;
+            return false;
         }
 
         if (zipcode.equals(""))
         {
             Log.v(TAG, "Invalid Zipcode");
             toast("Enter Zipcode" );
-            return;
+            return false;
         }
 
-        if (cost.equals(""))
+        if (price.equals(""))
         {
             Log.v(TAG, "Invalid Cost");
             toast("Enter Price" );
-            return;
+            return false;
         }
 
+        return true;
     }
 }
