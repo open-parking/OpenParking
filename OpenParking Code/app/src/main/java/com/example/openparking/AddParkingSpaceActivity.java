@@ -315,6 +315,9 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
         zipcode = editTextZipCode.getText().toString().trim();
         price = editTextPrice.getText().toString().trim();
 
+        openTime = openTimeSpinner.getSelectedItem().toString()+ openTimeAMPMSpinner.getSelectedItem().toString();
+        closeTime = closeTimeSpinner.getSelectedItem().toString()+ closeTimeAMPMSpinner.getSelectedItem().toString();
+
         //Check Street
         if (street.equals(""))
         {
