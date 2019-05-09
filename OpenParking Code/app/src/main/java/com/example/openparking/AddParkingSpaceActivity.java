@@ -48,7 +48,7 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
     private EditText editTextZipCode;
 
     //Price and Times
-    private EditText editTextCost;
+    private EditText editTextPrice;
     private Spinner  openTimeSpinner;
     private Spinner  closeTimeSpinner;
     private Spinner  openTimeAMPMSpinner;
@@ -111,7 +111,7 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
         editTextZipCode     = findViewById(R.id.editTextZipCode);
 
         //Price and Times
-        editTextCost        = findViewById(R.id.editTextCost);
+        editTextPrice        = findViewById(R.id.editTextPrice);
         openTimeSpinner     = findViewById(R.id.spinner_open_time);
         closeTimeSpinner    = findViewById(R.id.spinner_close_time);
         openTimeAMPMSpinner = findViewById(R.id.spinner_open_time_ampm);
@@ -231,7 +231,7 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
 
                     //Get Cost and Times
                     Log.v(TAG, "Get cost and Time");
-                    final Double costDouble = Double.parseDouble(cost);
+                    final Double priceDouble = Double.parseDouble(price);
                     final String open = openTimeSpinner.getSelectedItem().toString() + openTimeAMPMSpinner.getSelectedItem().toString();
                     final String close = closeTimeSpinner.getSelectedItem().toString() + closeTimeAMPMSpinner.getSelectedItem().toString();
 
@@ -330,13 +330,13 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
         }
     }
 
-    private void writeNewParkingSpace(String ownerID, String Address,String zipCode, Double latitude, Double longitude, Double cost, String openTime, String closeTime )
+    private void writeNewParkingSpace(String ownerID, String Address,String zipCode, Double latitude, Double longitude, Double price, String openTime, String closeTime )
     {
         Log.v(TAG, "writeNewParkingSpace()");
 
 
         // Send Parking Space to FireBase
-        ParkingSpace ps = new ParkingSpace(ownerID, Address,zipCode, latitude, longitude, cost, openTime, closeTime);
+        ParkingSpace ps = new ParkingSpace(ownerID, Address,zipCode, latitude, longitude, price, openTime, closeTime);
         Log.v(TAG, "Sending to mDatabase");
 
 
@@ -358,12 +358,11 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
     private void resetInputs()
     {
         Log.v(TAG, "resetInputs()");
-
         editTextStreet.setText("");
         editTextCity.setText("");
         stateSpinner.setSelection(0);
         editTextZipCode.setText("");
-        editTextCost.setText("");
+        editTextPrice.setText("");
         openTimeSpinner.setSelection(0);
         closeTimeSpinner.setSelection(1);
         openTimeAMPMSpinner.setSelection(0);
@@ -383,15 +382,16 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
 
     private Boolean checkForEmptyFields()
     {
+        Log.v(TAG, "checkForEmptyFields()");
+
         //Get User Input from text fields
-        Log.v(TAG, "Getting input from editText");
         street   = editTextStreet.getText().toString().trim();
         city     = editTextCity.getText().toString().trim();
         state    = stateSpinner.getSelectedItem().toString();
         address = street + ", " + city + ", " + state;
 
         zipcode = editTextZipCode.getText().toString().trim();
-        price = editTextCost.getText().toString().trim();
+        price = editTextPrice.getText().toString().trim();
 
         //Check Street
         if (street.equals(""))
@@ -417,7 +417,7 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
 
         if (price.equals(""))
         {
-            Log.v(TAG, "Invalid Cost");
+            Log.v(TAG, "Invalid Price");
             toast("Enter Price" );
             return false;
         }
