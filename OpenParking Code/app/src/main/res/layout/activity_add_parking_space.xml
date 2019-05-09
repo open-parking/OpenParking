@@ -59,7 +59,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp">
 
-        <AutoCompleteTextView
+        <EditText
             android:id="@+id/editTextCity"
             android:layout_width="0dp"
             android:layout_weight="1"
@@ -152,19 +152,11 @@
                 android:paddingRight="16dp"
                 android:text="@string/open_label"/>
 
-            <TextView
-                android:id="@+id/textViewCloseTime"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
-                android:text="@string/close_label"/>
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp">
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
 
             <Spinner
                 android:id="@+id/spinner_open_time"
@@ -175,11 +167,32 @@
                 />
             <Spinner
                 android:id="@+id/spinner_open_time_ampm"
-                android:hint="am pm"
+                android:hint="am"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="50dp"
                 />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <TextView
+                android:id="@+id/textViewCloseTime"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:text="@string/close_label"/>
+        </LinearLayout>
+
+
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
 
             <Spinner
                 android:id="@+id/spinner_close_time"
@@ -190,16 +203,15 @@
                 />
             <Spinner
                 android:id="@+id/spinner_close_time_ampm"
-                android:hint="am pm"
+                android:hint="pm"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="50dp"
                 />
+    </LinearLayout>
 
-        </LinearLayout>
 
-
-        <Button
+            <Button
             android:id="@+id/btnAddPicture"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
