@@ -7,6 +7,7 @@ package com.example.openparking;
 //DONE:
 // USE THIS ACTIVITY TO TEST ADDING PARKING INSTANCES TO DATABASE
 
+import android.content.Context;
 import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
@@ -20,6 +21,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -27,7 +29,9 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class AddParkingSpaceActivity extends AppCompatActivity {
     private static final String TAG = "AddParkingInstanceAct";
@@ -36,13 +40,12 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
     Button btnAddPicture;
     //Button btnCoordinate; // Hidden
 
-    public Double latitude;        //received from geocoder
-    public Double longitude;       //received from geocoder
-    int zipCode;            //received from geocoder
+    public Double latitude;         //received from geocoder
+    public Double longitude;        //received from geocoder
+    int zipCode;                    //received from geocoder
 
     private EditText editTextStreet;
-    private AutoCompleteTextView editTextCity;
-    //private EditText editTextState; // replaced with spinner
+    private EditText editTextCity;
     private Spinner  stateSpinner;
 
     private EditText editTextZipCode;
@@ -116,6 +119,7 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
         myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         openTimeAMPMSpinner.setAdapter(myAMPM_Adapter);
         closeTimeAMPMSpinner.setAdapter(myAMPM_Adapter);
+        closeTimeAMPMSpinner.setSelection(1);
 
 
         // Get userID
@@ -138,39 +142,91 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Log.v(TAG, "Clicked Send Button");
 
-                //Get address from user Input
-                String address =            editTextStreet.getText().toString().trim();
-                address = address + ", " +  editTextCity.getText().toString().trim();
-                address = address + ", " +  stateSpinner.getSelectedItem().toString();
-                final String zipcode = editTextZipCode.getText().toString().trim();
+                // Toast message
+                //toast("Clicked Button Address" );
 
-                // Check Street Address Validity
-                if(!verifyAddress(address))
+                //Check for empty fields
+                if(checkForEmptyFields())
                 {
-                    // Notify User and reset input boxes
+                    //Get Coordinates
 
-                    //toast
-                    resetInputs();
+
 
                 }
-                else {
+                else
+                {
+                    return;
+                }
+
+                // Check Street Address Validity
+                 Log.v(TAG, "Verifying(" + address + ")");
+
+                Boolean receivedCoordinates = false;
+                Geocoder geocoder = new Geocoder(v.getContext(), Locale.getDefault());
+
+                List<Address> addresses;
+                try{
+                    int maxResults = 5;
+                    Log.v(TAG, "trying : geocoder.getFromLocationName(" + address + ", " + maxResults + ")" );
+                    addresses = geocoder.getFromLocationName(address, maxResults);
+
+                    if(addresses.size() > 0) {
+                        Log.v(TAG, "address verified");
+                        latitude= addresses.get(0).getLatitude();
+                        longitude= addresses.get(0).getLongitude();
+                        //editTextLatitude.setText(Double.toString(latitude));   // Hidden
+                        //editTextLongitude.setText(Double.toString(longitude)); // Hidden
+                        //return true;
+                        receivedCoordinates = true;
+                    }
+                    else{
+                        //Not a valid address
+                        Log.v(TAG, "address not valid");
+                        editTextStreet.setText("Not Valid");
+                        editTextCity.setText("Not Valid");
+                        //return false;
+                        receivedCoordinates = true;
+
+                    }
+                }catch(Exception e)
+                {
+                    Log.e(TAG, ":error geocoder failed");
+                    //return false;
+                    receivedCoordinates = false;
+                }
+
+                if(receivedCoordinates)
+                {
+                    Log.v(TAG, "Received Coordinates");
+
                     //Get Cost and Times
-                    final Double cost = Double.parseDouble(editTextCost.getText().toString());
+                    Log.v(TAG, "Get cost and Time");
+                    final Double costDouble = Double.parseDouble(cost);
                     final String open = openTimeSpinner.getSelectedItem().toString() + openTimeAMPMSpinner.getSelectedItem().toString();
                     final String close = closeTimeSpinner.getSelectedItem().toString() + closeTimeAMPMSpinner.getSelectedItem().toString();
 
                     // Send to Fire Base
-                    writeNewParkingSpace(userID, address, zipcode, latitude, longitude, cost, open, close);
+                    Log.v(TAG, "Sending to Database");
+                    writeNewParkingSpace(userID, address, zipcode, latitude, longitude, costDouble, open, close);
 
                     // Reset inputs
+                    Log.v(TAG, "Resetting Inputs");
                     resetInputs();
 
-                    //toast
-                    //TODO: show loading bar or toast message
+                    // Show result message
+                    toast("Success: Parking Space Added" );
+                }
+                else
+                {
+                    Log.v(TAG, "Invalid Address");
 
+                    // Reset input boxes
+                    resetInputs();
+
+                    // Show result message
+                    toast("Invalid Address" );
                 }
             }
-
         });
 
         //btnCoordinate = findViewById(R.id.btnCoords);
@@ -213,35 +269,43 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
         */
     }
 
-    private boolean verifyAddress(String address)
+    private Boolean getCoords(String address, Geocoder geocoder)
     {
-        Geocoder geocoder = new Geocoder(this);
+        //Geocoder geocoder = new Geocoder(v.getContext());
+
+
         List<Address> addresses;
         try{
-            addresses = geocoder.getFromLocationName(address, 1);
+            Log.v(TAG, "trying : geocoder.getFromLocationName(" + address + ", 1)");
+            addresses = geocoder.getFromLocationName(address, 5);
 
             if(addresses.size() > 0) {
-                this.latitude= addresses.get(0).getLatitude();
-                this.longitude= addresses.get(0).getLongitude();
+                Log.v(TAG, "address verified");
+                latitude= addresses.get(0).getLatitude();
+                longitude= addresses.get(0).getLongitude();
                 //editTextLatitude.setText(Double.toString(latitude));   // Hidden
                 //editTextLongitude.setText(Double.toString(longitude)); // Hidden
                 return true;
             }
             else{
                 //Not a valid address
+                Log.v(TAG, "address not valid");
                 editTextStreet.setText("Not Valid");
                 editTextCity.setText("Not Valid");
                 return false;
             }
         }catch(Exception e)
         {
-            Log.e(TAG, ":error verifying coordinates");
+            Log.e(TAG, ":error geocoder failed");
+            return false;
         }
-        return false;
     }
 
     private void writeNewParkingSpace(String ownerID, String Address,String zipCode, Double latitude, Double longitude, Double cost, String openTime, String closeTime )
     {
+        Log.v(TAG, "writeNewParkingSpace()");
+
+
         // Send Parking Space to FireBase
         ParkingSpace ps = new ParkingSpace(ownerID, Address,zipCode, latitude, longitude, cost, openTime, closeTime);
         Log.v(TAG, "Sending to mDatabase");
@@ -264,18 +328,71 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
 
     private void resetInputs()
     {
+        Log.v(TAG, "resetInputs()");
+
         editTextStreet.setText("");
         editTextCity.setText("");
-        stateSpinner.setSelection(1);
-        editTextZipCode.setText("Zipcode");
-        //editTextLatitude.setText("");
-        //editTextLongitude.setText("");
-        editTextCost.setText("Price per hour");
-        //editTextOpenTime.setText("Open Time");
-        //editTextCloseTime.setText("Close Time");
-        openTimeSpinner.setSelection(1);
+        stateSpinner.setSelection(0);
+        editTextZipCode.setText("");
+        //editTextLatitude.setText("");  //Hidden
+        //editTextLongitude.setText(""); //Hidden
+        editTextCost.setText("");
+        openTimeSpinner.setSelection(0);
         closeTimeSpinner.setSelection(1);
-        openTimeAMPMSpinner.setSelection(1);
-        closeTimeAMPMSpinner.setSelection(2);
+        openTimeAMPMSpinner.setSelection(0);
+        closeTimeAMPMSpinner.setSelection(1);
+    }
+
+    private void toast(CharSequence cs)
+    {
+        Context context = getApplicationContext();
+        CharSequence text = cs;
+        int duration = Toast.LENGTH_SHORT;
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
+    }
+
+    private Boolean checkForEmptyFields()
+    {
+
+        //Get address from user Input
+        Log.v(TAG, "Getting input from editText");
+        String street   = editTextStreet.getText().toString().trim();
+        String city     = editTextCity.getText().toString().trim();
+        String state    = stateSpinner.getSelectedItem().toString();
+        String address = street + ", " + city + ", " + state;
+
+        String zipcode = editTextZipCode.getText().toString().trim();
+        String cost = editTextCost.getText().toString().trim();
+
+        //Check Street
+        if (street.equals(""))
+        {
+            Log.v(TAG, "Invalid Street");
+            toast("Enter Street" );
+            return;
+        }
+
+        if (city.equals(""))
+        {
+            Log.v(TAG, "Invalid City");
+            toast("Enter City" );
+            return;
+        }
+
+        if (zipcode.equals(""))
+        {
+            Log.v(TAG, "Invalid Zipcode");
+            toast("Enter Zipcode" );
+            return;
+        }
+
+        if (cost.equals(""))
+        {
+            Log.v(TAG, "Invalid Cost");
+            toast("Enter Price" );
+            return;
+        }
+
     }
 }
