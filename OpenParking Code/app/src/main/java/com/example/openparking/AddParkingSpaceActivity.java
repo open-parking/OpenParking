@@ -47,16 +47,16 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
     private Spinner  stateSpinner;
     private EditText editTextZipCode;
 
-    //Latitude and Longitude
-    private EditText editTextLatitude;    // To Be Hidden
-    private EditText editTextLongitude;   // To Be Hidden
-
     //Price and Times
     private EditText editTextCost;
     private Spinner  openTimeSpinner;
     private Spinner  closeTimeSpinner;
     private Spinner  openTimeAMPMSpinner;
     private Spinner  closeTimeAMPMSpinner;
+
+    //Latitude and Longitude
+    private EditText editTextLatitude;    // To Be Hidden
+    private EditText editTextLongitude;   // To Be Hidden
 
     //Database
     private DatabaseReference mDatabase;
@@ -82,15 +82,22 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-         street = "";
+        //Temp Variables
+
+        //Street, City, State and ZipCode
+        street = "";
          city = "";
          state = "";
          address = "";
          zipcode = "";
-         price = "";
+
+        //Price and Times
+        price = "";
          openTime = "";
          closeTime = "";
-         lat_Str = "";
+
+        //Latitude and Longitude
+        lat_Str = "";
          lng_Str = "";
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
