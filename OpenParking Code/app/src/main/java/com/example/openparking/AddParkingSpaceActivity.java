@@ -69,6 +69,9 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
     String state;
     String address;
     String zipcode;
+    String price;
+    String openTime;
+    String closeTime;
     String lat_Str;
     String lng_Str;
 
@@ -369,16 +372,15 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
 
     private Boolean checkForEmptyFields()
     {
-
-        //Get address from user Input
+        //Get User Input from text fields
         Log.v(TAG, "Getting input from editText");
-        String street   = editTextStreet.getText().toString().trim();
-        String city     = editTextCity.getText().toString().trim();
-        String state    = stateSpinner.getSelectedItem().toString();
-        String address = street + ", " + city + ", " + state;
+        street   = editTextStreet.getText().toString().trim();
+        city     = editTextCity.getText().toString().trim();
+        state    = stateSpinner.getSelectedItem().toString();
+        address = street + ", " + city + ", " + state;
 
-        String zipcode = editTextZipCode.getText().toString().trim();
-        String cost = editTextCost.getText().toString().trim();
+        zipcode = editTextZipCode.getText().toString().trim();
+        cost = editTextCost.getText().toString().trim();
 
         //Check Street
         if (street.equals(""))
