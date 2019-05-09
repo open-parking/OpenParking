@@ -363,13 +363,13 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
         editTextCity.setText("");
         stateSpinner.setSelection(0);
         editTextZipCode.setText("");
-        //editTextLatitude.setText("");  //Hidden
-        //editTextLongitude.setText(""); //Hidden
         editTextCost.setText("");
         openTimeSpinner.setSelection(0);
         closeTimeSpinner.setSelection(1);
         openTimeAMPMSpinner.setSelection(0);
         closeTimeAMPMSpinner.setSelection(1);
+        editTextLatitude.setText("");  //To Be Hidden
+        editTextLongitude.setText(""); //To Be Hidden
     }
 
     private void toast(CharSequence cs)
