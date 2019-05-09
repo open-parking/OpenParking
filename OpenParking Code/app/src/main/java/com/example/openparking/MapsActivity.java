@@ -1,7 +1,11 @@
 package com.example.openparking;
 
 import android.Manifest;
+import android.app.Dialog;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -14,16 +18,18 @@ import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RatingBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.location.LocationListener;
-
-
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
+
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -33,7 +39,19 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
@@ -49,29 +67,49 @@ public class MapsActivity extends FragmentActivity implements
     private GoogleApiClient googleApiClient;
     private LocationRequest locationRequest;
     private Location lastLocation;
-    private Marker currentLocationMarker;
+    private Marker currentLocationMarker;//To be removed later,
     private static final int Request_User_Location_Code = 99;
     private static final String TAG = "Maps Activity";
 
-    //private EditText addressSearchText;
-   // private Button   addressSearchButton;
+    // [START declare_database_ref]
+    private DatabaseReference mDatabase;
+    // [END declare_database_ref]
 
 
+    List <ParkingInstance> parkingInstanceList;         // List of parking spaces with a car in them. //THIS LIST NOT CURRENTLY USED.
+    List <ParkingSpace> parkingSpaceList;               // List of parking spaces that are available for reservation.
+    HashMap<String, ParkingSpace>parkingSpaceHashMap;   // For quick look up from marker ID to parkingSpace.
 
-    // Test Values for Random Markers in Long Beach
+
+    private ParkingSpace ps;
+    //Dialog for displaying popup parking space details
+    private Dialog myDialog;
+    //Owner retrieved from database
+    private User owner;
+
+    private TextView sellerName;
+
+    //intent to go from maps to createparkinginstance activity
+    Intent create;
+
+    // [START Test Values for Random Markers in Long Beach]
+
+    // Test Area Latitude and Longitude
+    // from (Hilltop Park) to (7th and Studebaker)
     double scale_value  = 1000000.0;
     int parallel = 33;
     int meridian = -118;
 
-    //Test Area from (Hilltop Park) to (7th and Studebaker)
-    // Latitude Range
+    // Latitude Range (numbers must be adjusted with scale_value)
     private static final int maxLat =800471;
     private static final int minLat =774571;
-    // Longitude Range
+    // Longitude Range(numbers must be adjusted with scale_value)
     private static final int maxLon =167585;
     private static final int minLon =103137;
-
     private static final int NUM_MARKERS = 8;
+
+    // [END Test Values for Random Markers in Long Beach]
+
 
     class ParkingInfoWindow implements GoogleMap.InfoWindowAdapter {
 
@@ -123,6 +161,19 @@ public class MapsActivity extends FragmentActivity implements
             checkUserLocationPermission();
         }
 
+        // [START initialize_database_ref]
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        // [END initialize_database_ref]
+
+        myDialog = new Dialog(this);
+        myDialog.setContentView(R.layout.custom_window);
+        ps = new ParkingSpace();
+
+        owner = new User();
+        sellerName = (TextView)findViewById(R.id.txtSellerName);
+
+        create = new Intent(MapsActivity.this, CreateParkingInstanceActivity.class);
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -131,8 +182,31 @@ public class MapsActivity extends FragmentActivity implements
         // Set a preference for minimum and maximum zoom.
         //mMap.setMinZoomPreference(6.0f);
         //mMap.setMaxZoomPreference(14.0f);
+
+
+        parkingInstanceList = new ArrayList<>();
+        parkingSpaceList = new ArrayList<>();
+        parkingSpaceHashMap = new HashMap<>();
+
+
+
+        //Parking Spaces are now loaded when user clicks the search button
+        //loadParkingSpacesFromDataBase("90802");
+
+        //TODO: Get users location, get zipcode and load parking spaces
+        loadParkingSpacesFromDataBase("90815");
     }
 
+    /**
+    @Override
+    public boolean onMarkerClick(final Marker marker)
+    {
+        return false;// temp
+    }
+    **/
+    // Generates random Latitude Longitude coordinates to be placed in the ParkingInstance ArrayList.
+    // These Random Coordinates help test the map markers .
+    /*
     private LatLng randomLongBeachLocation()
     {
         int randLat = new Random().nextInt(maxLat-minLat)+minLat;
@@ -144,6 +218,13 @@ public class MapsActivity extends FragmentActivity implements
 
         return new LatLng(randLatD, randLonD);
     }
+    */
+
+
+    /** Adds map markers on the map at random coordinates within Long Beach.
+    *   This function is no longer used. It was replaced by:
+    *      addRandomMarkersToParkingInstanceList() and
+    *      displayMarkersOnList().
 
     private void addRandomMarkers(GoogleMap googleMap, int num_markers)
     {
@@ -161,6 +242,145 @@ public class MapsActivity extends FragmentActivity implements
 
         }
     }
+     **/
+
+    /**
+     *  This function is for testing purposes only.
+     *  Generates Random Coordinates and saved them to ParkingInstanceList.
+
+    private void addRandomMarkersToParkingInstanceList(int num_markers)
+    {
+        for (int i = 0; i < num_markers; i++ ) {
+            LatLng random_coords = randomLongBeachLocation();
+            ParkingInstance testInstance = new ParkingInstance(random_coords);
+
+            parkingInstanceList.add(testInstance);
+        }
+    }
+     **/
+
+    /**
+     * @param zipCode the zipcode area that we want to load from the database
+     */
+    private void loadParkingSpacesFromDataBase(String zipCode)
+    {
+
+        mDatabase.child("ParkingSpaces").child(zipCode).addChildEventListener( //OLD TABLE NAME WAS "ZipCodes"
+                new ChildEventListener() {
+
+                    @Override
+                    public void onChildAdded(DataSnapshot dataSnapshot, String previousChildName) {
+                        Log.d(TAG, "onChildAdded:" + dataSnapshot.getKey());
+
+                        // A new parking space has been added, add it to the displayed list
+                        //ParkingSpace ps = new ParkingSpace();
+                        ParkingSpace ps = dataSnapshot.getValue(ParkingSpace.class);
+
+                        if(!ps.equals(null))
+                        {
+                            Log.d(TAG, "onChildAdded: " +  "ps is good");
+
+                            parkingSpaceList.add(ps);
+
+                            String address = ps.getAddress();
+                            String hours = "Hours: " + ps.getOpentime() + " to " + ps.getClosetime();
+
+                            MarkerOptions mo = new MarkerOptions();
+                            mo.position(new LatLng(ps.getLatitude(), ps.getLongitude() ) );
+                            mo.title(address);
+                            mo.snippet(hours);
+                            mo.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
+                            mo.flat(true);
+
+                            //Add marker to map AND get its ID
+                            String markerID = mMap.addMarker(mo).getId();
+
+                            /** OLD WAY OF ADDING A MARKER TO THE MAP
+                            mMap.addMarker(new MarkerOptions()
+                                    .position(ps.getLatLng())
+                                    .title(address)
+                                    .snippet(hours)
+                                    //.icon(BitmapDescriptorFactory.fromResource(R.drawable.openparkinglogo_small))
+                                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
+                                    .flat(true)
+                            );**/
+
+                            parkingSpaceHashMap.put(markerID, ps);
+                        }
+                        else
+                        {
+                            Log.d(TAG, "onChildAdded: " +  "ps is null");
+                        }
+                    }
+
+                    @Override
+                    public void onChildChanged(DataSnapshot dataSnapshot, String previousChildName) {
+                        Log.d(TAG, "onChildChanged:" + dataSnapshot.getKey());
+
+                        // A comment has changed, use the key to determine if we are displaying this
+                        // comment and if so displayed the changed comment.
+                        //Comment newComment = dataSnapshot.getValue(Comment.class);
+                        //String commentKey = dataSnapshot.getKey();
+
+                        // ...
+                    }
+
+                    @Override
+                    public void onChildRemoved(DataSnapshot dataSnapshot) {
+                        Log.d(TAG, "onChildRemoved:" + dataSnapshot.getKey());
+
+                        // A comment has changed, use the key to determine if we are displaying this
+                        // comment and if so remove it.
+                        // commentKey = dataSnapshot.getKey();
+
+                        // ...
+                    }
+
+                    @Override
+                    public void onChildMoved(DataSnapshot dataSnapshot, String previousChildName) {
+                        Log.d(TAG, "onChildMoved:" + dataSnapshot.getKey());
+
+                        // A comment has changed position, use the key to determine if we are
+                        // displaying this comment and if so move it.
+                        //Comment movedComment = dataSnapshot.getValue(Comment.class);
+                        //String commentKey = dataSnapshot.getKey();
+
+                        // ...
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        Log.w(TAG, "postComments:onCancelled", databaseError.toException());
+                        //Toast.makeText(mContext, "Failed to load comments.",
+                        //Toast.LENGTH_SHORT).show();
+                    }
+
+                });
+    }
+
+
+    /**
+     * Displays on the map the markers stored in ParkingInstanceList.
+     *
+     * @param googleMap
+
+    private void displayMarkersOnList(GoogleMap googleMap)
+    {
+        mMap = googleMap;
+        for (int i = 0; i < parkingInstanceList.size(); i++ )
+        {
+
+            mMap.addMarker(new MarkerOptions()
+                    .position(parkingInstanceList.get(i).getLatlng())
+                    .title("List: " + String.valueOf(i) )
+                    .snippet("Hours: 9:00am - 6:00pm\nPrice: $3/hr")
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.openparkinglogo_small))
+                    .flat(true)
+            );
+        }
+    }
+     */
+
 
     /**
      * Manipulates the map once available.
@@ -179,7 +399,7 @@ public class MapsActivity extends FragmentActivity implements
         // Add a marker in Long Beach and move the camera
         LatLng longbeach = new LatLng(33.782896, -118.110230);
 
-        mMap.addMarker(new MarkerOptions().position(longbeach).title("Marker in Long Beach"));
+        //mMap.addMarker(new MarkerOptions().position(longbeach).title("Marker in Long Beach"));// Test Marker
         mMap.moveCamera(CameraUpdateFactory.newLatLng(longbeach));
         mMap.moveCamera(CameraUpdateFactory.zoomTo(12));
 
@@ -202,13 +422,18 @@ public class MapsActivity extends FragmentActivity implements
         }
 
         // Create Test Markers for Open Parking Locations
-        mMap.addMarker(new MarkerOptions()
-                .position(new LatLng(33.782000, -118.110000))
-                .title("Hello Marker"));
+
+        // Test Marker
+        //mMap.addMarker(new MarkerOptions()
+                //.position(new LatLng(33.782000, -118.110000))
+                //.title("Hello Marker"));
 
         // Randomized Markers
-        addRandomMarkers(mMap, NUM_MARKERS);
+        //addRandomMarkers(mMap, NUM_MARKERS);
 
+        // Load Markers From ParkingInstanceList
+        //addRandomMarkersToParkingInstanceList(NUM_MARKERS);
+        //displayMarkersOnList(mMap);
 
         // Move Camera to LongBeach
         mMap.moveCamera(CameraUpdateFactory.newLatLng(longbeach));
@@ -337,11 +562,94 @@ public class MapsActivity extends FragmentActivity implements
 
     }
 
+    // WIP
     @Override
     public void onInfoWindowClick(Marker marker)
     {
-        Toast.makeText(this, "Info window clicked", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Info window clicked", Toast.LENGTH_SHORT).show();
+        Log.v(TAG, "onInfoWindowClick: Info Window clicked");
 
+        //Steps for passing Data to other Activity
+        // 1. Create New Intent object
+        //create = new Intent(MapsActivity.this, ViewParkingInstance.class);
+
+        // 2. intent.putExtra(String key, Object data)
+        ps = parkingSpaceHashMap.get(marker.getId());
+
+        //CHECK IF THE MARKER BELONGS TO A VALID PARKING SPACE
+        if(!(ps == null))
+        {
+            create.putExtra("parkingSpace", ps);
+
+            retrieveOwner();
+
+
+            // 3. startActivity(intent)
+            //Toast.makeText(this, "Starting new Activity", Toast.LENGTH_SHORT).show();
+            //startActivity(intent);
+
+            //In new Activity
+            // 4. getIntent()
+
+            // 5. intent.getStringExtra(String key)
+        }
+        else
+        {
+            Toast.makeText(this, "Not a parking space marker!", Toast.LENGTH_SHORT).show();
+        }
+
+
+
+
+
+
+        //display custom_window.xml
+    }
+
+    private void retrieveOwner()
+    {
+        DatabaseReference ref = mDatabase.child("users").child(ps.getOwnerID());
+
+        //Retrieve seller information using ps.getOwnerID()
+        readData(ref, new OnGetDataListener() {
+            @Override
+            public void onSuccess(DataSnapshot dataSnapshot) {
+                owner = new User();
+                owner = dataSnapshot.getValue(User.class);
+                Log.d("TAG", "Read successful, Owner: " + owner.toString());
+
+                TextView txtSellerName = (TextView) myDialog.findViewById(R.id.txtSellerName);
+                txtSellerName.setText(owner.getName());
+
+                showPopup();
+            }
+
+            @Override
+            public void onStart() {
+                Log.d("ONSTART", "Started");
+            }
+
+            @Override
+            public void onFailure(DatabaseError databaseError) {
+                Log.d("ONFAILURE", "Failed");
+            }
+        });
+    }
+
+    public void readData(DatabaseReference ref, final OnGetDataListener listener){
+        System.out.println("Reached READDATA function");
+        listener.onStart();
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                listener.onSuccess(dataSnapshot);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                listener.onFailure(databaseError);
+            }
+        });
     }
 
     public void onMapSearch(View view) {
@@ -350,6 +658,7 @@ public class MapsActivity extends FragmentActivity implements
         String location = addressSearchText.getText().toString();
         List<Address> addressList = null;
 
+        //Move Camera to search result and load parking spaces from zipcode
         if (location != null || !location.equals("")) {
             Geocoder geocoder = new Geocoder(this);
             try {
@@ -358,21 +667,166 @@ public class MapsActivity extends FragmentActivity implements
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            Address address = addressList.get(0);
-            LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
+            if(!addressList.isEmpty())
+            {
+                Address address = addressList.get(0);
+                LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
 
-            //Marker Options
-            MarkerOptions markerOptions = new MarkerOptions();
-            markerOptions.position(latLng);
-            markerOptions.title("Search Result");
-            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
+                //Marker Options
+                //MarkerOptions markerOptions = new MarkerOptions();
+                //markerOptions.position(latLng);
+                //markerOptions.title("Search Result");
+                //markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
 
-            mMap.addMarker(markerOptions);
+                //Search Result Marker
+                //mMap.addMarker(markerOptions);
 
-            //mMap.addMarker(new MarkerOptions().position(latLng).title("Search Result"));
-            mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
+                //Move Camera
+                mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
+
+                //Load Parking Spaces
+                loadParkingSpacesFromDataBase(address.getPostalCode());
+            }else
+            {
+                Log.v(TAG, "onMapSearch: addressList isEmpty()");
+            }
+
         }
     }
 
+    public String getUid() {
+        return "42";
+    }
 
+    public void basicQueryValueListener() {
+        String myUserId = getUid();
+        String myZipcode = "90840";
+
+        Query myParkingInstanceQuery = mDatabase.child("parking-instances").child(myZipcode);
+
+        /**Query myParkingInstanceQuery = mDatabase.child("user-posts").child(myUserId)
+                .orderByChild("starCount");**/
+
+        // [START basic_query_value_listener]
+        // My top posts by number of stars
+        myParkingInstanceQuery.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
+                    // TODO: handle the post
+                    //postSnapshot.
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Getting Post failed, log a message
+                Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
+                // ...
+            }
+        });
+        // [END basic_query_value_listener]
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        basicQueryValueListener();
+    }
+
+
+    public void showPopup() {
+        TextView txtclose;
+        Button btnFollow;
+        TextView txtSellerName;
+        TextView txtAddress;
+        TextView txtIsAvailable;
+        TextView txtOpenClose;
+        TextView txtCost;
+        RatingBar mRatingBar;
+
+        myDialog.setContentView(R.layout.custom_window);
+
+        mRatingBar = (RatingBar) myDialog.findViewById(R.id.ratingBar2);
+        displayRating(mRatingBar);
+
+        txtclose =(TextView) myDialog.findViewById(R.id.txtclose);
+        txtclose.setText("X");
+
+        btnFollow = (Button) myDialog.findViewById(R.id.btnfollow);
+        btnFollow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!ps.getReservedStatus()) {
+                    myDialog.dismiss();
+                    create.putExtra("parkingSpace", ps);
+                    startActivity(create);
+                    finish();
+                } else {
+                    Toast.makeText(getApplicationContext(), "This listing has already been sold", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        txtclose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                myDialog.dismiss();
+            }
+        });
+
+        //txtSellerName = (TextView) myDialog.findViewById(R.id.txtSellerName);
+        //txtSellerName.setText(owner.getName());
+
+        txtAddress = (TextView) myDialog.findViewById(R.id.txtAddress);
+        txtAddress.setText(ps.getAddress() + ", " + ps.getZipcode());
+
+        txtIsAvailable = (TextView) myDialog.findViewById(R.id.txtIsAvailable);
+        if(ps.getReservedStatus())
+            txtIsAvailable.setText("Sold");
+        else
+            txtIsAvailable.setText("Available");
+
+        txtOpenClose = (TextView) myDialog.findViewById(R.id.txtOpenClose);
+        txtOpenClose.setText("From " + ps.getOpentime() + " to " + ps.getClosetime());
+
+        txtCost = (TextView) myDialog.findViewById(R.id.txtCost);
+        txtCost.setText("$" + ps.getCost() + "0");
+
+        myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        myDialog.show();
+    }
+    private void displayRating(RatingBar mRatingBar)
+    {
+        double rating = owner.getContributorRating();
+        int numRated = owner.getTimesContributorRated();
+        if(numRated == 0)
+        {
+            Toast.makeText(this, "This seller has not been rated.", Toast.LENGTH_SHORT).show();
+        }
+        else if(rating >= 4.5)
+        {
+            mRatingBar.setNumStars(5);
+        }
+        else if(rating >= 3.5)
+        {
+            mRatingBar.setNumStars(4);
+        }
+        else if(rating >= 2.5)
+        {
+            mRatingBar.setNumStars(3);
+        }
+        else if(rating >= 1.5)
+        {
+            mRatingBar.setNumStars(2);
+        }
+        else if(rating >= 0.5)
+        {
+            mRatingBar.setNumStars(1);
+        }
+        else
+        {
+            mRatingBar.setNumStars(0);
+        }
+    }
 }

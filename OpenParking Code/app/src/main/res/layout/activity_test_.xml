@@ -37,6 +37,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Map" />
+        <Button
+            android:id="@+id/btnAddParkingSpace"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add Parking" />
 
         <Button
             android:id="@+id/btnFileWrite"
@@ -61,6 +66,25 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Rating" />
+
+        <Button
+            android:id="@+id/btnParkingList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Parking List" />
+
+        <Button
+            android:id="@+id/btnCreateParkingInstance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Create Parking Instance" />
+
+        <Button
+            android:id="@+id/btnPurchaseComplete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Purchase confirmation page" />
+
     </LinearLayout>
 
     <android.support.design.widget.FloatingActionButton

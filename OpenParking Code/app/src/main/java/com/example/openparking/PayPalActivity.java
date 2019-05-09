@@ -73,7 +73,6 @@ public class PayPalActivity extends AppCompatActivity {
         intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION,config);
         intent.putExtra(PaymentActivity.EXTRA_PAYMENT,payPalPayment);
         startActivityForResult(intent, PAYPAL_REQUEST_CODE);
-
     }
 
     @Override

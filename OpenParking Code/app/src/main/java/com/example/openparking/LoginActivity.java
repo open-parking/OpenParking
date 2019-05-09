@@ -25,9 +25,6 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
-    //Test Button - Do Not Remove Until Release
-    private Button btnTest;
-
     private Button buttonSignIn;
     private EditText editTextEmail;
     private EditText editTextPassword;
@@ -72,15 +69,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             }
         });
-        /// Test Button
-        btnTest = findViewById(R.id.btnTest);
-        btnTest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this, Test_Activity.class));
 
-            }
-        });
     }
 
 

@@ -1,16 +1,12 @@
 package com.example.openparking;
 
-import android.location.Address;
-
 public class User {
     String name;
     String email;
     double userRating;
     int timesUserRated;
     String id;
-    boolean isContributor;
     String acceptedPayment;
-    Address address;
     double contributorRating;
     int timesContributorRated;
 
@@ -20,35 +16,21 @@ public class User {
         this.userRating = 0;
         this.timesUserRated = 0;
         this.id = "";
-        this.isContributor = false;
         this.acceptedPayment = "";
-        //this.address = address;
         this.contributorRating = 0;
         this.timesContributorRated = 0;
     }
 
     @java.lang.Override
     public java.lang.String toString() {
-        return "User{" +
-                "name='" + name +
-                ", email='" + email + '\'' +
-                ", userRating=" + userRating +
-                ", timesUserRated=" + timesUserRated +
-                ", id='" + id + '\'' +
-                ", isContributor=" + isContributor +
-                ", acceptedPayment='" + acceptedPayment + '\'' +
-                ", address=" + address +
-                ", contributorRating=" + contributorRating +
-                ", timesContributorRated=" + timesContributorRated +
-                '}';
-    }
-
-    public boolean isContributor() {
-        return isContributor;
-    }
-
-    public void setContributor(boolean contributor) {
-        isContributor = contributor;
+        return  "Name = " + name +
+                ", Email = " + email +
+                ", UserRating = " + userRating +
+                ", TimesUserRated = " + timesUserRated +
+                ", ID = " + id +
+                ", AcceptedPayment = " + acceptedPayment +
+                ", ContributorRating = " + contributorRating +
+                ", TimesContributorRated = " + timesContributorRated;
     }
 
     public String getAcceptedPayment() {
@@ -57,14 +39,6 @@ public class User {
 
     public void setAcceptedPayment(String acceptedPayment) {
         this.acceptedPayment = acceptedPayment;
-    }
-
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
     }
 
     public double getContributorRating() {

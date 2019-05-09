@@ -1,0 +1,1 @@
+git rm --cache 'OpenParking Code/app/src/main/java/com/example/openparking/Config/Config.java'

@@ -15,22 +15,35 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/openparkinglogo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/openparkinglogo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".PasswordRecovery"></activity>
+        <activity android:name=".MyRatingActivity"></activity>
+        <activity android:name=".BuyActivity" />
+        <activity android:name=".PurchaseCompleteActivity" />
+        <activity
+            android:name=".AddParkingSpaceActivity"
+            android:label="@string/title_activity_add_parking_instance"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".CreateParkingActivity" />
+        <activity android:name=".PasswordRecovery" />
         <activity android:name=".PaymentDetails" />
         <activity android:name=".PayPalActivity" />
         <activity android:name=".RatingActivity" />
+        <activity android:name=".MyParkingList" />
+        <activity android:name=".ParkingListActivity" />
         <activity
             android:name=".Test_Activity"
             android:label="@string/title_activity_test_"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".SecondActivity" />
         <activity android:name=".ProfileActivity" />
-        <activity android:name=".MainActivity" />
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".CreateParkingInstanceActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -60,6 +73,9 @@
         <activity
             android:name=".SignupActivity"
             android:label="Signup" />
+        <activity
+            android:name=".ViewParkingInstance"
+            android:label="View Parking Details" />
     </application>
 
 </manifest>
