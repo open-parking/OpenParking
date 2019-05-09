@@ -100,8 +100,7 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
         lat_Str = "";
          lng_Str = "";
 
-         //---DataBase---
-        mDatabase = FirebaseDatabase.getInstance().getReference();
+
 
         //---Edit Text and Spinners
 
@@ -122,11 +121,12 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
         editTextLatitude    = findViewById(R.id.editTextLatitude); // To Be  Hidden
         editTextLongitude   = findViewById(R.id.editTextLongitude); // To Be Hidden
 
-        //---Buttons--
+        //---Buttons---
         btnAddPicture = findViewById(R.id.bt_addpicture);
         btnCoordinate = findViewById(R.id.btnGetCoords);//
         btnSend = findViewById(R.id.btnSend);
 
+        //---Spinners---
 
         //Populate States Spinner
         ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(AddParkingSpaceActivity.this,
@@ -151,8 +151,8 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
         closeTimeAMPMSpinner.setAdapter(myAMPM_Adapter);
         closeTimeAMPMSpinner.setSelection(1);
 
-
-        // Get userID
+        //---DataBase---
+        mDatabase = FirebaseDatabase.getInstance().getReference();
         firebaseAuth = FirebaseAuth.getInstance();
         if(firebaseAuth.getCurrentUser() == null)
         {
@@ -160,7 +160,7 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
             startActivity(new Intent(this, LoginActivity.class));
         }
         FirebaseUser fuser = firebaseAuth.getCurrentUser();
-        userID = fuser.getUid();
+        userID = fuser.getUid(); // Get userID
 
         init();//Set OnClickListeners
     }
