@@ -39,11 +39,7 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
     Button btnSend;
     Button btnAddPicture;
     //Button btnCoordinate; // Hidden
-
-    public Double latitude;         //received from geocoder
-    public Double longitude;        //received from geocoder
-    int zipCode;                    //received from geocoder
-
+    
     private EditText editTextStreet;
     private EditText editTextCity;
     private Spinner  stateSpinner;
@@ -63,6 +59,13 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private String userID;
 
+    String street;
+    String city;
+    String state
+    String address;
+    String zipcode;
+    String lat_Str;
+    String lng_Str;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +73,14 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_parking_space);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        String street;
+        String city;
+        String state
+        String address;
+        String zipcode;
+        String lat_Str;
+        String lng_Str;
 
         this.latitude = 0.0;
         this.longitude = 0.0;
