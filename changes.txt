@@ -10,3 +10,14 @@ Version 0.2 - Full Paypal functionality
 	      Email verification
 	      Basic profile
 	      UI for current features
+
+Version 0.3 - ListView Implementation
+	      Popups for Map and List views of ParkingSpaces
+	      Full Ratings Implementation
+	      AddParkingSpace
+	      View my ParkingSpaces
+	      Reserve a ParkingSpace
+	      Removal of debugging features
+	      ParkingSpaces 
+	      UI for current features
+	      .apk Release 1
