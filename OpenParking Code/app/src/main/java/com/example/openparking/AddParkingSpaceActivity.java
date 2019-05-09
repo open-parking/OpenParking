@@ -175,8 +175,11 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
                 Log.v(TAG, "Clicked Send Button");
 
                 //Check for empty fields
+                checkForEmptyFields();
+
                 if(!coordinatesReceived)
                 {
+                    toast("Press Confirm Button" );
                     return;
                 }
 
