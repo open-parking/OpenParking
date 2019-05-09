@@ -46,11 +46,9 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
     private Spinner  stateSpinner;
 
     private EditText editTextZipCode;
-    //private EditText editTextLatitude;    // Hidden
-    //private EditText editTextLongitude;   // Hidden
+    private EditText editTextLatitude;    // To Be Hidden
+    private EditText editTextLongitude;   // To Be Hidden
     private EditText editTextCost;
-    //private EditText editTextOpenTime;    // replaced with spinner
-    //private EditText editTextCloseTime;   // replaced with spinner
     private Spinner  openTimeSpinner;
     private Spinner  closeTimeSpinner;
     private Spinner  openTimeAMPMSpinner;
