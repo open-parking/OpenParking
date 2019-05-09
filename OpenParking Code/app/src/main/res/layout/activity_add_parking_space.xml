@@ -100,12 +100,12 @@
 
 
         <EditText
-        android:id="@+id/editTextCost"
+        android:id="@+id/editTextPrice"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_margin="15dp"
         android:autofillHints=""
-        android:hint="Enter the cost"
+        android:hint="Enter the price"
         android:inputType="number"
         android:paddingLeft="16dp"
         android:paddingRight="16dp" />
