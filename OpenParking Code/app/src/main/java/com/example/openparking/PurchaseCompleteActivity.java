@@ -11,7 +11,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -142,8 +144,12 @@ public class PurchaseCompleteActivity extends AppCompatActivity implements View.
         TextView txtIsAvailable;
         TextView txtOpenClose;
         TextView txtCost;
+        RatingBar mRatingBar;
 
         myDialog.setContentView(R.layout.custom_window2);
+
+        mRatingBar = (RatingBar) myDialog.findViewById(R.id.ratingBar3);
+        displayRating(mRatingBar);
 
         txtclose =(TextView) myDialog.findViewById(R.id.txtclose);
         txtclose.setText("X");
@@ -185,6 +191,39 @@ public class PurchaseCompleteActivity extends AppCompatActivity implements View.
         myDialog.show();
     }
 
+    private void displayRating(RatingBar mRatingBar)
+    {
+        double rating = owner.getContributorRating();
+        int numRated = owner.getTimesContributorRated();
+        if(numRated == 0)
+        {
+            Toast.makeText(this, "This seller has not been rated.", Toast.LENGTH_SHORT).show();
+        }
+        else if(rating >= 4.5)
+        {
+            mRatingBar.setNumStars(5);
+        }
+        else if(rating >= 3.5)
+        {
+            mRatingBar.setNumStars(4);
+        }
+        else if(rating >= 2.5)
+        {
+            mRatingBar.setNumStars(3);
+        }
+        else if(rating >= 1.5)
+        {
+            mRatingBar.setNumStars(2);
+        }
+        else if(rating >= 0.5)
+        {
+            mRatingBar.setNumStars(1);
+        }
+        else
+        {
+            mRatingBar.setNumStars(0);
+        }
+    }
 
 
 
