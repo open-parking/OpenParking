@@ -98,35 +98,6 @@
 
     </LinearLayout>
 
-        <!-- Hidden
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:orientation="horizontal">
-
-
-        <EditText
-            android:id="@+id/editTextLatitude"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="50dp"
-            android:autofillHints=""
-            android:focusable="false"
-            android:hint="Latitude"
-            android:inputType="text"
-            />
-        <EditText
-            android:id="@+id/editTextLongitude"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="50dp"
-            android:autofillHints=""
-            android:focusable="false"
-            android:hint="Longitude"
-            android:inputType="text"
-            />
-    </LinearLayout>
-    -->
 
         <EditText
         android:id="@+id/editTextCost"
@@ -211,13 +182,49 @@
     </LinearLayout>
 
 
-            <Button
-            android:id="@+id/btnAddPicture"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/editTextLatitude"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="50dp"
+            android:autofillHints=""
+            android:focusable="false"
+            android:hint="Latitude"
+            android:inputType="text"
+            />
+        <EditText
+            android:id="@+id/editTextLongitude"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="50dp"
+            android:autofillHints=""
+            android:focusable="false"
+            android:hint="Longitude"
+            android:inputType="text"
+            />
+    </LinearLayout>
+
+
+        <Button
+        android:id="@+id/btnAddPicture"
+        android:layout_width="0dp" <!--Hidden-->
+        android:layout_height="0dp"<!--Hidden-->
+        android:layout_margin="15dp"
+        android:background="@drawable/rounded_button"
+        android:text="Add Picture " />
+
+        <Button
+            android:id="@+id/btnGetCoords"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
             android:background="@drawable/rounded_button"
-            android:text="Add Picture " />
+            android:text="Confirm " />
 
         <Button
             android:id="@+id/btnSend"
