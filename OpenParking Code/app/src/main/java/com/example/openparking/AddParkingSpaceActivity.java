@@ -187,10 +187,11 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
 
                     if(addresses.size() > 0) {
                         Log.v(TAG, "address verified");
-                        latitude= addresses.get(0).getLatitude();
-                        longitude= addresses.get(0).getLongitude();
-                        //editTextLatitude.setText(Double.toString(latitude));   // Hidden
-                        //editTextLongitude.setText(Double.toString(longitude)); // Hidden
+                        lat_Str = Double.toString(addresses.get(0).getLatitude());
+                        lng_Str = Double.toString(addresses.get(0).getLongitude());
+
+                        editTextLatitude.setText(lat_Str);   // To Be Hidden
+                        editTextLongitude.setText(lng_Str); // To Be Hidden
                         //return true;
                         receivedCoordinates = true;
                     }
@@ -260,8 +261,8 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
                     addresses = geocoder.getFromLocationName(address, 1);
 
                     if(addresses.size() > 0) {
-                        double latitude= addresses.get(0).getLatitude();
-                        double longitude= addresses.get(0).getLongitude();
+                        latitude = addresses.get(0).getLatitude();
+                        longitude = addresses.get(0).getLongitude();
 
                         //Set Text
                         editTextLatitude.setText(Double.toString(latitude));
