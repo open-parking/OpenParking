@@ -108,7 +108,7 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
 
         //Buttons
         btnAddPicture = findViewById(R.id.bt_addpicture);
-        btnCoordinate = findViewById(R.id.btnCoords);//
+        btnCoordinate = findViewById(R.id.btnGetCoords);//
         btnSend = findViewById(R.id.btnSend);
 
 
