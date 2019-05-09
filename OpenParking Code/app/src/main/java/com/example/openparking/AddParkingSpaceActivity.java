@@ -36,10 +36,11 @@ import java.util.Locale;
 public class AddParkingSpaceActivity extends AppCompatActivity {
     private static final String TAG = "AddParkingInstanceAct";
 
-    Button btnSend;
     Button btnAddPicture;
-    //Button btnCoordinate; // Hidden
-    
+    Button btnCoordinate; // To Be Hidden // Change to  btnConfirm
+    Button btnSend;
+
+
     private EditText editTextStreet;
     private EditText editTextCity;
     private Spinner  stateSpinner;
