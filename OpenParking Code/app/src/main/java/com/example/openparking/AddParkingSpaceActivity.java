@@ -146,10 +146,11 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
         FirebaseUser fuser = firebaseAuth.getCurrentUser();
         userID = fuser.getUid();
 
-        init();
+        init();//Set OnClickListeners
     }
 
     private void init() {
+
         // Send Button
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -243,16 +244,11 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
             }
         });
 
-        //btnCoordinate = findViewById(R.id.btnCoords);
-
-        /**
+        //Coordinates Button // Confirm Button
         btnCoordinate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
-                //TODO: Get Coordinates from maps api
-
+                
                 Geocoder geocoder = new Geocoder(v.getContext());
                 List<Address> addresses;
                 try{
