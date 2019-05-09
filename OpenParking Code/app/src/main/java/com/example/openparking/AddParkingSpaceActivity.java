@@ -296,38 +296,7 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
             }
         });
     }
-
-    private Boolean getCoords(String address, Geocoder geocoder)
-    {
-        //Geocoder geocoder = new Geocoder(v.getContext());
-
-
-        List<Address> addresses;
-        try{
-            Log.v(TAG, "trying : geocoder.getFromLocationName(" + address + ", 1)");
-            addresses = geocoder.getFromLocationName(address, 5);
-
-            if(addresses.size() > 0) {
-                Log.v(TAG, "address verified");
-                latitude= addresses.get(0).getLatitude();
-                longitude= addresses.get(0).getLongitude();
-                //editTextLatitude.setText(Double.toString(latitude));   // Hidden
-                //editTextLongitude.setText(Double.toString(longitude)); // Hidden
-                return true;
-            }
-            else{
-                //Not a valid address
-                Log.v(TAG, "address not valid");
-                editTextStreet.setText("Not Valid");
-                editTextCity.setText("Not Valid");
-                return false;
-            }
-        }catch(Exception e)
-        {
-            Log.e(TAG, ":error geocoder failed");
-            return false;
-        }
-    }
+    
 
     private void writeNewParkingSpace(String ownerID, String Address,String zipCode, Double latitude, Double longitude, Double price, String openTime, String closeTime )
     {
