@@ -2,7 +2,7 @@
 ![OpenParking](openparkinglogo.png)
 ## A parking sharing app made for the users, by the users.
 
-###Version 0.3 is live!
+### Version 0.3 is live!
 
 You can find the .apk in OpenParking Code/app/debug/OpenParking.apk
 
