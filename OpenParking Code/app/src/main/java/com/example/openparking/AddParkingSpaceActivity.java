@@ -82,7 +82,7 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        //Temp Variables
+        //---Temp Variables---
 
         //Street, City, State and ZipCode
         street = "";
@@ -100,17 +100,16 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
         lat_Str = "";
          lng_Str = "";
 
+         //---DataBase---
         mDatabase = FirebaseDatabase.getInstance().getReference();
+
+        //---Edit Text and Spinners
 
         //Street, City, State and ZipCode
         editTextStreet      = findViewById(R.id.editTextStreet);
         editTextCity        = findViewById(R.id.editTextCity);
         stateSpinner        = findViewById(R.id.spinner_states);
         editTextZipCode     = findViewById(R.id.editTextZipCode);
-
-        //Latitude and Longitude
-        editTextLatitude    = findViewById(R.id.editTextLatitude); // To Be  Hidden
-        editTextLongitude   = findViewById(R.id.editTextLongitude); // To Be Hidden
 
         //Price and Times
         editTextCost        = findViewById(R.id.editTextCost);
@@ -119,7 +118,11 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
         openTimeAMPMSpinner = findViewById(R.id.spinner_open_time_ampm);
         closeTimeAMPMSpinner= findViewById(R.id.spinner_close_time_ampm);
 
-        //Buttons
+        //Latitude and Longitude
+        editTextLatitude    = findViewById(R.id.editTextLatitude); // To Be  Hidden
+        editTextLongitude   = findViewById(R.id.editTextLongitude); // To Be Hidden
+
+        //---Buttons--
         btnAddPicture = findViewById(R.id.bt_addpicture);
         btnCoordinate = findViewById(R.id.btnGetCoords);//
         btnSend = findViewById(R.id.btnSend);
