@@ -74,6 +74,7 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
     String closeTime;
     String lat_Str;
     String lng_Str;
+    Boolean coordinatesReceived;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,7 +100,7 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
         //Latitude and Longitude
         lat_Str = "";
          lng_Str = "";
-
+         coordinatesReceived = false;
 
 
         //---Edit Text and Spinners
@@ -174,87 +175,27 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
                 Log.v(TAG, "Clicked Send Button");
 
                 //Check for empty fields
-                if(checkForEmptyFields())
-                {
-                    //Get Coordinates
-
-                }
-                else
+                if(!coordinatesReceived)
                 {
                     return;
                 }
 
-                /**
-                // Check Street Address Validity
-                 Log.v(TAG, "Verifying(" + address + ")");
+                //Send Parking Space
+                Double lat = Double.parseDouble(lat_Str);
+                Double lon = Double.parseDouble(lng_Str);
+                Double priceDouble = Double.parseDouble(price);
+                writeNewParkingSpace(userID, address, zipcode, lat, lon, priceDouble, openTime, closeTime);
 
-                Boolean receivedCoordinates = false;
-                Geocoder geocoder = new Geocoder(v.getContext(), Locale.getDefault());
+                // Send to Fire Base
+                Log.v(TAG, "Sending to Database");
 
-                List<Address> addresses;
-                try{
-                    int maxResults = 5;
-                    Log.v(TAG, "trying : geocoder.getFromLocationName(" + address + ", " + maxResults + ")" );
-                    addresses = geocoder.getFromLocationName(address, maxResults);
+                // Reset inputs
+                Log.v(TAG, "Resetting Inputs");
+                resetInputs();
 
-                    if(addresses.size() > 0) {
-                        Log.v(TAG, "address verified");
-                        lat_Str = Double.toString(addresses.get(0).getLatitude());
-                        lng_Str = Double.toString(addresses.get(0).getLongitude());
+                // Show result message
+                toast("Success: Parking Space Added" );
 
-                        editTextLatitude.setText(lat_Str);   // To Be Hidden
-                        editTextLongitude.setText(lng_Str); // To Be Hidden
-                        //return true;
-                        receivedCoordinates = true;
-                    }
-                    else{
-                        //Not a valid address
-                        Log.v(TAG, "address not valid");
-                        editTextStreet.setText("Not Valid");
-                        editTextCity.setText("Not Valid");
-                        //return false;
-                        receivedCoordinates = true;
-
-                    }
-                }catch(Exception e)
-                {
-                    Log.e(TAG, ":error geocoder failed");
-                    //return false;
-                    receivedCoordinates = false;
-                }
-
-                if(receivedCoordinates)
-                {
-                    Log.v(TAG, "Received Coordinates");
-
-                    //Get Cost and Times
-                    Log.v(TAG, "Get cost and Time");
-                    final Double priceDouble = Double.parseDouble(price);
-                    final String open = openTimeSpinner.getSelectedItem().toString() + openTimeAMPMSpinner.getSelectedItem().toString();
-                    final String close = closeTimeSpinner.getSelectedItem().toString() + closeTimeAMPMSpinner.getSelectedItem().toString();
-
-                    // Send to Fire Base
-                    Log.v(TAG, "Sending to Database");
-                    writeNewParkingSpace(userID, address, zipcode, latitude, longitude, costDouble, open, close);
-
-                    // Reset inputs
-                    Log.v(TAG, "Resetting Inputs");
-                    resetInputs();
-
-                    // Show result message
-                    toast("Success: Parking Space Added" );
-                }
-                else
-                {
-                    Log.v(TAG, "Invalid Address");
-
-                    // Reset input boxes
-                    resetInputs();
-
-                    // Show result message
-                    toast("Invalid Address" );
-                }
-                 **/
             }
         });
 
@@ -262,6 +203,12 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
         btnCoordinate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                //Check for empty fields
+                if(!checkForEmptyFields())
+                {
+                    return;
+                }
 
                 Geocoder geocoder = new Geocoder(v.getContext());
                 List<Address> addresses;
@@ -281,6 +228,9 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
                         //Set Text
                         editTextLatitude.setText(lat_Str);
                         editTextLongitude.setText(lng_Str);
+
+                        //Set Boolean
+                        coordinatesReceived = true;
                     }
                     else{
                         //Set Text //Not a valid address
@@ -296,7 +246,7 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
             }
         });
     }
-    
+
 
     private void writeNewParkingSpace(String ownerID, String Address,String zipCode, Double latitude, Double longitude, Double price, String openTime, String closeTime )
     {
@@ -337,6 +287,7 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
         closeTimeAMPMSpinner.setSelection(1);
         editTextLatitude.setText("");  //To Be Hidden
         editTextLongitude.setText(""); //To Be Hidden
+        coordinatesReceived = false;
     }
 
     private void toast(CharSequence cs)
