@@ -225,13 +225,20 @@ public class ParkingListActivity extends AppCompatActivity{
                         {
                             Log.d(TAG, "onChildAdded: " +  "ps is good");
 
-                            parkingSpaceList.add(ps);
-                            Log.v(TAG, "onChildAdded:" + ps.getAddress());
-                            mAdapter.notifyDataSetChanged();
+                            //If Space is not reserved
+                            if(!ps.getReservedStatus())
+                            {
+                                parkingSpaceList.add(ps);
+                                Log.v(TAG, "onChildAdded:" + ps.getAddress());
+                                mAdapter.notifyDataSetChanged();
 
-                            //String address = ps.getAddress();
-                            //String hours = "Hours: " + ps.getOpentime() + " to " + ps.getClosetime();
-
+                                //String address = ps.getAddress();
+                                //String hours = "Hours: " + ps.getOpentime() + " to " + ps.getClosetime();
+                            }
+                            else
+                            {
+                                //ps is reserved
+                            }
                         }
                         else
                         {
