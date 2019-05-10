@@ -75,15 +75,15 @@ public class MapsActivity extends FragmentActivity implements
     private DatabaseReference mDatabase;
     // [END declare_database_ref]
 
-
-    List <ParkingInstance> parkingInstanceList;         // List of parking spaces with a car in them. //THIS LIST NOT CURRENTLY USED.
     List <ParkingSpace> parkingSpaceList;               // List of parking spaces that are available for reservation.
     HashMap<String, ParkingSpace>parkingSpaceHashMap;   // For quick look up from marker ID to parkingSpace.
 
 
     private ParkingSpace ps;
+
     //Dialog for displaying popup parking space details
     private Dialog myDialog;
+
     //Owner retrieved from database
     private User owner;
 
@@ -184,7 +184,6 @@ public class MapsActivity extends FragmentActivity implements
         //mMap.setMaxZoomPreference(14.0f);
 
 
-        parkingInstanceList = new ArrayList<>();
         parkingSpaceList = new ArrayList<>();
         parkingSpaceHashMap = new HashMap<>();
 
@@ -280,32 +279,43 @@ public class MapsActivity extends FragmentActivity implements
                         {
                             Log.d(TAG, "onChildAdded: " +  "ps is good");
 
-                            parkingSpaceList.add(ps);
+                            //if Space is not reserved
+                            if(!ps.getReservedStatus())
+                            {
+                                Log.d(TAG, "onChildAdded: " +  "ps is Open");
 
-                            String address = ps.getAddress();
-                            String hours = "Hours: " + ps.getOpentime() + " to " + ps.getClosetime();
+                                parkingSpaceList.add(ps);
 
-                            MarkerOptions mo = new MarkerOptions();
-                            mo.position(new LatLng(ps.getLatitude(), ps.getLongitude() ) );
-                            mo.title(address);
-                            mo.snippet(hours);
-                            mo.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
-                            mo.flat(true);
+                                String address = ps.getAddress();
+                                String hours = "Hours: " + ps.getOpentime() + " to " + ps.getClosetime();
 
-                            //Add marker to map AND get its ID
-                            String markerID = mMap.addMarker(mo).getId();
+                                MarkerOptions mo = new MarkerOptions();
+                                mo.position(new LatLng(ps.getLatitude(), ps.getLongitude() ) );
+                                mo.title(address);
+                                mo.snippet(hours);
+                                mo.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
+                                mo.flat(true);
 
-                            /** OLD WAY OF ADDING A MARKER TO THE MAP
-                            mMap.addMarker(new MarkerOptions()
-                                    .position(ps.getLatLng())
-                                    .title(address)
-                                    .snippet(hours)
-                                    //.icon(BitmapDescriptorFactory.fromResource(R.drawable.openparkinglogo_small))
-                                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
-                                    .flat(true)
-                            );**/
+                                //Add marker to map AND get its ID
+                                String markerID = mMap.addMarker(mo).getId();
 
-                            parkingSpaceHashMap.put(markerID, ps);
+                                /** OLD WAY OF ADDING A MARKER TO THE MAP
+                                 mMap.addMarker(new MarkerOptions()
+                                 .position(ps.getLatLng())
+                                 .title(address)
+                                 .snippet(hours)
+                                 //.icon(BitmapDescriptorFactory.fromResource(R.drawable.openparkinglogo_small))
+                                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
+                                 .flat(true)
+                                 );**/
+
+                                parkingSpaceHashMap.put(markerID, ps);
+                            }
+                            else
+                            {
+                                Log.d(TAG, "onChildAdded: " +  "ps is Reserved");
+                            }
+
                         }
                         else
                         {
