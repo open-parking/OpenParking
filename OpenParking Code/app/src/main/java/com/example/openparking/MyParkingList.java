@@ -26,10 +26,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class MyParkingList extends AppCompatActivity{
@@ -95,11 +93,11 @@ public class MyParkingList extends AppCompatActivity{
         create = new Intent(MyParkingList.this, CreateParkingInstanceActivity.class);
 
         //FireBase
-        //loadImagesFromFireBase();
+        //loadImagesFromFireBase(); TODO: implement this function
         loadParkingSpacesFromDataBase("90815");
 
         //Test Info
-        setTestImages();
+        setTestImages(); // TODO: replace this function with loadImagesFromFireBase();
         //setTestData();
 
         //initRecyclerView();
