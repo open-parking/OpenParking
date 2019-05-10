@@ -44,9 +44,8 @@ public class MyParkingList extends AppCompatActivity{
     private ArrayList<String> mImageUrls = new ArrayList<>();
     private ArrayList<String> mImagePrice = new ArrayList<>();
 
-    List<ParkingSpace> parkingSpaceList;                    // List of parking spaces that are available for reservation.
-    HashMap<String, ParkingSpace> parkingSpaceHashMap;      // For quick look up from marker ID to parkingSpace.
-    // Are we still using this HashMap? can I re-purpose it?
+    List<ParkingSpace> parkingSpaceList;  // List of parking spaces that user owns
+
 
     // [START declare_database_ref]
     private DatabaseReference mDatabase;
@@ -79,7 +78,6 @@ public class MyParkingList extends AppCompatActivity{
         recyclerView.setLayoutManager(layoutManager);
 
         parkingSpaceList = new ArrayList<>();
-        parkingSpaceHashMap = new HashMap<>();
 
         // [START initialize_database_ref]
         Log.v(TAG, "getting database reference");
