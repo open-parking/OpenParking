@@ -188,6 +188,7 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
                 Double lon = Double.parseDouble(lng_Str);
                 Double priceDouble = Double.parseDouble(price);
                 writeNewParkingSpace(userID, address, zipcode, lat, lon, priceDouble, openTime, closeTime);
+                //TODO GET CONFIRMATION FROM FIREBASE THAT PS WAS STORED.
 
                 // Send to Fire Base
                 Log.v(TAG, "Sending to Database");
@@ -199,6 +200,8 @@ public class AddParkingSpaceActivity extends AppCompatActivity {
                 // Show result message
                 toast("Success: Parking Space Added" );
 
+                //Show my parking spaces list
+                startActivity(new Intent(AddParkingSpaceActivity.this, MyParkingList.class));
             }
         });
 
