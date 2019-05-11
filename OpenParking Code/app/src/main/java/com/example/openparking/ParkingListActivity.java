@@ -17,6 +17,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.openparking.Config.RecyclerTouchListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -218,6 +220,12 @@ public class ParkingListActivity extends AppCompatActivity{
                         //ParkingSpace ps = new ParkingSpace();
                         ps = dataSnapshot.getValue(ParkingSpace.class);
 
+                        //Get user info to filter out parking spaces that are owned by this user
+                        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+                        FirebaseUser fuser = firebaseAuth.getCurrentUser();
+                        User user = new User();
+                        user.setId(fuser.getUid());
+
 
 
 
@@ -228,12 +236,18 @@ public class ParkingListActivity extends AppCompatActivity{
                             //If Space is not reserved
                             if(!ps.getReservedStatus())
                             {
-                                parkingSpaceList.add(ps);
-                                Log.v(TAG, "onChildAdded:" + ps.getAddress());
-                                mAdapter.notifyDataSetChanged();
 
-                                //String address = ps.getAddress();
-                                //String hours = "Hours: " + ps.getOpentime() + " to " + ps.getClosetime();
+                                //Don't add to list if the ps belongs to the user
+                                if(!ps.getOwnerID().equals(user.getId() ) )
+                                {
+                                    parkingSpaceList.add(ps);
+                                    Log.v(TAG, "onChildAdded:" + ps.getAddress());
+                                    mAdapter.notifyDataSetChanged();
+
+                                    //String address = ps.getAddress();
+                                    //String hours = "Hours: " + ps.getOpentime() + " to " + ps.getClosetime();
+                                }
+
                             }
                             else
                             {
