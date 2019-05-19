@@ -121,14 +121,34 @@
         </LinearLayout>
     </LinearLayout>
 
-    <Button
-        android:id="@+id/btnfollow"
-        android:layout_width="163dp"
+
+    <LinearLayout
+        android:id="@+id/LinearLayout3"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="25dp"
-        android:background="@drawable/rounded_button"
-        android:text="Book Parking Spot"
-        android:textColor="@color/black" />
+        android:layout_alignParentBottom="true">
+        <Button
+            android:id="@+id/btnfollow"
+            android:layout_width="163dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/rounded_button"
+            android:text="Book with cash"
+            android:textColor="@color/black"
+            />
+
+        <Button
+            android:id="@+id/btnPayPal"
+            android:layout_width="163dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/rounded_button"
+            android:text="Book with PayPal"
+            android:textColor="@color/black"
+            />
+
+    </LinearLayout>
+
 
 </LinearLayout>

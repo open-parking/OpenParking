@@ -748,6 +748,7 @@ public class MapsActivity extends FragmentActivity implements
     public void showPopup() {
         TextView txtclose;
         Button btnFollow;
+        Button btnPayPal;
         TextView txtSellerName;
         TextView txtAddress;
         TextView txtIsAvailable;
@@ -775,6 +776,22 @@ public class MapsActivity extends FragmentActivity implements
                 } else {
                     Toast.makeText(getApplicationContext(), "This listing has already been sold", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+        btnPayPal = (Button) myDialog.findViewById(R.id.btnPayPal);
+        btnPayPal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!ps.getReservedStatus())
+                {
+                    create = new Intent(MapsActivity.this, PayPalActivity.class);
+                    myDialog.dismiss();
+                    startActivity(create);
+                    finish();
+                }
+                else
+                    Toast.makeText(getApplicationContext(), "This listing has already been sold", Toast.LENGTH_SHORT).show();
             }
         });
 

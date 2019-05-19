@@ -359,6 +359,7 @@ public class ParkingListActivity extends AppCompatActivity{
     public void showPopup() {
         TextView txtclose;
         Button btnFollow;
+        Button btnPayPal;
         TextView txtSellerName;
         TextView txtAddress;
         TextView txtIsAvailable;
@@ -388,6 +389,22 @@ public class ParkingListActivity extends AppCompatActivity{
                 {
                     Toast.makeText(getApplicationContext(), "This listing has already been sold", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+        btnPayPal = (Button) myDialog.findViewById(R.id.btnPayPal);
+        btnPayPal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!ps.getReservedStatus())
+                {
+                    create = new Intent(ParkingListActivity.this, PayPalActivity.class);
+                    myDialog.dismiss();
+                    startActivity(create);
+                    finish();
+                }
+                else
+                    Toast.makeText(getApplicationContext(), "This listing has already been sold", Toast.LENGTH_SHORT).show();
             }
         });
 
